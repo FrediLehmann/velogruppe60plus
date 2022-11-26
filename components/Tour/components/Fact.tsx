@@ -1,0 +1,12 @@
+import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
+
+const Fact = ({ label, value }: { label: string; value: string }) => {
+  return (
+    <Stat>
+      <StatLabel fontWeight="light">{label}</StatLabel>
+      <StatNumber fontSize={["sm", "lg"]}>{value}</StatNumber>
+    </Stat>
+  );
+};
+
+export default Fact;
