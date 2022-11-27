@@ -25,11 +25,11 @@ const Tour = () => {
           <Fact label="Abstieg" value="607 m" />
           <Fact label="Dauer" value="3 Std." />
           <Fact label="Start" value="Restaurant Mühletal" />
+          <Fact label="Ziel" value="Güüge-Velo Laupen" />
           <Fact
             label="Kaffepause"
             value="Restaurant Trubehöfli, Kriechenwil, +41315051115"
           />
-          <Fact label="Ziel" value="Güüge-Velo Laupen" />
         </Flex>
       </Flex>
       <NextLink
