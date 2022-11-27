@@ -6,6 +6,8 @@ const Footer = () => {
     <Box as="footer" mt="8" py="3" borderTop="1px solid" borderColor="gray.200">
       <Container
         display="flex"
+        gap="8"
+        alignItems="flex-start"
         maxW="container.md"
         color="gray.500"
         fontSize={["xs", "sm"]}
