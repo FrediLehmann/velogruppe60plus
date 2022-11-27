@@ -2,7 +2,7 @@ import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
 
 const Fact = ({ label, value }: { label: string; value: string }) => {
   return (
-    <Stat>
+    <Stat minW="20">
       <StatLabel fontWeight="light" whiteSpace="nowrap">
         {label}
       </StatLabel>

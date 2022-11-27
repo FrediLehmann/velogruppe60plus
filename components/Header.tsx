@@ -11,7 +11,7 @@ const Header = () => {
       justifyContent="space-between"
     >
       <Text fontSize={["xl", "2xl"]} fontWeight="bold">
-        Velogruppe60+
+        Velogruppe 60+
       </Text>
       <ButtonGroup>
         <NextLink href="/alle-touren" passHref legacyBehavior>
