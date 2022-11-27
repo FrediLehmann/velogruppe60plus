@@ -1,4 +1,4 @@
-import { Footer, Header, Login as LoginComponent } from "components";
+import { Login as LoginComponent, PageFrame } from "components";
 import Head from "next/head";
 
 const Login = () => {
@@ -7,9 +7,9 @@ const Login = () => {
       <Head>
         <title>Velogruppe 60+ | Login</title>
       </Head>
-      <Header />
-      <LoginComponent />
-      <Footer />
+      <PageFrame>
+        <LoginComponent />
+      </PageFrame>
     </>
   );
 };

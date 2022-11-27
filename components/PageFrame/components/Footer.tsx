@@ -7,7 +7,7 @@ const Footer = () => {
       <Container
         display="flex"
         gap="8"
-        alignItems="flex-start"
+        alignItems="center"
         maxW="container.md"
         color="gray.500"
         fontSize={["xs", "sm"]}

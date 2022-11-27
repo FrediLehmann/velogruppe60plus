@@ -1,4 +1,4 @@
-import { Footer, Header, Tour } from "components";
+import { PageFrame, Tour } from "components";
 import Head from "next/head";
 
 export default function Home() {
@@ -7,9 +7,9 @@ export default function Home() {
       <Head>
         <title>Velogruppe 60+</title>
       </Head>
-      <Header />
-      <Tour />
-      <Footer />
+      <PageFrame>
+        <Tour />
+      </PageFrame>
     </>
   );
 }
