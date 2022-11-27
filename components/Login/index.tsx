@@ -1,21 +1,32 @@
 import {
   Button,
+  Center,
   Container,
   FormControl,
   FormErrorMessage,
   FormLabel,
+  Heading,
   Input,
   Stack,
+  useToast,
 } from "@chakra-ui/react";
-import { PasswordField } from "components";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { useState } from "react";
 import { object, string } from "yup";
 
 const Login = () => {
+  const supabaseClient = useSupabaseClient();
+
+  const toast = useToast();
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   return (
     <Container maxW="lg">
+      <Center>
+        <Heading mb="8">Anmeldung</Heading>
+      </Center>
       <Stack
         spacing="6"
         py={["0", "8"]}
@@ -25,18 +36,39 @@ const Login = () => {
         borderRadius={["none", "xl"]}
       >
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ email: "" }}
           validationSchema={object({
             email: string()
               .email("Invalide Email Addresse.")
               .required("Email Addresse wird benötigt."),
-            password: string()
-              .min(6, "Passwort ist zu kurz.")
-              .required("Passwort wird benötigt."),
           })}
-          onSubmit={async (values) => {
+          onSubmit={async ({ email }) => {
             setIsSubmitting(true);
-            console.log(values);
+
+            const { error } = await supabaseClient.auth.signInWithOtp({
+              email,
+            });
+
+            if (error) {
+              toast({
+                title: "Anmeldung fehlgeschlagen.",
+                description: "Wir konnten die Anmeldung nicht durchführen.",
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+              setIsSubmitting(false);
+              return;
+            }
+
+            toast({
+              title: "Anmeldung erfolgreich.",
+              description: "Wir haben Ihnen einen Link zum einloggen gesendet.",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+            setIsSubmitting(false);
           }}
         >
           {(props) => (
@@ -56,18 +88,6 @@ const Login = () => {
                         {form.errors?.email as string}
                       </FormErrorMessage>
                     </FormControl>
-                  )}
-                </Field>
-                <Field name="password">
-                  {({ field, form }: FieldProps) => (
-                    <PasswordField
-                      isInvalid={
-                        (form.errors.password &&
-                          form.touched.password) as boolean
-                      }
-                      errorMessage={form.errors?.password as string}
-                      field={field}
-                    />
                   )}
                 </Field>
               </Stack>
