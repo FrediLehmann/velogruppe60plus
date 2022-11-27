@@ -1,6 +1,7 @@
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
+import { Database } from "lib/types/database.types";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 
@@ -15,7 +16,9 @@ const theme = extendTheme({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [supabaseClient] = useState(() => createBrowserSupabaseClient());
+  const [supabaseClient] = useState(() =>
+    createBrowserSupabaseClient<Database>()
+  );
 
   return (
     <SessionContextProvider
