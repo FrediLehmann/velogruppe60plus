@@ -33,7 +33,7 @@ import { useContext, useRef } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { ToursContext } from "../context";
 import { TourForm } from ".";
-import { Tour } from "../tours.type";
+import { Tour } from "../../../lib/tours.type";
 
 const TourInfo = ({
   id,

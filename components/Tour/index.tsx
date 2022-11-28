@@ -1,42 +1,62 @@
-import { Container, Flex, Heading, Link, Text } from "@chakra-ui/react";
+import {
+  Container,
+  Flex,
+  Heading,
+  Link,
+  Skeleton,
+  Text,
+} from "@chakra-ui/react";
 import { Fact } from "components";
 import NextLink from "next/link";
 import { External } from "icons";
 import Image from "next/image";
 import MapImage from "./images/map.png";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { useEffect, useState } from "react";
+import type { Tour as TourType } from "lib/tours.type";
 
 const Tour = () => {
+  const [tour, setTour] = useState<TourType>();
+  const supabaseClient = useSupabaseClient();
+
+  useEffect(() => {
+    const loadTour = async () => {
+      const { data } = await supabaseClient
+        .from("touren")
+        .select(
+          "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour"
+        )
+        .eq("next_tour", true)
+        .single();
+
+      if (data) setTour(data);
+    };
+
+    loadTour();
+  }, [supabaseClient]);
+
+  if (!tour) return <Skeleton></Skeleton>;
   return (
     <Container as="main" maxW="container.md" mt={["4", "6", "12"]}>
       <Text fontSize="sm" fontWeight="semibold" color="gray.700">
         Aktuelle Tour
       </Text>
       <Heading as="h1" fontSize={["xl", "2xl"]}>
-        Tour 011: Kerzers
+        {tour.name}
       </Heading>
       <Flex my={["6", "10"]} gap="8" flexDirection={["column", "row"]}>
-        <Text fontSize={["lg", "xl"]}>
-          Die Tour führt nach Laupen über den Auriedstäg weiter nach Kerzers bis
-          zur Hasenholz Hütte und zurück über Wileroltigen nach Laupen.
-        </Text>
+        <Text fontSize={["lg", "xl"]}>{tour.description}</Text>
         <Flex gap={["6", "8"]} wrap="wrap">
-          <Fact label="Distanz" value="48 km" />
-          <Fact label="Aufstieg" value="506 m" />
-          <Fact label="Abstieg" value="607 m" />
-          <Fact label="Dauer" value="3 Std." />
-          <Fact label="Start" value="Restaurant Mühletal" />
-          <Fact label="Ziel" value="Güüge-Velo Laupen" />
-          <Fact
-            label="Kaffepause"
-            value="Restaurant Trubehöfli, Kriechenwil, +41315051115"
-          />
+          <Fact label="Distanz" value={tour.distance} />
+          <Fact label="Aufstieg" value={tour.ascent} />
+          <Fact label="Abstieg" value={tour.descent} />
+          <Fact label="Dauer" value={tour.duration} />
+          <Fact label="Start" value={tour.startPoint} />
+          <Fact label="Ziel" value={tour.endPoint} />
+          <Fact label="Kaffepause" value={tour.pause} />
         </Flex>
       </Flex>
-      <NextLink
-        href="https://map.schweizmobil.ch/?lang=de&photos=no&logo=no&detours=no&season=summer&bgLayer=pk&resolution=15.41&E=2583432&N=1199574&trackId=1295801641&3d_enabled=true&3d_lon=7.21459&3d_lat=46.90739&3d_elevation=13928&3d_heading=360.000&3d_pitch=-72.688"
-        passHref
-        legacyBehavior
-      >
+      <NextLink href={tour.mapUrl} passHref legacyBehavior>
         <Link display="block" my="2" isExternal color="blue.700">
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
