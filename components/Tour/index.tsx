@@ -10,7 +10,6 @@ import { Fact } from "components";
 import NextLink from "next/link";
 import { External } from "icons";
 import Image from "next/image";
-import MapImage from "./images/map.png";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import type { Tour as TourType } from "lib/tours.type";
@@ -24,7 +23,7 @@ const Tour = () => {
       const { data } = await supabaseClient
         .from("touren")
         .select(
-          "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour"
+          "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
         )
         .eq("next_tour", true)
         .single();
@@ -61,7 +60,7 @@ const Tour = () => {
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>
-      <Image src={MapImage} alt="Karte" />
+      {/* <Image src={tour.image} alt="Karte" /> */}
     </Container>
   );
 };

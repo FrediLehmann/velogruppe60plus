@@ -7,6 +7,7 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/react";
+import UploadInput from "components/UploadInput";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { object, string } from "yup";
 
@@ -14,6 +15,7 @@ interface TourFields {
   name: string;
   description: string;
   mapLink: string;
+  mapImage: File | string;
   distance: string;
   ascent: string;
   descent: string;
@@ -28,6 +30,7 @@ const TourForm = ({
     name: "",
     description: "",
     mapLink: "",
+    mapImage: "",
     distance: "",
     ascent: "",
     descent: "",
@@ -52,6 +55,7 @@ const TourForm = ({
         mapLink: string()
           .url("Inkorrekt formatierte Url")
           .required("Url wird benötigt"),
+        mapImage: string().nullable().required("Bild wird benötigt"),
         distance: string().required("Distanz wird benötigt"),
         ascent: string().required("Aufstieg wird benötigt"),
         descent: string().required("Abstieg wird benötigt"),
@@ -110,6 +114,16 @@ const TourForm = ({
                     {form.errors?.mapLink as string}
                   </FormErrorMessage>
                 </FormControl>
+              )}
+            </Field>
+            <Field name="mapImage">
+              {(fieldProps: FieldProps) => (
+                <UploadInput
+                  label="Bild der Karte"
+                  placeholder="Bild hochladen..."
+                  acceptedFileTypes="image/png, image/jpeg"
+                  fieldProps={fieldProps}
+                />
               )}
             </Field>
             <HStack spacing="4">

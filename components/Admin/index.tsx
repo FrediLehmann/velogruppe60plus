@@ -15,7 +15,7 @@ const Admin = () => {
     const { data, error } = await supabaseClient
       .from("touren")
       .select(
-        "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour"
+        "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
       )
       .order("id");
 
