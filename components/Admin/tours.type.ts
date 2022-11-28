@@ -10,4 +10,5 @@ export type Tour = {
   ascent: string;
   descent: string;
   duration: string;
+  next_tour: boolean;
 };

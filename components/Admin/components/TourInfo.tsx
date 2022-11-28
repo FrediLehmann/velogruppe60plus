@@ -9,6 +9,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogOverlay,
+  Badge,
   Box,
   Button,
   ButtonGroup,
@@ -32,6 +33,7 @@ import { useContext, useRef } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { ToursContext } from "../context";
 import { TourForm } from ".";
+import { Tour } from "../tours.type";
 
 const TourInfo = ({
   id,
@@ -45,19 +47,8 @@ const TourInfo = ({
   startPoint,
   endPoint,
   pause,
-}: {
-  id: number;
-  name: string;
-  description: string;
-  mapUrl: string;
-  distance: string;
-  ascent: string;
-  descent: string;
-  duration: string;
-  startPoint: string;
-  endPoint: string;
-  pause: string;
-}) => {
+  next_tour,
+}: Tour) => {
   const supabaseClient = useSupabaseClient();
   const {
     isOpen: isAlertOpen,
@@ -71,7 +62,7 @@ const TourInfo = ({
   } = useDisclosure();
   const cancelRef = useRef(null);
   const toast = useToast();
-  const { load } = useContext(ToursContext);
+  const { load, setNextTour } = useContext(ToursContext);
 
   const deleteTour = async () => {
     const { error } = await supabaseClient.from("touren").delete().eq("id", id);
@@ -95,9 +86,21 @@ const TourInfo = ({
     <AccordionItem>
       <h2>
         <AccordionButton>
-          <Box flex="1" textAlign="left" fontSize="lg" fontWeight="semibold">
+          <Flex
+            align="center"
+            flex="1"
+            textAlign="left"
+            fontSize="lg"
+            fontWeight="semibold"
+            gap="6"
+          >
             {name}
-          </Box>
+            {next_tour && (
+              <Badge variant="outline" colorScheme="blue">
+                Nächste Tour
+              </Badge>
+            )}
+          </Flex>
           <AccordionIcon />
         </AccordionButton>
       </h2>
@@ -123,12 +126,21 @@ const TourInfo = ({
           <Fact label="Ziel" value={endPoint} />
           <Fact label="Kaffepause" value={pause} />
         </Flex>
-        <ButtonGroup mt="8">
+        <Flex mt="6" gap="3" flexWrap="wrap">
           <Button onClick={modalOnOpen}>Bearbeiten</Button>
           <Button colorScheme="red" onClick={alertOnOpen}>
             Löschen
           </Button>
-        </ButtonGroup>
+          {!next_tour && (
+            <Button
+              variant="outline"
+              colorScheme="blue"
+              onClick={() => setNextTour(id)}
+            >
+              Als nächste Tour festlegen
+            </Button>
+          )}
+        </Flex>
         <Modal isOpen={modalIsOpen} onClose={modalOnClose} size="xl">
           <ModalOverlay />
           <ModalContent>
