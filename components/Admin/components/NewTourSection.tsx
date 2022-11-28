@@ -22,12 +22,16 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { Plus } from "icons";
+import { useContext } from "react";
 import { object, string } from "yup";
+import { ToursContext } from "../context";
 
 const NewTourSection = () => {
   const toast = useToast();
   const supabaseClient = useSupabaseClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const { load } = useContext(ToursContext);
 
   return (
     <>
@@ -119,6 +123,7 @@ const NewTourSection = () => {
                   isClosable: true,
                   position: "top",
                 });
+                load();
                 onClose();
               }}
             >

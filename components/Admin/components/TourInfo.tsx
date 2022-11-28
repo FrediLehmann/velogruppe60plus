@@ -21,8 +21,9 @@ import {
 import NextLink from "next/link";
 import { External } from "icons";
 import { Fact } from "components";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { ToursContext } from "../context";
 
 const TourInfo = ({
   id,
@@ -53,6 +54,7 @@ const TourInfo = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = useRef(null);
   const toast = useToast();
+  const { load } = useContext(ToursContext);
 
   const deleteTour = async () => {
     const { error } = await supabaseClient.from("touren").delete().eq("id", id);
@@ -68,6 +70,7 @@ const TourInfo = ({
         position: "top",
       });
 
+    load();
     onClose();
   };
 
