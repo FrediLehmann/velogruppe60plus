@@ -56,6 +56,7 @@ const Login = () => {
                 status: "error",
                 duration: 9000,
                 isClosable: true,
+                position: "top",
               });
               setIsSubmitting(false);
               return;
@@ -67,6 +68,7 @@ const Login = () => {
               status: "success",
               duration: 9000,
               isClosable: true,
+              position: "top",
             });
             setIsSubmitting(false);
           }}

@@ -65,6 +65,7 @@ const TourInfo = ({
         status: "error",
         duration: 9000,
         isClosable: true,
+        position: "top",
       });
 
     onClose();
