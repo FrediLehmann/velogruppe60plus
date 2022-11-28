@@ -10,7 +10,6 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Badge,
-  Box,
   Button,
   ButtonGroup,
   Flex,
@@ -105,27 +104,23 @@ const TourInfo = ({
         </AccordionButton>
       </h2>
       <AccordionPanel>
+        <Flex my={["6", "10"]} gap="8" flexDirection={["column", "row"]}>
+          <Text fontSize={["lg", "xl"]}>{description}</Text>
+          <Flex gap={["6", "8"]} wrap="wrap">
+            <Fact label="Distanz" value={distance} />
+            <Fact label="Aufstieg" value={ascent} />
+            <Fact label="Abstieg" value={descent} />
+            <Fact label="Dauer" value={duration} />
+            <Fact label="Start" value={startPoint} />
+            <Fact label="Ziel" value={endPoint} />
+            <Fact label="Kaffepause" value={pause} />
+          </Flex>
+        </Flex>
         <NextLink href={mapUrl} passHref legacyBehavior>
-          <Link
-            display="block"
-            my="4"
-            isExternal
-            color="blue.700"
-            fontSize="lg"
-          >
-            Schweiz Mobil Link <External mx="2px" boxSize="4" />
+          <Link display="block" my="2" isExternal color="blue.700">
+            Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
           </Link>
         </NextLink>
-        <Text fontSize="lg">{description}</Text>
-        <Flex gap={["6", "8"]} my="8" wrap="wrap">
-          <Fact label="Distanz" value={distance} />
-          <Fact label="Aufstieg" value={ascent} />
-          <Fact label="Abstieg" value={descent} />
-          <Fact label="Dauer" value={duration} />
-          <Fact label="Start" value={startPoint} />
-          <Fact label="Ziel" value={endPoint} />
-          <Fact label="Kaffepause" value={pause} />
-        </Flex>
         <Flex mt="6" gap="3" flexWrap="wrap">
           <Button onClick={modalOnOpen}>Bearbeiten</Button>
           <Button colorScheme="red" onClick={alertOnOpen}>
