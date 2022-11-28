@@ -1,5 +1,5 @@
 import { Container, Flex, Heading, Link, Text } from "@chakra-ui/react";
-import { Fact } from "./components";
+import { Fact } from "components";
 import NextLink from "next/link";
 import { External } from "icons";
 import Image from "next/image";
