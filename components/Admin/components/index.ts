@@ -1,3 +1,4 @@
 export { default as NewTourSection } from "./NewTourSection";
+export { default as TourForm } from "./TourForm";
 export { default as Tours } from "./Tours";
 export { default as TourInfo } from "./TourInfo";

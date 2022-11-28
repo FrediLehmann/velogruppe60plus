@@ -14,6 +14,13 @@ import {
   ButtonGroup,
   Flex,
   Link,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Text,
   useDisclosure,
   useToast,
@@ -24,6 +31,7 @@ import { Fact } from "components";
 import { useContext, useRef } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { ToursContext } from "../context";
+import { TourForm } from ".";
 
 const TourInfo = ({
   id,
@@ -51,7 +59,16 @@ const TourInfo = ({
   pause: string;
 }) => {
   const supabaseClient = useSupabaseClient();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isAlertOpen,
+    onOpen: alertOnOpen,
+    onClose: alertOnClose,
+  } = useDisclosure();
+  const {
+    isOpen: modalIsOpen,
+    onOpen: modalOnOpen,
+    onClose: modalOnClose,
+  } = useDisclosure();
   const cancelRef = useRef(null);
   const toast = useToast();
   const { load } = useContext(ToursContext);
@@ -71,7 +88,7 @@ const TourInfo = ({
       });
 
     load();
-    onClose();
+    alertOnClose();
   };
 
   return (
@@ -107,15 +124,100 @@ const TourInfo = ({
           <Fact label="Kaffepause" value={pause} />
         </Flex>
         <ButtonGroup mt="8">
-          <Button>Bearbeiten</Button>
-          <Button colorScheme="red" onClick={onOpen}>
+          <Button onClick={modalOnOpen}>Bearbeiten</Button>
+          <Button colorScheme="red" onClick={alertOnOpen}>
             Löschen
           </Button>
         </ButtonGroup>
+        <Modal isOpen={modalIsOpen} onClose={modalOnClose} size="xl">
+          <ModalOverlay />
+          <ModalContent>
+            <ModalCloseButton />
+            <ModalHeader>Tour bearbeiten</ModalHeader>
+            <ModalBody>
+              <TourForm
+                formName="editTour"
+                initialValues={{
+                  name,
+                  description,
+                  mapLink: mapUrl,
+                  distance,
+                  ascent,
+                  descent,
+                  duration,
+                  start: startPoint,
+                  end: endPoint,
+                  pause,
+                }}
+                submit={async ({
+                  name,
+                  description,
+                  mapLink,
+                  start,
+                  end,
+                  pause,
+                  distance,
+                  ascent,
+                  descent,
+                  duration,
+                }) => {
+                  const { error } = await supabaseClient
+                    .from("touren")
+                    .update({
+                      name,
+                      description,
+                      mapUrl: mapLink,
+                      startPoint: start,
+                      endPoint: end,
+                      pause,
+                      distance,
+                      ascent,
+                      descent,
+                      duration,
+                    })
+                    .eq("id", id);
+
+                  if (error) {
+                    toast({
+                      title: "Speichern fehlgeschlagen.",
+                      description: "Tour konnte nicht gespeichert werden.",
+                      status: "error",
+                      duration: 9000,
+                      isClosable: true,
+                      position: "top",
+                    });
+                    return;
+                  }
+
+                  toast({
+                    title: "Tour gespeichert.",
+                    description: "Ihre Tour wurde gespeichert.",
+                    status: "success",
+                    duration: 9000,
+                    isClosable: true,
+                    position: "top",
+                  });
+                  load();
+                  modalOnClose();
+                }}
+              />
+            </ModalBody>
+            <ModalFooter>
+              <ButtonGroup>
+                <Button variant="outline" onClick={modalOnClose}>
+                  Abbrechen
+                </Button>
+                <Button colorScheme="blue" type="submit" form="editTour">
+                  Speichern
+                </Button>
+              </ButtonGroup>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
         <AlertDialog
-          isOpen={isOpen}
+          isOpen={isAlertOpen}
           leastDestructiveRef={cancelRef}
-          onClose={onClose}
+          onClose={alertOnClose}
         >
           <AlertDialogOverlay>
             <AlertDialogContent>
@@ -126,7 +228,7 @@ const TourInfo = ({
                 Soll die Tour {name} gelöscht werden?
               </AlertDialogBody>
               <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
+                <Button ref={cancelRef} onClick={alertOnClose}>
                   Abbrechen
                 </Button>
                 <Button colorScheme="red" onClick={deleteTour} ml={3}>
