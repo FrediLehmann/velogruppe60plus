@@ -10,35 +10,11 @@ import {
 import UploadInput from "components/UploadInput";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { object, string } from "yup";
-
-interface TourFields {
-  name: string;
-  description: string;
-  mapLink: string;
-  mapImage: File | string;
-  distance: string;
-  ascent: string;
-  descent: string;
-  duration: string;
-  start: string;
-  end: string;
-  pause: string;
-}
+import { defaultValues } from "./defaultValues";
+import { TourFields } from "./TourFields.types";
 
 const TourForm = ({
-  initialValues = {
-    name: "",
-    description: "",
-    mapLink: "",
-    mapImage: "",
-    distance: "",
-    ascent: "",
-    descent: "",
-    duration: "",
-    start: "",
-    end: "",
-    pause: "",
-  },
+  initialValues = defaultValues,
   submit,
   formName,
 }: {

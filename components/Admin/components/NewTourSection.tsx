@@ -15,17 +15,113 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
 import { Tour } from "lib/types/tours.types";
-import { useContext, useState } from "react";
+import { useCallback, useContext, useState } from "react";
 import { TourForm } from ".";
 import { ToursContext } from "../context";
+import { TourFields } from "./TourForm/TourFields.types";
 
 const NewTourSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const toast = useToast();
-  const supabaseClient = useSupabaseClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const supabaseClient = useSupabaseClient();
   const { load } = useContext(ToursContext);
+
+  const saveNewTour = useCallback(
+    async ({
+      name,
+      description,
+      mapLink,
+      mapImage,
+      start,
+      end,
+      pause,
+      distance,
+      ascent,
+      descent,
+      duration,
+    }: TourFields) => {
+      setIsSubmitting(true);
+
+      // Save new tour
+      const { data, error } = await supabaseClient
+        .from("touren")
+        .insert([
+          {
+            name,
+            description,
+            mapUrl: mapLink,
+            startPoint: start,
+            endPoint: end,
+            pause,
+            distance,
+            ascent,
+            descent,
+            duration,
+          },
+        ])
+        .select();
+
+      if (error) {
+        toast({
+          title: "Speichern fehlgeschlagen.",
+          description: "Tour konnte nicht gespeichert werden.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Upload image
+      const { data: imageData, error: imageUploadError } =
+        await supabaseClient.storage
+          .from("map-images")
+          .upload(
+            `${(data[0] as Tour).id.toString()}.${(mapImage as File).name
+              .split(".")
+              .pop()}`,
+            mapImage,
+            { upsert: true }
+          );
+
+      if (imageUploadError) {
+        toast({
+          title: "Bild upload fehlgeschlagen.",
+          description: "Bild konnte nicht hochgeladen werden.",
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+          position: "top",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Set the image info for the new tour
+      await supabaseClient
+        .from("touren")
+        .update({ image: imageData.path })
+        .eq("id", (data[0] as unknown as Tour).id);
+
+      toast({
+        title: "Tour gespeichert.",
+        description: "Ihre Tour wurde gespeichert.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      setIsSubmitting(false);
+      onClose();
+      load();
+    },
+    [load, onClose, supabaseClient, toast]
+  );
 
   return (
     <>
@@ -37,107 +133,14 @@ const NewTourSection = () => {
       >
         Neue Tour erfassen
       </Button>
-
+      <Divider borderColor="gray.500" my="3" />
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalCloseButton />
           <ModalHeader>Tour erfassen</ModalHeader>
           <ModalBody>
-            <TourForm
-              formName="createTour"
-              submit={async ({
-                name,
-                description,
-                mapLink,
-                mapImage,
-                start,
-                end,
-                pause,
-                distance,
-                ascent,
-                descent,
-                duration,
-              }) => {
-                setIsSubmitting(true);
-
-                const { data, error } = await supabaseClient
-                  .from("touren")
-                  .insert([
-                    {
-                      name,
-                      description,
-                      mapUrl: mapLink,
-                      startPoint: start,
-                      endPoint: end,
-                      pause,
-                      distance,
-                      ascent,
-                      descent,
-                      duration,
-                    },
-                  ])
-                  .select();
-
-                if (error) {
-                  toast({
-                    title: "Speichern fehlgeschlagen.",
-                    description: "Tour konnte nicht gespeichert werden.",
-                    status: "error",
-                    duration: 9000,
-                    isClosable: true,
-                    position: "top",
-                  });
-                  setIsSubmitting(false);
-                  return;
-                }
-
-                if (data && data.length > 0) {
-                  const { data: imageData, error: imageUploadError } =
-                    await supabaseClient.storage
-                      .from("map-images")
-                      .upload(
-                        `${(data[0] as Tour).id.toString()}.${(
-                          mapImage as File
-                        ).name
-                          .split(".")
-                          .pop()}`,
-                        mapImage,
-                        { upsert: true }
-                      );
-
-                  if (imageUploadError) {
-                    toast({
-                      title: "Bild upload fehlgeschlagen.",
-                      description: "Bild konnte nicht hochgeladen werden.",
-                      status: "error",
-                      duration: 9000,
-                      isClosable: true,
-                      position: "top",
-                    });
-                    setIsSubmitting(false);
-                    return;
-                  }
-
-                  await supabaseClient
-                    .from("touren")
-                    .update({ image: imageData.path })
-                    .eq("id", (data[0] as unknown as Tour).id);
-                }
-
-                toast({
-                  title: "Tour gespeichert.",
-                  description: "Ihre Tour wurde gespeichert.",
-                  status: "success",
-                  duration: 9000,
-                  isClosable: true,
-                  position: "top",
-                });
-                load();
-                onClose();
-                setIsSubmitting(false);
-              }}
-            />
+            <TourForm formName="createTour" submit={saveNewTour} />
           </ModalBody>
           <ModalFooter>
             <ButtonGroup>
@@ -160,7 +163,6 @@ const NewTourSection = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-      <Divider borderColor="gray.500" my="3" />
     </>
   );
 };
