@@ -9,21 +9,29 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FieldProps } from "formik";
 import { Upload } from "icons";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 const UploadInput = ({
   label,
-  placeholder,
+  buttonLabel,
   acceptedFileTypes,
   fieldProps,
 }: {
   label: string;
-  placeholder?: string;
+  buttonLabel: string;
   acceptedFileTypes: string;
   fieldProps: FieldProps;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const supabaseClient = useSupabaseClient();
+
+  const image = useMemo(() => {
+    return typeof fieldProps.field.value === "string"
+      ? supabaseClient.storage
+          .from("map-images")
+          .getPublicUrl(fieldProps.field.value).data.publicUrl
+      : URL.createObjectURL(fieldProps.field.value);
+  }, [supabaseClient.storage, fieldProps.field.value]);
 
   return (
     <FormControl
@@ -51,17 +59,7 @@ const UploadInput = ({
       />
       <Flex align="flex-start" gap="6">
         {fieldProps.field.value && (
-          <Image
-            alt="Bild der Karte"
-            boxSize="125px"
-            src={
-              typeof fieldProps.field.value === "string"
-                ? supabaseClient.storage
-                    .from("map-images")
-                    .getPublicUrl(fieldProps.field.value).data.publicUrl
-                : URL.createObjectURL(fieldProps.field.value)
-            }
-          />
+          <Image alt="Bild der Karte" boxSize="125px" src={image} />
         )}
         <Button
           variant="outline"
@@ -71,7 +69,7 @@ const UploadInput = ({
             inputRef?.current?.click();
           }}
         >
-          {placeholder || "Dokument hochladen..."}
+          {buttonLabel}
         </Button>
       </Flex>
       <FormErrorMessage>

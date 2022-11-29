@@ -120,7 +120,7 @@ const TourForm = ({
               {(fieldProps: FieldProps) => (
                 <UploadInput
                   label="Bild der Karte"
-                  placeholder="Bild hochladen..."
+                  buttonLabel="Bild hochladen..."
                   acceptedFileTypes="image/png, image/jpeg"
                   fieldProps={fieldProps}
                 />
