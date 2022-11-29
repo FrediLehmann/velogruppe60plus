@@ -1,37 +1,35 @@
 import {
-  Button,
   Container,
   Flex,
   Heading,
-  Image,
   Link,
+  Skeleton,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { Fact } from "components";
 import NextLink from "next/link";
-import { ArrowLeft, External } from "icons";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { External } from "icons";
 import { useContext } from "react";
 import { TourContext } from "./context";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
-const Tour = () => {
+const CurrentTour = () => {
   const supabaseClient = useSupabaseClient();
   const { tour } = useContext(TourContext);
 
+  if (!tour)
+    return (
+      <Container as="main" maxW="container.md" mt={["4", "6", "12"]}>
+        <Skeleton h="xl" w="full"></Skeleton>
+      </Container>
+    );
+
   return (
     <Container as="main" maxW="container.md" mt={["4", "6", "12"]}>
-      <NextLink href="alle-touren" passHref legacyBehavior>
-        <Button
-          as={Link}
-          mb="4"
-          variant="link"
-          color="blue.700"
-          alignItems="center"
-          leftIcon={<ArrowLeft boxSize="5" />}
-        >
-          Zurück zu den Touren
-        </Button>
-      </NextLink>
+      <Text fontSize="sm" fontWeight="semibold" color="gray.700">
+        Aktuelle Tour
+      </Text>
       <Heading as="h1" fontSize={["xl", "2xl"]}>
         {tour.name}
       </Heading>
@@ -63,4 +61,4 @@ const Tour = () => {
   );
 };
 
-export default Tour;
+export default CurrentTour;

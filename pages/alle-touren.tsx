@@ -1,13 +1,73 @@
-import { PageFrame } from "components";
+import { useToast } from "@chakra-ui/react";
+import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { AllTours, PageFrame } from "components";
+import { ToursContext } from "components/AllTours/context";
+import { Tour } from "lib/types/tours.types";
 import Head from "next/head";
+import { GetServerSidePropsContext } from "next/types";
+import { useCallback, useEffect, useState } from "react";
 
-const AlleTouren = () => {
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const supabase = createServerSupabaseClient(ctx);
+
+  const { data } = await supabase
+    .from("touren")
+    .select(
+      "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
+    )
+    .order("name");
+
+  return {
+    props: {
+      tours: data,
+    },
+  };
+};
+
+const AlleTouren = ({ tours: serverTours }: { tours: Tour[] }) => {
+  const toast = useToast();
+  const supabaseClient = useSupabaseClient();
+  const [tours, setTours] = useState(serverTours);
+
+  const load = useCallback(async () => {
+    const { data, error } = await supabaseClient
+      .from("touren")
+      .select(
+        "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
+      )
+      .order("name");
+
+    if (error) {
+      toast({
+        title: "Fehler beim laden der Touren.",
+        description:
+          "Tour konnte nicht geladen werden. Versuchen Sie es später erneut.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+
+    if (data) setTours(data);
+  }, [supabaseClient, toast]);
+
+  useEffect(() => {
+    if (!serverTours) load();
+  }, [serverTours, load]);
+
   return (
     <>
       <Head>
-        <title>Velogruppe 60+</title>
+        <title>Velogruppe 60+ | Alle Touren</title>
       </Head>
-      <PageFrame>Leer</PageFrame>
+      <PageFrame>
+        <ToursContext.Provider value={{ tours, load }}>
+          <AllTours />
+        </ToursContext.Provider>
+      </PageFrame>
     </>
   );
 };
