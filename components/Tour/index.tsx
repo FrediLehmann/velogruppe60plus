@@ -5,11 +5,11 @@ import {
   Link,
   Skeleton,
   Text,
+  Image,
 } from "@chakra-ui/react";
 import { Fact } from "components";
 import NextLink from "next/link";
 import { External } from "icons";
-import Image from "next/image";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
 import type { Tour as TourType } from "lib/tours.type";
@@ -60,7 +60,13 @@ const Tour = () => {
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>
-      {/* <Image src={tour.image} alt="Karte" /> */}
+      <Image
+        src={
+          supabaseClient.storage.from("map-images").getPublicUrl(tour.image)
+            .data.publicUrl
+        }
+        alt="Karte"
+      />
     </Container>
   );
 };

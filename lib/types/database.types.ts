@@ -23,6 +23,8 @@ export interface Database {
           ascent: string | null
           descent: string | null
           duration: string | null
+          next_tour: boolean
+          image: string | null
         }
         Insert: {
           id?: number
@@ -37,6 +39,8 @@ export interface Database {
           ascent?: string | null
           descent?: string | null
           duration?: string | null
+          next_tour?: boolean
+          image?: string | null
         }
         Update: {
           id?: number
@@ -51,6 +55,8 @@ export interface Database {
           ascent?: string | null
           descent?: string | null
           duration?: string | null
+          next_tour?: boolean
+          image?: string | null
         }
       }
     }

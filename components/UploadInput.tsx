@@ -6,6 +6,7 @@ import {
   FormLabel,
   Image,
 } from "@chakra-ui/react";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { FieldProps } from "formik";
 import { Upload } from "icons";
 import { useRef } from "react";
@@ -22,8 +23,7 @@ const UploadInput = ({
   fieldProps: FieldProps;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  console.log(fieldProps.field.value);
+  const supabaseClient = useSupabaseClient();
 
   return (
     <FormControl
@@ -56,7 +56,9 @@ const UploadInput = ({
             boxSize="125px"
             src={
               typeof fieldProps.field.value === "string"
-                ? fieldProps.field.value
+                ? supabaseClient.storage
+                    .from("map-images")
+                    .getPublicUrl(fieldProps.field.value).data.publicUrl
                 : URL.createObjectURL(fieldProps.field.value)
             }
           />

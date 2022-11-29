@@ -13,6 +13,7 @@ import {
   Button,
   ButtonGroup,
   Flex,
+  Image,
   Link,
   Modal,
   ModalBody,
@@ -28,7 +29,7 @@ import {
 import NextLink from "next/link";
 import { External } from "icons";
 import { Fact } from "components";
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { ToursContext } from "../context";
 import { TourForm } from ".";
@@ -47,6 +48,7 @@ const TourInfo = ({
   endPoint,
   pause,
   next_tour,
+  image,
 }: Tour) => {
   const supabaseClient = useSupabaseClient();
   const {
@@ -62,8 +64,10 @@ const TourInfo = ({
   const cancelRef = useRef(null);
   const toast = useToast();
   const { load, setNextTour } = useContext(ToursContext);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const deleteTour = async () => {
+    await supabaseClient.storage.from("map-images").remove([image]);
     const { error } = await supabaseClient.from("touren").delete().eq("id", id);
 
     if (error)
@@ -121,9 +125,16 @@ const TourInfo = ({
             Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
           </Link>
         </NextLink>
+        <Image
+          alt="Bild der Karte"
+          src={
+            supabaseClient.storage.from("map-images").getPublicUrl(image).data
+              .publicUrl
+          }
+        />
         <Flex mt="6" gap="3" flexWrap="wrap">
           <Button onClick={modalOnOpen}>Bearbeiten</Button>
-          <Button colorScheme="red" onClick={alertOnOpen}>
+          <Button disabled={next_tour} colorScheme="red" onClick={alertOnOpen}>
             Löschen
           </Button>
           {!next_tour && (
@@ -148,6 +159,7 @@ const TourInfo = ({
                   name,
                   description,
                   mapLink: mapUrl,
+                  mapImage: image,
                   distance,
                   ascent,
                   descent,
@@ -160,6 +172,7 @@ const TourInfo = ({
                   name,
                   description,
                   mapLink,
+                  mapImage,
                   start,
                   end,
                   pause,
@@ -168,12 +181,42 @@ const TourInfo = ({
                   descent,
                   duration,
                 }) => {
+                  setIsSubmitting(true);
+
+                  let img = mapImage;
+                  if (typeof mapImage !== "string") {
+                    const { data, error: imageUploadError } =
+                      await supabaseClient.storage
+                        .from("map-images")
+                        .upload(
+                          `${id.toString()}.${mapImage.name.split(".").pop()}`,
+                          mapImage,
+                          { upsert: true }
+                        );
+
+                    if (imageUploadError) {
+                      toast({
+                        title: "Bild upload fehlgeschlagen.",
+                        description: "Bild konnte nicht hochgeladen werden.",
+                        status: "error",
+                        duration: 9000,
+                        isClosable: true,
+                        position: "top",
+                      });
+                      setIsSubmitting(false);
+                      return;
+                    }
+
+                    img = data.path;
+                  }
+
                   const { error } = await supabaseClient
                     .from("touren")
                     .update({
                       name,
                       description,
                       mapUrl: mapLink,
+                      image: img,
                       startPoint: start,
                       endPoint: end,
                       pause,
@@ -193,6 +236,7 @@ const TourInfo = ({
                       isClosable: true,
                       position: "top",
                     });
+                    setIsSubmitting(false);
                     return;
                   }
 
@@ -206,15 +250,25 @@ const TourInfo = ({
                   });
                   load();
                   modalOnClose();
+                  setIsSubmitting(false);
                 }}
               />
             </ModalBody>
             <ModalFooter>
               <ButtonGroup>
-                <Button variant="outline" onClick={modalOnClose}>
+                <Button
+                  disabled={isSubmitting}
+                  variant="outline"
+                  onClick={modalOnClose}
+                >
                   Abbrechen
                 </Button>
-                <Button colorScheme="blue" type="submit" form="editTour">
+                <Button
+                  colorScheme="blue"
+                  type="submit"
+                  form="editTour"
+                  isLoading={isSubmitting}
+                >
                   Speichern
                 </Button>
               </ButtonGroup>

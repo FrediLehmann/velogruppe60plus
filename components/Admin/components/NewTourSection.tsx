@@ -14,11 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
-import { useContext } from "react";
+import { Tour } from "lib/tours.type";
+import { useContext, useState } from "react";
 import { TourForm } from ".";
 import { ToursContext } from "../context";
 
 const NewTourSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
   const supabaseClient = useSupabaseClient();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -47,6 +49,7 @@ const NewTourSection = () => {
                 name,
                 description,
                 mapLink,
+                mapImage,
                 start,
                 end,
                 pause,
@@ -55,20 +58,25 @@ const NewTourSection = () => {
                 descent,
                 duration,
               }) => {
-                const { error } = await supabaseClient.from("touren").insert([
-                  {
-                    name,
-                    description,
-                    mapUrl: mapLink,
-                    startPoint: start,
-                    endPoint: end,
-                    pause,
-                    distance,
-                    ascent,
-                    descent,
-                    duration,
-                  },
-                ]);
+                setIsSubmitting(true);
+
+                const { data, error } = await supabaseClient
+                  .from("touren")
+                  .insert([
+                    {
+                      name,
+                      description,
+                      mapUrl: mapLink,
+                      startPoint: start,
+                      endPoint: end,
+                      pause,
+                      distance,
+                      ascent,
+                      descent,
+                      duration,
+                    },
+                  ])
+                  .select();
 
                 if (error) {
                   toast({
@@ -79,7 +87,41 @@ const NewTourSection = () => {
                     isClosable: true,
                     position: "top",
                   });
+                  setIsSubmitting(false);
                   return;
+                }
+
+                if (data && data.length > 0) {
+                  const { data: imageData, error: imageUploadError } =
+                    await supabaseClient.storage
+                      .from("map-images")
+                      .upload(
+                        `${(data[0] as Tour).id.toString()}.${(
+                          mapImage as File
+                        ).name
+                          .split(".")
+                          .pop()}`,
+                        mapImage,
+                        { upsert: true }
+                      );
+
+                  if (imageUploadError) {
+                    toast({
+                      title: "Bild upload fehlgeschlagen.",
+                      description: "Bild konnte nicht hochgeladen werden.",
+                      status: "error",
+                      duration: 9000,
+                      isClosable: true,
+                      position: "top",
+                    });
+                    setIsSubmitting(false);
+                    return;
+                  }
+
+                  await supabaseClient
+                    .from("touren")
+                    .update({ image: imageData.path })
+                    .eq("id", (data[0] as unknown as Tour).id);
                 }
 
                 toast({
@@ -92,15 +134,25 @@ const NewTourSection = () => {
                 });
                 load();
                 onClose();
+                setIsSubmitting(false);
               }}
             />
           </ModalBody>
           <ModalFooter>
             <ButtonGroup>
-              <Button variant="outline" onClick={onClose}>
+              <Button
+                disabled={isSubmitting}
+                variant="outline"
+                onClick={onClose}
+              >
                 Abbrechen
               </Button>
-              <Button colorScheme="blue" type="submit" form="createTour">
+              <Button
+                colorScheme="blue"
+                type="submit"
+                form="createTour"
+                isLoading={isSubmitting}
+              >
                 Speichern
               </Button>
             </ButtonGroup>
