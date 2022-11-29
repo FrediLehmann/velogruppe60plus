@@ -17,9 +17,16 @@ const Header = () => {
       alignItems="center"
       justifyContent="space-between"
     >
-      <Text fontSize={["xl", "2xl"]} fontWeight="bold">
-        Velogruppe 60+
-      </Text>
+      <NextLink href="/" passHref legacyBehavior>
+        <Link
+          as={Text}
+          fontSize={["xl", "2xl"]}
+          fontWeight="bold"
+          _hover={{ textDecoration: "none" }}
+        >
+          Velogruppe 60+
+        </Link>
+      </NextLink>
       <ButtonGroup variant="link" size={["xs", "sm"]} spacing={["0", "2"]}>
         {user && (
           <Button
