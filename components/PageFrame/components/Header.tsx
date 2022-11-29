@@ -14,16 +14,15 @@ const Header = () => {
       py="4"
       maxW="container.md"
       display="flex"
+      alignItems="center"
       justifyContent="space-between"
     >
       <Text fontSize={["xl", "2xl"]} fontWeight="bold">
         Velogruppe 60+
       </Text>
-      <ButtonGroup size="sm" gap="4">
+      <ButtonGroup variant="link" size={["xs", "sm"]} spacing={["0", "2"]}>
         {user && (
           <Button
-            as={Link}
-            variant="link"
             onClick={async () => {
               await supabaseClient.auth.signOut();
               router.push("/");
@@ -33,9 +32,7 @@ const Header = () => {
           </Button>
         )}
         <NextLink href="/alle-touren" passHref legacyBehavior>
-          <Button as={Link} variant="link">
-            Alle Touren
-          </Button>
+          <Button as={Link}>Alle Touren</Button>
         </NextLink>
       </ButtonGroup>
     </Container>
