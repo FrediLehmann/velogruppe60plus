@@ -85,7 +85,7 @@ const Login = () => {
                       }
                     >
                       <FormLabel>Email Addresse</FormLabel>
-                      <Input {...field} background="white" />
+                      <Input {...field} />
                       <FormErrorMessage>
                         {form.errors?.email as string}
                       </FormErrorMessage>

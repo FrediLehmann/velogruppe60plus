@@ -76,7 +76,7 @@ const TourForm = ({
                   isInvalid={(form.errors.name && form.touched.name) as boolean}
                 >
                   <FormLabel>Name</FormLabel>
-                  <Input {...field} background="white" />
+                  <Input {...field} />
                   <FormErrorMessage>
                     {form.errors?.name as string}
                   </FormErrorMessage>
@@ -109,7 +109,7 @@ const TourForm = ({
                   }
                 >
                   <FormLabel>Url zur Schweiz Mobil Karte</FormLabel>
-                  <Input {...field} background="white" />
+                  <Input {...field} />
                   <FormErrorMessage>
                     {form.errors?.mapLink as string}
                   </FormErrorMessage>
@@ -136,7 +136,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Startpunk</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.start as string}
                     </FormErrorMessage>
@@ -150,7 +150,7 @@ const TourForm = ({
                     isInvalid={(form.errors.end && form.touched.end) as boolean}
                   >
                     <FormLabel>Endpunkt</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.end as string}
                     </FormErrorMessage>
@@ -184,7 +184,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Distanz</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.distance as string}
                     </FormErrorMessage>
@@ -200,7 +200,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Dauer</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.duration as string}
                     </FormErrorMessage>
@@ -218,7 +218,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Aufstieg</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.ascent as string}
                     </FormErrorMessage>
@@ -234,7 +234,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Abstieg</FormLabel>
-                    <Input {...field} background="white" />
+                    <Input {...field} />
                     <FormErrorMessage>
                       {form.errors?.descent as string}
                     </FormErrorMessage>
