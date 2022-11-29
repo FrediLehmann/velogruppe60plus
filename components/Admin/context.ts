@@ -1,4 +1,3 @@
-import { SupabaseClient } from "@supabase/supabase-js";
 import { createContext } from "react";
 import { Tour } from "lib/types/tours.types";
 

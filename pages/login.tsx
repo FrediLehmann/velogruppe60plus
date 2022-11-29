@@ -1,6 +1,6 @@
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Login as LoginComponent, PageFrame } from "components";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext } from "next/types";
 import Head from "next/head";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
