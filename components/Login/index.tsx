@@ -16,11 +16,9 @@ import { useState } from "react";
 import { object, string } from "yup";
 
 const Login = () => {
-  const supabaseClient = useSupabaseClient();
-
-  const toast = useToast();
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const supabaseClient = useSupabaseClient();
+  const toast = useToast();
 
   return (
     <Container maxW="lg" mt={["32", "36"]}>
