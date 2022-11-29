@@ -28,7 +28,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .select(
       "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
     )
-    .order("id");
+    .order("name");
 
   return {
     props: {
@@ -49,7 +49,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
       .select(
         "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
       )
-      .order("id");
+      .order("name");
 
     if (error) {
       toast({
