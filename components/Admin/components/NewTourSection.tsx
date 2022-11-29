@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
-import { Tour } from "lib/tours.type";
+import { Tour } from "lib/types/tours.type";
 import { useContext, useState } from "react";
 import { TourForm } from ".";
 import { ToursContext } from "../context";
@@ -30,6 +30,7 @@ const NewTourSection = () => {
   return (
     <>
       <Button
+        size={["sm", "md"]}
         colorScheme="blue"
         rightIcon={<Plus boxSize="5" />}
         onClick={onOpen}

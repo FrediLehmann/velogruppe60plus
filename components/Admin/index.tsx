@@ -3,7 +3,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useCallback, useEffect, useState } from "react";
 import { NewTourSection, Tours } from "./components";
 import { ToursContext } from "./context";
-import { Tour } from "../../lib/tours.type";
+import { Tour } from "lib/types/tours.type";
 
 const Admin = () => {
   const supabaseClient = useSupabaseClient();
