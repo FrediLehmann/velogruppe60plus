@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
-import { Tour } from "lib/types/tours.type";
+import { Tour } from "lib/types/tours.types";
 import { useContext, useState } from "react";
 import { TourForm } from ".";
 import { ToursContext } from "../context";

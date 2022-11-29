@@ -12,7 +12,7 @@ import NextLink from "next/link";
 import { External } from "icons";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useEffect, useState } from "react";
-import type { Tour as TourType } from "lib/types/tours.type";
+import type { Tour as TourType } from "lib/types/tours.types";
 
 const Tour = () => {
   const [tour, setTour] = useState<TourType>();
