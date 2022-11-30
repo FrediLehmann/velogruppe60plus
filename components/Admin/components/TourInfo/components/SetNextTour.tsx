@@ -9,7 +9,7 @@ const SetNextTour = ({ id, disabled }: { id: number; disabled: boolean }) => {
     <Button
       disabled={disabled}
       variant="outline"
-      colorScheme="blue"
+      colorScheme="mapGreen"
       onClick={() => setNextTour(id)}
     >
       Als nächste Tour festlegen

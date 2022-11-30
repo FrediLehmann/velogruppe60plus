@@ -30,7 +30,7 @@ const Login = () => {
         py={["0", "8"]}
         px={["4", "10"]}
         bg={["transparent", "white"]}
-        boxShadow={["none", "md"]}
+        boxShadow={["none", "sm"]}
         borderRadius={["none", "xl"]}
       >
         <Formik
@@ -97,7 +97,7 @@ const Login = () => {
         <Button
           type="submit"
           form="login"
-          colorScheme="blue"
+          colorScheme="mapGreen"
           isLoading={isSubmitting}
         >
           Einloggen

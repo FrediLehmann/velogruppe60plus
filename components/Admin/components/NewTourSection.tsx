@@ -127,7 +127,7 @@ const NewTourSection = () => {
     <>
       <Button
         size={["sm", "md"]}
-        colorScheme="blue"
+        colorScheme="mapGreen"
         rightIcon={<Plus boxSize="5" />}
         onClick={onOpen}
       >
@@ -152,7 +152,7 @@ const NewTourSection = () => {
                 Abbrechen
               </Button>
               <Button
-                colorScheme="blue"
+                colorScheme="mapGreen"
                 type="submit"
                 form="createTour"
                 isLoading={isSubmitting}

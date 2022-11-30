@@ -56,6 +56,7 @@ const CurrentTour = () => {
             .data.publicUrl
         }
         alt="Bild der Karte"
+        borderRadius="sm"
       />
     </Container>
   );

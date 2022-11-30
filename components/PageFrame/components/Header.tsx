@@ -27,7 +27,7 @@ const Header = () => {
           Velogruppe 60+
         </Link>
       </NextLink>
-      <ButtonGroup variant="link" size={["xs", "sm"]} spacing={["0", "2"]}>
+      <ButtonGroup variant="link" size={["xs", "md"]} spacing={["0", "2"]}>
         {user && (
           <Button
             onClick={async () => {

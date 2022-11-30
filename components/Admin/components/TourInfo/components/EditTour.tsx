@@ -152,7 +152,7 @@ const EditTour = (tour: Tour) => {
                 Abbrechen
               </Button>
               <Button
-                colorScheme="blue"
+                colorScheme="mapGreen"
                 type="submit"
                 form="editTour"
                 isLoading={isSubmitting}
