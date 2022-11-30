@@ -7,6 +7,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { ImageFallback } from "components";
 import { FieldProps } from "formik";
 import { Upload } from "icons";
 import { useMemo, useRef } from "react";
@@ -59,7 +60,13 @@ const UploadInput = ({
       />
       <Flex align="flex-start" gap="6">
         {fieldProps.field.value && (
-          <Image alt="Bild der Karte" boxSize="125px" src={image} />
+          <Image
+            borderRadius="md"
+            alt="Bild der Karte"
+            boxSize="125px"
+            fallback={<ImageFallback height="125px" width="125px" />}
+            src={image}
+          />
         )}
         <Button
           variant="outline"

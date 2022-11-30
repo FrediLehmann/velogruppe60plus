@@ -1,6 +1,6 @@
 import { Flex, Link, Image, Text } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Fact } from "components";
+import { Fact, ImageFallback } from "components";
 import { Tour } from "lib/types/Tours.types";
 import { External } from "icons";
 import NextLink from "next/link";
@@ -28,6 +28,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
         </Link>
       </NextLink>
       <Image
+        fallback={<ImageFallback height="2xl" />}
         src={
           supabaseClient.storage.from("map-images").getPublicUrl(tour.image)
             .data.publicUrl

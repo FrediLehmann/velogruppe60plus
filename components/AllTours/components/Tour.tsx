@@ -8,10 +8,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { ImageFallback } from "components";
 import { Tour } from "lib/types/Tours.types";
 import NextLink from "next/link";
 
-const Tour = ({ id, name, distance, duration, image }: Tour) => {
+const Tour = ({ id, name, duration, image }: Tour) => {
   const supabaseClient = useSupabaseClient();
 
   return (
@@ -30,6 +31,7 @@ const Tour = ({ id, name, distance, duration, image }: Tour) => {
         borderRadius="md"
         alt="Bild der Karte"
         boxSize="100px"
+        fallback={<ImageFallback height="100px" width="100px" />}
         src={
           supabaseClient.storage.from("map-images").getPublicUrl(image).data
             .publicUrl
