@@ -5,6 +5,7 @@ export default defineStyleConfig({
     outline: {
       field: {
         bg: "white",
+        borderRadius: "sm",
       },
     },
   },
