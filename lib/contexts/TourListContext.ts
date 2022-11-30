@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Tour } from "lib/types/tours.types";
 
-export const ToursContext = createContext<{
+export const TourListContext = createContext<{
   tours: Tour[];
   load: () => void;
   setNextTour: (id: number) => void;

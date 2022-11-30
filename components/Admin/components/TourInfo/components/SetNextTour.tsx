@@ -1,9 +1,9 @@
 import { Button } from "@chakra-ui/react";
-import { ToursContext } from "components/Admin/context";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { useContext } from "react";
 
 const SetNextTour = ({ id, disabled }: { id: number; disabled: boolean }) => {
-  const { setNextTour } = useContext(ToursContext);
+  const { setNextTour } = useContext(TourListContext);
 
   return (
     <Button

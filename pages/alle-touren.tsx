@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { AllTours, PageFrame } from "components";
-import { ToursContext } from "components/AllTours/context";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { Tour } from "lib/types/tours.types";
 import Head from "next/head";
 import { GetServerSidePropsContext } from "next/types";
@@ -64,9 +64,11 @@ const AlleTouren = ({ tours: serverTours }: { tours: Tour[] }) => {
         <title>Velogruppe 60+ | Alle Touren</title>
       </Head>
       <PageFrame>
-        <ToursContext.Provider value={{ tours, load }}>
+        <TourListContext.Provider
+          value={{ tours, load, setNextTour: (_) => _ }}
+        >
           <AllTours />
-        </ToursContext.Provider>
+        </TourListContext.Provider>
       </PageFrame>
     </>
   );

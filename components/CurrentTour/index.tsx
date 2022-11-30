@@ -11,8 +11,8 @@ import { Fact } from "components";
 import NextLink from "next/link";
 import { External } from "icons";
 import { useContext } from "react";
-import { TourContext } from "./context";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { TourContext } from "lib/contexts/TourContext";
 
 const CurrentTour = () => {
   const supabaseClient = useSupabaseClient();

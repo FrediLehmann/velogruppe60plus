@@ -12,7 +12,7 @@ import NextLink from "next/link";
 import { ArrowLeft, External } from "icons";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useContext } from "react";
-import { TourContext } from "./context";
+import { TourContext } from "../../lib/contexts/TourContext";
 
 const Tour = () => {
   const supabaseClient = useSupabaseClient();

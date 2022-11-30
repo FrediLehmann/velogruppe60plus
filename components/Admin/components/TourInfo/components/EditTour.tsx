@@ -15,13 +15,13 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { TourForm } from "components/Admin/components";
 
 import { TourFields } from "components/Admin/components/TourForm/TourFields.types";
-import { ToursContext } from "components/Admin/context";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { Tour } from "lib/types/tours.types";
 import { useCallback, useContext, useState } from "react";
 
 const EditTour = (tour: Tour) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { load } = useContext(ToursContext);
+  const { load } = useContext(TourListContext);
 
   const supabaseClient = useSupabaseClient();
   const toast = useToast();

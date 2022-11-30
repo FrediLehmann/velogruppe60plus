@@ -1,10 +1,10 @@
 import { Container, Flex, Heading, Text } from "@chakra-ui/react";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { useContext } from "react";
 import { Tour } from "./components";
-import { ToursContext } from "./context";
 
 const AllTours = () => {
-  const { tours } = useContext(ToursContext);
+  const { tours } = useContext(TourListContext);
 
   return (
     <Container maxW="container.md" mt={["4", "6", "12"]}>

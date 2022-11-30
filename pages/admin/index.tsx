@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Admin as AdminContent, PageFrame } from "components";
-import { ToursContext } from "components/Admin/context";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { Tour } from "lib/types/tours.types";
 import type { GetServerSidePropsContext } from "next";
 import Head from "next/head";
@@ -131,9 +131,9 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
         <title>Velogruppe 60+ | Admin</title>
       </Head>
       <PageFrame>
-        <ToursContext.Provider value={{ tours, load, setNextTour }}>
+        <TourListContext.Provider value={{ tours, load, setNextTour }}>
           <AdminContent />
-        </ToursContext.Provider>
+        </TourListContext.Provider>
       </PageFrame>
     </>
   );

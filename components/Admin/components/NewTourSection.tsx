@@ -14,10 +14,10 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
+import { TourListContext } from "lib/contexts/TourListContext";
 import { Tour } from "lib/types/tours.types";
 import { useCallback, useContext, useState } from "react";
 import { TourForm } from ".";
-import { ToursContext } from "../context";
 import { TourFields } from "./TourForm/TourFields.types";
 
 const NewTourSection = () => {
@@ -27,7 +27,7 @@ const NewTourSection = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const supabaseClient = useSupabaseClient();
-  const { load } = useContext(ToursContext);
+  const { load } = useContext(TourListContext);
 
   const saveNewTour = useCallback(
     async ({

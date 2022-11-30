@@ -3,9 +3,9 @@ import { GetServerSidePropsContext } from "next/types";
 import Head from "next/head";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { Tour } from "lib/types/tours.types";
-import { TourContext } from "components/CurrentTour/context";
 import { useCallback, useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { TourContext } from "lib/contexts/TourContext";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
