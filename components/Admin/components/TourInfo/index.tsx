@@ -33,7 +33,7 @@ const TourInfo = (tour: Tour) => {
           >
             {tour.name}
             {tour.next_tour && (
-              <Badge variant="outline" colorScheme="mapGreen">
+              <Badge variant="outline" colorScheme="gray">
                 Nächste Tour
               </Badge>
             )}
