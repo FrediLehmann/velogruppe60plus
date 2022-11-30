@@ -5,4 +5,5 @@ export { default as Login } from "./Login";
 export { default as PageFrame } from "./PageFrame";
 export { default as Tour } from "./Tour";
 export { default as CurrentTour } from "./CurrentTour";
+export { default as TourView } from "./TourView";
 export { default as UploadInput } from "./UploadInput";
