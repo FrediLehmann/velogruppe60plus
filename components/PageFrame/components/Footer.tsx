@@ -1,4 +1,4 @@
-import { Box, Button, Container, Link, Text } from "@chakra-ui/react";
+import { Box, Button, Container, Flex, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 const Footer = () => {
@@ -15,11 +15,28 @@ const Footer = () => {
           <Text>© Copyright 2022 by Frederic Lehmann,</Text>
           <Text>all rights reserved.</Text>
         </Box>
-        <NextLink href="/admin" passHref legacyBehavior>
-          <Button as={Link} variant="link" size="xs">
-            Admin
-          </Button>
-        </NextLink>
+        <Flex gap="3">
+          <NextLink
+            href="https://github.com/FrediLehmann/velogruppe60plus"
+            passHref
+            legacyBehavior
+          >
+            <Button
+              as={Link}
+              aria-label="Github"
+              isExternal
+              variant="link"
+              size="xs"
+            >
+              Github
+            </Button>
+          </NextLink>
+          <NextLink href="/admin" passHref legacyBehavior>
+            <Button as={Link} variant="link" size="xs">
+              Admin
+            </Button>
+          </NextLink>
+        </Flex>
       </Container>
     </Box>
   );
