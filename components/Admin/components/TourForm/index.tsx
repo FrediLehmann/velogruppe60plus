@@ -112,7 +112,7 @@ const TourForm = ({
                     }
                   >
                     <FormLabel>Startpunk</FormLabel>
-                    <Input {...field} />
+                    <Textarea {...field} />
                     <FormErrorMessage>
                       {form.errors?.start as string}
                     </FormErrorMessage>
@@ -126,7 +126,7 @@ const TourForm = ({
                     isInvalid={(form.errors.end && form.touched.end) as boolean}
                   >
                     <FormLabel>Endpunkt</FormLabel>
-                    <Input {...field} />
+                    <Textarea {...field} />
                     <FormErrorMessage>
                       {form.errors?.end as string}
                     </FormErrorMessage>
