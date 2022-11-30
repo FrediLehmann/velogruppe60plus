@@ -15,7 +15,6 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
 import { TourListContext } from "lib/contexts/TourListContext";
-import { Tour } from "lib/types/Tours.types";
 import { useCallback, useContext, useState } from "react";
 import { TourForm } from ".";
 import { TourFields } from "lib/types/TourFields.types";
@@ -82,7 +81,7 @@ const NewTourSection = () => {
         await supabaseClient.storage
           .from("map-images")
           .upload(
-            `${(data[0] as Tour).id.toString()}.${(mapImage as File).name
+            `${data[0].id.toString()}.${(mapImage as File).name
               .split(".")
               .pop()}`,
             mapImage,
@@ -106,7 +105,7 @@ const NewTourSection = () => {
       await supabaseClient
         .from("touren")
         .update({ image: imageData.path })
-        .eq("id", (data[0] as unknown as Tour).id);
+        .eq("id", data[0].id);
 
       toast({
         title: "Tour gespeichert.",
