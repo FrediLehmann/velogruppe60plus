@@ -8,7 +8,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Tour } from "lib/types/tours.types";
+import { Tour } from "lib/types/Tours.types";
 import NextLink from "next/link";
 
 const Tour = ({ id, name, distance, duration, image }: Tour) => {

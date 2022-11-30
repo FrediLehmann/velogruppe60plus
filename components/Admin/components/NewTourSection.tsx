@@ -15,10 +15,10 @@ import {
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Plus } from "icons";
 import { TourListContext } from "lib/contexts/TourListContext";
-import { Tour } from "lib/types/tours.types";
+import { Tour } from "lib/types/Tours.types";
 import { useCallback, useContext, useState } from "react";
 import { TourForm } from ".";
-import { TourFields } from "./TourForm/TourFields.types";
+import { TourFields } from "lib/types/TourFields.types";
 
 const NewTourSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

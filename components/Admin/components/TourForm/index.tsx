@@ -11,7 +11,7 @@ import UploadInput from "components/UploadInput";
 import { Field, FieldProps, Form, Formik } from "formik";
 import { object, string } from "yup";
 import { defaultValues } from "./defaultValues";
-import { TourFields } from "./TourFields.types";
+import { TourFields } from "lib/types/TourFields.types";
 
 const TourForm = ({
   initialValues = defaultValues,

@@ -1,4 +1,4 @@
-import { TourFields } from "./TourFields.types";
+import { TourFields } from "lib/types/TourFields.types";
 
 export const defaultValues: TourFields = {
   name: "",

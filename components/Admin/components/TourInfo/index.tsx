@@ -13,7 +13,7 @@ import NextLink from "next/link";
 import { External } from "icons";
 import { Fact } from "components";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Tour } from "lib/types/tours.types";
+import { Tour } from "lib/types/Tours.types";
 import { DeleteTour, EditTour, SetNextTour } from "./components";
 
 const TourInfo = (tour: Tour) => {

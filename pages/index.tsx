@@ -2,7 +2,7 @@ import { PageFrame, CurrentTour } from "components";
 import { GetServerSidePropsContext } from "next/types";
 import Head from "next/head";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
-import { Tour } from "lib/types/tours.types";
+import { Tour } from "lib/types/Tours.types";
 import { useCallback, useEffect, useState } from "react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { TourContext } from "lib/contexts/TourContext";
