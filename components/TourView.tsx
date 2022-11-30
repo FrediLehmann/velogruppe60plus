@@ -10,8 +10,15 @@ const TourView = ({ tour }: { tour: Tour }) => {
 
   return (
     <>
-      <Flex my={["6", "10"]} gap="8" flexDirection={["column", "row"]}>
-        <Text fontSize={["lg", "xl"]}>{tour.description}</Text>
+      <Flex
+        my={["6", "10"]}
+        gap="8"
+        flexDirection={["column", "row"]}
+        align="flex-start"
+      >
+        <Text fontSize={["lg", "xl"]} whiteSpace="pre-wrap">
+          {tour.description}
+        </Text>
         <Flex gap={["6", "8"]} wrap="wrap">
           <Fact label="Distanz" value={tour.distance} />
           <Fact label="Aufstieg" value={tour.ascent} />

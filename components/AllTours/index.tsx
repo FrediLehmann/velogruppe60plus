@@ -11,11 +11,7 @@ const AllTours = () => {
       <Heading as="h1" fontSize={["lg", "xl"]} mb="8">
         Alle Touren
       </Heading>
-      <Flex
-        gap={["4", "6"]}
-        wrap={["nowrap", "wrap"]}
-        direction={["column", "row"]}
-      >
+      <Flex gap={["4", "6"]} direction="column">
         {tours.map((tour, index) => (
           <Tour key={index} {...tour} />
         ))}

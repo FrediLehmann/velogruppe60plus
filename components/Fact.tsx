@@ -6,10 +6,8 @@ const Fact = ({ label, value }: { label: string; value: string }) => {
       <StatLabel fontWeight="light" whiteSpace="nowrap">
         {label}
       </StatLabel>
-      <StatNumber fontSize={["sm", "lg"]}>
-        {value.split("\n").map((str, index) => (
-          <Text key={index}>{str}</Text>
-        ))}
+      <StatNumber fontSize={["md", "lg"]} whiteSpace="pre-wrap">
+        {value}
       </StatNumber>
     </Stat>
   );
