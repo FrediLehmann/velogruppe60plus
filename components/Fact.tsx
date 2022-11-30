@@ -1,4 +1,4 @@
-import { Stat, StatLabel, StatNumber } from "@chakra-ui/react";
+import { Stat, StatLabel, StatNumber, Text } from "@chakra-ui/react";
 
 const Fact = ({ label, value }: { label: string; value: string }) => {
   return (
@@ -6,7 +6,11 @@ const Fact = ({ label, value }: { label: string; value: string }) => {
       <StatLabel fontWeight="light" whiteSpace="nowrap">
         {label}
       </StatLabel>
-      <StatNumber fontSize={["sm", "lg"]}>{value}</StatNumber>
+      <StatNumber fontSize={["sm", "lg"]}>
+        {value.split("\n").map((str, index) => (
+          <Text key={index}>{str}</Text>
+        ))}
+      </StatNumber>
     </Stat>
   );
 };
