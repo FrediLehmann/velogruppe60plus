@@ -1,7 +1,7 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { createBrowserSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { SessionContextProvider } from "@supabase/auth-helpers-react";
-import { Database } from "lib/types/database.types";
+import { Database } from "lib/types/Database.types";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import theme from "lib/theme";
