@@ -13,11 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { TourForm } from "components/Admin/components";
-
-import { TourFields } from "lib/types/TourFields.types";
+import { TourFields } from "types/TourFields.types";
 import { TourListContext } from "lib/contexts/TourListContext";
-import { Tour } from "lib/types/Tours.types";
 import { useCallback, useContext, useState } from "react";
+import { Tour } from "types/Tours.types";
 
 const EditTour = (tour: Tour) => {
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,9 +1,9 @@
 import { Flex, Link, Image, Text } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { Fact, ImageFallback } from "components";
-import { Tour } from "lib/types/Tours.types";
 import { External } from "icons";
 import NextLink from "next/link";
+import { Tour } from "types/Tours.types";
 
 const TourView = ({ tour }: { tour: Tour }) => {
   const supabaseClient = useSupabaseClient();

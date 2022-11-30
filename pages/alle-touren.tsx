@@ -3,7 +3,7 @@ import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { AllTours, PageFrame } from "components";
 import { TourListContext } from "lib/contexts/TourListContext";
-import { Tour } from "lib/types/Tours.types";
+import { Tour } from "types/Tours.types";
 import Head from "next/head";
 import { GetServerSidePropsContext } from "next/types";
 import { useCallback, useEffect, useState } from "react";

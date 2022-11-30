@@ -7,7 +7,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import TourView from "components/TourView";
-import { Tour } from "lib/types/Tours.types";
+import { Tour } from "types/Tours.types";
 import { DeleteTour, EditTour, SetNextTour } from "./components";
 
 const TourInfo = (tour: Tour) => {

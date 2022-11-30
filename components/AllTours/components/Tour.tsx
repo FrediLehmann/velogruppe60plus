@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { ImageFallback } from "components";
-import { Tour } from "lib/types/Tours.types";
+import { Tour } from "types/Tours.types";
 import NextLink from "next/link";
 
 const Tour = ({

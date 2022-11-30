@@ -17,7 +17,7 @@ import { Plus } from "icons";
 import { TourListContext } from "lib/contexts/TourListContext";
 import { useCallback, useContext, useState } from "react";
 import { TourForm } from ".";
-import { TourFields } from "lib/types/TourFields.types";
+import { TourFields } from "types/TourFields.types";
 
 const NewTourSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { Tour } from "lib/types/Tours.types";
+import { Tour } from "types/Tours.types";
 
 export const TourContext = createContext<{
   tour: Tour;
