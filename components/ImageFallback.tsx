@@ -1,4 +1,4 @@
-import { Center } from "@chakra-ui/react";
+import { Center, Spinner } from "@chakra-ui/react";
 import { Image as ImageIcon } from "icons";
 
 const ImageFallback = ({
@@ -12,11 +12,13 @@ const ImageFallback = ({
     <Center
       h={height}
       w={width}
+      minH={height}
+      minW={width}
       bg="gray.200"
       color="gray.400"
       borderRadius="sm"
     >
-      <ImageIcon boxSize="10" />
+      <Spinner />
     </Center>
   );
 };
