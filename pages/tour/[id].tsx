@@ -69,6 +69,7 @@ export default function Tour({
     <>
       <Head>
         <title>Velogruppe 60+</title>
+        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <TourContext.Provider value={{ tour, load }}>

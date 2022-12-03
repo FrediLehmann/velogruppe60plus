@@ -129,6 +129,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
     <>
       <Head>
         <title>Velogruppe 60+ | Admin</title>
+        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <TourListContext.Provider value={{ tours, load, setNextTour }}>

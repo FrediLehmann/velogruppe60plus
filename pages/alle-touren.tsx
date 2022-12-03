@@ -62,6 +62,7 @@ const AlleTouren = ({ tours: serverTours }: { tours: Tour[] }) => {
     <>
       <Head>
         <title>Velogruppe 60+ | Alle Touren</title>
+        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <TourListContext.Provider

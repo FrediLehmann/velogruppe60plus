@@ -28,6 +28,7 @@ const Login = () => {
     <>
       <Head>
         <title>Velogruppe 60+ | Login</title>
+        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <LoginComponent />
