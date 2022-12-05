@@ -68,7 +68,7 @@ export default function Tour({
   return (
     <>
       <Head>
-        <title>Velogruppe 60+</title>
+        <title>Velogruppe 60+ | {tour.name}</title>
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
