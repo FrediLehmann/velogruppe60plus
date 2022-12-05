@@ -2,7 +2,7 @@ import { useToast } from "@chakra-ui/react";
 import { createServerSupabaseClient } from "@supabase/auth-helpers-nextjs";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { AllTours, PageFrame } from "components";
-import { TourListContext } from "lib/contexts/TourListContext";
+import { AllTourListContext } from "lib/contexts/AllTourListContext";
 import { Tour } from "types/Tours.types";
 import Head from "next/head";
 import { GetServerSidePropsContext } from "next/types";
@@ -11,21 +11,33 @@ import { useCallback, useEffect, useState } from "react";
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
 
-  const { data } = await supabase
+  const { data, count } = await supabase
     .from("touren")
     .select(
-      "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image"
+      "id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image",
+      { count: "exact" }
     )
-    .order("name");
+    .order("name")
+    .range(0, 9);
 
   return {
     props: {
       tours: data,
+      toursCount: count,
+      page: 1,
     },
   };
 };
 
-const AlleTouren = ({ tours: serverTours }: { tours: Tour[] }) => {
+const AlleTouren = ({
+  tours: serverTours,
+  toursCount,
+  page,
+}: {
+  tours: Tour[];
+  toursCount: number;
+  page: number;
+}) => {
   const toast = useToast();
   const supabaseClient = useSupabaseClient();
   const [tours, setTours] = useState(serverTours);
@@ -65,11 +77,9 @@ const AlleTouren = ({ tours: serverTours }: { tours: Tour[] }) => {
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
-        <TourListContext.Provider
-          value={{ tours, load, setNextTour: (_) => _ }}
-        >
+        <AllTourListContext.Provider value={{ tours }}>
           <AllTours />
-        </TourListContext.Provider>
+        </AllTourListContext.Provider>
       </PageFrame>
     </>
   );

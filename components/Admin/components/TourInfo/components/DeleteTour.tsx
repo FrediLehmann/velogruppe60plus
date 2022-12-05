@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { TourListContext } from "lib/contexts/TourListContext";
+import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
 import { useContext, useRef } from "react";
 
 const DeleteTour = ({
@@ -25,7 +25,7 @@ const DeleteTour = ({
   disabled: boolean;
 }) => {
   const cancelRef = useRef(null);
-  const { load } = useContext(TourListContext);
+  const { load } = useContext(AdminTourListContext);
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();

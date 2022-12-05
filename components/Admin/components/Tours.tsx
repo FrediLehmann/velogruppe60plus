@@ -1,10 +1,10 @@
 import { Accordion } from "@chakra-ui/react";
-import { TourListContext } from "lib/contexts/TourListContext";
+import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
 import { useContext } from "react";
 import { TourInfo } from ".";
 
 const Tours = () => {
-  const { tours } = useContext(TourListContext);
+  const { tours } = useContext(AdminTourListContext);
 
   return (
     <Accordion allowMultiple mt="8">
