@@ -128,7 +128,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ | Admin</title>
+        <title>Velogruppe 60+ Sensetal | Admin</title>
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>

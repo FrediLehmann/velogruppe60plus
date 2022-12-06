@@ -94,7 +94,7 @@ const AlleTouren = ({
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ | Alle Touren</title>
+        <title>Velogruppe 60+ Sensetal | Alle Touren</title>
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>

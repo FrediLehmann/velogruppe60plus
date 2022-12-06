@@ -46,7 +46,7 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+</title>
+        <title>Velogruppe 60+ Sensetal</title>
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>

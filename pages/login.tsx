@@ -27,7 +27,7 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ | Login</title>
+        <title>Velogruppe 60+ Sensetal | Login</title>
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>

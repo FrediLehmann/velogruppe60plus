@@ -24,7 +24,7 @@ const Header = () => {
           fontWeight="bold"
           _hover={{ textDecoration: "none" }}
         >
-          Velogruppe 60+
+          Velogruppe 60+ Sensetal
         </Link>
       </NextLink>
       <ButtonGroup variant="link" size={["xs", "md"]} spacing={["0", "2"]}>
