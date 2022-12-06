@@ -29,15 +29,13 @@ const AllTours = () => {
           {totalTours} Touren
         </Text>
       </Flex>
-      {isLoading ? (
-        <Skeleton h="1892" />
-      ) : (
-        <Flex gap={["4", "6"]} direction="column">
-          {tours.map((tour, index) => (
-            <Tour key={index} {...tour} />
-          ))}
-        </Flex>
-      )}
+      <Flex gap={["4", "6"]} direction="column">
+        {isLoading
+          ? [...new Array(10)].map((_, index) => (
+              <Skeleton key={index} h="168" />
+            ))
+          : tours.map((tour, index) => <Tour key={index} {...tour} />)}
+      </Flex>
       <Center mt="8">
         <ButtonGroup size="lg" variant="outline" isAttached>
           {page !== 1 && (
