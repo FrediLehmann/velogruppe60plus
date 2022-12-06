@@ -5,6 +5,7 @@ import { Database } from "types/Database.types";
 import type { AppProps } from "next/app";
 import { useState } from "react";
 import theme from "lib/theme";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() =>
@@ -12,13 +13,16 @@ export default function App({ Component, pageProps }: AppProps) {
   );
 
   return (
-    <SessionContextProvider
-      supabaseClient={supabaseClient}
-      initialSession={pageProps.initialSession}
-    >
-      <ChakraProvider theme={theme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </SessionContextProvider>
+    <>
+      <SessionContextProvider
+        supabaseClient={supabaseClient}
+        initialSession={pageProps.initialSession}
+      >
+        <ChakraProvider theme={theme}>
+          <Component {...pageProps} />
+        </ChakraProvider>
+      </SessionContextProvider>
+      <Analytics />
+    </>
   );
 }
