@@ -1,42 +1,55 @@
-import { Box, Button, Container, Flex, Link, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Container,
+  Link,
+  Text
+} from '@chakra-ui/react';
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 
 const Footer = () => {
+  const user = useUser();
+  const router = useRouter();
+  const supabaseClient = useSupabaseClient();
+
   return (
     <Box as="footer" mt="8" py="3" borderTop="1px solid" borderColor="gray.200">
       <Container
         maxW="container.md"
         display="flex"
-        alignItems="center"
+        alignItems={['flex-start', 'center']}
+        flexDirection={['column-reverse', 'row']}
         justifyContent="space-between"
-        gap="8"
-      >
-        <Box color="gray.500" fontSize={["xs", "sm"]}>
+        gap={['3', '8']}>
+        <Box color="gray.700" fontSize={['xs', 'sm']}>
           <Text>© Copyright 2022 by Frederic Lehmann,</Text>
           <Text>all rights reserved.</Text>
         </Box>
-        <Flex gap="3">
+        <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
           <NextLink
             href="https://github.com/FrediLehmann/velogruppe60plus"
             passHref
-            legacyBehavior
-          >
-            <Button
-              as={Link}
-              aria-label="Github"
-              isExternal
-              variant="link"
-              size="xs"
-            >
+            legacyBehavior>
+            <Button as={Link} aria-label="Github" isExternal>
               Github
             </Button>
           </NextLink>
-          <NextLink href="/admin" passHref legacyBehavior>
-            <Button as={Link} variant="link" size="xs">
-              Admin
+          {user && (
+            <Button
+              onClick={async () => {
+                await supabaseClient.auth.signOut();
+                router.push('/');
+              }}>
+              Abmelden
             </Button>
+          )}
+          <NextLink href="/admin" passHref legacyBehavior>
+            <Button as={Link}>{user ? 'Admin' : 'Login'}</Button>
           </NextLink>
-        </Flex>
+        </ButtonGroup>
       </Container>
     </Box>
   );
