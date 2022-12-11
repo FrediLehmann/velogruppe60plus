@@ -41,7 +41,7 @@ const Header = () => {
             <Button as={Link}>Alle Touren</Button>
           </NextLink>
           <NextLink href="/bedingungen" passHref legacyBehavior>
-            <Button as={Link}>Bedingugen</Button>
+            <Button as={Link}>Bedingungen</Button>
           </NextLink>
           <NextLink href="/allgemeines" passHref legacyBehavior>
             <Button as={Link}>Allgemein</Button>
@@ -62,7 +62,7 @@ const Header = () => {
               Alle Touren
             </MenuItem>
             <MenuItem as={NextLink} href="/bedingungen">
-              Bedingugen
+              Bedingungen
             </MenuItem>
             <MenuItem as={NextLink} href="/allgemeines">
               Allgemein
