@@ -4,11 +4,11 @@ import {
   AccordionItem,
   AccordionPanel,
   Badge,
-  Flex,
-} from "@chakra-ui/react";
-import TourView from "components/TourView";
-import { Tour } from "types/Tours.types";
-import { DeleteTour, EditTour, SetNextTour } from "./components";
+  Flex
+} from '@chakra-ui/react';
+import TourView from 'components/TourView';
+import { Tour } from 'types/Tours.types';
+import { DeleteTour, EditTour, SetNextTour } from './components';
 
 const TourInfo = (tour: Tour) => {
   return (
@@ -21,8 +21,7 @@ const TourInfo = (tour: Tour) => {
             textAlign="left"
             fontSize="lg"
             fontWeight="semibold"
-            gap="6"
-          >
+            gap="6">
             {tour.name}
             {tour.next_tour && (
               <Badge variant="outline" colorScheme="gray">

@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { Tour } from "types/Tours.types";
+import { createContext } from 'react';
+import { Tour } from 'types/Tours.types';
 
 export const AllTourListContext = createContext<{
   tours: Tour[];
@@ -10,7 +10,7 @@ export const AllTourListContext = createContext<{
 }>({
   tours: [],
   page: 1,
-  setPage: (_) => _,
+  setPage: _ => _,
   isLoading: false,
-  totalTours: 1,
+  totalTours: 1
 });

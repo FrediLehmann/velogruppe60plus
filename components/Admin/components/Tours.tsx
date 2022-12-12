@@ -1,7 +1,7 @@
-import { Accordion } from "@chakra-ui/react";
-import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
-import { useContext } from "react";
-import { TourInfo } from ".";
+import { Accordion } from '@chakra-ui/react';
+import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
+import { useContext } from 'react';
+import { TourInfo } from '.';
 
 const Tours = () => {
   const { tours } = useContext(AdminTourListContext);

@@ -1,6 +1,6 @@
-import { Button } from "@chakra-ui/react";
-import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
-import { useContext } from "react";
+import { Button } from '@chakra-ui/react';
+import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
+import { useContext } from 'react';
 
 const SetNextTour = ({ id, disabled }: { id: number; disabled: boolean }) => {
   const { setNextTour } = useContext(AdminTourListContext);
@@ -10,8 +10,7 @@ const SetNextTour = ({ id, disabled }: { id: number; disabled: boolean }) => {
       disabled={disabled}
       variant="outline"
       colorScheme="mapGreen"
-      onClick={() => setNextTour(id)}
-    >
+      onClick={() => setNextTour(id)}>
       Als nächste Tour festlegen
     </Button>
   );

@@ -4,19 +4,19 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Image,
-} from "@chakra-ui/react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { ImageFallback } from "components";
-import { FieldProps } from "formik";
-import { Upload } from "icons";
-import { useMemo, useRef } from "react";
+  Image
+} from '@chakra-ui/react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { ImageFallback } from 'components';
+import { FieldProps } from 'formik';
+import { Upload } from 'icons';
+import { useMemo, useRef } from 'react';
 
 const UploadInput = ({
   label,
   buttonLabel,
   acceptedFileTypes,
-  fieldProps,
+  fieldProps
 }: {
   label: string;
   buttonLabel: string;
@@ -27,9 +27,9 @@ const UploadInput = ({
   const supabaseClient = useSupabaseClient();
 
   const image = useMemo(() => {
-    return typeof fieldProps.field.value === "string"
+    return typeof fieldProps.field.value === 'string'
       ? supabaseClient.storage
-          .from("map-images")
+          .from('map-images')
           .getPublicUrl(fieldProps.field.value).data.publicUrl
       : URL.createObjectURL(fieldProps.field.value);
   }, [supabaseClient.storage, fieldProps.field.value]);
@@ -39,14 +39,13 @@ const UploadInput = ({
       isInvalid={
         (fieldProps.form.errors[fieldProps.field.name] &&
           fieldProps.form.touched[fieldProps.field.name]) as boolean
-      }
-    >
+      }>
       <FormLabel>{label}</FormLabel>
       <input
         type="file"
         accept={acceptedFileTypes}
         ref={inputRef}
-        onChange={(event) => {
+        onChange={event => {
           fieldProps.form.setFieldValue(
             fieldProps.field.name,
             (event &&
@@ -56,7 +55,7 @@ const UploadInput = ({
               null
           );
         }}
-        style={{ display: "none" }}
+        style={{ display: 'none' }}
       />
       <Flex align="flex-start" gap="6">
         {fieldProps.field.value && (
@@ -74,8 +73,7 @@ const UploadInput = ({
           onClick={() => {
             fieldProps.form.setTouched({ [fieldProps.field.name]: true });
             inputRef?.current?.click();
-          }}
-        >
+          }}>
           {buttonLabel}
         </Button>
       </Flex>

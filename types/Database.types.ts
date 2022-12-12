@@ -4,73 +4,73 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json }
-  | Json[]
+  | Json[];
 
 export interface Database {
   public: {
     Tables: {
       touren: {
         Row: {
-          id: number
-          created_at: string | null
-          name: string | null
-          description: string | null
-          mapUrl: string | null
-          startPoint: string | null
-          endPoint: string | null
-          pause: string | null
-          distance: string | null
-          ascent: string | null
-          descent: string | null
-          duration: string | null
-          next_tour: boolean
-          image: string | null
-        }
+          id: number;
+          created_at: string | null;
+          name: string | null;
+          description: string | null;
+          mapUrl: string | null;
+          startPoint: string | null;
+          endPoint: string | null;
+          pause: string | null;
+          distance: string | null;
+          ascent: string | null;
+          descent: string | null;
+          duration: string | null;
+          next_tour: boolean;
+          image: string | null;
+        };
         Insert: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-          description?: string | null
-          mapUrl?: string | null
-          startPoint?: string | null
-          endPoint?: string | null
-          pause?: string | null
-          distance?: string | null
-          ascent?: string | null
-          descent?: string | null
-          duration?: string | null
-          next_tour?: boolean
-          image?: string | null
-        }
+          id?: number;
+          created_at?: string | null;
+          name?: string | null;
+          description?: string | null;
+          mapUrl?: string | null;
+          startPoint?: string | null;
+          endPoint?: string | null;
+          pause?: string | null;
+          distance?: string | null;
+          ascent?: string | null;
+          descent?: string | null;
+          duration?: string | null;
+          next_tour?: boolean;
+          image?: string | null;
+        };
         Update: {
-          id?: number
-          created_at?: string | null
-          name?: string | null
-          description?: string | null
-          mapUrl?: string | null
-          startPoint?: string | null
-          endPoint?: string | null
-          pause?: string | null
-          distance?: string | null
-          ascent?: string | null
-          descent?: string | null
-          duration?: string | null
-          next_tour?: boolean
-          image?: string | null
-        }
-      }
-    }
+          id?: number;
+          created_at?: string | null;
+          name?: string | null;
+          description?: string | null;
+          mapUrl?: string | null;
+          startPoint?: string | null;
+          endPoint?: string | null;
+          pause?: string | null;
+          distance?: string | null;
+          ascent?: string | null;
+          descent?: string | null;
+          duration?: string | null;
+          next_tour?: boolean;
+          image?: string | null;
+        };
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
       install_available_extensions_and_test: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-    }
+        Args: Record<PropertyKey, never>;
+        Returns: boolean;
+      };
+    };
     Enums: {
-      [_ in never]: never
-    }
-  }
+      [_ in never]: never;
+    };
+  };
 }

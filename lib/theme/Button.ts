@@ -1,7 +1,7 @@
-import { defineStyleConfig } from "@chakra-ui/react";
+import { defineStyleConfig } from '@chakra-ui/react';
 
 export default defineStyleConfig({
   baseStyle: {
-    borderRadius: "sm",
-  },
+    borderRadius: 'sm'
+  }
 });

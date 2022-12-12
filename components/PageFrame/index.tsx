@@ -1,6 +1,6 @@
-import { Box, Flex } from "@chakra-ui/react";
-import { ReactNode } from "react";
-import { Footer, Header } from "./components";
+import { Box, Flex } from '@chakra-ui/react';
+import { ReactNode } from 'react';
+import { Footer, Header } from './components';
 
 const PageFrame = ({ children }: { children: ReactNode }) => {
   return (

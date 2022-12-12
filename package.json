@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "formatt": "prettier \"**/*\" --write --ignore-unknown --ignore-path",
     "types": "npx supabase gen types typescript --project-id \"bemryfdzntwpamztjgyr\" --schema public > types/Database.types.ts"
   },
   "dependencies": {

@@ -1,5 +1,5 @@
-import { createContext } from "react";
-import { Tour } from "types/Tours.types";
+import { createContext } from 'react';
+import { Tour } from 'types/Tours.types';
 
 export const AdminTourListContext = createContext<{
   tours: Tour[];
@@ -8,5 +8,5 @@ export const AdminTourListContext = createContext<{
 }>({
   tours: [],
   load: () => {},
-  setNextTour: (id) => {},
+  setNextTour: id => {}
 });

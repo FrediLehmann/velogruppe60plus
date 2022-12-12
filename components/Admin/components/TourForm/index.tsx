@@ -5,18 +5,18 @@ import {
   HStack,
   Input,
   Stack,
-  Textarea,
-} from "@chakra-ui/react";
-import UploadInput from "components/UploadInput";
-import { Field, FieldProps, Form, Formik } from "formik";
-import { object, string } from "yup";
-import { defaultValues } from "./defaultValues";
-import { TourFields } from "types/TourFields.types";
+  Textarea
+} from '@chakra-ui/react';
+import UploadInput from 'components/UploadInput';
+import { Field, FieldProps, Form, Formik } from 'formik';
+import { object, string } from 'yup';
+import { defaultValues } from './defaultValues';
+import { TourFields } from 'types/TourFields.types';
 
 const TourForm = ({
   initialValues = defaultValues,
   submit,
-  formName,
+  formName
 }: {
   initialValues?: TourFields;
   submit: (values: TourFields) => Promise<void>;
@@ -26,31 +26,31 @@ const TourForm = ({
     <Formik
       initialValues={initialValues}
       validationSchema={object({
-        name: string().required("Name wird benötigt."),
-        description: string().required("Beschreibung wird benötigt."),
+        name: string().required('Name wird benötigt.'),
+        description: string().required('Beschreibung wird benötigt.'),
         mapLink: string()
-          .url("Inkorrekt formatierte Url")
-          .required("Url wird benötigt"),
-        mapImage: string().nullable().required("Bild wird benötigt"),
-        distance: string().required("Distanz wird benötigt"),
-        ascent: string().required("Aufstieg wird benötigt"),
-        descent: string().required("Abstieg wird benötigt"),
-        duration: string().required("Dauer wird benötigt"),
-        start: string().required("Start ort wird benötigt"),
-        end: string().required("Zielpunkt wird benötigt"),
-        pause: string().required("Pause wird benötigt"),
+          .url('Inkorrekt formatierte Url')
+          .required('Url wird benötigt'),
+        mapImage: string().nullable().required('Bild wird benötigt'),
+        distance: string().required('Distanz wird benötigt'),
+        ascent: string().required('Aufstieg wird benötigt'),
+        descent: string().required('Abstieg wird benötigt'),
+        duration: string().required('Dauer wird benötigt'),
+        start: string().required('Start ort wird benötigt'),
+        end: string().required('Zielpunkt wird benötigt'),
+        pause: string().required('Pause wird benötigt')
       })}
-      onSubmit={submit}
-    >
-      {(props) => (
+      onSubmit={submit}>
+      {props => (
         <Form id={formName}>
           <Stack spacing="5">
             <Field name="name">
               {({ field, form }: FieldProps) => (
                 <FormControl
                   isRequired
-                  isInvalid={(form.errors.name && form.touched.name) as boolean}
-                >
+                  isInvalid={
+                    (form.errors.name && form.touched.name) as boolean
+                  }>
                   <FormLabel>Name</FormLabel>
                   <Input {...field} />
                   <FormErrorMessage>
@@ -66,8 +66,7 @@ const TourForm = ({
                   isInvalid={
                     (form.errors.description &&
                       form.touched.description) as boolean
-                  }
-                >
+                  }>
                   <FormLabel>Beschreibung</FormLabel>
                   <Textarea {...field} background="white" />
                   <FormErrorMessage>
@@ -82,8 +81,7 @@ const TourForm = ({
                   isRequired
                   isInvalid={
                     (form.errors.mapLink && form.touched.mapLink) as boolean
-                  }
-                >
+                  }>
                   <FormLabel>Url zur Schweiz Mobil Karte</FormLabel>
                   <Input {...field} />
                   <FormErrorMessage>
@@ -109,8 +107,7 @@ const TourForm = ({
                     isRequired
                     isInvalid={
                       (form.errors.start && form.touched.start) as boolean
-                    }
-                  >
+                    }>
                     <FormLabel>Startpunk</FormLabel>
                     <Textarea {...field} />
                     <FormErrorMessage>
@@ -123,8 +120,9 @@ const TourForm = ({
                 {({ field, form }: FieldProps) => (
                   <FormControl
                     isRequired
-                    isInvalid={(form.errors.end && form.touched.end) as boolean}
-                  >
+                    isInvalid={
+                      (form.errors.end && form.touched.end) as boolean
+                    }>
                     <FormLabel>Endpunkt</FormLabel>
                     <Textarea {...field} />
                     <FormErrorMessage>
@@ -140,8 +138,7 @@ const TourForm = ({
                   isRequired
                   isInvalid={
                     (form.errors.pause && form.touched.pause) as boolean
-                  }
-                >
+                  }>
                   <FormLabel>Pausenort</FormLabel>
                   <Textarea {...field} background="white" />
                   <FormErrorMessage>
@@ -157,8 +154,7 @@ const TourForm = ({
                     isRequired
                     isInvalid={
                       (form.errors.distance && form.touched.distance) as boolean
-                    }
-                  >
+                    }>
                     <FormLabel>Distanz</FormLabel>
                     <Input {...field} />
                     <FormErrorMessage>
@@ -173,8 +169,7 @@ const TourForm = ({
                     isRequired
                     isInvalid={
                       (form.errors.duration && form.touched.duration) as boolean
-                    }
-                  >
+                    }>
                     <FormLabel>Dauer</FormLabel>
                     <Input {...field} />
                     <FormErrorMessage>
@@ -191,8 +186,7 @@ const TourForm = ({
                     isRequired
                     isInvalid={
                       (form.errors.ascent && form.touched.ascent) as boolean
-                    }
-                  >
+                    }>
                     <FormLabel>Aufstieg</FormLabel>
                     <Input {...field} />
                     <FormErrorMessage>
@@ -207,8 +201,7 @@ const TourForm = ({
                     isRequired
                     isInvalid={
                       (form.errors.descent && form.touched.descent) as boolean
-                    }
-                  >
+                    }>
                     <FormLabel>Abstieg</FormLabel>
                     <Input {...field} />
                     <FormErrorMessage>

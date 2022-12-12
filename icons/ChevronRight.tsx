@@ -1,4 +1,4 @@
-import { Icon } from "@chakra-ui/react";
+import { Icon } from '@chakra-ui/react';
 
 export default function ChevronRight(props: any) {
   return (
@@ -9,8 +9,7 @@ export default function ChevronRight(props: any) {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      {...props}
-    >
+      {...props}>
       <polyline points="9 18 15 12 9 6" />
     </Icon>
   );

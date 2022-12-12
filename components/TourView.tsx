@@ -1,9 +1,9 @@
-import { Flex, Link, Image, Text } from "@chakra-ui/react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Fact, ImageFallback } from "components";
-import { External } from "icons";
-import NextLink from "next/link";
-import { Tour } from "types/Tours.types";
+import { Flex, Link, Image, Text } from '@chakra-ui/react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Fact, ImageFallback } from 'components';
+import { External } from 'icons';
+import NextLink from 'next/link';
+import { Tour } from 'types/Tours.types';
 
 const TourView = ({ tour }: { tour: Tour }) => {
   const supabaseClient = useSupabaseClient();
@@ -11,15 +11,14 @@ const TourView = ({ tour }: { tour: Tour }) => {
   return (
     <>
       <Flex
-        my={["6", "10"]}
+        my={['6', '10']}
         gap="8"
-        flexDirection={["column", "row"]}
-        align="flex-start"
-      >
-        <Text fontSize={["lg", "xl"]} whiteSpace="pre-wrap">
+        flexDirection={['column', 'row']}
+        align="flex-start">
+        <Text fontSize={['lg', 'xl']} whiteSpace="pre-wrap">
           {tour.description}
         </Text>
-        <Flex gap={["6", "8"]} wrap="wrap">
+        <Flex gap={['6', '8']} wrap="wrap">
           <Fact label="Distanz" value={tour.distance} />
           <Fact label="Aufstieg" value={tour.ascent} />
           <Fact label="Abstieg" value={tour.descent} />
@@ -37,7 +36,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
       <Image
         fallback={<ImageFallback height="2xl" />}
         src={
-          supabaseClient.storage.from("map-images").getPublicUrl(tour.image)
+          supabaseClient.storage.from('map-images').getPublicUrl(tour.image)
             .data.publicUrl
         }
         alt="Bild der Karte"

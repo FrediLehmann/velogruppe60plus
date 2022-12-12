@@ -10,14 +10,14 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { Plus } from "icons";
-import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
-import { useCallback, useContext, useState } from "react";
-import { TourForm } from ".";
-import { TourFields } from "types/TourFields.types";
+  useToast
+} from '@chakra-ui/react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { Plus } from 'icons';
+import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
+import { useCallback, useContext, useState } from 'react';
+import { TourForm } from '.';
+import { TourFields } from 'types/TourFields.types';
 
 const NewTourSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,13 +40,13 @@ const NewTourSection = () => {
       distance,
       ascent,
       descent,
-      duration,
+      duration
     }: TourFields) => {
       setIsSubmitting(true);
 
       // Save new tour
       const { data, error } = await supabaseClient
-        .from("touren")
+        .from('touren')
         .insert([
           {
             name,
@@ -58,19 +58,19 @@ const NewTourSection = () => {
             distance,
             ascent,
             descent,
-            duration,
-          },
+            duration
+          }
         ])
         .select();
 
       if (error) {
         toast({
-          title: "Speichern fehlgeschlagen.",
-          description: "Tour konnte nicht gespeichert werden.",
-          status: "error",
+          title: 'Speichern fehlgeschlagen.',
+          description: 'Tour konnte nicht gespeichert werden.',
+          status: 'error',
           duration: 9000,
           isClosable: true,
-          position: "top",
+          position: 'top'
         });
         setIsSubmitting(false);
         return;
@@ -79,10 +79,10 @@ const NewTourSection = () => {
       // Upload image
       const { data: imageData, error: imageUploadError } =
         await supabaseClient.storage
-          .from("map-images")
+          .from('map-images')
           .upload(
             `${data[0].id.toString()}.${(mapImage as File).name
-              .split(".")
+              .split('.')
               .pop()}`,
             mapImage,
             { upsert: true }
@@ -90,12 +90,12 @@ const NewTourSection = () => {
 
       if (imageUploadError) {
         toast({
-          title: "Bild upload fehlgeschlagen.",
-          description: "Bild konnte nicht hochgeladen werden.",
-          status: "error",
+          title: 'Bild upload fehlgeschlagen.',
+          description: 'Bild konnte nicht hochgeladen werden.',
+          status: 'error',
           duration: 9000,
           isClosable: true,
-          position: "top",
+          position: 'top'
         });
         setIsSubmitting(false);
         return;
@@ -103,17 +103,17 @@ const NewTourSection = () => {
 
       // Set the image info for the new tour
       await supabaseClient
-        .from("touren")
+        .from('touren')
         .update({ image: imageData.path })
-        .eq("id", data[0].id);
+        .eq('id', data[0].id);
 
       toast({
-        title: "Tour gespeichert.",
-        description: "Ihre Tour wurde gespeichert.",
-        status: "success",
+        title: 'Tour gespeichert.',
+        description: 'Ihre Tour wurde gespeichert.',
+        status: 'success',
         duration: 9000,
         isClosable: true,
-        position: "top",
+        position: 'top'
       });
       setIsSubmitting(false);
       onClose();
@@ -125,11 +125,10 @@ const NewTourSection = () => {
   return (
     <>
       <Button
-        size={["sm", "md"]}
+        size={['sm', 'md']}
         colorScheme="mapGreen"
         rightIcon={<Plus boxSize="5" />}
-        onClick={onOpen}
-      >
+        onClick={onOpen}>
         Neue Tour erfassen
       </Button>
       <Divider borderColor="gray.500" my="3" />
@@ -146,16 +145,14 @@ const NewTourSection = () => {
               <Button
                 disabled={isSubmitting}
                 variant="outline"
-                onClick={onClose}
-              >
+                onClick={onClose}>
                 Abbrechen
               </Button>
               <Button
                 colorScheme="mapGreen"
                 type="submit"
                 form="createTour"
-                isLoading={isSubmitting}
-              >
+                isLoading={isSubmitting}>
                 Speichern
               </Button>
             </ButtonGroup>

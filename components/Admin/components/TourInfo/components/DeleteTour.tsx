@@ -7,17 +7,17 @@ import {
   AlertDialogOverlay,
   Button,
   useDisclosure,
-  useToast,
-} from "@chakra-ui/react";
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
-import { AdminTourListContext } from "lib/contexts/AdminTourListContext";
-import { useContext, useRef } from "react";
+  useToast
+} from '@chakra-ui/react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
+import { useContext, useRef } from 'react';
 
 const DeleteTour = ({
   id,
   name,
   image,
-  disabled,
+  disabled
 }: {
   id: number;
   name: string;
@@ -33,18 +33,18 @@ const DeleteTour = ({
   const supabaseClient = useSupabaseClient();
 
   const deleteTour = async () => {
-    await supabaseClient.storage.from("map-images").remove([image]);
-    const { error } = await supabaseClient.from("touren").delete().eq("id", id);
+    await supabaseClient.storage.from('map-images').remove([image]);
+    const { error } = await supabaseClient.from('touren').delete().eq('id', id);
 
     if (error)
       toast({
-        title: "Fehler beim löschen der Tour.",
+        title: 'Fehler beim löschen der Tour.',
         description:
-          "Tour konnte nicht gelöscht werden. Versuchen Sie es später erneut.",
-        status: "error",
+          'Tour konnte nicht gelöscht werden. Versuchen Sie es später erneut.',
+        status: 'error',
         duration: 9000,
         isClosable: true,
-        position: "top",
+        position: 'top'
       });
 
     load();
@@ -59,8 +59,7 @@ const DeleteTour = ({
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
+        onClose={onClose}>
         <AlertDialogOverlay>
           <AlertDialogContent>
             <AlertDialogHeader fontSize="lg" fontWeight="bold">
