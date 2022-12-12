@@ -67,7 +67,7 @@ const Print = ({ tours }: { tours: Tour[] }) => {
             leftIcon={<PrintIcon boxSize="5" />}
             onClick={printPage}
             sx={{ '@media print': { display: 'none' } }}>
-            Drucken
+            Jetzt Drucken
           </Button>
         </Flex>
         <Box as="main">
