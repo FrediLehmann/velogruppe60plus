@@ -14,7 +14,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { data, count } = await supabase
     .from('touren')
     .select(
-      'id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image',
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image',
       { count: 'exact' }
     )
     .order('name')
@@ -53,7 +53,7 @@ const AlleTouren = ({
       const { data, error } = await supabaseClient
         .from('touren')
         .select(
-          'id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+          'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
         )
         .order('name')
         .range(from, to);

@@ -31,6 +31,7 @@ const EditTour = (tour: Tour) => {
     async ({
       name,
       description,
+      route,
       mapLink,
       mapImage,
       start,
@@ -74,6 +75,7 @@ const EditTour = (tour: Tour) => {
         .update({
           name,
           description,
+          route,
           mapUrl: mapLink,
           image: img,
           startPoint: start,
@@ -128,6 +130,7 @@ const EditTour = (tour: Tour) => {
               initialValues={{
                 name: tour.name,
                 description: tour.description,
+                route: tour.route,
                 mapLink: tour.mapUrl,
                 mapImage: tour.image,
                 distance: tour.distance,

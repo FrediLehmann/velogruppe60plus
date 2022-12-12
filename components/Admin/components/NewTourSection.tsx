@@ -32,6 +32,7 @@ const NewTourSection = () => {
     async ({
       name,
       description,
+      route,
       mapLink,
       mapImage,
       start,
@@ -51,6 +52,7 @@ const NewTourSection = () => {
           {
             name,
             description,
+            route,
             mapUrl: mapLink,
             startPoint: start,
             endPoint: end,

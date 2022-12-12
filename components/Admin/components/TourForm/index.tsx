@@ -28,6 +28,7 @@ const TourForm = ({
       validationSchema={object({
         name: string().required('Name wird benötigt.'),
         description: string().required('Beschreibung wird benötigt.'),
+        route: string().required('Route wird benötigt'),
         mapLink: string()
           .url('Inkorrekt formatierte Url')
           .required('Url wird benötigt'),
@@ -71,6 +72,21 @@ const TourForm = ({
                   <Textarea {...field} background="white" />
                   <FormErrorMessage>
                     {form.errors?.description as string}
+                  </FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name="route">
+              {({ field, form }: FieldProps) => (
+                <FormControl
+                  isRequired
+                  isInvalid={
+                    (form.errors.route && form.touched.route) as boolean
+                  }>
+                  <FormLabel>Route</FormLabel>
+                  <Textarea {...field} background="white" />
+                  <FormErrorMessage>
+                    {form.errors?.route as string}
                   </FormErrorMessage>
                 </FormControl>
               )}

@@ -1,4 +1,4 @@
-import { Flex, Link, Image, Text } from '@chakra-ui/react';
+import { Flex, Link, Image, Text, Box, Heading } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Fact, ImageFallback } from 'components';
 import { External } from 'icons';
@@ -15,9 +15,21 @@ const TourView = ({ tour }: { tour: Tour }) => {
         gap="8"
         flexDirection={['column', 'row']}
         align="flex-start">
-        <Text fontSize={['lg', 'xl']} whiteSpace="pre-wrap">
-          {tour.description}
-        </Text>
+        <Box>
+          <Text fontSize={['lg', 'xl']} whiteSpace="pre-wrap" mb="4">
+            {tour.description}
+          </Text>
+          {tour.route && (
+            <>
+              <Heading as="span" size="sm">
+                Wegbeschreibung:
+              </Heading>
+              <Text fontSize={['lg', 'xl']} whiteSpace="pre-wrap">
+                {tour.route}
+              </Text>
+            </>
+          )}
+        </Box>
         <Flex gap={['6', '8']} wrap="wrap">
           <Fact label="Distanz" value={tour.distance} />
           <Fact label="Aufstieg" value={tour.ascent} />

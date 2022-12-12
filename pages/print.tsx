@@ -19,7 +19,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   const { data } = await supabase
     .from('touren')
-    .select('id, name, description, mapUrl, startPoint, endPoint, image')
+    .select('id, name, description, route, mapUrl, startPoint, endPoint, image')
     .order('name');
 
   return {
@@ -89,9 +89,17 @@ const Print = ({ tours }: { tours: Tour[] }) => {
                     <Text fontWeight="semibold">{tour.endPoint}</Text>
                   </Flex>
                 </Flex>
-                <Flex>
-                  <Text>{tour.description}</Text>
-                </Flex>
+                <Box>
+                  <Text mb="4">{tour.description}</Text>
+                  {tour.route && (
+                    <>
+                      <Heading as="span" size="sm">
+                        Wegbeschreibung:
+                      </Heading>
+                      <Text>{tour.route}</Text>
+                    </>
+                  )}
+                </Box>
               </Box>
             </Box>
           ))}

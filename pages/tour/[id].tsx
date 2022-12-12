@@ -21,7 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { data, error } = await supabase
     .from('touren')
     .select(
-      'id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
     )
     .eq('id', ctx.params.id)
     .single();
@@ -53,7 +53,7 @@ export default function Tour({
     const { data } = await supabaseClient
       .from('touren')
       .select(
-        'id, name, description, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
       )
       .eq('id', id)
       .single();
