@@ -25,7 +25,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       tours: data,
       toursCount: count,
       page: 1
-    }
+    },
+    revalidate: 10 * 60
   };
 };
 
