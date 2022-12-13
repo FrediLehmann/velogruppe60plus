@@ -116,6 +116,10 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
         isClosable: true,
         position: 'top'
       });
+
+      // revalidate pages
+      await fetch(`/api/revalidate?secret=${process.env.REGENERATE_TOKEN}`);
+
       load();
     },
     [load, supabaseClient, toast, tours]

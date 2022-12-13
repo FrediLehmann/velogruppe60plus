@@ -1,14 +1,16 @@
 import { PageFrame, CurrentTour } from 'components';
-import { GetServerSidePropsContext } from 'next/types';
 import Head from 'next/head';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { Tour } from 'types/Tours.types';
 import { useCallback, useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { TourContext } from 'lib/contexts/TourContext';
+import { createClient } from '@supabase/supabase-js';
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const supabase = createServerSupabaseClient(ctx);
+export const getStaticProps = async () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
   const { data } = await supabase
     .from('touren')
@@ -19,8 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .single();
 
   return {
-    props: { tour: data },
-    revalidate: 10 * 60
+    props: { tour: data }
   };
 };
 

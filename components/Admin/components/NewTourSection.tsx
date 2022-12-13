@@ -117,6 +117,12 @@ const NewTourSection = () => {
         isClosable: true,
         position: 'top'
       });
+
+      // revalidate pages
+      await fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print`
+      );
+
       setIsSubmitting(false);
       onClose();
       load();

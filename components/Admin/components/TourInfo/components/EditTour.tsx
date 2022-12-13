@@ -109,9 +109,15 @@ const EditTour = (tour: Tour) => {
         isClosable: true,
         position: 'top'
       });
-      load();
+
+      // revalidate pages
+      await fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren,print`
+      );
+
       setIsSubmitting(false);
       onClose();
+      load();
     },
     [load, onClose, supabaseClient, toast, tour.id]
   );

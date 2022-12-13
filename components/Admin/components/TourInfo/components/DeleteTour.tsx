@@ -47,8 +47,13 @@ const DeleteTour = ({
         position: 'top'
       });
 
-    load();
+    // revalidate pages
+    await fetch(
+      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print`
+    );
+
     onClose();
+    load();
   };
 
   return (

@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import { GetServerSidePropsContext } from 'next/types';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { Tour } from 'types/Tours.types';
 import {
   Box,
@@ -13,9 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { ArrowLeft, Print as PrintIcon } from 'icons';
 import NextLink from 'next/link';
+import { createClient } from '@supabase/supabase-js';
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const supabase = createServerSupabaseClient(ctx);
+export const getStaticProps = async () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
   const { data } = await supabase
     .from('touren')
@@ -25,8 +27,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       tours: data
-    },
-    revalidate: 10 * 60
+    }
   };
 };
 

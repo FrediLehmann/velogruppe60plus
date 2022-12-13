@@ -1,15 +1,17 @@
 import { useToast } from '@chakra-ui/react';
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { AllTours, PageFrame } from 'components';
 import { AllTourListContext } from 'lib/contexts/AllTourListContext';
 import { Tour } from 'types/Tours.types';
 import Head from 'next/head';
-import { GetServerSidePropsContext } from 'next/types';
 import { useCallback, useEffect, useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const supabase = createServerSupabaseClient(ctx);
+export const getStaticProps = async () => {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
   const { data, count } = await supabase
     .from('touren')
@@ -25,8 +27,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       tours: data,
       toursCount: count,
       page: 1
-    },
-    revalidate: 10 * 60
+    }
   };
 };
 
