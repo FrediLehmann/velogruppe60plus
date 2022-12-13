@@ -25,8 +25,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: {
       tours: data
-    },
-    revalidate: 10 * 60
+    }
   };
 };
 
