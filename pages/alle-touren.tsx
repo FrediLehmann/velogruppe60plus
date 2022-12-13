@@ -1,38 +1,11 @@
 import { useToast } from '@chakra-ui/react';
-// import {
-//   createBrowserSupabaseClient,
-//   createServerSupabaseClient
-// } from '@supabase/auth-helpers-nextjs';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { AllTours, PageFrame } from 'components';
 import { AllTourListContext } from 'lib/contexts/AllTourListContext';
 import { Tour } from 'types/Tours.types';
 import Head from 'next/head';
-// import { GetServerSidePropsContext } from 'next/types';
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-
-// export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-//   const supabase = createServerSupabaseClient(ctx);
-
-//   const { data, count } = await supabase
-//     .from('touren')
-//     .select(
-//       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image',
-//       { count: 'exact' }
-//     )
-//     .order('name')
-//     .range(0, 9);
-
-//   return {
-//     props: {
-//       tours: data,
-//       toursCount: count,
-//       page: 1
-//     },
-//     revalidate: 10 * 60
-//   };
-// };
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -54,8 +27,7 @@ export const getStaticProps = async () => {
       tours: data,
       toursCount: count,
       page: 1
-    },
-    revalidate: 10 * 60
+    }
   };
 };
 
