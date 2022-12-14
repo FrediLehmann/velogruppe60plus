@@ -81,8 +81,8 @@ const AlleTouren = ({
   );
 
   const setPageNextPage = (page: number) => {
+    setPage(page);
     const p = page - 1;
-    setPage(p);
     if (p === 0) {
       load(0, 9);
     } else {
