@@ -10,7 +10,7 @@ const Tour = () => {
 
   return (
     <Container as="main" maxW="container.md" mt={['4', '6', '12']}>
-      <NextLink href="alle-touren" passHref legacyBehavior>
+      <NextLink href="/alle-touren" passHref legacyBehavior>
         <Button
           as={Link}
           mb="4"

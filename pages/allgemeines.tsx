@@ -38,7 +38,7 @@ const Information = () => {
               mitzumachen, erhalten bei Paul Lehmann ESA-Leiter, Peter Poffet
               oder Arthur Schneuwly ESA-Leiter, weitere Auskünfte.
             </Text>
-            <NextLink href="alle-touren" passHref legacyBehavior>
+            <NextLink href="/alle-touren" passHref legacyBehavior>
               <Link>Zu den Touren</Link>
             </NextLink>
           </Box>
