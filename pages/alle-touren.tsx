@@ -80,18 +80,19 @@ const AlleTouren = ({
     [supabaseClient, toast]
   );
 
-  useEffect(() => {
-    if (!serverTours) load(0, 9);
-  }, [serverTours, load]);
-
-  useEffect(() => {
+  const setPageNextPage = (page: number) => {
     const p = page - 1;
+    setPage(p);
     if (p === 0) {
       load(0, 9);
     } else {
       load(Number(p.toString() + 0), Number(p.toString() + 9));
     }
-  }, [load, page]);
+  };
+
+  useEffect(() => {
+    if (!serverTours) load(0, 9);
+  }, [serverTours, load]);
 
   return (
     <>
@@ -104,7 +105,7 @@ const AlleTouren = ({
           value={{
             tours,
             page,
-            setPage,
+            setPage: setPageNextPage,
             totalTours: toursCount,
             isLoading: loading
           }}>
