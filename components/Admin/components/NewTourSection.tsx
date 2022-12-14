@@ -109,6 +109,11 @@ const NewTourSection = () => {
         .update({ image: imageData.path })
         .eq('id', data[0].id);
 
+      // revalidate pages
+      await fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print,tour/${data[0].id}`
+      );
+
       toast({
         title: 'Tour gespeichert.',
         description: 'Ihre Tour wurde gespeichert.',
@@ -117,11 +122,6 @@ const NewTourSection = () => {
         isClosable: true,
         position: 'top'
       });
-
-      // revalidate pages
-      await fetch(
-        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print`
-      );
 
       setIsSubmitting(false);
       onClose();

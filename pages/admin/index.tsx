@@ -108,6 +108,11 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
         }
       }
 
+      // revalidate pages
+      await fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren`
+      );
+
       toast({
         title: 'Nächste Tour festgelegt.',
         description: 'Die nächste Tour wurde erfolgreich festgelegt.',
@@ -116,9 +121,6 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
         isClosable: true,
         position: 'top'
       });
-
-      // revalidate pages
-      await fetch(`/api/revalidate?secret=${process.env.REGENERATE_TOKEN}`);
 
       load();
     },

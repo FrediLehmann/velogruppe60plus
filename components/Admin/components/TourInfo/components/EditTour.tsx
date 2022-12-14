@@ -101,6 +101,11 @@ const EditTour = (tour: Tour) => {
         return;
       }
 
+      // revalidate pages
+      await fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren,print,tour/${tour.id}`
+      );
+
       toast({
         title: 'Tour gespeichert.',
         description: 'Ihre Tour wurde gespeichert.',
@@ -109,11 +114,6 @@ const EditTour = (tour: Tour) => {
         isClosable: true,
         position: 'top'
       });
-
-      // revalidate pages
-      await fetch(
-        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren,print`
-      );
 
       setIsSubmitting(false);
       onClose();
