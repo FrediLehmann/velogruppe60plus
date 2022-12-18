@@ -8,7 +8,7 @@ import {
 } from '@chakra-ui/react';
 import TourView from 'components/TourView';
 import { Tour } from 'types/Tours.types';
-import { DeleteTour, EditTour, SetNextTour } from './components';
+import { TourOperations } from './components';
 
 const TourInfo = (tour: Tour) => {
   return (
@@ -28,22 +28,18 @@ const TourInfo = (tour: Tour) => {
                 Nächste Tour
               </Badge>
             )}
+            {!tour.published && (
+              <Badge variant="outline" colorScheme="blue">
+                Nicht öffentlich
+              </Badge>
+            )}
           </Flex>
           <AccordionIcon />
         </AccordionButton>
       </h2>
       <AccordionPanel>
+        <TourOperations tour={tour} />
         <TourView tour={tour} />
-        <Flex mt="6" gap="3" flexWrap="wrap">
-          <EditTour {...tour} />
-          <DeleteTour
-            id={tour.id}
-            name={tour.name}
-            image={tour.image}
-            disabled={tour.next_tour}
-          />
-          <SetNextTour id={tour.id} disabled={tour.next_tour} />
-        </Flex>
       </AccordionPanel>
     </AccordionItem>
   );

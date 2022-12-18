@@ -8,7 +8,6 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -18,14 +17,20 @@ import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useCallback, useContext, useState } from 'react';
 import { Tour } from 'types/Tours.types';
 
-const EditTour = (tour: Tour) => {
+const EditTour = ({
+  tour,
+  isOpen,
+  onClose
+}: {
+  tour: Tour;
+  isOpen: boolean;
+  onClose: () => void;
+}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { load } = useContext(AdminTourListContext);
 
   const supabaseClient = useSupabaseClient();
   const toast = useToast();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const editTour = useCallback(
     async ({
@@ -123,53 +128,47 @@ const EditTour = (tour: Tour) => {
   );
 
   return (
-    <>
-      <Button onClick={onOpen}>Bearbeiten</Button>
-      <Modal isOpen={isOpen} onClose={onClose} size="xl">
-        <ModalOverlay />
-        <ModalContent>
-          <ModalCloseButton />
-          <ModalHeader>Tour bearbeiten</ModalHeader>
-          <ModalBody>
-            <TourForm
-              formName="editTour"
-              initialValues={{
-                name: tour.name,
-                description: tour.description,
-                route: tour.route,
-                mapLink: tour.mapUrl,
-                mapImage: tour.image,
-                distance: tour.distance,
-                ascent: tour.ascent,
-                descent: tour.descent,
-                duration: tour.duration,
-                start: tour.startPoint,
-                end: tour.endPoint,
-                pause: tour.pause
-              }}
-              submit={editTour}
-            />
-          </ModalBody>
-          <ModalFooter>
-            <ButtonGroup>
-              <Button
-                disabled={isSubmitting}
-                variant="outline"
-                onClick={onClose}>
-                Abbrechen
-              </Button>
-              <Button
-                colorScheme="mapGreen"
-                type="submit"
-                form="editTour"
-                isLoading={isSubmitting}>
-                Speichern
-              </Button>
-            </ButtonGroup>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl">
+      <ModalOverlay />
+      <ModalContent>
+        <ModalCloseButton />
+        <ModalHeader>Tour bearbeiten</ModalHeader>
+        <ModalBody>
+          <TourForm
+            formName="editTour"
+            initialValues={{
+              name: tour.name,
+              description: tour.description,
+              route: tour.route,
+              mapLink: tour.mapUrl,
+              mapImage: tour.image,
+              distance: tour.distance,
+              ascent: tour.ascent,
+              descent: tour.descent,
+              duration: tour.duration,
+              start: tour.startPoint,
+              end: tour.endPoint,
+              pause: tour.pause
+            }}
+            submit={editTour}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <ButtonGroup>
+            <Button disabled={isSubmitting} variant="outline" onClick={onClose}>
+              Abbrechen
+            </Button>
+            <Button
+              colorScheme="mapGreen"
+              type="submit"
+              form="editTour"
+              isLoading={isSubmitting}>
+              Speichern
+            </Button>
+          </ButtonGroup>
+        </ModalFooter>
+      </ModalContent>
+    </Modal>
   );
 };
 

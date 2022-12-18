@@ -26,7 +26,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { data } = await supabase
     .from('touren')
     .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, published'
     )
     .order('name');
 
@@ -47,7 +47,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
     const { data, error } = await supabaseClient
       .from('touren')
       .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, published'
       )
       .order('name');
 
@@ -127,6 +127,40 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
     [load, supabaseClient, toast, tours]
   );
 
+  const setPublished = useCallback(async (id: number, published: boolean) => {
+    const { error } = await supabaseClient
+      .from('touren')
+      .update({ published })
+      .eq('id', id);
+
+    if (error) {
+      toast({
+        title: 'Fehler beim publizieren.',
+        description: 'Aktuelle Tour konnte nicht Veröffentlicht werden.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'top'
+      });
+    }
+
+    // revalidate pages
+    await fetch(
+      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=tour/${id},alle-touren`
+    );
+
+    toast({
+      title: 'Veröffentlichung geändert.',
+      description: 'Der Veröffentlichungsstatus wurde erfolgreich geändert.',
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+      position: 'top'
+    });
+
+    load();
+  }, []);
+
   useEffect(() => {
     if (!serverTours) load();
   }, [serverTours, load]);
@@ -138,7 +172,8 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
         <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
-        <AdminTourListContext.Provider value={{ tours, load, setNextTour }}>
+        <AdminTourListContext.Provider
+          value={{ tours, load, setNextTour, setPublished }}>
           <AdminContent />
         </AdminTourListContext.Provider>
       </PageFrame>

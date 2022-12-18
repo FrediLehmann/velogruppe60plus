@@ -6,7 +6,6 @@ import {
   AlertDialogHeader,
   AlertDialogOverlay,
   Button,
-  useDisclosure,
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -17,18 +16,19 @@ const DeleteTour = ({
   id,
   name,
   image,
-  disabled
+  isOpen,
+  onClose
 }: {
   id: number;
   name: string;
   image: string;
-  disabled: boolean;
+  isOpen: boolean;
+  onClose: () => void;
 }) => {
   const cancelRef = useRef(null);
   const { load } = useContext(AdminTourListContext);
 
   const toast = useToast();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const supabaseClient = useSupabaseClient();
 
@@ -57,34 +57,29 @@ const DeleteTour = ({
   };
 
   return (
-    <>
-      <Button disabled={disabled} colorScheme="red" onClick={onOpen}>
-        Löschen
-      </Button>
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}>
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Tour löschen
-            </AlertDialogHeader>
-            <AlertDialogBody>
-              Soll die Tour &quot;{name}&quot; gelöscht werden?
-            </AlertDialogBody>
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Abbrechen
-              </Button>
-              <Button colorScheme="red" onClick={deleteTour} ml={3}>
-                Löschen
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
-    </>
+    <AlertDialog
+      isOpen={isOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}>
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Tour löschen
+          </AlertDialogHeader>
+          <AlertDialogBody>
+            Soll die Tour &quot;{name}&quot; gelöscht werden?
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              Abbrechen
+            </Button>
+            <Button colorScheme="red" onClick={deleteTour} ml={3}>
+              Löschen
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
   );
 };
 
