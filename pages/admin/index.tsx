@@ -146,7 +146,9 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
 
     // revalidate pages
     fetch(
-      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=tour/${id},alle-touren,print`
+      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=${
+        published ? `tour/${id},` : ''
+      }alle-touren,print`
     );
 
     toast({
