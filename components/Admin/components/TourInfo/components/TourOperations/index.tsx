@@ -27,7 +27,7 @@ const TourOperations = ({ tour }: { tour: Tour }) => {
 
   return (
     <>
-      <Menu>
+      <Menu closeOnSelect={false}>
         <MenuButton as={Button} rightIcon={<ChevronDown />} mt="4">
           Änderungen vornehemen
         </MenuButton>
