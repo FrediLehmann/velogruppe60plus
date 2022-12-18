@@ -109,7 +109,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
       }
 
       // revalidate pages
-      await fetch(
+      fetch(
         `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren`
       );
 
@@ -145,7 +145,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
     }
 
     // revalidate pages
-    await fetch(
+    fetch(
       `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=tour/${id},alle-touren,print`
     );
 

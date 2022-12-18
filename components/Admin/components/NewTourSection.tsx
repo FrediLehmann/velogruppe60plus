@@ -110,7 +110,7 @@ const NewTourSection = () => {
         .eq('id', data[0].id);
 
       // revalidate pages
-      await fetch(
+      fetch(
         `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print,tour/${data[0].id}`
       );
 
