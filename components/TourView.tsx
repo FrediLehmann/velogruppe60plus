@@ -30,7 +30,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
             </>
           )}
         </Box>
-        <Flex gap={['6', '8']} wrap="wrap">
+        <Flex gap={['6', '8']} wrap="wrap" minW="40">
           <Fact label="Distanz" value={tour.distance} />
           <Fact label="Aufstieg" value={tour.ascent} />
           <Fact label="Abstieg" value={tour.descent} />
