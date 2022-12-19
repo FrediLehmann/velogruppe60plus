@@ -155,8 +155,8 @@ const Admin = () => {
   }, []);
 
   useEffect(() => {
-    if (!tours) load();
-  }, [load]);
+    load();
+  }, []);
 
   return (
     <>
