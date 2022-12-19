@@ -23,25 +23,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       }
     };
 
-  const { data } = await supabase
-    .from('touren')
-    .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, published'
-    )
-    .order('name');
-
   return {
-    props: {
-      tours: data
-    }
+    props: {}
   };
 };
 
-const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
+const Admin = () => {
   const supabaseClient = useSupabaseClient();
   const toast = useToast();
 
-  const [tours, setTours] = useState<Tour[]>(serverTours);
+  const [tours, setTours] = useState<Tour[] | null>(null);
 
   const load = useCallback(async () => {
     const { data, error } = await supabaseClient
@@ -69,7 +60,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
 
   const setNextTour = useCallback(
     async (id: number) => {
-      const activeNextTourId = tours.find(tour => tour.next_tour)?.id;
+      const activeNextTourId = tours?.find(tour => tour.next_tour)?.id;
 
       const { error } = await supabaseClient
         .from('touren')
@@ -164,8 +155,8 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
   }, []);
 
   useEffect(() => {
-    if (!serverTours) load();
-  }, [serverTours, load]);
+    if (!tours) load();
+  }, [load]);
 
   return (
     <>
@@ -175,7 +166,7 @@ const Admin = ({ tours: serverTours }: { tours: Tour[] }) => {
       </Head>
       <PageFrame>
         <AdminTourListContext.Provider
-          value={{ tours, load, setNextTour, setPublished }}>
+          value={{ tours: tours || [], load, setNextTour, setPublished }}>
           <AdminContent />
         </AdminTourListContext.Provider>
       </PageFrame>
