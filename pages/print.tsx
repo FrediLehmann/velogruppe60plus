@@ -92,15 +92,10 @@ const Print = ({ tours }: { tours: Tour[] }) => {
                   </Flex>
                 </Flex>
                 <Box>
-                  <Text mb="4">{tour.description}</Text>
-                  {tour.route && (
-                    <>
-                      <Heading as="span" size="sm">
-                        Wegbeschreibung:
-                      </Heading>
-                      <Text>{tour.route}</Text>
-                    </>
-                  )}
+                  <Heading as="span" size="sm">
+                    Wegbeschreibung:
+                  </Heading>
+                  <Text>{tour.route}</Text>
                 </Box>
               </Box>
             </Box>
