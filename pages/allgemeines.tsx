@@ -16,6 +16,10 @@ const Information = () => {
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal | Allgemeines</title>
+        <meta
+          name="description"
+          content="Allgemeine Informationen zu unserer Webseite und Velogruppe."
+        />
       </Head>
       <PageFrame>
         <Container maxW="container.md" mt={['4', '6', '12']} pb="8">

@@ -13,6 +13,10 @@ const Conditions = () => {
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal | Bedingungen</title>
+        <meta
+          name="description"
+          content="Teilnahmebedingungen und Verhaltensregeln"
+        />
       </Head>
       <PageFrame>
         <Container maxW="container.md" mt={['4', '6', '12']} pb="8">

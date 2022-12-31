@@ -49,6 +49,10 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal</title>
+        <meta
+          name="description"
+          content="Velogruppe 60+ Sensethal ist eine Velogruppe für Personen über 60. Wir fahren Touren im Senesetal bereich, die Teilnahme ist offen für alle."
+        />
       </Head>
       <PageFrame>
         <TourContext.Provider value={{ tour, load }}>

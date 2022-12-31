@@ -29,6 +29,7 @@ const Login = () => {
       <Head>
         <title>Velogruppe 60+ Sensetal | Login</title>
         <meta name="robots" content="noindex"></meta>
+        <meta name="description" content="Login für den Admin bereich." />
       </Head>
       <PageFrame>
         <LoginComponent />

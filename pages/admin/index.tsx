@@ -163,6 +163,7 @@ const Admin = () => {
       <Head>
         <title>Velogruppe 60+ Sensetal | Admin</title>
         <meta name="robots" content="noindex"></meta>
+        <meta name="description" content="Admin bereich" />
       </Head>
       <PageFrame>
         <AdminTourListContext.Provider

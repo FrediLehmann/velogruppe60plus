@@ -98,6 +98,10 @@ const AlleTouren = ({
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal | Alle Touren</title>
+        <meta
+          name="description"
+          content="Tour Übersicht von Velogruppe 60+ Sensetal. Sehen Sie alle Touren die durch unsere Gruppe befahren werden."
+        />
       </Head>
       <PageFrame>
         <AllTourListContext.Provider

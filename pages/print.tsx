@@ -41,6 +41,7 @@ const Print = ({ tours }: { tours: Tour[] }) => {
       <Head>
         <title>Velogruppe 60+ Sensetal | Alle Touren</title>
         <meta name="robots" content="noindex"></meta>
+        <meta name="description" content="Seite optimiert für den Drucker." />
       </Head>
       <Container
         maxW="container.md"
