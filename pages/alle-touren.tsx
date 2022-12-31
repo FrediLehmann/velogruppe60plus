@@ -98,7 +98,6 @@ const AlleTouren = ({
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal | Alle Touren</title>
-        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <AllTourListContext.Provider

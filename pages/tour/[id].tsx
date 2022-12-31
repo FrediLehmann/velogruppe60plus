@@ -71,7 +71,6 @@ export default function Tour({
     <>
       <Head>
         <title>Velogruppe 60+ Sensetal | {tour.name}</title>
-        <meta name="robots" content="noindex"></meta>
       </Head>
       <PageFrame>
         <TourContext.Provider value={{ tour, load }}>
