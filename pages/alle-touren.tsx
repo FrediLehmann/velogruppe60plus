@@ -6,6 +6,7 @@ import { Tour } from 'types/Tours.types';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { MainTourQuery } from 'lib/constants/queries';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -15,10 +16,7 @@ export const getStaticProps = async () => {
 
   const { data, count } = await supabase
     .from('touren')
-    .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image',
-      { count: 'exact' }
-    )
+    .select(MainTourQuery, { count: 'exact' })
     .order('name')
     .range(0, 9);
 
@@ -54,9 +52,7 @@ const AlleTouren = ({
 
       const { data, error } = await supabaseClient
         .from('touren')
-        .select(
-          'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
-        )
+        .select(MainTourQuery)
         .order('name')
         .range(from, to);
 
