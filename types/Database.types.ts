@@ -25,6 +25,8 @@ export interface Database {
           duration: string | null;
           next_tour: boolean;
           image: string | null;
+          route: string | null;
+          published: boolean | null;
         };
         Insert: {
           id?: number;
@@ -41,6 +43,8 @@ export interface Database {
           duration?: string | null;
           next_tour?: boolean;
           image?: string | null;
+          route?: string | null;
+          published?: boolean | null;
         };
         Update: {
           id?: number;
@@ -57,6 +61,8 @@ export interface Database {
           duration?: string | null;
           next_tour?: boolean;
           image?: string | null;
+          route?: string | null;
+          published?: boolean | null;
         };
       };
     };
