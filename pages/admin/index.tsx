@@ -7,7 +7,6 @@ import { Tour } from 'types/Tours.types';
 import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
-import { MainTourQuery } from 'lib/constants/queries';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -38,7 +37,9 @@ const Admin = () => {
   const load = useCallback(async () => {
     const { data, error } = await supabaseClient
       .from('touren')
-      .select(`${MainTourQuery}, published`)
+      .select(
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, published'
+      )
       .order('name');
 
     if (error) {
@@ -151,12 +152,10 @@ const Admin = () => {
     });
 
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

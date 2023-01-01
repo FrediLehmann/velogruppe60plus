@@ -12,7 +12,6 @@ import {
 import { ArrowLeft, Print as PrintIcon } from 'icons';
 import NextLink from 'next/link';
 import { createClient } from '@supabase/supabase-js';
-import { MainTourQuery } from 'lib/constants/queries';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -22,7 +21,7 @@ export const getStaticProps = async () => {
 
   const { data } = await supabase
     .from('touren')
-    .select(MainTourQuery)
+    .select('id, name, description, route, mapUrl, startPoint, endPoint, image')
     .order('name');
 
   return {

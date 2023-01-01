@@ -5,7 +5,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { TourContext } from 'lib/contexts/TourContext';
 import { createClient } from '@supabase/supabase-js';
-import { MainTourQuery } from 'lib/constants/queries';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -15,7 +14,9 @@ export const getStaticProps = async () => {
 
   const { data } = await supabase
     .from('touren')
-    .select(MainTourQuery)
+    .select(
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+    )
     .eq('next_tour', true)
     .single();
 
@@ -31,7 +32,9 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
   const load = useCallback(async () => {
     const { data } = await supabaseClient
       .from('touren')
-      .select(MainTourQuery)
+      .select(
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      )
       .eq('next_tour', true)
       .single();
 

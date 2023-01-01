@@ -6,7 +6,6 @@ import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next/types';
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
-import { MainTourQuery } from 'lib/constants/queries';
 
 export async function getStaticProps(ctx: GetServerSidePropsContext) {
   const supabase = createClient(
@@ -16,7 +15,9 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
 
   const { data } = await supabase
     .from('touren')
-    .select(MainTourQuery)
+    .select(
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+    )
     .eq('id', ctx?.params?.id)
     .single();
 
@@ -53,7 +54,9 @@ export default function Tour({
   const load = useCallback(async () => {
     const { data } = await supabaseClient
       .from('touren')
-      .select(MainTourQuery)
+      .select(
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      )
       .eq('id', id)
       .single();
 
