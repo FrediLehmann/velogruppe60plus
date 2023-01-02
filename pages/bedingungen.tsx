@@ -4,7 +4,8 @@ import {
   Heading,
   ListItem,
   Text,
-  OrderedList
+  OrderedList,
+  Link
 } from '@chakra-ui/react';
 import { PageFrame } from 'components';
 import Head from 'next/head';
@@ -107,17 +108,22 @@ const Conditions = () => {
                 Velotouren werden in der Regel jeden Mittwoch vom April bis
                 Oktober als Halbtages- oder Tagestouren angeboten und führen,
                 wenn möglich, über Velowege abseits vom großen Verkehr. Die
-                Tourendetails können auf der Homepage der
-                https://velogruppe60plus.vercel.app Sensetal abgerufen werden,
-                indem auf den Link &quot;Auf Schweiz Mobil anschauen&quot;
-                geklickt wird. Die Touren sind für E-Bikes abgestimmt, aber für
-                gut trainierte Teilnehmer auch ohne Motorunterstützung machbar.
-                Falls eine Tour wegen unsicherer Witterung nicht durchgeführt
-                oder verschoben wird, erhalten alle Teilnehmer eine Mitteilung
-                per WhatsApp und auf der Homepage. Es empfiehlt sich, sich vor
-                der Tour über die genauen Details und den Ablauf zu informieren
-                und sich an die Anweisungen des Tourenleiters zu halten, um eine
-                sichere und angenehme Tour zu erleben.
+                Tourendetails können auf der Homepage der{' '}
+                <Link
+                  href="https://www.velogruppe60plus-sensetal.ch"
+                  color="green.500">
+                  https://www.velogruppe60plus-sensetal.ch
+                </Link>{' '}
+                Sensetal abgerufen werden, indem auf den Link &quot;Auf Schweiz
+                Mobil anschauen&quot; geklickt wird. Die Touren sind für E-Bikes
+                abgestimmt, aber für gut trainierte Teilnehmer auch ohne
+                Motorunterstützung machbar. Falls eine Tour wegen unsicherer
+                Witterung nicht durchgeführt oder verschoben wird, erhalten alle
+                Teilnehmer eine Mitteilung per WhatsApp und auf der Homepage. Es
+                empfiehlt sich, sich vor der Tour über die genauen Details und
+                den Ablauf zu informieren und sich an die Anweisungen des
+                Tourenleiters zu halten, um eine sichere und angenehme Tour zu
+                erleben.
               </Text>
               <Heading as="h3" size="md" mt="8" mb="4">
                 Informationen zu den Touren
