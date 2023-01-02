@@ -118,44 +118,48 @@ const Admin = () => {
     [load, supabaseClient, toast, tours]
   );
 
-  const setPublished = useCallback(async (id: number, published: boolean) => {
-    const { error } = await supabaseClient
-      .from('touren')
-      .update({ published })
-      .eq('id', id);
+  const setPublished = useCallback(
+    async (id: number, published: boolean) => {
+      const { error } = await supabaseClient
+        .from('touren')
+        .update({ published })
+        .eq('id', id);
 
-    if (error) {
+      if (error) {
+        toast({
+          title: 'Fehler beim publizieren.',
+          description: 'Aktuelle Tour konnte nicht Veröffentlicht werden.',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
+
+      // revalidate pages
+      fetch(
+        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=${
+          published ? `tour/${id},` : ''
+        }alle-touren,print`
+      );
+
       toast({
-        title: 'Fehler beim publizieren.',
-        description: 'Aktuelle Tour konnte nicht Veröffentlicht werden.',
-        status: 'error',
+        title: 'Veröffentlichung geändert.',
+        description: 'Der Veröffentlichungsstatus wurde erfolgreich geändert.',
+        status: 'success',
         duration: 9000,
         isClosable: true,
         position: 'top'
       });
-    }
 
-    // revalidate pages
-    fetch(
-      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=${
-        published ? `tour/${id},` : ''
-      }alle-touren,print`
-    );
-
-    toast({
-      title: 'Veröffentlichung geändert.',
-      description: 'Der Veröffentlichungsstatus wurde erfolgreich geändert.',
-      status: 'success',
-      duration: 9000,
-      isClosable: true,
-      position: 'top'
-    });
-
-    load();
-  }, []);
+      load();
+    },
+    [load, supabaseClient, toast]
+  );
 
   useEffect(() => {
     load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

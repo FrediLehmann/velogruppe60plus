@@ -6,6 +6,7 @@ export const defaultValues: TourFields = {
   route: '',
   mapLink: '',
   mapImage: '',
+  mapImageData: { width: 0, height: 0 },
   distance: '',
   ascent: '',
   descent: '',
