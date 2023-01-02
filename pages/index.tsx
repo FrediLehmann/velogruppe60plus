@@ -15,7 +15,7 @@ export const getStaticProps = async () => {
   const { data } = await supabase
     .from('touren')
     .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
     )
     .eq('next_tour', true)
     .single();
@@ -33,7 +33,7 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
     const { data } = await supabaseClient
       .from('touren')
       .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
       )
       .eq('next_tour', true)
       .single();

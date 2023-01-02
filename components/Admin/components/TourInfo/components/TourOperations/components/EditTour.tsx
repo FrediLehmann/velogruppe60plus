@@ -39,6 +39,7 @@ const EditTour = ({
       route,
       mapLink,
       mapImage,
+      mapImageData,
       start,
       end,
       pause,
@@ -51,6 +52,25 @@ const EditTour = ({
 
       let img = mapImage;
       if (typeof mapImage !== 'string') {
+        const { error: imageRemovalError } = await supabaseClient.storage
+          .from('map-images')
+          .remove([tour.image_data.path]);
+
+        if (imageRemovalError) {
+          toast({
+            title: 'Bild upload fehlgeschlagen.',
+            description:
+              'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+            position: 'top'
+          });
+
+          setIsSubmitting(false);
+          return;
+        }
+
         const { data, error: imageUploadError } = await supabaseClient.storage
           .from('map-images')
           .upload(
@@ -62,12 +82,14 @@ const EditTour = ({
         if (imageUploadError) {
           toast({
             title: 'Bild upload fehlgeschlagen.',
-            description: 'Bild konnte nicht hochgeladen werden.',
+            description:
+              'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
             status: 'error',
             duration: 9000,
             isClosable: true,
             position: 'top'
           });
+
           setIsSubmitting(false);
           return;
         }
@@ -83,6 +105,11 @@ const EditTour = ({
           route,
           mapUrl: mapLink,
           image: img,
+          image_data: {
+            path: img,
+            width: mapImageData.width,
+            height: mapImageData.height
+          },
           startPoint: start,
           endPoint: end,
           pause,
@@ -124,7 +151,7 @@ const EditTour = ({
       onClose();
       load();
     },
-    [load, onClose, supabaseClient, toast, tour.id]
+    [load, onClose, supabaseClient, toast, tour.id, tour.image_data.path]
   );
 
   return (
@@ -142,6 +169,7 @@ const EditTour = ({
               route: tour.route,
               mapLink: tour.mapUrl,
               mapImage: tour.image,
+              mapImageData: tour.image_data,
               distance: tour.distance,
               ascent: tour.ascent,
               descent: tour.descent,

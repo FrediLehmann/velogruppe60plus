@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react';
 import UploadInput from 'components/UploadInput';
 import { Field, FieldProps, Form, Formik } from 'formik';
-import { object, string } from 'yup';
+import { number, object, string } from 'yup';
 import { defaultValues } from './defaultValues';
 import { TourFields } from 'types/TourFields.types';
 
@@ -33,6 +33,10 @@ const TourForm = ({
           .url('Inkorrekt formatierte Url')
           .required('Url wird benötigt'),
         mapImage: string().nullable().required('Bild wird benötigt'),
+        mapImageData: object({
+          width: number(),
+          height: number()
+        }),
         distance: string().required('Distanz wird benötigt'),
         ascent: string().required('Aufstieg wird benötigt'),
         descent: string().required('Abstieg wird benötigt'),
@@ -42,7 +46,7 @@ const TourForm = ({
         pause: string().required('Pause wird benötigt')
       })}
       onSubmit={submit}>
-      {props => (
+      {() => (
         <Form id={formName}>
           <Stack spacing="5">
             <Field name="name">

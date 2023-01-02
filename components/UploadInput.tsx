@@ -4,7 +4,7 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Image
+  Image as ChakraImage
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { ImageFallback } from 'components';
@@ -46,20 +46,45 @@ const UploadInput = ({
         accept={acceptedFileTypes}
         ref={inputRef}
         onChange={event => {
+          if (
+            !event ||
+            !event.currentTarget ||
+            !event.currentTarget.files ||
+            !event.currentTarget.files[0]
+          ) {
+            fieldProps.form.setFieldValue(fieldProps.field.name, null);
+            return;
+          }
+
+          var fr = new FileReader();
+          fr.onload = function () {
+            var img = new Image();
+
+            img.onload = function () {
+              fieldProps.form.setFieldValue('mapImageData', {
+                width:
+                  (this as unknown as { height: number; width: number })
+                    .width || 0,
+                height:
+                  (this as unknown as { height: number; width: number })
+                    .height || 0
+              });
+            };
+
+            img.src = fr.result as string;
+          };
+          fr.readAsDataURL(event.currentTarget.files[0]);
+
           fieldProps.form.setFieldValue(
             fieldProps.field.name,
-            (event &&
-              event.currentTarget &&
-              event.currentTarget.files &&
-              event.currentTarget.files[0]) ||
-              null
+            event.currentTarget.files[0]
           );
         }}
         style={{ display: 'none' }}
       />
       <Flex align="flex-start" gap="6">
         {fieldProps.field.value && (
-          <Image
+          <ChakraImage
             borderRadius="md"
             alt="Bild der Karte"
             boxSize="125px"

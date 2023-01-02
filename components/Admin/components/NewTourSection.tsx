@@ -35,6 +35,7 @@ const NewTourSection = () => {
       route,
       mapLink,
       mapImage,
+      mapImageData,
       start,
       end,
       pause,
@@ -106,7 +107,14 @@ const NewTourSection = () => {
       // Set the image info for the new tour
       await supabaseClient
         .from('touren')
-        .update({ image: imageData.path })
+        .update({
+          image: imageData.path,
+          image_data: {
+            path: imageData.path,
+            width: mapImageData?.width,
+            height: mapImageData?.height
+          }
+        })
         .eq('id', data[0].id);
 
       toast({

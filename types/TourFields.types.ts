@@ -4,6 +4,10 @@ export type TourFields = {
   route: string;
   mapLink: string;
   mapImage: File | string;
+  mapImageData: {
+    width: number;
+    height: number;
+  };
   distance: string;
   ascent: string;
   descent: string;

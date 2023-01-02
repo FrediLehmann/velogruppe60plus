@@ -13,5 +13,6 @@ export type Tour = {
   duration: string;
   next_tour: boolean;
   image: string;
+  image_data: { path: string; width: number; height: number };
   published?: boolean;
 };

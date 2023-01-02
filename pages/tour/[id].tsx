@@ -16,7 +16,7 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
   const { data } = await supabase
     .from('touren')
     .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
     )
     .eq('id', ctx?.params?.id)
     .single();
@@ -55,7 +55,7 @@ export default function Tour({
     const { data } = await supabaseClient
       .from('touren')
       .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image'
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
       )
       .eq('id', id)
       .single();
@@ -70,7 +70,7 @@ export default function Tour({
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ Sensetal | {tour.name}</title>
+        <title>Velogruppe 60+ Sensetal | {tour.name.toString()}</title>
         <meta name="description" content={tour.description} />
       </Head>
       <PageFrame>

@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
 
   const { data } = await supabase
     .from('touren')
-    .select('id, name, description, route, mapUrl, startPoint, endPoint, image')
+    .select('id, name, description, route, mapUrl, startPoint, endPoint')
     .order('name');
 
   return {
@@ -39,7 +39,7 @@ const Print = ({ tours }: { tours: Tour[] }) => {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ Sensetal | Alle Touren</title>
+        <title>Velogruppe 60+ Sensetal | Drucken</title>
         <meta name="robots" content="noindex"></meta>
         <meta name="description" content="Seite optimiert für den Drucker." />
       </Head>

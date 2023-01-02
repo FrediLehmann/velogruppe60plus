@@ -15,13 +15,13 @@ import { useContext, useRef } from 'react';
 const DeleteTour = ({
   id,
   name,
-  image,
+  image_data,
   isOpen,
   onClose
 }: {
   id: number;
   name: string;
-  image: string;
+  image_data: { path: string; height: number; width: number };
   isOpen: boolean;
   onClose: () => void;
 }) => {
@@ -33,7 +33,7 @@ const DeleteTour = ({
   const supabaseClient = useSupabaseClient();
 
   const deleteTour = async () => {
-    await supabaseClient.storage.from('map-images').remove([image]);
+    await supabaseClient.storage.from('map-images').remove([image_data.path]);
     const { error } = await supabaseClient.from('touren').delete().eq('id', id);
 
     if (error)
