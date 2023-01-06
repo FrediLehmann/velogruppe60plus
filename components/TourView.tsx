@@ -1,9 +1,10 @@
-import { Flex, Link, Text, Box, Heading } from '@chakra-ui/react';
+import { Flex, Link, Text, Box, Heading, AspectRatio } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Fact, MapImage } from 'components';
+import { Fact } from 'components';
 import { External } from 'icons';
 import NextLink from 'next/link';
 import { Tour } from 'types/Tours.types';
+import Image from 'next/image';
 
 const TourView = ({ tour }: { tour: Tour }) => {
   const supabaseClient = useSupabaseClient();
@@ -45,19 +46,22 @@ const TourView = ({ tour }: { tour: Tour }) => {
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>
-      <MapImage
-        src={
-          supabaseClient.storage
-            .from('map-images')
-            .getPublicUrl(tour.image_data.path).data.publicUrl
-        }
-        priority
-        width="736"
-        height={736 / (tour.image_data.width / tour.image_data.height)}
-        alt="Bild der Karte"
-        borderRadius="sm"
-        placeholder="blur"
-      />
+      <AspectRatio
+        maxW="736px"
+        ratio={tour.image_data.width / tour.image_data.height}
+        borderRadius="sm">
+        <Image
+          src={
+            supabaseClient.storage
+              .from('map-images')
+              .getPublicUrl(tour.image_data.path).data.publicUrl
+          }
+          priority
+          fill
+          sizes="(min-width: 768px) 736px, 100vw"
+          alt="Bild der Karte"
+        />
+      </AspectRatio>
     </>
   );
 };

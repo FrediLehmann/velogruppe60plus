@@ -3,13 +3,10 @@ import {
   Box,
   Flex,
   Heading,
-  Image,
   LinkBox,
   LinkOverlay,
   Text
 } from '@chakra-ui/react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { MapImage } from 'components';
 import { Tour } from 'types/Tours.types';
 import NextLink from 'next/link';
 
@@ -21,11 +18,8 @@ const Tour = ({
   description,
   distance,
   duration,
-  image_data,
   next_tour
 }: Tour) => {
-  const supabaseClient = useSupabaseClient();
-
   return (
     <LinkBox
       as="article"
@@ -48,19 +42,6 @@ const Tour = ({
           )}
           <Text noOfLines={next_tour ? 2 : 3}>{description}</Text>
         </Box>
-        <MapImage
-          borderRadius="sm"
-          alt="Bild der Karte"
-          boxSize="100px"
-          width="100"
-          height="100"
-          placeholder="blur"
-          src={
-            supabaseClient.storage
-              .from('map-images')
-              .getPublicUrl(image_data.path).data.publicUrl
-          }
-        />
       </Flex>
       <Flex wrap="wrap" gap="4" mt="2">
         <Flex align="center" gap="1" fontSize={['sm', 'md']}>
