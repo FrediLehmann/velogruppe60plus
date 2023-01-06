@@ -104,7 +104,6 @@ const EditTour = ({
           description,
           route,
           mapUrl: mapLink,
-          image: img,
           image_data: {
             path: img,
             width: mapImageData.width,
@@ -168,7 +167,7 @@ const EditTour = ({
               description: tour.description,
               route: tour.route,
               mapLink: tour.mapUrl,
-              mapImage: tour.image,
+              mapImage: tour.image_data.path,
               mapImageData: tour.image_data,
               distance: tour.distance,
               ascent: tour.ascent,

@@ -1,6 +1,6 @@
-import { Flex, Link, Image, Text, Box, Heading } from '@chakra-ui/react';
+import { Flex, Link, Text, Box, Heading } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Fact, ImageFallback } from 'components';
+import { Fact, MapImage } from 'components';
 import { External } from 'icons';
 import NextLink from 'next/link';
 import { Tour } from 'types/Tours.types';
@@ -45,14 +45,18 @@ const TourView = ({ tour }: { tour: Tour }) => {
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>
-      <Image
-        fallback={<ImageFallback height="2xl" />}
+      <MapImage
         src={
-          supabaseClient.storage.from('map-images').getPublicUrl(tour.image)
-            .data.publicUrl
+          supabaseClient.storage
+            .from('map-images')
+            .getPublicUrl(tour.image_data.path).data.publicUrl
         }
+        priority
+        width="736"
+        height={736 / (tour.image_data.width / tour.image_data.height)}
         alt="Bild der Karte"
         borderRadius="sm"
+        placeholder="blur"
       />
     </>
   );

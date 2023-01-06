@@ -108,7 +108,6 @@ const NewTourSection = () => {
       await supabaseClient
         .from('touren')
         .update({
-          image: imageData.path,
           image_data: {
             path: imageData.path,
             width: mapImageData?.width,

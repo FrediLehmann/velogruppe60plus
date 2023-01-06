@@ -9,7 +9,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { ImageFallback } from 'components';
+import { MapImage } from 'components';
 import { Tour } from 'types/Tours.types';
 import NextLink from 'next/link';
 
@@ -21,7 +21,7 @@ const Tour = ({
   description,
   distance,
   duration,
-  image,
+  image_data,
   next_tour
 }: Tour) => {
   const supabaseClient = useSupabaseClient();
@@ -48,14 +48,17 @@ const Tour = ({
           )}
           <Text noOfLines={next_tour ? 2 : 3}>{description}</Text>
         </Box>
-        <Image
+        <MapImage
           borderRadius="sm"
           alt="Bild der Karte"
           boxSize="100px"
-          fallback={<ImageFallback height="100px" width="100px" />}
+          width="100"
+          height="100"
+          placeholder="blur"
           src={
-            supabaseClient.storage.from('map-images').getPublicUrl(image).data
-              .publicUrl
+            supabaseClient.storage
+              .from('map-images')
+              .getPublicUrl(image_data.path).data.publicUrl
           }
         />
       </Flex>

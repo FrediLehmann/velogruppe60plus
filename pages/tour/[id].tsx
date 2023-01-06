@@ -16,7 +16,7 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
   const { data } = await supabase
     .from('touren')
     .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
     )
     .eq('id', ctx?.params?.id)
     .single();
@@ -55,7 +55,7 @@ export default function Tour({
     const { data } = await supabaseClient
       .from('touren')
       .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
+        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
       )
       .eq('id', id)
       .single();

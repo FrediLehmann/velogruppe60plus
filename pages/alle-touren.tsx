@@ -16,7 +16,7 @@ export const getStaticProps = async () => {
   const { data, count } = await supabase
     .from('touren')
     .select(
-      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data',
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
       { count: 'exact' }
     )
     .order('name')
@@ -55,7 +55,7 @@ const AlleTouren = ({
       const { data, error } = await supabaseClient
         .from('touren')
         .select(
-          'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image, image_data'
+          'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
         )
         .order('name')
         .range(from, to);

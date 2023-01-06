@@ -12,7 +12,6 @@ export type Tour = {
   descent: string;
   duration: string;
   next_tour: boolean;
-  image: string;
   image_data: { path: string; width: number; height: number };
   published?: boolean;
 };
