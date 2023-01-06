@@ -38,7 +38,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
           <Fact label="Dauer" value={tour.duration} />
           <Fact label="Start" value={tour.startPoint} />
           <Fact label="Ziel" value={tour.endPoint} />
-          <Fact label="Kaffepause" value={tour.pause} />
+          <Fact label="Kaffeepause" value={tour.pause} />
         </Flex>
       </Flex>
       <NextLink href={tour.mapUrl} passHref legacyBehavior>
