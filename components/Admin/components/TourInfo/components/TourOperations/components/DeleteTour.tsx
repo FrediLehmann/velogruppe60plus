@@ -47,10 +47,13 @@ const DeleteTour = ({
         position: 'top'
       });
 
-    // revalidate pages
-    fetch(
-      `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=alle-touren,print`
-    );
+    fetch('/api/revalidate', {
+      method: 'POST',
+      body: JSON.stringify({
+        secret: process.env.REGENERATE_TOKEN,
+        pages: ['alle-touren', 'print']
+      })
+    });
 
     onClose();
     load();

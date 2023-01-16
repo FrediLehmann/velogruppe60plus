@@ -132,10 +132,13 @@ const EditTour = ({
         return;
       }
 
-      // revalidate pages
-      fetch(
-        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren,print,tour/${tour.id}`
-      );
+      fetch('/api/revalidate', {
+        method: 'POST',
+        body: JSON.stringify({
+          secret: process.env.REGENERATE_TOKEN,
+          pages: ['alle-touren', 'print', `tour/${tour.id}`]
+        })
+      });
 
       toast({
         title: 'Tour gespeichert.',

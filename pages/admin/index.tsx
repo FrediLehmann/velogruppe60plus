@@ -99,10 +99,13 @@ const Admin = () => {
         }
       }
 
-      // revalidate pages
-      fetch(
-        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=,alle-touren`
-      );
+      fetch('/api/revalidate', {
+        method: 'POST',
+        body: JSON.stringify({
+          secret: process.env.REGENERATE_TOKEN,
+          pages: ['alle-touren']
+        })
+      });
 
       toast({
         title: 'Nächste Tour festgelegt.',
@@ -136,12 +139,15 @@ const Admin = () => {
         });
       }
 
-      // revalidate pages
-      fetch(
-        `/api/revalidate?secret=${process.env.REGENERATE_TOKEN}&pages=${
-          published ? `tour/${id},` : ''
-        }alle-touren,print`
-      );
+      const pagesToRevalidate = ['alle-touren', 'print'];
+      if (published) pagesToRevalidate.push(`tour/${id}`);
+      fetch('/api/revalidate', {
+        method: 'POST',
+        body: JSON.stringify({
+          secret: process.env.REGENERATE_TOKEN,
+          pages: pagesToRevalidate
+        })
+      });
 
       toast({
         title: 'Veröffentlichung geändert.',
