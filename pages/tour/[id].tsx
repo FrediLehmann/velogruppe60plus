@@ -13,13 +13,15 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   );
 
-  const { data } = await supabase
+  const { error, data } = await supabase
     .from('touren')
     .select(
       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
     )
     .eq('id', ctx?.params?.id)
     .single();
+
+  if (error) throw error;
 
   return {
     props: { tour: data, id: ctx?.params?.id }

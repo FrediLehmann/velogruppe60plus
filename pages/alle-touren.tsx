@@ -13,7 +13,7 @@ export const getStaticProps = async () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   );
 
-  const { data, count } = await supabase
+  const { error, data, count } = await supabase
     .from('touren')
     .select(
       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
@@ -21,6 +21,8 @@ export const getStaticProps = async () => {
     )
     .order('name')
     .range(0, 9);
+
+  if (error) throw error;
 
   return {
     props: {
