@@ -55,8 +55,8 @@ const Information = () => {
               Teilnahme haben und über 60 Jahre alt sind, können Sie sich bei
               Paul Lehmann, Peter Poffet oder Arthur Schneuwly, unter der
               E-Mail-Adresse{' '}
-              <Link href="mailto:velogruppe60plus@bluewin.ch" color="green.500">
-                velogruppe60plus@bluewin.ch
+              <Link href="mailto:velogruppe60plus-sensetal@bluewin.ch" color="green.500">
+                velogruppe60plus-sensetal@bluewin.ch
               </Link>{' '}
               für weitere Informationen und Auskünfte melden. Ich wünsche Ihnen
               viel Spaß und Freude bei den zukünftigen Ausflügen!
