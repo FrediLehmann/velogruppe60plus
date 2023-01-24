@@ -13,6 +13,8 @@ export async function getStaticProps(ctx: GetServerSidePropsContext) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   );
 
+  if (!ctx?.params?.id) throw 'No Id defined';
+
   const { error, data } = await supabase
     .from('touren')
     .select(

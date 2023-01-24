@@ -23,6 +23,7 @@ export const getStaticProps = async () => {
     .range(0, 9);
 
   if (error) throw error;
+  if (data.length < 1 || (count && count < 1)) throw 'No Data received';
 
   return {
     props: {
