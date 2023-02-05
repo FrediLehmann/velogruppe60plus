@@ -65,6 +65,7 @@ const AlleTouren = ({
         .select(
           'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
         )
+        .eq('published', true)
         .order('name')
         .range(from, to);
 

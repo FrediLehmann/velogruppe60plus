@@ -41,7 +41,10 @@ export async function getStaticPaths() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   );
 
-  const { data } = await supabase.from('touren').select('id');
+  const { data } = await supabase
+    .from('touren')
+    .select('id')
+    .eq('published', true);
 
   const paths = data?.map(tour => ({ params: { id: tour.id.toString() } }));
 
