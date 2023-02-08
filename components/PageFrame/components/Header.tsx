@@ -1,76 +1,52 @@
 import {
+  Box,
   Button,
   ButtonGroup,
   Container,
   Link,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-  useDisclosure,
-  useMediaQuery
+  Text
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { Menu as MenuIcon } from 'icons';
+import { Info, List } from 'icons';
 
 const Header = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [isLargerThan30em] = useMediaQuery('(min-width: 30em)');
-
   return (
-    <Container
-      as="header"
-      py="4"
-      maxW="container.md"
-      display="flex"
-      alignItems="center"
-      justifyContent="space-between">
-      <NextLink href="/" passHref legacyBehavior>
-        <Link
-          as={Text}
-          fontSize={['xl', '2xl']}
-          fontWeight="bold"
-          _hover={{ textDecoration: 'none' }}>
-          Velogruppe 60+ Sensetal
-        </Link>
-      </NextLink>
-      {isLargerThan30em ? (
-        <ButtonGroup variant="link" size="md" spacing="3" colorScheme="black">
+    <Box as="header" borderBottom="1px solid" borderColor="gray.200">
+      <Container
+        py="4"
+        maxW="container.md"
+        display="flex"
+        flexDirection={['column', null, 'row']}
+        alignItems={['flex-start', null, 'center']}
+        justifyContent="space-between">
+        <NextLink href="/" passHref legacyBehavior>
+          <Link
+            as={Text}
+            fontSize={['xl', '2xl']}
+            fontWeight="bold"
+            _hover={{ textDecoration: 'none' }}>
+            Velogruppe 60+ Sensetal
+          </Link>
+        </NextLink>
+        <ButtonGroup
+          size={['sm', 'md']}
+          variant="ghost"
+          colorScheme="gray"
+          spacing="2"
+          mt={['4', null, '0']}>
           <NextLink href="/alle-touren" passHref legacyBehavior>
-            <Button as={Link}>Alle Touren</Button>
+            <Button as="a" leftIcon={<List boxSize={['4', '5']} />}>
+              Alle Touren
+            </Button>
           </NextLink>
-          <NextLink href="/bedingungen" passHref legacyBehavior>
-            <Button as={Link}>Bedingungen</Button>
-          </NextLink>
-          <NextLink href="/allgemeines" passHref legacyBehavior>
-            <Button as={Link}>Allgemein</Button>
+          <NextLink href="/info" passHref legacyBehavior>
+            <Button as="a" leftIcon={<Info boxSize={['4', '5']} />}>
+              Informationen
+            </Button>
           </NextLink>
         </ButtonGroup>
-      ) : (
-        <Menu isOpen={isOpen} onClose={onClose} placement="bottom-end">
-          <MenuButton
-            as={Button}
-            size="sm"
-            leftIcon={<MenuIcon />}
-            variant="outline"
-            onClick={onOpen}>
-            Menu
-          </MenuButton>
-          <MenuList>
-            <MenuItem as={NextLink} href="/alle-touren">
-              Alle Touren
-            </MenuItem>
-            <MenuItem as={NextLink} href="/bedingungen">
-              Bedingungen
-            </MenuItem>
-            <MenuItem as={NextLink} href="/allgemeines">
-              Allgemein
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      )}
-    </Container>
+      </Container>
+    </Box>
   );
 };
 
