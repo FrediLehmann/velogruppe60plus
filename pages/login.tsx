@@ -1,29 +1,17 @@
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { useUser } from '@supabase/auth-helpers-react';
 import { Login as LoginComponent, PageFrame } from 'components';
-import { GetServerSidePropsContext } from 'next/types';
 import Head from 'next/head';
-
-export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const supabase = createServerSupabaseClient(ctx);
-
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
-
-  if (session)
-    return {
-      redirect: {
-        destination: '/admin',
-        permanent: false
-      }
-    };
-
-  return {
-    props: {}
-  };
-};
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Login = () => {
+  const router = useRouter();
+  const user = useUser();
+
+  useEffect(() => {
+    if (user) router.push('/admin');
+  }, [user, router]);
+
   return (
     <>
       <Head>
