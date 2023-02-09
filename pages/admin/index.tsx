@@ -98,11 +98,6 @@ const Admin = ({
     if (data) setTours(data);
   }, [page, supabaseClient, toast]);
 
-  const setPageNextPage = (page: number) => {
-    setPage(page);
-    load();
-  };
-
   const setNextTour = useCallback(
     async (id: number) => {
       const activeNextTourId = tours?.find(tour => tour.next_tour)?.id;
@@ -212,6 +207,11 @@ const Admin = ({
     if (!serverTours) load();
   }, [serverTours, load]);
 
+  useEffect(() => {
+    load();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
   return (
     <>
       <Head>
@@ -224,7 +224,7 @@ const Admin = ({
           value={{
             tours: tours || [],
             page,
-            setPage: setPageNextPage,
+            setPage,
             totalTours: toursCount,
             load,
             setNextTour,
