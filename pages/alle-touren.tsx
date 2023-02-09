@@ -8,35 +8,30 @@ import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 export const getStaticProps = async () => {
-  try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    );
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
-    const { error, data, count } = await supabase
-      .from('touren')
-      .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
-        { count: 'exact' }
-      )
-      .order('name')
-      .range(0, 9);
+  const { error, data, count } = await supabase
+    .from('touren')
+    .select(
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
+      { count: 'exact' }
+    )
+    .order('name')
+    .range(0, 9);
 
-    if (error) throw error;
-    if (data.length < 1 || (count && count < 1)) throw 'No Data received';
+  if (error) throw error;
+  if (data.length < 1 || (count && count < 1)) throw 'No Data received';
 
-    return {
-      props: {
-        tours: data,
-        toursCount: count,
-        page: 1
-      }
-    };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return {
+    props: {
+      tours: data,
+      toursCount: count,
+      page: 1
+    }
+  };
 };
 
 const AlleTouren = ({

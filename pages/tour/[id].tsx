@@ -8,31 +8,26 @@ import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 export async function getStaticProps(ctx: GetServerSidePropsContext) {
-  try {
-    const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
-    );
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
+  );
 
-    if (!ctx?.params?.id) throw 'No Id defined';
+  if (!ctx?.params?.id) throw 'No Id defined';
 
-    const { error, data } = await supabase
-      .from('touren')
-      .select(
-        'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
-      )
-      .eq('id', ctx?.params?.id)
-      .single();
+  const { error, data } = await supabase
+    .from('touren')
+    .select(
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
+    )
+    .eq('id', ctx?.params?.id)
+    .single();
 
-    if (error) throw error;
+  if (error) throw error;
 
-    return {
-      props: { tour: data, id: ctx?.params?.id }
-    };
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
+  return {
+    props: { tour: data, id: ctx?.params?.id }
+  };
 }
 
 export async function getStaticPaths() {
