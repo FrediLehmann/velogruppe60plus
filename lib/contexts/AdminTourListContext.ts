@@ -5,7 +5,7 @@ export const AdminTourListContext = createContext<{
   tours: Tour[];
   page: number;
   setPage: (page: number) => void;
-  load: (from: number, to: number) => void;
+  load: () => void;
   totalTours: number;
   setNextTour: (id: number) => void;
   setPublished: (id: number, published: boolean) => void;
