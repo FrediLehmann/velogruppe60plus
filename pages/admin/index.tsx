@@ -72,8 +72,6 @@ const Admin = ({
       to = Number(p.toString() + 9);
     }
 
-    console.log({ page, from, to });
-
     const { data, error } = await supabaseClient
       .from('touren')
       .select(
