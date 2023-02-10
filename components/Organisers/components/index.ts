@@ -1,1 +1,1 @@
-export { default as Organiser } from './Organiser';
+export { default as OrganiserCard } from './OrganiserCard';

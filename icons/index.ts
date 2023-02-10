@@ -10,6 +10,7 @@ export { default as EyeOff } from './EyeOff';
 export { default as Image } from './Image';
 export { default as Info } from './Info';
 export { default as List } from './List';
+export { default as Mail } from './Mail';
 export { default as Menu } from './Menu';
 export { default as Phone } from './Phone';
 export { default as Plus } from './Plus';

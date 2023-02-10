@@ -1,6 +1,5 @@
-import { Box, Divider, Flex, Heading, Link, Text } from '@chakra-ui/react';
-import { m } from 'framer-motion';
-import { Organiser } from './components';
+import { Flex, Heading } from '@chakra-ui/react';
+import { OrganiserCard } from './components';
 
 import arthur from './images/arthur.jpeg';
 import paul from './images/paul.jpeg';
@@ -8,54 +7,38 @@ import peter from './images/peter.jpeg';
 
 const Organisers = () => {
   return (
-    <Box as="section">
-      <Heading as="h2" size="md" mb="2">
-        Kontakt
+    <Flex flexDirection={['column', 'row', 'column']} as="section">
+      <Heading as="h2" size="lg" mb="6" mr="4">
+        Kontakte
       </Heading>
-      <Text>
-        {' '}
-        <Link
-          href="mailto:velogruppe60plus-sensetal@bluewin.ch"
-          color="green.500">
-          velogruppe60plus-sensetal@bluewin.ch
-        </Link>{' '}
-      </Text>
       <Flex
         direction={['column', 'row']}
+        gap="3"
         justifyContent="space-between"
-        alignItems="center"
-        mt="6"
-        gap={['4', '0']}>
-        <Organiser
+        flexWrap="wrap">
+        <OrganiserCard
           image={paul}
           name="Paul Lehmann"
-          phoneNumber="+41 79 322 66 16"
-          objectPosition={['0 -25px', '0 -20px', '0 -25px']}
+          description='"Organisator und verwalter der Webseite"'
+          phone="+41 79 322 66 16"
+          objectPosition="0 -34px"
         />
-        <Divider
-          orientation="vertical"
-          borderColor="gray.300"
-          height={['0', '130', '170']}
-        />
-        <Organiser
-          image={peter}
-          name="Peter Poffet"
-          phoneNumber="+41 79 648 52 47"
-          objectPosition={['0 -14px', '0 -10px', '0 -14px']}
-        />
-        <Divider
-          orientation="vertical"
-          borderColor="gray.300"
-          height={['0', '130', '170']}
-        />
-        <Organiser
+        <OrganiserCard
           image={arthur}
           name="Arthur Schneuwly"
-          phoneNumber="+41 78 801 67 45"
-          objectPosition={['0 -35px', '0 -24px', '0 -35px']}
+          description='"Organisator und verwalter der Webseite"'
+          phone="+41 78 801 67 45"
+          objectPosition="0 -42px"
+        />
+        <OrganiserCard
+          image={peter}
+          name="Peter Poffet"
+          description='"Organisator und verwalter der Webseite"'
+          phone="+41 79 648 52 47"
+          objectPosition="0 -10px"
         />
       </Flex>
-    </Box>
+    </Flex>
   );
 };
 
