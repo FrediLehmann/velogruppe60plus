@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Link } from '@chakra-ui/react';
 import { ArrowRight } from 'icons';
 import NextLink from 'next/link';
 
@@ -11,16 +11,16 @@ const AdditionalInfos = () => {
       <Heading as="h2" size="lg" mb="3">
         Wo finde ich weitere Informationen?
       </Heading>
-      <Flex gap="6">
+      <Flex flexDirection={['column', 'row']} gap={['2', '6']}>
         <NextLink href="/unfallverhalten" passHref legacyBehavior>
-          <Link display="block" color="green.700">
-            Unfallverhalten <ArrowRight boxSize="4" />
-          </Link>
+          <Button as="a" rightIcon={<ArrowRight boxSize="5" />}>
+            Unfallverhalten
+          </Button>
         </NextLink>
         <NextLink href="/e-bikes" passHref legacyBehavior>
-          <Link display="block" color="green.700">
-            Gesetzliche Regelung E-Bikes <ArrowRight boxSize="4" />
-          </Link>
+          <Button as="a" rightIcon={<ArrowRight boxSize="5" />}>
+            Gesetzliche Regelung E-Bikes
+          </Button>
         </NextLink>
       </Flex>
     </Box>
