@@ -34,14 +34,14 @@ const Organisers = () => {
         <OrganiserCard
           image={arthur}
           name="Arthur Schneuwly"
-          description='"Organisator und verwalter der Webseite"'
+          description='"Organisator und Tourenleiter"'
           phone="+41 78 801 67 45"
           objectPosition="0 -42px"
         />
         <OrganiserCard
           image={peter}
           name="Peter Poffet"
-          description='"Organisator und verwalter der Webseite"'
+          description='"Organisator und Tourenleiter"'
           phone="+41 79 648 52 47"
           objectPosition="0 -10px"
         />

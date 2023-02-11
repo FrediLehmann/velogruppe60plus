@@ -1,5 +1,11 @@
 import { Container } from '@chakra-ui/react';
-import { Organisers, PageFrame, TourInfo } from 'components';
+import {
+  AdditionalInfos,
+  Organisers,
+  PageFrame,
+  RulesOfConduct,
+  TourInfo
+} from 'components';
 import Head from 'next/head';
 
 const Information = () => {
@@ -29,6 +35,8 @@ const Information = () => {
           gap={['12', '16', '24']}>
           <TourInfo />
           <Organisers />
+          <RulesOfConduct />
+          <AdditionalInfos />
         </Container>
       </PageFrame>
     </>
