@@ -1,5 +1,5 @@
 import { Container } from '@chakra-ui/react';
-import { Organisers, PageFrame } from 'components';
+import { Organisers, PageFrame, TourInfo } from 'components';
 import Head from 'next/head';
 
 const Information = () => {
@@ -19,7 +19,15 @@ const Information = () => {
         />
       </Head>
       <PageFrame>
-        <Container maxW="container.md" mt={['4', '6', '12']} pb="8">
+        <Container
+          as="main"
+          maxW="container.md"
+          mt={['6', '12']}
+          pb="12"
+          display="flex"
+          flexDirection="column"
+          gap={['12', '16', '24']}>
+          <TourInfo />
           <Organisers />
         </Container>
       </PageFrame>

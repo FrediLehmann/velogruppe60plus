@@ -1,4 +1,4 @@
-import { Flex, Heading } from '@chakra-ui/react';
+import { Box, Flex, Heading, Text } from '@chakra-ui/react';
 import { OrganiserCard } from './components';
 
 import arthur from './images/arthur.jpeg';
@@ -7,11 +7,19 @@ import peter from './images/peter.jpeg';
 
 const Organisers = () => {
   return (
-    <Flex flexDirection={['column', 'row', 'column']} as="section">
-      <Heading as="h2" size="lg" mb="6" mr="4">
+    <Box as="section">
+      <Heading as="h2" size="md" color="green.800">
         Kontakte
       </Heading>
+      <Heading as="h2" size="lg" mb="3">
+        Bei wem kann ich mich melden?
+      </Heading>
+      <Text fontSize="lg">
+        Sie können sich jederzeit bei einem unserer Organisatoren melden.
+        Jeweils per E-Mail oder Telefonisch.
+      </Text>
       <Flex
+        mt="8"
         direction={['column', 'row']}
         gap="3"
         justifyContent="space-between"
@@ -38,7 +46,7 @@ const Organisers = () => {
           objectPosition="0 -10px"
         />
       </Flex>
-    </Flex>
+    </Box>
   );
 };
 
