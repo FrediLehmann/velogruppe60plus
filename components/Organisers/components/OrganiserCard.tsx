@@ -41,9 +41,10 @@ const OrganiserCard = ({
         </Text>
         <Text
           textAlign="center"
+          fontSize="sm"
           fontWeight="thin"
           fontStyle="italic"
-          maxW="18ch">
+          maxW="20ch">
           {description}
         </Text>
       </Center>

@@ -21,9 +21,9 @@ const TourInfo = () => {
         Was muss ich wissen?
       </Heading>
       <Text fontSize="lg">
-        Jede Woche fahren wir eine von über 30 Touren, kreuz und quer durch das
-        schöne Sensetal. Dabei sind wir einen halben, bis einen ganzen Tag
-        unterwegs.
+        Jede Woche fahren wir auf eine von über 30 Touren, die durch das schöne
+        Freiburgerland und den benachbarten Kanton Bern führen. Dabei sind wir
+        einen halben bis ganzen Tag unterwegs.
       </Text>
       <Grid mt="8" templateColumns={['1fr', 'repeat(2, 1fr)']} gap="6">
         <GridItem>
@@ -42,8 +42,8 @@ const TourInfo = () => {
               <Text fontSize="lg" fontWeight="semibold">
                 Jeden Mittwoch
               </Text>
-              <Text maxW={['25ch', '20ch', '25ch']}>
-                Die Touren finden einmal pro Woche statt, jeweils am Mittwoch.
+              <Text maxW={['30ch', '22ch', '30ch']}>
+                Ab dem 26. April 2023 finden die Touren jeden Mittwoch statt.
               </Text>
             </Box>
           </Flex>
@@ -57,15 +57,19 @@ const TourInfo = () => {
               borderRadius="lg"
               color="white">
               <Text fontSize="lg" fontWeight="bold" m="auto">
-                30+
+                30
+                <Text as="sup" fontWeight="bold">
+                  +
+                </Text>
               </Text>
             </Flex>
             <Box>
               <Text fontSize="lg" fontWeight="semibold">
                 Über 30 Touren
               </Text>
-              <Text maxW={['25ch', '20ch', '25ch']}>
-                Jede Woche wird eine andere von über 30 Touren gefahren.
+              <Text maxW={['30ch', '22ch', '30ch']}>
+                Jede Woche wird eine andere von über 30 verfügbaren Touren
+                gefahren.
               </Text>
               <NextLink href="/alle-touren" passHref legacyBehavior>
                 <Link display="block" mt="2" color="green.700">
@@ -90,9 +94,9 @@ const TourInfo = () => {
               <Text fontSize="lg" fontWeight="semibold">
                 Halb- und Ganztagestouren
               </Text>
-              <Text maxW={['25ch', '20ch', '25ch']}>
-                Jeweils 35 bis 50 Kilometer oder Ganztagestouren von 60 bis 70
-                Kilometer.
+              <Text maxW={['30ch', '22ch', '30ch']}>
+                Die Touren umfassen entweder 35 bis 50 Kilometer für
+                Halbtagesausflüge oder 60 bis 70 Kilometer für Ganztagestouren.
               </Text>
             </Box>
           </Flex>
@@ -114,9 +118,9 @@ const TourInfo = () => {
               <Text fontSize="lg" fontWeight="semibold">
                 Freiburger-Nachrichten
               </Text>
-              <Text maxW={['25ch', '20ch', '25ch']}>
-                Die genauen Zeitpunkte der nächsten Tour wird jeweils Dienstags
-                und Mittwochs publiziert.
+              <Text maxW={['30ch', '22ch', '30ch']}>
+                Die genauen Zeitpunkte der nächsten Tour werden jeweils Dienstag
+                und Mittwoch veröffentlicht.
               </Text>
             </Box>
           </Flex>
@@ -136,7 +140,7 @@ const TourInfo = () => {
               <Text fontSize="lg" fontWeight="semibold">
                 WhatsApp Gruppe
               </Text>
-              <Text maxW={['25ch', '20ch', '25ch']}>
+              <Text maxW={['30ch', '22ch', '30ch']}>
                 Die Gruppe dient dazu die Teilnehmer über Änderungen zu
                 informieren.
               </Text>
