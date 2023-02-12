@@ -27,7 +27,7 @@ const Organisers = () => {
         <OrganiserCard
           image={paul}
           name="Paul Lehmann"
-          description='"Ist für die Verwaltung der Webseite und das Leiten der Touren verantwortlich"'
+          description='"Ist für die Organisation und das Leiten der Touren verantwortlich."'
           phone="+41 79 322 66 16"
           objectPosition="0 -34px"
         />

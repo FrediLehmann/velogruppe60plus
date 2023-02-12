@@ -1,6 +1,5 @@
 import {
   Box,
-  Center,
   Flex,
   Grid,
   GridItem,
@@ -10,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import { ArrowRight, Clock, MessageCircle } from 'icons';
 import NextLink from 'next/link';
+import { External } from 'icons';
 
 const TourInfo = () => {
   return (
@@ -144,6 +144,15 @@ const TourInfo = () => {
                 Die Gruppe dient dazu die Teilnehmer über Änderungen zu
                 informieren.
               </Text>
+              <NextLink
+                href="https://chat.whatsapp.com/BRNlcAM9NttJzwiZ0IrotS"
+                passHref
+                legacyBehavior>
+                <Link display="block" mt="2" color="green.700" isExternal>
+                  Der WhatsApp-Gruppe beitreten{' '}
+                  <External mx="2px" boxSize="4" />
+                </Link>
+              </NextLink>
             </Box>
           </Flex>
         </GridItem>
