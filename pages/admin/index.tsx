@@ -23,24 +23,62 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       }
     };
 
+  const { error, data, count } = await supabase
+    .from('touren')
+    .select(
+      'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, published',
+      { count: 'exact' }
+    )
+    .order('name')
+    .range(0, 9);
+
+  if (error) throw error;
+  if (data.length < 1 || (count && count < 1)) throw 'No Data received';
+
   return {
-    props: {}
+    props: {
+      tours: data,
+      toursCount: count,
+      page: 1
+    }
   };
 };
 
-const Admin = () => {
-  const supabaseClient = useSupabaseClient();
+const Admin = ({
+  tours: serverTours,
+  toursCount,
+  page: serverPage
+}: {
+  tours: Tour[];
+  toursCount: number;
+  page: number;
+}) => {
   const toast = useToast();
-
-  const [tours, setTours] = useState<Tour[] | null>(null);
+  const supabaseClient = useSupabaseClient();
+  const [tours, setTours] = useState(serverTours);
+  const [page, setPage] = useState(serverPage);
 
   const load = useCallback(async () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+
+    const p = page - 1;
+    let from, to;
+    if (p === 0) {
+      from = 0;
+      to = 9;
+    } else {
+      from = Number(p.toString() + 0);
+      to = Number(p.toString() + 9);
+    }
+
     const { data, error } = await supabaseClient
       .from('touren')
       .select(
         'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, published'
       )
-      .order('name');
+      .order('name')
+      .range(from, to);
 
     if (error) {
       toast({
@@ -56,7 +94,7 @@ const Admin = () => {
     }
 
     if (data) setTours(data);
-  }, [supabaseClient, toast]);
+  }, [page, supabaseClient, toast]);
 
   const setNextTour = useCallback(
     async (id: number) => {
@@ -164,9 +202,13 @@ const Admin = () => {
   );
 
   useEffect(() => {
+    if (!serverTours) load();
+  }, [serverTours, load]);
+
+  useEffect(() => {
     load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [page]);
 
   return (
     <>
@@ -177,7 +219,15 @@ const Admin = () => {
       </Head>
       <PageFrame>
         <AdminTourListContext.Provider
-          value={{ tours: tours || [], load, setNextTour, setPublished }}>
+          value={{
+            tours: tours || [],
+            page,
+            setPage,
+            totalTours: toursCount,
+            load,
+            setNextTour,
+            setPublished
+          }}>
           <AdminContent />
         </AdminTourListContext.Provider>
       </PageFrame>
