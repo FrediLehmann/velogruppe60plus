@@ -29,14 +29,14 @@ const Header = () => {
           </Link>
         </NextLink>
         <ButtonGroup
-          size={['sm', 'md']}
+          size="md"
           variant="ghost"
           colorScheme="gray"
           spacing="2"
           mt={['4', null, '0']}>
           <NextLink href="/alle-touren" passHref legacyBehavior>
             <Button as="a" leftIcon={<List boxSize={['4', '5']} />}>
-              Alle Touren
+              Touren
             </Button>
           </NextLink>
           <NextLink href="/info" passHref legacyBehavior>
