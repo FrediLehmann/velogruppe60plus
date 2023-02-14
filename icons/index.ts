@@ -18,5 +18,6 @@ export { default as MessageCircle } from './MessageCircle';
 export { default as Phone } from './Phone';
 export { default as Plus } from './Plus';
 export { default as Print } from './Print';
+export { default as Slash } from './Slash';
 export { default as Target } from './Target';
 export { default as Upload } from './Upload';
