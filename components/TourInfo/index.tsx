@@ -29,7 +29,7 @@ const TourInfo = () => {
         <GridItem>
           <Flex gap="4">
             <Flex
-              background="green.400"
+              background="green.600"
               w="50px"
               h="50px"
               borderRadius="lg"
@@ -51,7 +51,7 @@ const TourInfo = () => {
         <GridItem>
           <Flex gap="4">
             <Flex
-              background="green.400"
+              background="green.600"
               w="50px"
               h="50px"
               borderRadius="lg"
@@ -82,7 +82,7 @@ const TourInfo = () => {
         <GridItem>
           <Flex gap="4">
             <Flex
-              background="green.400"
+              background="green.600"
               w="50px"
               h="50px"
               borderRadius="lg"
@@ -104,7 +104,7 @@ const TourInfo = () => {
         <GridItem>
           <Flex gap="4">
             <Flex
-              background="green.400"
+              background="green.600"
               w="50px"
               h="50px"
               borderRadius="lg"
@@ -128,7 +128,7 @@ const TourInfo = () => {
         <GridItem>
           <Flex gap="4">
             <Flex
-              background="green.400"
+              background="green.600"
               w="50px"
               h="50px"
               borderRadius="lg"
