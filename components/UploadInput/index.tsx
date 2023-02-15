@@ -7,7 +7,7 @@ import {
   Image as ChakraImage
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { ImageFallback } from 'components';
+import { ImageFallback } from './components';
 import { FieldProps } from 'formik';
 import { Upload } from 'icons';
 import { useMemo, useRef } from 'react';
