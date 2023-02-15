@@ -1,40 +1,60 @@
-import { Box, Button, Divider } from '@chakra-ui/react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Plus } from 'icons';
-import { useEffect, useState } from 'react';
-import { NextTour } from './components';
-import { TourDate } from './TourDate';
+import { Box, ButtonGroup, Divider, Flex, Text } from '@chakra-ui/react';
+import { AlertTriangle } from 'icons';
+import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
+import { useContext, useMemo } from 'react';
+import { ToggleTourDate, EditTourDate } from './components';
 
 const NextTourSection = () => {
-  const [nextTour, setNextTour] = useState<TourDate | null>();
-  const supabaseClient = useSupabaseClient();
+  const { tourDate } = useContext(AdminTourListContext);
 
-  useEffect(() => {
-    const loadDate = async () => {
-      const { data, error } = await supabaseClient
-        .from('tour_dates')
-        .select('*')
-        .order('tour_date')
-        .limit(1)
-        .single();
-
-      if (error) throw error;
-      setNextTour(data);
-    };
-
-    loadDate();
-  }, [supabaseClient]);
+  const date = useMemo(() => {
+    if (!tourDate.tour_date) return;
+    return new Intl.DateTimeFormat('de-ch', {
+      dateStyle: 'full',
+      timeStyle: 'short'
+    }).format(new Date(tourDate.tour_date));
+  }, [tourDate.tour_date]);
 
   return (
-    <Box as="section">
-      <Button
-        size={['sm', 'md']}
-        colorScheme="mapGreen"
-        rightIcon={<Plus boxSize="5" />}>
-        Neue Tour Daten erfassen
-      </Button>
+    <Box as="section" mb="10">
+      <Text fontSize="xl" fontWeight="semibold">
+        Datum für die Nächste Tour
+      </Text>
       <Divider borderColor="gray.500" my="3" />
-      {nextTour && <NextTour {...nextTour} />}
+      {tourDate.is_canceled && (
+        <Flex
+          px="4"
+          py="2"
+          gap="6"
+          background="red.50"
+          border="1px solid"
+          borderColor="red.100"
+          borderRadius="sm"
+          alignItems="center">
+          <AlertTriangle boxSize="6" />
+          <Text fontSize="lg" fontWeight="semibold">
+            Abgesagt
+          </Text>
+        </Flex>
+      )}
+      <Flex my="6" gap="6" alignItems="center">
+        <Box>
+          <Text fontSize="sm" fontWeight="semibold">
+            Tour Datum:
+          </Text>
+          <Text fontSize="lg">{date}</Text>
+        </Box>
+        <Box>
+          <Text fontSize="sm" fontWeight="semibold">
+            Treffpunkt nächste Tour:
+          </Text>
+          <Text fontSize="lg">{tourDate.meeting_point}</Text>
+        </Box>
+      </Flex>
+      <ButtonGroup>
+        <EditTourDate />
+        <ToggleTourDate id={tourDate.id} isCanceled={tourDate.is_canceled} />
+      </ButtonGroup>
     </Box>
   );
 };

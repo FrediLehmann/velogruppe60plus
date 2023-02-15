@@ -1,1 +1,2 @@
-export { default as NextTour } from './NextTour';
+export { default as EditTourDate } from './EditTourDate';
+export { default as ToggleTourDate } from './ToggleTourDate';
