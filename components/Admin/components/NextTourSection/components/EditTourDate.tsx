@@ -62,6 +62,14 @@ const EditTourDate = () => {
         position: 'top'
       });
 
+    fetch('/api/revalidate', {
+      method: 'POST',
+      body: JSON.stringify({
+        secret: process.env.REGENERATE_TOKEN,
+        pages: []
+      })
+    });
+
     onClose();
     setIsSubmitting(false);
     load();
