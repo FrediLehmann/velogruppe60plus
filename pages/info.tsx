@@ -12,7 +12,7 @@ const Information = () => {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ Sensetal | Allgemeines</title>
+        <title>Velogruppe 60+ Sensetal | Informationen</title>
         <meta
           name="description"
           content="Das Programm umfasst Touren mit verschiedenen Distanzen, Halb- und

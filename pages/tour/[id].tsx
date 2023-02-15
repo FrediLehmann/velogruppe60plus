@@ -77,7 +77,7 @@ export default function Tour({
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ Sensetal | {tour.name.toString()}</title>
+        <title>Velogruppe 60+ Sensetal | Tourdetails</title>
         <meta name="description" content={tour.description} />
       </Head>
       <PageFrame>

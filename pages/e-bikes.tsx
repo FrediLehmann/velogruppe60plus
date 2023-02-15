@@ -12,7 +12,7 @@ const Unfallverhlaten = () => {
   return (
     <>
       <Head>
-        <title>Velogruppe 60+ Sensetal | Unfallverhalten</title>
+        <title>Velogruppe 60+ Sensetal | E-Bikes</title>
         <meta
           name="description"
           content="Im Falle eines Unfalls mit einem eBike gibt es einige wichtige Schritte, die Sie beachten sollten"
