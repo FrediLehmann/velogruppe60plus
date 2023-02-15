@@ -45,6 +45,14 @@ const ToggleTourDate = ({
         position: 'top'
       });
 
+    fetch('/api/revalidate', {
+      method: 'POST',
+      body: JSON.stringify({
+        secret: process.env.REGENERATE_TOKEN,
+        pages: []
+      })
+    });
+
     onClose();
     load();
     setIsSubmitting(false);
