@@ -22,6 +22,7 @@ export const getStaticProps = async () => {
   const { error, data } = await supabase
     .from('touren')
     .select('id, name, description, route, mapUrl, startPoint, endPoint')
+    .eq('published', true)
     .order('name');
 
   if (error) throw error;

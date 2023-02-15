@@ -19,6 +19,7 @@ export const getStaticProps = async () => {
       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
       { count: 'exact' }
     )
+    .eq('published', true)
     .order('name')
     .range(0, 9);
 
