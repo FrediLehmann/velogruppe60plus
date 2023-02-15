@@ -46,9 +46,15 @@ const Footer = () => {
               Abmelden
             </Button>
           )}
-          <NextLink href="/admin" passHref legacyBehavior>
-            <Button as={Link}>{user ? 'Admin' : 'Login'}</Button>
-          </NextLink>
+          {user ? (
+            <NextLink href="/admin" passHref legacyBehavior>
+              <Button as={Link}>Admin</Button>
+            </NextLink>
+          ) : (
+            <NextLink href="/login" passHref legacyBehavior>
+              <Button as={Link}>Login</Button>
+            </NextLink>
+          )}
         </ButtonGroup>
       </Container>
     </Box>
