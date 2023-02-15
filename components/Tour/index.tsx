@@ -15,7 +15,7 @@ const Tour = () => {
           as={Link}
           mb="4"
           variant="link"
-          color="blue.700"
+          color="green.700"
           alignItems="center"
           leftIcon={<ArrowLeft boxSize="5" />}>
           Zurück zu den Touren

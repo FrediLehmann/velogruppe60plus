@@ -42,7 +42,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
         </Flex>
       </Flex>
       <NextLink href={tour.mapUrl} passHref legacyBehavior>
-        <Link display="block" my="2" isExternal color="blue.700">
+        <Link display="block" my="2" isExternal color="green.700">
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>

@@ -54,6 +54,7 @@ const Print = ({ tours }: { tours: Tour[] }) => {
           <Button
             as={Link}
             variant="link"
+            color="green.700"
             leftIcon={<ArrowLeft />}
             py="6"
             sx={{ '@media print': { display: 'none' } }}>
