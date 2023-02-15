@@ -46,7 +46,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
           Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
         </Link>
       </NextLink>
-      {/* <AspectRatio
+      <AspectRatio
         maxW="736px"
         ratio={tour.image_data.width / tour.image_data.height}
         borderRadius="sm">
@@ -61,7 +61,7 @@ const TourView = ({ tour }: { tour: Tour }) => {
           sizes="(min-width: 768px) 736px, 100vw"
           alt="Bild der Karte"
         />
-      </AspectRatio> */}
+      </AspectRatio>
     </>
   );
 };
