@@ -18,7 +18,7 @@ const RulesOfConduct = () => {
           Alle Teilnehmer tragen einen Helm und beachten die Verkehrsregeln.
         </ListItem>
         <ListItem fontSize="lg" fontWeight="semibold" py="1">
-          Nehman Sie ausreichend Getränke und Snacks mit.
+          Nehmen Sie ausreichend Getränke und Snacks mit.
         </ListItem>
         <ListItem fontSize="lg" fontWeight="semibold" py="1">
           Es empfiehlt sich bei unsicherer Witterung Regenschutz mitzunehmen.
