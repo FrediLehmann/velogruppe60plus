@@ -6,7 +6,7 @@ import {
   Badge,
   Flex
 } from '@chakra-ui/react';
-import TourView from 'components/TourView';
+import { TourView } from 'components';
 import { Tour } from 'types/Tours.types';
 import { TourOperations } from './components';
 

@@ -1,6 +1,6 @@
 import { Flex, Link, Text, Box, Heading, AspectRatio } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { Fact } from 'components';
+import { Fact } from './components';
 import { External } from 'icons';
 import NextLink from 'next/link';
 import { Tour } from 'types/Tours.types';

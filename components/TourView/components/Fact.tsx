@@ -1,4 +1,4 @@
-import { Stat, StatLabel, StatNumber, Text } from '@chakra-ui/react';
+import { Stat, StatLabel, StatNumber } from '@chakra-ui/react';
 
 const Fact = ({ label, value }: { label: string; value: string }) => {
   return (
