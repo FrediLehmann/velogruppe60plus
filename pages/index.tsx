@@ -49,6 +49,8 @@ export default function Home({
   const [tourDate, setTourDate] = useState(serverTourDate);
   const supabaseClient = useSupabaseClient();
 
+  console.log(serverTourDate);
+
   const load = useCallback(async () => {
     const { data: tour, error: tourError } = await supabaseClient
       .from('touren')
@@ -74,8 +76,8 @@ export default function Home({
   }, [supabaseClient]);
 
   useEffect(() => {
-    if (!serverTour) load();
-  }, [load, serverTour]);
+    if (!serverTour || !serverTourDate) load();
+  }, [load, serverTour, serverTourDate]);
 
   return (
     <>
