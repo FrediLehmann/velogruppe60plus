@@ -40,15 +40,23 @@ const NextTourSection = () => {
       <Flex my="6" gap="6" alignItems="center">
         <Box>
           <Text fontSize="sm" fontWeight="semibold">
-            Tour Datum:
+            Nächste Tour am:
           </Text>
           <Text fontSize="lg">{date}</Text>
         </Box>
         <Box>
           <Text fontSize="sm" fontWeight="semibold">
-            Treffpunkt nächste Tour:
+            Treffpunkt:
           </Text>
           <Text fontSize="lg">{tourDate.meeting_point}</Text>
+        </Box>
+        <Box>
+          <Text fontSize="sm" fontWeight="semibold">
+            Tourlänge:
+          </Text>
+          <Text fontSize="lg">
+            {tourDate.halfday_tour ? 'Halbtagestour' : 'Ganztagestour'}
+          </Text>
         </Box>
       </Flex>
       <ButtonGroup>

@@ -4,4 +4,5 @@ export type TourDate = {
   tour_date: string;
   meeting_point: string;
   is_canceled: boolean;
+  halfday_tour: boolean;
 };

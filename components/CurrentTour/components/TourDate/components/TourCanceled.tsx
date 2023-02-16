@@ -4,19 +4,21 @@ import { AlertTriangle } from 'icons';
 const TourCanceled = ({ tourDate = '' }: { tourDate?: string }) => {
   return (
     <Flex
-      p="4"
+      mt="4"
+      px="4"
+      py="2"
       gap="6"
       background="red.50"
       border="1px solid"
       borderColor="red.100"
       borderRadius="sm"
       alignItems="center">
-      <AlertTriangle boxSize="10" />
+      <AlertTriangle boxSize={['8', '10']} />
       <Box>
         <Text fontSize="sm" fontWeight="semibold" color="gray.700">
           Tour abgesagt
         </Text>
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize={['md', 'lg']} fontWeight="bold">
           {tourDate.split('um')[0]}
         </Text>
       </Box>

@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonGroup,
+  Checkbox,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -21,7 +22,7 @@ import { Field, FieldProps, Form, Formik } from 'formik';
 import { Edit } from 'icons';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useContext, useState } from 'react';
-import { object, string } from 'yup';
+import { boolean, object, string } from 'yup';
 
 const EDIT_FORM = 'editTourDate';
 
@@ -34,10 +35,12 @@ const EditTourDate = () => {
 
   const submit = async ({
     tour_date,
-    meeting_point
+    meeting_point,
+    halfday_tour
   }: {
     tour_date: string;
     meeting_point: string;
+    halfday_tour: boolean;
   }) => {
     setIsSubmitting(false);
 
@@ -49,7 +52,7 @@ const EditTourDate = () => {
 
     const { error } = await supabaseClient
       .from('tour_dates')
-      .update({ tour_date: date.toISOString(), meeting_point })
+      .update({ tour_date: date.toISOString(), meeting_point, halfday_tour })
       .eq('id', tourDate.id);
 
     if (error)
@@ -96,7 +99,8 @@ const EditTourDate = () => {
                   minute: 'numeric',
                   hour12: false
                 }).format(new Date(tourDate.tour_date)),
-                meeting_point: tourDate.meeting_point
+                meeting_point: tourDate.meeting_point,
+                halfday_tour: tourDate.halfday_tour
               }}
               validationSchema={object({
                 tour_date: string()
@@ -104,7 +108,8 @@ const EditTourDate = () => {
                   .matches(/^[0-9]{2}.[0-9]{2}.[0-9]{4}, [0-9]{2}:[0-9]{2}$/, {
                     message: 'Datum muss im Format "dd.mm.yyyy, hh:mm" sein.'
                   }),
-                meeting_point: string().required('Treffpunkt wird benötigt')
+                meeting_point: string().required('Treffpunkt wird benötigt'),
+                halfday_tour: boolean()
               })}
               onSubmit={submit}>
               <Form id={EDIT_FORM}>
@@ -137,6 +142,25 @@ const EditTourDate = () => {
                         <Input {...field} />
                         <FormErrorMessage>
                           {form.errors?.meeting_point as string}
+                        </FormErrorMessage>
+                      </FormControl>
+                    )}
+                  </Field>
+                  <Field name="halfday_tour">
+                    {({ field, form }: FieldProps) => (
+                      <FormControl
+                        isInvalid={
+                          (form.errors.halfday_tour &&
+                            form.touched.halfday_tour) as boolean
+                        }>
+                        <Checkbox
+                          colorScheme="green"
+                          isChecked={field.value}
+                          {...field}>
+                          Halbtagestour
+                        </Checkbox>
+                        <FormErrorMessage>
+                          {form.errors?.halfday_tour as string}
                         </FormErrorMessage>
                       </FormControl>
                     )}

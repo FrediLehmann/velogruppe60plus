@@ -1,4 +1,4 @@
-import { PageFrame, CurrentTour, TourDate } from 'components';
+import { PageFrame, CurrentTour } from 'components';
 import Head from 'next/head';
 import { Tour } from 'types/Tours.types';
 import { TourDate as TourDateType } from 'types/TourDate.types';
@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { TourContext } from 'lib/contexts/TourContext';
 import { createClient } from '@supabase/supabase-js';
-import { Container, Divider } from '@chakra-ui/react';
+import { Container } from '@chakra-ui/react';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -89,8 +89,6 @@ export default function Home({
       <PageFrame>
         <TourContext.Provider value={{ tour, tourDate, load }}>
           <Container as="main" maxW="container.md" mt={['4', '6', '12']}>
-            <TourDate />
-            <Divider my="4" />
             <CurrentTour />
           </Container>
         </TourContext.Provider>

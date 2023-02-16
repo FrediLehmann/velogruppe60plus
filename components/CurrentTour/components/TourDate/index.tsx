@@ -17,21 +17,29 @@ const TourDate = () => {
   if (tourDate.is_canceled) return <TourCanceled tourDate={date} />;
 
   return (
-    <Flex flexDirection={['column', 'row']} gap={['4', '10']}>
+    <Flex my="6" flexDirection={['column', 'row']} gap={['3', '10']}>
       <Box>
         <Text fontSize="sm" fontWeight="semibold" color="gray.700">
-          Nächste Tour am
+          Dürchführung am:
         </Text>
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize={['md', 'lg']} fontWeight="bold">
           {date}
         </Text>
       </Box>
       <Box>
         <Text fontSize="sm" fontWeight="semibold" color="gray.700">
-          Treffpunkt
+          Treffpunkt:
         </Text>
-        <Text fontSize="lg" fontWeight="bold">
+        <Text fontSize={['md', 'lg']} fontWeight="bold">
           {tourDate.meeting_point}
+        </Text>
+      </Box>
+      <Box>
+        <Text fontSize="sm" fontWeight="semibold" color="gray.700">
+          Tourlänge:
+        </Text>
+        <Text fontSize={['md', 'lg']} fontWeight="bold">
+          {tourDate.halfday_tour ? 'Halbtagestour' : 'Ganztagestour'}
         </Text>
       </Box>
     </Flex>
