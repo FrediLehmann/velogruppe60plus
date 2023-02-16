@@ -19,7 +19,7 @@ const TourDate = () => {
   return (
     <Flex my="6" flexDirection={['column', 'row']} gap={['3', '10']}>
       <Box>
-        <Text fontSize="sm" fontWeight="semibold" color="gray.700">
+        <Text fontWeight="light" color="gray.700">
           Dürchführung am:
         </Text>
         <Text fontSize={['md', 'lg']} fontWeight="bold">
@@ -27,7 +27,7 @@ const TourDate = () => {
         </Text>
       </Box>
       <Box>
-        <Text fontSize="sm" fontWeight="semibold" color="gray.700">
+        <Text fontWeight="light" color="gray.700">
           Treffpunkt:
         </Text>
         <Text fontSize={['md', 'lg']} fontWeight="bold">
@@ -35,7 +35,7 @@ const TourDate = () => {
         </Text>
       </Box>
       <Box>
-        <Text fontSize="sm" fontWeight="semibold" color="gray.700">
+        <Text fontWeight="light" color="gray.700">
           Tourlänge:
         </Text>
         <Text fontSize={['md', 'lg']} fontWeight="bold">
