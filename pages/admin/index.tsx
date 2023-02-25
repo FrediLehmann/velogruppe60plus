@@ -98,7 +98,11 @@ const Admin = ({
 
   const setNextTour = useCallback(
     async (id: number) => {
-      const activeNextTourId = tours?.find(tour => tour.next_tour)?.id;
+      const activeNextTourId = await supabaseClient
+        .from('touren')
+        .select('id')
+        .eq('next_tour', true)
+        .single();
 
       const { error } = await supabaseClient
         .from('touren')
@@ -118,11 +122,11 @@ const Admin = ({
         return;
       }
 
-      if (activeNextTourId) {
+      if (activeNextTourId?.data?.id) {
         const { error: nextTourError } = await supabaseClient
           .from('touren')
           .update({ next_tour: false })
-          .eq('id', activeNextTourId);
+          .eq('id', activeNextTourId.data.id);
 
         if (nextTourError) {
           toast({
@@ -156,7 +160,7 @@ const Admin = ({
 
       load();
     },
-    [load, supabaseClient, toast, tours]
+    [load, supabaseClient, toast]
   );
 
   const setPublished = useCallback(
