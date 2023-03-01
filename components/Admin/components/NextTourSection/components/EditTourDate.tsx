@@ -35,24 +35,16 @@ const EditTourDate = () => {
 
   const submit = async ({
     tour_date,
-    meeting_point,
     halfday_tour
   }: {
     tour_date: string;
-    meeting_point: string;
     halfday_tour: boolean;
   }) => {
     setIsSubmitting(false);
 
-    const date = new Date(
-      `${tour_date.split(', ')[0].split('.').reverse().join('-')} ${
-        tour_date.split(', ')[1]
-      }`
-    );
-
     const { error } = await supabaseClient
       .from('tour_dates')
-      .update({ tour_date: date.toISOString(), meeting_point, halfday_tour })
+      .update({ tour_date: new Date(tour_date).toISOString(), halfday_tour })
       .eq('id', tourDate.id);
 
     if (error)
@@ -91,24 +83,11 @@ const EditTourDate = () => {
           <ModalBody>
             <Formik
               initialValues={{
-                tour_date: new Intl.DateTimeFormat('de-ch', {
-                  year: 'numeric',
-                  month: '2-digit',
-                  day: '2-digit',
-                  hour: 'numeric',
-                  minute: 'numeric',
-                  hour12: false
-                }).format(new Date(tourDate.tour_date)),
-                meeting_point: tourDate.meeting_point,
+                tour_date: tourDate.tour_date.split('+')[0],
                 halfday_tour: tourDate.halfday_tour
               }}
               validationSchema={object({
-                tour_date: string()
-                  .required('Datum wird benötigt.')
-                  .matches(/^[0-9]{2}.[0-9]{2}.[0-9]{4}, [0-9]{2}:[0-9]{2}$/, {
-                    message: 'Datum muss im Format "dd.mm.yyyy, hh:mm" sein.'
-                  }),
-                meeting_point: string().required('Treffpunkt wird benötigt'),
+                tour_date: string().required('Datum wird benötigt.'),
                 halfday_tour: boolean()
               })}
               onSubmit={submit}>
@@ -123,25 +102,9 @@ const EditTourDate = () => {
                             form.touched.tour_date) as boolean
                         }>
                         <FormLabel>Tour Datum</FormLabel>
-                        <Input placeholder="dd.mm.yyyy, hh:mm" {...field} />
+                        <Input type="datetime-local" {...field} />
                         <FormErrorMessage>
                           {form.errors?.tour_date as string}
-                        </FormErrorMessage>
-                      </FormControl>
-                    )}
-                  </Field>
-                  <Field name="meeting_point">
-                    {({ field, form }: FieldProps) => (
-                      <FormControl
-                        isRequired
-                        isInvalid={
-                          (form.errors.meeting_point &&
-                            form.touched.meeting_point) as boolean
-                        }>
-                        <FormLabel>Treffpunkt</FormLabel>
-                        <Input {...field} />
-                        <FormErrorMessage>
-                          {form.errors?.meeting_point as string}
                         </FormErrorMessage>
                       </FormControl>
                     )}

@@ -46,12 +46,6 @@ const NextTourSection = () => {
         </Box>
         <Box>
           <Text fontSize="sm" fontWeight="semibold">
-            Treffpunkt:
-          </Text>
-          <Text fontSize="lg">{tourDate.meeting_point}</Text>
-        </Box>
-        <Box>
-          <Text fontSize="sm" fontWeight="semibold">
             Tourlänge:
           </Text>
           <Text fontSize="lg">
