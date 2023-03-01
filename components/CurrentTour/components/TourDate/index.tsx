@@ -18,7 +18,7 @@ const TourDate = () => {
 
   return (
     <Flex my="6" flexDirection={['column', 'row']} gap={['3', '6']}>
-      <Box>
+      <Box maxW="25ch">
         <Text fontWeight="light" color="gray.700">
           Besammlung
         </Text>
