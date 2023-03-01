@@ -20,28 +20,30 @@ const TourDate = () => {
     <Flex my="6" flexDirection={['column', 'row']} gap={['3', '10']}>
       <Box>
         <Text fontWeight="light" color="gray.700">
-          Dürchführung am:
+          Besammlung
         </Text>
         <Text fontSize={['md', 'lg']} fontWeight="bold">
-          {date}
+          {date} Uhr
         </Text>
       </Box>
-      <Box>
-        <Text fontWeight="light" color="gray.700">
-          Treffpunkt:
-        </Text>
-        <Text fontSize={['md', 'lg']} fontWeight="bold">
-          {tourDate.meeting_point}
-        </Text>
-      </Box>
-      <Box>
-        <Text fontWeight="light" color="gray.700">
-          Tourlänge:
-        </Text>
-        <Text fontSize={['md', 'lg']} fontWeight="bold">
-          {tourDate.halfday_tour ? 'Halbtagestour' : 'Ganztagestour'}
-        </Text>
-      </Box>
+      <Flex gap={['6', '10']} flexDirection="row">
+        <Box>
+          <Text fontWeight="light" color="gray.700">
+            Treffpunkt
+          </Text>
+          <Text fontSize={['md', 'lg']} fontWeight="bold">
+            {tourDate.meeting_point}
+          </Text>
+        </Box>
+        <Box>
+          <Text fontWeight="light" color="gray.700">
+            Tourlänge
+          </Text>
+          <Text fontSize={['md', 'lg']} fontWeight="bold">
+            {tourDate.halfday_tour ? 'Halbtagestour' : 'Ganztagestour'}
+          </Text>
+        </Box>
+      </Flex>
     </Flex>
   );
 };
