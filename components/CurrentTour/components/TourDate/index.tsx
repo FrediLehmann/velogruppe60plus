@@ -9,8 +9,12 @@ const TourDate = () => {
   const date = useMemo(() => {
     if (!tourDate.tour_date) return;
     return new Intl.DateTimeFormat('de-ch', {
-      dateStyle: 'full',
-      timeStyle: 'short'
+      weekday: 'long',
+      year: 'numeric',
+      month: '2-digit',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric'
     }).format(new Date(tourDate.tour_date));
   }, [tourDate.tour_date]);
 
@@ -18,7 +22,7 @@ const TourDate = () => {
 
   return (
     <Flex my="6" flexDirection={['column', 'row']} gap={['3', '6']}>
-      <Box maxW="25ch">
+      <Box>
         <Text fontWeight="light" color="gray.700">
           Besammlung
         </Text>
