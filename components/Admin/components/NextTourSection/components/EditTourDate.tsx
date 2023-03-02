@@ -21,7 +21,7 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import { Edit } from 'icons';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { boolean, object, string } from 'yup';
 
 const EDIT_FORM = 'editTourDate';
@@ -32,6 +32,15 @@ const EditTourDate = () => {
   const toast = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const dateString = useMemo(() => {
+    const date = new Date(tourDate.tour_date);
+    return `${date.getFullYear()}-${
+      date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
+    }-${date.getDate()}T${date.getHours()}:${
+      date.getMinutes() < 10 ? `0${date.getMinutes()}` : date.getMinutes()
+    }`;
+  }, [tourDate.tour_date]);
 
   const submit = async ({
     tour_date,
@@ -83,9 +92,7 @@ const EditTourDate = () => {
           <ModalBody>
             <Formik
               initialValues={{
-                tour_date: new Date(tourDate.tour_date)
-                  .toISOString()
-                  .replace('Z', ''),
+                tour_date: dateString,
                 halfday_tour: tourDate.halfday_tour
               }}
               validationSchema={object({
