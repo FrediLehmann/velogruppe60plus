@@ -83,7 +83,7 @@ const EditTourDate = () => {
           <ModalBody>
             <Formik
               initialValues={{
-                tour_date: new Date(tourDate.tour_date).toISOString(),
+                tour_date: tourDate.tour_date.split('+')[0],
                 halfday_tour: tourDate.halfday_tour
               }}
               validationSchema={object({
