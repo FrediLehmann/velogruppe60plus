@@ -14,7 +14,8 @@ const TourDate = () => {
       month: '2-digit',
       day: 'numeric',
       hour: 'numeric',
-      minute: 'numeric'
+      minute: 'numeric',
+      timeZone: 'Europe/Zurich'
     }).format(new Date(tourDate.tour_date));
   }, [tourDate.tour_date]);
 

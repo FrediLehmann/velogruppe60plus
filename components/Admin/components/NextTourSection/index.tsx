@@ -11,7 +11,8 @@ const NextTourSection = () => {
     if (!tourDate.tour_date) return;
     return new Intl.DateTimeFormat('de-ch', {
       dateStyle: 'full',
-      timeStyle: 'short'
+      timeStyle: 'short',
+      timeZone: 'Europe/Zurich'
     }).format(new Date(tourDate.tour_date));
   }, [tourDate.tour_date]);
 
