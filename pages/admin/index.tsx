@@ -7,6 +7,7 @@ import { Tour } from 'types/Tours.types';
 import type { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useCallback, useEffect, useState } from 'react';
+import { TourDate } from 'types/TourDate.types';
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const supabase = createServerSupabaseClient(ctx);
@@ -23,7 +24,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       }
     };
 
-  const { error, data, count } = await supabase
+  const {
+    error: toursError,
+    data: tours,
+    count: toursCount
+  } = await supabase
     .from('touren')
     .select(
       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, published',
@@ -32,13 +37,24 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     .order('name')
     .range(0, 9);
 
-  if (error) throw error;
-  if (data.length < 1 || (count && count < 1)) throw 'No Data received';
+  if (toursError) throw toursError;
+  if (tours.length < 1 || (toursCount && toursCount < 1))
+    throw 'No Data received';
+
+  const { error: tourDateError, data: tourDate } = await supabase
+    .from('tour_dates')
+    .select('*')
+    .order('tour_date')
+    .limit(1)
+    .single();
+
+  if (tourDateError) throw tourDateError;
 
   return {
     props: {
-      tours: data,
-      toursCount: count,
+      tours,
+      toursCount,
+      tourDate,
       page: 1
     }
   };
@@ -47,15 +63,18 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 const Admin = ({
   tours: serverTours,
   toursCount,
+  tourDate: serverTourDate,
   page: serverPage
 }: {
   tours: Tour[];
   toursCount: number;
+  tourDate: TourDate;
   page: number;
 }) => {
   const toast = useToast();
   const supabaseClient = useSupabaseClient();
   const [tours, setTours] = useState(serverTours);
+  const [tourDate, setTourDate] = useState(serverTourDate);
   const [page, setPage] = useState(serverPage);
 
   const load = useCallback(async () => {
@@ -72,7 +91,7 @@ const Admin = ({
       to = Number(p.toString() + 9);
     }
 
-    const { data, error } = await supabaseClient
+    const { error: toursError, data: tours } = await supabaseClient
       .from('touren')
       .select(
         'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, published'
@@ -80,7 +99,7 @@ const Admin = ({
       .order('name')
       .range(from, to);
 
-    if (error) {
+    if (toursError) {
       toast({
         title: 'Fehler beim laden der Touren.',
         description:
@@ -93,7 +112,18 @@ const Admin = ({
       return;
     }
 
-    if (data) setTours(data);
+    if (tours) setTours(tours);
+
+    const { error: tourDateError, data: tourDate } = await supabaseClient
+      .from('tour_dates')
+      .select('*')
+      .order('tour_date')
+      .limit(1)
+      .single();
+
+    if (tourDateError) throw tourDateError;
+
+    if (tourDate) setTourDate(tourDate);
   }, [page, supabaseClient, toast]);
 
   const setNextTour = useCallback(
@@ -225,9 +255,10 @@ const Admin = ({
         <AdminTourListContext.Provider
           value={{
             tours: tours || [],
+            totalTours: toursCount,
+            tourDate,
             page,
             setPage,
-            totalTours: toursCount,
             load,
             setNextTour,
             setPublished

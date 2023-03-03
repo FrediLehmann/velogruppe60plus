@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { GetServerSidePropsContext } from 'next/types';
 import { useCallback, useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import { TourDate } from 'types/TourDate.types';
 
 export async function getStaticProps(ctx: GetServerSidePropsContext) {
   const supabase = createClient(
@@ -81,7 +82,7 @@ export default function Tour({
         <meta name="description" content={tour.description} />
       </Head>
       <PageFrame>
-        <TourContext.Provider value={{ tour, load }}>
+        <TourContext.Provider value={{ tour, tourDate: {} as TourDate, load }}>
           <CurrentTour />
         </TourContext.Provider>
       </PageFrame>

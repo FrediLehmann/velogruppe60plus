@@ -1,5 +1,7 @@
+export { default as AlertTriangle } from './AlertTriangle';
 export { default as ArrowLeft } from './ArrowLeft';
 export { default as ArrowRight } from './ArrowRight';
+export { default as Calendar } from './Calendar';
 export { default as ChevronDown } from './ChevronDown';
 export { default as ChevronLeft } from './ChevronLeft';
 export { default as ChevronRight } from './ChevronRight';
@@ -18,5 +20,6 @@ export { default as MessageCircle } from './MessageCircle';
 export { default as Phone } from './Phone';
 export { default as Plus } from './Plus';
 export { default as Print } from './Print';
+export { default as Slash } from './Slash';
 export { default as Target } from './Target';
 export { default as Upload } from './Upload';

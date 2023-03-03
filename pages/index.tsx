@@ -1,10 +1,12 @@
 import { PageFrame, CurrentTour } from 'components';
 import Head from 'next/head';
 import { Tour } from 'types/Tours.types';
+import { TourDate as TourDateType } from 'types/TourDate.types';
 import { useCallback, useEffect, useState } from 'react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { TourContext } from 'lib/contexts/TourContext';
 import { createClient } from '@supabase/supabase-js';
+import { Container } from '@chakra-ui/react';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -12,7 +14,7 @@ export const getStaticProps = async () => {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
   );
 
-  const { error, data } = await supabase
+  const { data: tour, error: tourError } = await supabase
     .from('touren')
     .select(
       'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
@@ -20,19 +22,35 @@ export const getStaticProps = async () => {
     .eq('next_tour', true)
     .single();
 
-  if (error) throw error;
+  if (tourError) throw tourError;
+
+  const { data: tourDate, error: tourDateError } = await supabase
+    .from('tour_dates')
+    .select('*')
+    .order('tour_date')
+    .limit(1)
+    .single();
+
+  if (tourDateError) throw tourDateError;
 
   return {
-    props: { tour: data }
+    props: { tour, tourDate }
   };
 };
 
-export default function Home({ tour: serverTour }: { tour: Tour }) {
+export default function Home({
+  tour: serverTour,
+  tourDate: serverTourDate
+}: {
+  tour: Tour;
+  tourDate: TourDateType;
+}) {
   const [tour, setTour] = useState(serverTour);
+  const [tourDate, setTourDate] = useState(serverTourDate);
   const supabaseClient = useSupabaseClient();
 
   const load = useCallback(async () => {
-    const { data } = await supabaseClient
+    const { data: tour, error: tourError } = await supabaseClient
       .from('touren')
       .select(
         'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
@@ -40,12 +58,24 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
       .eq('next_tour', true)
       .single();
 
-    setTour(data as Tour);
+    if (tourError) throw tourError;
+
+    const { data: tourDate, error: tourDateError } = await supabaseClient
+      .from('tour_dates')
+      .select('*')
+      .order('tour_date')
+      .limit(1)
+      .single();
+
+    if (tourDateError) throw tourDateError;
+
+    setTour(tour as Tour);
+    setTourDate(tourDate as TourDateType);
   }, [supabaseClient]);
 
   useEffect(() => {
-    if (!serverTour) load();
-  }, [load, serverTour]);
+    if (!serverTour || !serverTourDate) load();
+  }, [load, serverTour, serverTourDate]);
 
   return (
     <>
@@ -57,8 +87,10 @@ export default function Home({ tour: serverTour }: { tour: Tour }) {
         />
       </Head>
       <PageFrame>
-        <TourContext.Provider value={{ tour, load }}>
-          <CurrentTour />
+        <TourContext.Provider value={{ tour, tourDate, load }}>
+          <Container as="main" maxW="container.md" mt={['4', '6', '12']}>
+            <CurrentTour />
+          </Container>
         </TourContext.Provider>
       </PageFrame>
     </>

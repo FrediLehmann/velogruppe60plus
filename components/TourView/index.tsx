@@ -12,7 +12,8 @@ const TourView = ({ tour }: { tour: Tour }) => {
   return (
     <>
       <Flex
-        my={['6', '10']}
+        mt={['4', '6']}
+        mb={['6', '10']}
         gap="8"
         flexDirection={['column', 'row']}
         align="flex-start">
