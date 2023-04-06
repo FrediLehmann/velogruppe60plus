@@ -123,7 +123,7 @@ const Admin = ({
 
     if (tourDateError) throw tourDateError;
 
-    if (tourDate) setTourDate(tourDate);
+    if (tourDate) setTourDate(tourDate as TourDate);
   }, [page, supabaseClient, toast]);
 
   const setNextTour = useCallback(

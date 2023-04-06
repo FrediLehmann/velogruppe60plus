@@ -34,7 +34,7 @@ const EditTourDate = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const dateString = useMemo(() => {
-    const date = new Date(tourDate.tour_date);
+    const date = new Date(tourDate.tour_date || '');
     return `${date.getFullYear()}-${
       date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
     }-${date.getDate()}T${date.getHours()}:${
