@@ -24,7 +24,8 @@ const OrganiserCard = ({
       background="white"
       border="1px solid"
       borderColor="gray.200"
-      borderRadius="lg">
+      borderRadius="lg"
+      minH="290px">
       <Center flexDirection="column" mt="5">
         <Image
           borderRadius="full"

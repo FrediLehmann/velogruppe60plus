@@ -1,9 +1,10 @@
-import { Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 import { OrganiserCard } from './components';
 
 import arthur from './images/arthur.jpeg';
 import paul from './images/paul.jpeg';
 import peter from './images/peter.jpeg';
+import hugo from './images/hugo.jpeg';
 
 const Organisers = () => {
   return (
@@ -18,34 +19,48 @@ const Organisers = () => {
         Sie können sich jederzeit bei einem unserer Organisatoren melden,
         entweder per E-Mail oder telefonisch.
       </Text>
-      <Flex
+      <Grid
         mt="8"
-        direction={['column', 'row']}
-        gap="3"
-        justifyContent="space-between"
+        templateColumns={['1fr', 'repeat(2, 1fr)']}
+        gap={['3', '4']}
         flexWrap="wrap">
-        <OrganiserCard
-          image={paul}
-          name="Paul Lehmann"
-          description='"Ist für die Organisation und das Leiten der Touren verantwortlich."'
-          phone="+41 79 322 66 16"
-          objectPosition="0 -34px"
-        />
-        <OrganiserCard
-          image={arthur}
-          name="Arthur Schneuwly"
-          description='"Ist für die Touren und das Leiten der Touren zuständig."'
-          phone="+41 78 801 67 45"
-          objectPosition="0 -42px"
-        />
-        <OrganiserCard
-          image={peter}
-          name="Peter Poffet"
-          description='"Ist für die Kommunikation und das Leiten der Touren zuständig."'
-          phone="+41 79 648 52 47"
-          objectPosition="0 -10px"
-        />
-      </Flex>
+        <GridItem>
+          <OrganiserCard
+            image={paul}
+            name="Paul Lehmann"
+            description="Ist für die Organisation und das Leiten der Touren verantwortlich."
+            phone="+41 79 322 66 16"
+            objectPosition="0 -34px"
+          />
+        </GridItem>
+        <GridItem>
+          <OrganiserCard
+            image={arthur}
+            name="Arthur Schneuwly"
+            description="Ist für die Touren und das Leiten der Touren zuständig."
+            phone="+41 78 801 67 45"
+            objectPosition="0 -38px"
+          />
+        </GridItem>
+        <GridItem>
+          <OrganiserCard
+            image={peter}
+            name="Peter Poffet"
+            description="Ist für die Kommunikation und das Leiten der Touren zuständig."
+            phone="+41 79 648 52 47"
+            objectPosition="1px -9px"
+          />
+        </GridItem>
+        <GridItem>
+          <OrganiserCard
+            image={hugo}
+            name="Hugo Spicher"
+            description="Ist für das Leiten der Touren zuständig."
+            phone="+41 79 311 79 36"
+            objectPosition="0 -30px"
+          />
+        </GridItem>
+      </Grid>
     </Box>
   );
 };
