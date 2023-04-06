@@ -57,7 +57,6 @@ const TourView = ({ tour }: { tour: Tour }) => {
               .from('map-images')
               .getPublicUrl(tour.image_data.path).data.publicUrl
           }
-          priority
           fill
           sizes="(min-width: 768px) 736px, 100vw"
           alt="Bild der Karte"
