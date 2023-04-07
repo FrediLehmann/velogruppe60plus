@@ -23,7 +23,7 @@ export default async function handler(
     } catch (err) {
       // If there was an error, Next.js will continue
       // to show the last successfully generated page
-      return res.status(500).send({ message: 'Error revalidating' });
+      return res.status(500).send({ message: `Error revalidating: ${err}` });
     }
   } else {
     res.setHeader('Allow', ['POST']);

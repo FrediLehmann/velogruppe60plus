@@ -171,13 +171,24 @@ const Admin = ({
         }
       }
 
-      fetch('/api/revalidate', {
-        method: 'POST',
-        body: JSON.stringify({
-          secret: process.env.REGENERATE_TOKEN,
-          pages: ['alle-touren']
-        })
-      });
+      try {
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          body: JSON.stringify({
+            secret: process.env.REGENERATE_TOKEN,
+            pages: ['alle-touren']
+          })
+        });
+      } catch (err: any) {
+        toast({
+          title: 'Fehler beim regenerieren der Seiten.',
+          description: err?.message || '',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
 
       toast({
         title: 'Nächste Tour festgelegt.',
@@ -213,13 +224,24 @@ const Admin = ({
 
       const pagesToRevalidate = ['alle-touren', 'print'];
       if (published) pagesToRevalidate.push(`tour/${id}`);
-      fetch('/api/revalidate', {
-        method: 'POST',
-        body: JSON.stringify({
-          secret: process.env.REGENERATE_TOKEN,
-          pages: pagesToRevalidate
-        })
-      });
+      try {
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          body: JSON.stringify({
+            secret: process.env.REGENERATE_TOKEN,
+            pages: pagesToRevalidate
+          })
+        });
+      } catch (err: any) {
+        toast({
+          title: 'Fehler beim regenerieren der Seiten.',
+          description: err?.message || '',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
 
       toast({
         title: 'Veröffentlichung geändert.',

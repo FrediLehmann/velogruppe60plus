@@ -132,13 +132,24 @@ const EditTour = ({
         return;
       }
 
-      fetch('/api/revalidate', {
-        method: 'POST',
-        body: JSON.stringify({
-          secret: process.env.REGENERATE_TOKEN,
-          pages: ['alle-touren', 'print', `tour/${tour.id}`]
-        })
-      });
+      try {
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          body: JSON.stringify({
+            secret: process.env.REGENERATE_TOKEN,
+            pages: ['alle-touren', 'print', `tour/${tour.id}`]
+          })
+        });
+      } catch (err: any) {
+        toast({
+          title: 'Fehler beim regenerieren der Seiten.',
+          description: err?.message || '',
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+          position: 'top'
+        });
+      }
 
       toast({
         title: 'Tour gespeichert.',

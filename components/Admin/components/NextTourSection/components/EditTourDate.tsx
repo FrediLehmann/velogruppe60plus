@@ -66,13 +66,24 @@ const EditTourDate = () => {
         position: 'top'
       });
 
-    fetch('/api/revalidate', {
-      method: 'POST',
-      body: JSON.stringify({
-        secret: process.env.REGENERATE_TOKEN,
-        pages: []
-      })
-    });
+    try {
+      await fetch('/api/revalidate', {
+        method: 'POST',
+        body: JSON.stringify({
+          secret: process.env.REGENERATE_TOKEN,
+          pages: []
+        })
+      });
+    } catch (err: any) {
+      toast({
+        title: 'Fehler beim regenerieren der Seiten.',
+        description: err?.message || '',
+        status: 'error',
+        duration: 9000,
+        isClosable: true,
+        position: 'top'
+      });
+    }
 
     onClose();
     setIsSubmitting(false);
