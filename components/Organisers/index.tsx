@@ -28,7 +28,7 @@ const Organisers = () => {
           <OrganiserCard
             image={paul}
             name="Paul Lehmann"
-            description="Ist für die Organisation und das Leiten der Touren verantwortlich."
+            description="ESA-Radsportleiter mit Gesamtverantwortung"
             phone="+41 79 322 66 16"
             objectPosition="0 -34px"
           />
@@ -37,7 +37,7 @@ const Organisers = () => {
           <OrganiserCard
             image={arthur}
             name="Arthur Schneuwly"
-            description="Ist für die Touren und das Leiten der Touren zuständig."
+            description="ESA-Radsportleiter, zuständig für die Planung und Leitung von Touren"
             phone="+41 78 801 67 45"
             objectPosition="0 -38px"
           />
@@ -46,7 +46,7 @@ const Organisers = () => {
           <OrganiserCard
             image={peter}
             name="Peter Poffet"
-            description="Ist für die Kommunikation und das Leiten der Touren zuständig."
+            description="Zuständig für die Kommunikation und Leitung von Touren"
             phone="+41 79 648 52 47"
             objectPosition="1px -9px"
           />
@@ -55,7 +55,7 @@ const Organisers = () => {
           <OrganiserCard
             image={hugo}
             name="Hugo Spicher"
-            description="Ist für das Leiten der Touren zuständig."
+            description="Zuständig für die Sicherheit und Leitung von Touren"
             phone="+41 79 311 79 36"
             objectPosition="0 -30px"
           />
