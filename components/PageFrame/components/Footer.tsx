@@ -15,6 +15,8 @@ const Footer = () => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
 
+  const today = new Date().getFullYear();
+
   return (
     <Box as="footer" mt="8" py="3" borderTop="1px solid" borderColor="gray.200">
       <Container
@@ -25,7 +27,7 @@ const Footer = () => {
         justifyContent="space-between"
         gap={['3', '8']}>
         <Box color="gray.700" fontSize={['xs', 'sm']}>
-          <Text>© Copyright 2022 by Frederic Lehmann,</Text>
+          <Text>© Copyright {today} by Frederic Lehmann,</Text>
           <Text>all rights reserved.</Text>
         </Box>
         <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
