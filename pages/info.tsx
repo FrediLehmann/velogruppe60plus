@@ -6,6 +6,7 @@ import {
   RulesOfConduct,
   TourInfo
 } from 'components';
+import { EBikeSecurity } from 'components/EBikeSecurity';
 import Head from 'next/head';
 
 const Information = () => {
@@ -36,6 +37,7 @@ const Information = () => {
           <TourInfo />
           <Organisers />
           <RulesOfConduct />
+          <EBikeSecurity />
           <AdditionalInfos />
         </Container>
       </PageFrame>
