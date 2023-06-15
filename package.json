@@ -11,20 +11,20 @@
     "types": "npx supabase gen types typescript --project-id \"bemryfdzntwpamztjgyr\" --schema public > types/Database.types.ts"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.4.1",
-    "@emotion/react": "^11",
-    "@emotion/styled": "^11",
-    "@supabase/auth-helpers-nextjs": "^0.5.2",
+    "@chakra-ui/react": "^2.7.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@supabase/auth-helpers-nextjs": "^0.5.9",
     "@supabase/auth-helpers-react": "^0.3.1",
-    "@supabase/supabase-js": "^2.1.1",
+    "@supabase/supabase-js": "^2.25.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
-    "@vercel/analytics": "^0.1.5",
+    "@vercel/analytics": "^0.1.11",
     "eslint": "8.28.0",
     "eslint-config-next": "13.1.2",
-    "formik": "^2.2.9",
-    "framer-motion": "^6",
+    "formik": "^2.4.2",
+    "framer-motion": "^6.5.1",
     "next": "13.0.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,7 +33,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^8.5.0"
-  },
-  "packageManager": "yarn@1.22.19"
+    "eslint-config-prettier": "^8.8.0"
+  }
 }
