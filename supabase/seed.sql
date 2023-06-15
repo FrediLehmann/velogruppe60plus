@@ -17,4 +17,4 @@ values
   ('Tour 003 Seisa ü Röschtigrabe', 'Die Tour führt auf verkehrsarmen Strassen und gut befestigten Wegen durch das Sense Unterland an die markanten Gewässer Sense, Saane. Sehenswürdigkeiten laden zum Verweilen ein.', 'Neuenegg - Brüggelbach - Bramberg - Laupen - Bösingen - Fendringen - Richterwil - Bundtels - Luggiwil - Düdingen - Garmiswil - Balliswil - Chastels - Bruch - Menziswil - Tafers - Weissenbach - Gagenöli - Niedermuhren - Ober Zirkels - Mühletal', 'https://map.schweizmobil.ch/?lang=de&photos=yes&logo=yes&detours=yes&season=summer&resolution=9.54&E=2587293&N=1187473&bgLayer=pk&trackId=291576372', 'Restaurant Mühletal', 'Restaurant Smtynlara', 'Bäckerei Cafè\nSt. Antoni\n026 495 18 66', '40 Km', '990 m','969 m', '4 Std.', false, true, '{"path": "3.jpg", "width": 800, "height": 800}');
 
 
-INSERT INTO public.touren_dates (tour_date) values ('2023-04-26 11:00:00+00');
+INSERT INTO public.tour_dates (tour_date) values ('2023-04-26 11:00:00+00');
