@@ -12,6 +12,7 @@ import {
 import { ArrowLeft, Print as PrintIcon } from 'icons';
 import NextLink from 'next/link';
 import { createClient } from '@supabase/supabase-js';
+import { TrackClickEvent } from 'components';
 
 export const getStaticProps = async () => {
   const supabase = createClient(
@@ -51,15 +52,17 @@ const Print = ({ tours }: { tours: Tour[] }) => {
         my="8"
         sx={{ '@media print': { mt: '4' } }}>
         <NextLink href="/alle-touren" passHref legacyBehavior>
-          <Button
-            as={Link}
-            variant="link"
-            color="green.700"
-            leftIcon={<ArrowLeft />}
-            py="6"
-            sx={{ '@media print': { display: 'none' } }}>
-            Zurück zu allen Touren
-          </Button>
+          <TrackClickEvent event={{ name: 'BACK_TO_TOURS_LINK_CLICK' }}>
+            <Button
+              as={Link}
+              variant="link"
+              color="green.700"
+              leftIcon={<ArrowLeft />}
+              py="6"
+              sx={{ '@media print': { display: 'none' } }}>
+              Zurück zu allen Touren
+            </Button>
+          </TrackClickEvent>
         </NextLink>
         <Flex as="header" justifyContent="space-between" align="center">
           <Box>
@@ -70,12 +73,14 @@ const Print = ({ tours }: { tours: Tour[] }) => {
               Velogruppe 60+ Sensetal
             </Heading>
           </Box>
-          <Button
-            leftIcon={<PrintIcon boxSize="5" />}
-            onClick={printPage}
-            sx={{ '@media print': { display: 'none' } }}>
-            Jetzt Drucken
-          </Button>
+          <TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
+            <Button
+              leftIcon={<PrintIcon boxSize="5" />}
+              onClick={printPage}
+              sx={{ '@media print': { display: 'none' } }}>
+              Jetzt Drucken
+            </Button>
+          </TrackClickEvent>
         </Flex>
         <Box as="main">
           {tours.map(tour => (
