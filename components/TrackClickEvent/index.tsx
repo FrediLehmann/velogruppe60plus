@@ -8,14 +8,16 @@ const TrackClickEvent = ({
   event: TrackingEvent;
 }) => (
   <div
-    onClickCapture={() =>
+    onClickCapture={() => {
       (
         window as Window &
           typeof globalThis & {
             Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
           }
-      ).Tellytics?.trackEvent(event)
-    }
+      ).Tellytics?.trackEvent(event);
+
+      return true;
+    }}
     style={{ display: 'contents' }}>
     {children}
   </div>
