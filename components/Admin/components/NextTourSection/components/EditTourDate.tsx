@@ -18,6 +18,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { TrackClickEvent } from 'components';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import { Edit } from 'icons';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
@@ -92,9 +93,11 @@ const EditTourDate = () => {
 
   return (
     <>
-      <Button leftIcon={<Edit boxSize="5" />} onClick={onOpen}>
-        Ändern
-      </Button>
+      <TrackClickEvent event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+        <Button leftIcon={<Edit boxSize="5" />} onClick={onOpen}>
+          Ändern
+        </Button>
+      </TrackClickEvent>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
@@ -154,19 +157,25 @@ const EditTourDate = () => {
           </ModalBody>
           <ModalFooter>
             <ButtonGroup>
-              <Button
-                disabled={isSubmitting}
-                variant="outline"
-                onClick={onClose}>
-                Abbrechen
-              </Button>
-              <Button
-                colorScheme="mapGreen"
-                type="submit"
-                form={EDIT_FORM}
-                isLoading={isSubmitting}>
-                Speichern
-              </Button>
+              <TrackClickEvent
+                event={{ name: 'CANCEL_EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+                <Button
+                  disabled={isSubmitting}
+                  variant="outline"
+                  onClick={onClose}>
+                  Abbrechen
+                </Button>
+              </TrackClickEvent>
+              <TrackClickEvent
+                event={{ name: 'SAVE_EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+                <Button
+                  colorScheme="mapGreen"
+                  type="submit"
+                  form={EDIT_FORM}
+                  isLoading={isSubmitting}>
+                  Speichern
+                </Button>
+              </TrackClickEvent>
             </ButtonGroup>
           </ModalFooter>
         </ModalContent>

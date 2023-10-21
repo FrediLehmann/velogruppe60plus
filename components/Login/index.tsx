@@ -11,6 +11,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { TrackClickEvent } from 'components';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import { useState } from 'react';
 import { object, string } from 'yup';
@@ -91,13 +92,15 @@ const Login = () => {
             </Form>
           )}
         </Formik>
-        <Button
-          type="submit"
-          form="login"
-          colorScheme="mapGreen"
-          isLoading={isSubmitting}>
-          Einloggen
-        </Button>
+        <TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
+          <Button
+            type="submit"
+            form="login"
+            colorScheme="mapGreen"
+            isLoading={isSubmitting}>
+            Einloggen
+          </Button>
+        </TrackClickEvent>
       </Stack>
     </Container>
   );

@@ -1,4 +1,5 @@
 import { Box, Button, Center, chakra, Flex, Text } from '@chakra-ui/react';
+import { TrackClickEvent } from 'components';
 import { Mail, Phone } from 'icons';
 import NextImage from 'next/image';
 
@@ -50,24 +51,29 @@ const OrganiserCard = ({
         </Text>
       </Center>
       <Flex borderTop="1px solid" borderColor="gray.200" mt="6">
-        <Button
-          as="a"
-          href="mailto:velogruppe60plus-sensetal@bluewin.ch"
-          w="50%"
-          variant="ghost"
-          borderRight="1px solid"
-          borderColor="gray.200"
-          leftIcon={<Mail boxSize="5" />}>
-          Email
-        </Button>
-        <Button
-          as="a"
-          href={`tel:${phone}`}
-          w="50%"
-          variant="ghost"
-          leftIcon={<Phone boxSize="5" />}>
-          Telefon
-        </Button>
+        <TrackClickEvent event={{ name: 'SEND_EMAIL_BUTTON_CLICK' }}>
+          <Button
+            as="a"
+            href="mailto:velogruppe60plus-sensetal@bluewin.ch"
+            w="50%"
+            variant="ghost"
+            borderRight="1px solid"
+            borderColor="gray.200"
+            leftIcon={<Mail boxSize="5" />}>
+            Email
+          </Button>
+        </TrackClickEvent>
+        <TrackClickEvent
+          event={{ name: `CALL_${name.toUpperCase()}_BUTTON_CLICK` }}>
+          <Button
+            as="a"
+            href={`tel:${phone}`}
+            w="50%"
+            variant="ghost"
+            leftIcon={<Phone boxSize="5" />}>
+            Telefon
+          </Button>
+        </TrackClickEvent>
       </Flex>
     </Flex>
   );

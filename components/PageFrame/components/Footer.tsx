@@ -7,6 +7,7 @@ import {
   Text
 } from '@chakra-ui/react';
 import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { TrackClickEvent } from 'components';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -31,31 +32,39 @@ const Footer = () => {
           <Text>all rights reserved.</Text>
         </Box>
         <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
-          <NextLink
-            href="https://github.com/FrediLehmann/velogruppe60plus"
-            passHref
-            legacyBehavior>
-            <Button as={Link} aria-label="Github" isExternal>
-              Github
-            </Button>
-          </NextLink>
+          <TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }}>
+            <NextLink
+              href="https://github.com/FrediLehmann/velogruppe60plus"
+              passHref
+              legacyBehavior>
+              <Button as={Link} aria-label="Github" isExternal>
+                Github
+              </Button>
+            </NextLink>
+          </TrackClickEvent>
           {user && (
-            <Button
-              onClick={async () => {
-                await supabaseClient.auth.signOut();
-                router.push('/');
-              }}>
-              Abmelden
-            </Button>
+            <TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }}>
+              <Button
+                onClick={async () => {
+                  await supabaseClient.auth.signOut();
+                  router.push('/');
+                }}>
+                Abmelden
+              </Button>
+            </TrackClickEvent>
           )}
           {user ? (
-            <NextLink href="/admin" passHref legacyBehavior>
-              <Button as={Link}>Admin</Button>
-            </NextLink>
+            <TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }}>
+              <NextLink href="/admin" passHref legacyBehavior>
+                <Button as={Link}>Admin</Button>
+              </NextLink>
+            </TrackClickEvent>
           ) : (
-            <NextLink href="/login" passHref legacyBehavior>
-              <Button as={Link}>Login</Button>
-            </NextLink>
+            <TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }}>
+              <NextLink href="/login" passHref legacyBehavior>
+                <Button as={Link}>Login</Button>
+              </NextLink>
+            </TrackClickEvent>
           )}
         </ButtonGroup>
       </Container>

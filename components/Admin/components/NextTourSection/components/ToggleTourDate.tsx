@@ -10,6 +10,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { TrackClickEvent } from 'components';
 import { Calendar, Slash } from 'icons';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useContext, useRef, useState } from 'react';
@@ -71,11 +72,16 @@ const ToggleTourDate = ({
 
   return (
     <>
-      <Button
-        leftIcon={isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
-        onClick={onOpen}>
-        {isCanceled ? 'Aktivieren' : 'Absagen'}
-      </Button>
+      <TrackClickEvent
+        event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}>
+        <Button
+          leftIcon={
+            isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />
+          }
+          onClick={onOpen}>
+          {isCanceled ? 'Aktivieren' : 'Absagen'}
+        </Button>
+      </TrackClickEvent>
       <AlertDialog
         isOpen={isOpen}
         leastDestructiveRef={cancelRef}
@@ -90,19 +96,29 @@ const ToggleTourDate = ({
               {isCanceled ? 'wieder aktivieren' : 'absagen'}?
             </AlertDialogBody>
             <AlertDialogFooter>
-              <Button
-                ref={cancelRef}
-                onClick={onClose}
-                isLoading={isSubmitting}>
-                Abbrechen
-              </Button>
-              <Button
-                colorScheme="red"
-                onClick={toggleTour}
-                ml={3}
-                isLoading={isSubmitting}>
-                {isCanceled ? 'Aktivieren' : 'Absagen'}
-              </Button>
+              <TrackClickEvent
+                event={{
+                  name: `CANCEL_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
+                }}>
+                <Button
+                  ref={cancelRef}
+                  onClick={onClose}
+                  isLoading={isSubmitting}>
+                  Abbrechen
+                </Button>
+              </TrackClickEvent>
+              <TrackClickEvent
+                event={{
+                  name: `SAVE_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
+                }}>
+                <Button
+                  colorScheme="red"
+                  onClick={toggleTour}
+                  ml={3}
+                  isLoading={isSubmitting}>
+                  {isCanceled ? 'Aktivieren' : 'Absagen'}
+                </Button>
+              </TrackClickEvent>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialogOverlay>

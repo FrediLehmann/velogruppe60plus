@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { Info, List } from 'icons';
+import { TrackClickEvent } from 'components';
 
 const Header = () => {
   return (
@@ -34,16 +35,21 @@ const Header = () => {
           colorScheme="gray"
           spacing="2"
           mt={['4', null, '0']}>
-          <NextLink href="/alle-touren" passHref legacyBehavior>
-            <Button as="a" leftIcon={<List boxSize={['4', '5']} />}>
-              Touren
-            </Button>
-          </NextLink>
-          <NextLink href="/info" passHref legacyBehavior>
-            <Button as="a" leftIcon={<Info boxSize={['4', '5']} />}>
-              Informationen
-            </Button>
-          </NextLink>
+          <TrackClickEvent
+            event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }}>
+            <NextLink href="/alle-touren" passHref legacyBehavior>
+              <Button as="a" leftIcon={<List boxSize={['4', '5']} />}>
+                Touren
+              </Button>
+            </NextLink>
+          </TrackClickEvent>
+          <TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }}>
+            <NextLink href="/info" passHref legacyBehavior>
+              <Button as="a" leftIcon={<Info boxSize={['4', '5']} />}>
+                Informationen
+              </Button>
+            </NextLink>
+          </TrackClickEvent>
         </ButtonGroup>
       </Container>
     </Box>

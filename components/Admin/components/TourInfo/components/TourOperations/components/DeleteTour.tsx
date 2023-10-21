@@ -9,6 +9,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { TrackClickEvent } from 'components';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useContext, useRef } from 'react';
 
@@ -84,12 +85,16 @@ const DeleteTour = ({
             Soll die Tour &quot;{name}&quot; gelöscht werden?
           </AlertDialogBody>
           <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onClose}>
-              Abbrechen
-            </Button>
-            <Button colorScheme="red" onClick={deleteTour} ml={3}>
-              Löschen
-            </Button>
+            <TrackClickEvent event={{ name: 'CANCEL_DELETE_TOUR' }}>
+              <Button ref={cancelRef} onClick={onClose}>
+                Abbrechen
+              </Button>
+            </TrackClickEvent>
+            <TrackClickEvent event={{ name: 'DELETE_TOUR' }}>
+              <Button colorScheme="red" onClick={deleteTour} ml={3}>
+                Löschen
+              </Button>
+            </TrackClickEvent>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialogOverlay>

@@ -18,6 +18,7 @@ import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useCallback, useContext, useState } from 'react';
 import { TourForm } from '.';
 import { TourFields } from 'types/TourFields.types';
+import { TrackClickEvent } from 'components';
 
 const NewTourSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -134,13 +135,15 @@ const NewTourSection = () => {
 
   return (
     <>
-      <Button
-        size={['sm', 'md']}
-        colorScheme="mapGreen"
-        rightIcon={<Plus boxSize="5" />}
-        onClick={onOpen}>
-        Neue Tour erfassen
-      </Button>
+      <TrackClickEvent event={{ name: 'START_CREATE_NEW_TOUR_BUTTON_CLICK' }}>
+        <Button
+          size={['sm', 'md']}
+          colorScheme="mapGreen"
+          rightIcon={<Plus boxSize="5" />}
+          onClick={onOpen}>
+          Neue Tour erfassen
+        </Button>
+      </TrackClickEvent>
       <Divider borderColor="gray.500" my="3" />
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
@@ -152,19 +155,24 @@ const NewTourSection = () => {
           </ModalBody>
           <ModalFooter>
             <ButtonGroup>
-              <Button
-                disabled={isSubmitting}
-                variant="outline"
-                onClick={onClose}>
-                Abbrechen
-              </Button>
-              <Button
-                colorScheme="mapGreen"
-                type="submit"
-                form="createTour"
-                isLoading={isSubmitting}>
-                Speichern
-              </Button>
+              <TrackClickEvent
+                event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}>
+                <Button
+                  disabled={isSubmitting}
+                  variant="outline"
+                  onClick={onClose}>
+                  Abbrechen
+                </Button>
+              </TrackClickEvent>
+              <TrackClickEvent event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }}>
+                <Button
+                  colorScheme="mapGreen"
+                  type="submit"
+                  form="createTour"
+                  isLoading={isSubmitting}>
+                  Speichern
+                </Button>
+              </TrackClickEvent>
             </ButtonGroup>
           </ModalFooter>
         </ModalContent>

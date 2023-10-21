@@ -10,6 +10,7 @@ import { ChevronLeft, ChevronRight } from 'icons';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useContext } from 'react';
 import { TourInfo } from '.';
+import { TrackClickEvent } from 'components';
 
 const Tours = () => {
   const { page, tours, totalTours, setPage } = useContext(AdminTourListContext);
@@ -24,28 +25,35 @@ const Tours = () => {
       <Center mt="8">
         <ButtonGroup size="lg" variant="outline" isAttached>
           {page !== 1 && (
-            <IconButton
-              aria-label="Previous page"
-              icon={<ChevronLeft boxSize="6" />}
-              onClick={() => setPage(page - 1)}
-            />
+            <TrackClickEvent event={{ name: 'ADMIN_PAGINATION_PREV' }}>
+              <IconButton
+                aria-label="Previous page"
+                icon={<ChevronLeft boxSize="6" />}
+                onClick={() => setPage(page - 1)}
+              />
+            </TrackClickEvent>
           )}
           {[...new Array(totalPages)].map((_, index) => {
             return (
-              <Button
+              <TrackClickEvent
                 key={index}
-                bg={page === index + 1 ? 'gray.100' : 'transparent'}
-                onClick={() => page !== index + 1 && setPage(index + 1)}>
-                {index + 1}
-              </Button>
+                event={{ name: `ADMIN_PAGINATION_PAGE_${index}` }}>
+                <Button
+                  bg={page === index + 1 ? 'gray.100' : 'transparent'}
+                  onClick={() => page !== index + 1 && setPage(index + 1)}>
+                  {index + 1}
+                </Button>
+              </TrackClickEvent>
             );
           })}
           {page < totalPages && (
-            <IconButton
-              aria-label="Next page"
-              icon={<ChevronRight boxSize="6" />}
-              onClick={() => setPage(page + 1)}
-            />
+            <TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }}>
+              <IconButton
+                aria-label="Next page"
+                icon={<ChevronRight boxSize="6" />}
+                onClick={() => setPage(page + 1)}
+              />
+            </TrackClickEvent>
           )}
         </ButtonGroup>
       </Center>

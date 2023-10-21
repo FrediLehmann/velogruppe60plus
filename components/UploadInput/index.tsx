@@ -11,6 +11,7 @@ import { ImageFallback } from './components';
 import { FieldProps } from 'formik';
 import { Upload } from 'icons';
 import { useMemo, useRef } from 'react';
+import { TrackClickEvent } from 'components';
 
 const UploadInput = ({
   label,
@@ -92,15 +93,17 @@ const UploadInput = ({
             src={image}
           />
         )}
-        <Button
-          variant="outline"
-          leftIcon={<Upload boxSize="5" />}
-          onClick={() => {
-            fieldProps.form.setTouched({ [fieldProps.field.name]: true });
-            inputRef?.current?.click();
-          }}>
-          {buttonLabel}
-        </Button>
+        <TrackClickEvent event={{ name: 'UPLOAD_BUTTON_CLICK' }}>
+          <Button
+            variant="outline"
+            leftIcon={<Upload boxSize="5" />}
+            onClick={() => {
+              fieldProps.form.setTouched({ [fieldProps.field.name]: true });
+              inputRef?.current?.click();
+            }}>
+            {buttonLabel}
+          </Button>
+        </TrackClickEvent>
       </Flex>
       <FormErrorMessage>
         {fieldProps.form.errors[fieldProps.field.name] as string}

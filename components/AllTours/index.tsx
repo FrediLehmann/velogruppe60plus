@@ -16,6 +16,7 @@ import { useContext } from 'react';
 import { Tour } from './components';
 import { Print as PrintIcon } from 'icons';
 import { useRouter } from 'next/router';
+import { TrackClickEvent } from 'components';
 
 const AllTours = () => {
   const { page, tours, totalTours, setPage, isLoading } =
@@ -34,9 +35,14 @@ const AllTours = () => {
             {totalTours} Touren
           </Text>
         </Box>
-        <Button leftIcon={<PrintIcon />} onClick={() => router.push('/print')}>
-          Drucken
-        </Button>
+        <TrackClickEvent
+          event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
+          <Button
+            leftIcon={<PrintIcon />}
+            onClick={() => router.push('/print')}>
+            Drucken
+          </Button>
+        </TrackClickEvent>
       </Flex>
       <Flex gap={['4', '6']} direction="column">
         {isLoading
@@ -48,28 +54,35 @@ const AllTours = () => {
       <Center mt="8">
         <ButtonGroup size="lg" variant="outline" isAttached>
           {page !== 1 && (
-            <IconButton
-              aria-label="Previous page"
-              icon={<ChevronLeft boxSize="6" />}
-              onClick={() => setPage(page - 1)}
-            />
+            <TrackClickEvent event={{ name: 'PAGINATION_PREV' }}>
+              <IconButton
+                aria-label="Previous page"
+                icon={<ChevronLeft boxSize="6" />}
+                onClick={() => setPage(page - 1)}
+              />
+            </TrackClickEvent>
           )}
           {[...new Array(totalPages)].map((_, index) => {
             return (
-              <Button
+              <TrackClickEvent
                 key={index}
-                bg={page === index + 1 ? 'gray.100' : 'transparent'}
-                onClick={() => page !== index + 1 && setPage(index + 1)}>
-                {index + 1}
-              </Button>
+                event={{ name: `PAGINATION_PAGE_${index}` }}>
+                <Button
+                  bg={page === index + 1 ? 'gray.100' : 'transparent'}
+                  onClick={() => page !== index + 1 && setPage(index + 1)}>
+                  {index + 1}
+                </Button>
+              </TrackClickEvent>
             );
           })}
           {page < totalPages && (
-            <IconButton
-              aria-label="Next page"
-              icon={<ChevronRight boxSize="6" />}
-              onClick={() => setPage(page + 1)}
-            />
+            <TrackClickEvent event={{ name: 'PAGINATION_NEXT' }}>
+              <IconButton
+                aria-label="Next page"
+                icon={<ChevronRight boxSize="6" />}
+                onClick={() => setPage(page + 1)}
+              />
+            </TrackClickEvent>
           )}
         </ButtonGroup>
       </Center>

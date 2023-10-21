@@ -8,6 +8,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Tr,
   useToast
 } from '@chakra-ui/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
@@ -16,6 +17,7 @@ import { TourFields } from 'types/TourFields.types';
 import { AdminTourListContext } from 'lib/contexts/AdminTourListContext';
 import { useCallback, useContext, useState } from 'react';
 import { Tour } from 'types/Tours.types';
+import { TrackClickEvent } from 'components';
 
 const EditTour = ({
   tour,
@@ -196,16 +198,23 @@ const EditTour = ({
         </ModalBody>
         <ModalFooter>
           <ButtonGroup>
-            <Button disabled={isSubmitting} variant="outline" onClick={onClose}>
-              Abbrechen
-            </Button>
-            <Button
-              colorScheme="mapGreen"
-              type="submit"
-              form="editTour"
-              isLoading={isSubmitting}>
-              Speichern
-            </Button>
+            <TrackClickEvent event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }}>
+              <Button
+                disabled={isSubmitting}
+                variant="outline"
+                onClick={onClose}>
+                Abbrechen
+              </Button>
+            </TrackClickEvent>
+            <TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }}>
+              <Button
+                colorScheme="mapGreen"
+                type="submit"
+                form="editTour"
+                isLoading={isSubmitting}>
+                Speichern
+              </Button>
+            </TrackClickEvent>
           </ButtonGroup>
         </ModalFooter>
       </ModalContent>

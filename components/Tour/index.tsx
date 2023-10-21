@@ -1,5 +1,5 @@
 import { Button, Container, Heading, Link } from '@chakra-ui/react';
-import { TourView } from 'components';
+import { TourView, TrackClickEvent } from 'components';
 import NextLink from 'next/link';
 import { ArrowLeft } from 'icons';
 import { useContext } from 'react';
@@ -10,17 +10,20 @@ const Tour = () => {
 
   return (
     <Container as="main" maxW="container.md" mt={['4', '6', '12']}>
-      <NextLink href="/alle-touren" passHref legacyBehavior>
-        <Button
-          as={Link}
-          mb="4"
-          variant="link"
-          color="green.700"
-          alignItems="center"
-          leftIcon={<ArrowLeft boxSize="5" />}>
-          Zurück zu den Touren
-        </Button>
-      </NextLink>
+      <TrackClickEvent
+        event={{ name: 'NAVIGATE_BACK_TO_ALL_TOURS_BUTTON_CLICK' }}>
+        <NextLink href="/alle-touren" passHref legacyBehavior>
+          <Button
+            as={Link}
+            mb="4"
+            variant="link"
+            color="green.700"
+            alignItems="center"
+            leftIcon={<ArrowLeft boxSize="5" />}>
+            Zurück zu den Touren
+          </Button>
+        </NextLink>
+      </TrackClickEvent>
       <Heading as="h1" fontSize={['xl', '2xl']}>
         {tour.name}
       </Heading>
