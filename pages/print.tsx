@@ -51,8 +51,8 @@ const Print = ({ tours }: { tours: Tour[] }) => {
         maxW="container.md"
         my="8"
         sx={{ '@media print': { mt: '4' } }}>
-        <NextLink href="/alle-touren" passHref legacyBehavior>
-          <TrackClickEvent event={{ name: 'BACK_TO_TOURS_LINK_CLICK' }}>
+        <TrackClickEvent event={{ name: 'BACK_TO_TOURS_LINK_CLICK' }}>
+          <NextLink href="/alle-touren" passHref legacyBehavior>
             <Button
               as={Link}
               variant="link"
@@ -62,8 +62,8 @@ const Print = ({ tours }: { tours: Tour[] }) => {
               sx={{ '@media print': { display: 'none' } }}>
               Zurück zu allen Touren
             </Button>
-          </TrackClickEvent>
-        </NextLink>
+          </NextLink>
+        </TrackClickEvent>
         <Flex as="header" justifyContent="space-between" align="center">
           <Box>
             <Text fontSize="md" fontWeight="semibold" color="gray.700">
