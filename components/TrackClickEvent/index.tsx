@@ -11,20 +11,26 @@ const TrackClickEvent = ({
   children: React.ReactNode;
   event: TrackingEvent;
 }) => {
+  function clickCapture() {
+    (
+      window as Window &
+        typeof globalThis & {
+          Tellytics: {
+            trackEvent: (event: TrackingEvent) => Promise<void>;
+          };
+        }
+    ).Tellytics?.trackEvent(event);
+  }
+
+  if (Object.keys(rest).length > 0)
+    return (
+      <Box {...rest} onClickCapture={clickCapture}>
+        {children}
+      </Box>
+    );
+
   return (
-    <Box
-      style={{ display: 'contents' }}
-      {...rest}
-      onClickCapture={() => {
-        (
-          window as Window &
-            typeof globalThis & {
-              Tellytics: {
-                trackEvent: (event: TrackingEvent) => Promise<void>;
-              };
-            }
-        ).Tellytics?.trackEvent(event);
-      }}>
+    <Box style={{ display: 'contents' }} onClickCapture={clickCapture}>
       {children}
     </Box>
   );
