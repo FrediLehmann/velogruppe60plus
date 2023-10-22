@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { TrackingEvent } from 'types/TrackingEvent.types';
 
 const TrackClickEvent = ({
@@ -7,17 +9,20 @@ const TrackClickEvent = ({
   children: React.ReactNode;
   event: TrackingEvent;
 }) => {
-  // @ts-ignore
-  children.props.onClickCapture = () => {
-    (
-      window as Window &
-        typeof globalThis & {
-          Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
-        }
-    ).Tellytics?.trackEvent(event);
-  };
+  if (!children) return null;
 
-  return children;
+  let Component = children as React.ReactElement;
+  if (typeof children === 'string') Component = <>{children}</>;
+  return React.cloneElement(Component, {
+    onClickCapture: () => {
+      (
+        window as Window &
+          typeof globalThis & {
+            Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
+          }
+      ).Tellytics?.trackEvent(event);
+    }
+  });
 };
 
 export default TrackClickEvent;
