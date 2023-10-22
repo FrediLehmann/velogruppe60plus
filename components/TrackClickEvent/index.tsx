@@ -6,19 +6,18 @@ const TrackClickEvent = ({
 }: {
   children: React.ReactNode;
   event: TrackingEvent;
-}) => (
-  <div
-    style={{ display: 'contents' }}
-    onClickCapture={() => {
-      (
-        window as Window &
-          typeof globalThis & {
-            Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
-          }
-      ).Tellytics?.trackEvent(event);
-    }}>
-    {children}
-  </div>
-);
+}) => {
+  // @ts-ignore
+  children.props.onClickCapture = () => {
+    (
+      window as Window &
+        typeof globalThis & {
+          Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
+        }
+    ).Tellytics?.trackEvent(event);
+  };
+
+  return children;
+};
 
 export default TrackClickEvent;
