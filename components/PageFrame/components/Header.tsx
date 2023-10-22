@@ -36,14 +36,17 @@ const Header = () => {
           spacing="2"
           mt={['4', null, '0']}>
           <TrackClickEvent
-            event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }}>
+            event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }}
+            showBox={true}>
             <NextLink href="/alle-touren" passHref legacyBehavior>
               <Button as="a" leftIcon={<List boxSize={['4', '5']} />}>
                 Touren
               </Button>
             </NextLink>
           </TrackClickEvent>
-          <TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }}>
+          <TrackClickEvent
+            event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }}
+            showBox={true}>
             <NextLink href="/info" passHref legacyBehavior>
               <Button as="a" leftIcon={<Info boxSize={['4', '5']} />}>
                 Informationen

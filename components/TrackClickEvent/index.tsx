@@ -1,15 +1,15 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
 
 import { TrackingEvent } from 'types/TrackingEvent.types';
 
 const TrackClickEvent = ({
   children,
   event,
-  ...rest
+  showBox = false
 }: {
   children: React.ReactNode;
   event: TrackingEvent;
+  showBox?: boolean;
 }) => {
   function clickCapture() {
     (
@@ -22,17 +22,12 @@ const TrackClickEvent = ({
     ).Tellytics?.trackEvent(event);
   }
 
-  if (Object.keys(rest).length > 0)
-    return (
-      <Box {...rest} onClickCapture={clickCapture}>
-        {children}
-      </Box>
-    );
-
   return (
-    <Box style={{ display: 'contents' }} onClickCapture={clickCapture}>
+    <div
+      style={!showBox ? { display: 'contents' } : {}}
+      onClickCapture={clickCapture}>
       {children}
-    </Box>
+    </div>
   );
 };
 

@@ -32,7 +32,7 @@ const Footer = () => {
           <Text>all rights reserved.</Text>
         </Box>
         <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
-          <TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }}>
+          <TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
             <NextLink
               href="https://github.com/FrediLehmann/velogruppe60plus"
               passHref
@@ -43,7 +43,9 @@ const Footer = () => {
             </NextLink>
           </TrackClickEvent>
           {user && (
-            <TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }}>
+            <TrackClickEvent
+              event={{ name: 'SIGNOUT_BUTTON_CLICK' }}
+              showBox={true}>
               <Button
                 onClick={async () => {
                   await supabaseClient.auth.signOut();
@@ -54,13 +56,17 @@ const Footer = () => {
             </TrackClickEvent>
           )}
           {user ? (
-            <TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }}>
+            <TrackClickEvent
+              event={{ name: 'ADMIN_LINK_CLICK' }}
+              showBox={true}>
               <NextLink href="/admin" passHref legacyBehavior>
                 <Button as={Link}>Admin</Button>
               </NextLink>
             </TrackClickEvent>
           ) : (
-            <TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }}>
+            <TrackClickEvent
+              event={{ name: 'LOGIN_LINK_CLICK' }}
+              showBox={true}>
               <NextLink href="/login" passHref legacyBehavior>
                 <Button as={Link}>Login</Button>
               </NextLink>

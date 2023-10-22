@@ -73,7 +73,8 @@ const ToggleTourDate = ({
   return (
     <>
       <TrackClickEvent
-        event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}>
+        event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
+        showBox={true}>
         <Button
           leftIcon={
             isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />

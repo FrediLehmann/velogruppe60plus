@@ -25,7 +25,9 @@ const Tours = () => {
       <Center mt="8">
         <ButtonGroup size="lg" variant="outline" isAttached>
           {page !== 1 && (
-            <TrackClickEvent event={{ name: 'ADMIN_PAGINATION_PREV' }}>
+            <TrackClickEvent
+              event={{ name: 'ADMIN_PAGINATION_PREV' }}
+              showBox={true}>
               <IconButton
                 aria-label="Previous page"
                 icon={<ChevronLeft boxSize="6" />}
@@ -37,6 +39,7 @@ const Tours = () => {
             return (
               <TrackClickEvent
                 key={index}
+                showBox={true}
                 event={{ name: `ADMIN_PAGINATION_PAGE_${index}` }}>
                 <Button
                   bg={page === index + 1 ? 'gray.100' : 'transparent'}
@@ -47,7 +50,9 @@ const Tours = () => {
             );
           })}
           {page < totalPages && (
-            <TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }}>
+            <TrackClickEvent
+              event={{ name: 'ADMIN_PAGINATION_NEXT' }}
+              showBox={true}>
               <IconButton
                 aria-label="Next page"
                 icon={<ChevronRight boxSize="6" />}

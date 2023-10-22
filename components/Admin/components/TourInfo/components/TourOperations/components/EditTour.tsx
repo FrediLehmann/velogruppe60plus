@@ -198,7 +198,9 @@ const EditTour = ({
         </ModalBody>
         <ModalFooter>
           <ButtonGroup>
-            <TrackClickEvent event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }}>
+            <TrackClickEvent
+              event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }}
+              showBox={true}>
               <Button
                 disabled={isSubmitting}
                 variant="outline"
@@ -206,7 +208,9 @@ const EditTour = ({
                 Abbrechen
               </Button>
             </TrackClickEvent>
-            <TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }}>
+            <TrackClickEvent
+              event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }}
+              showBox={true}>
               <Button
                 colorScheme="mapGreen"
                 type="submit"

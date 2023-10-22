@@ -156,7 +156,8 @@ const NewTourSection = () => {
           <ModalFooter>
             <ButtonGroup>
               <TrackClickEvent
-                event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}>
+                event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}
+                showBox={true}>
                 <Button
                   disabled={isSubmitting}
                   variant="outline"
@@ -164,7 +165,9 @@ const NewTourSection = () => {
                   Abbrechen
                 </Button>
               </TrackClickEvent>
-              <TrackClickEvent event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }}>
+              <TrackClickEvent
+                event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }}
+                showBox={true}>
                 <Button
                   colorScheme="mapGreen"
                   type="submit"

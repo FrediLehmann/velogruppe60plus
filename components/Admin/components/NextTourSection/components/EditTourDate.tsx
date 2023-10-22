@@ -93,7 +93,9 @@ const EditTourDate = () => {
 
   return (
     <>
-      <TrackClickEvent event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+      <TrackClickEvent
+        event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }}
+        showBox={true}>
         <Button leftIcon={<Edit boxSize="5" />} onClick={onOpen}>
           Ändern
         </Button>
@@ -158,7 +160,8 @@ const EditTourDate = () => {
           <ModalFooter>
             <ButtonGroup>
               <TrackClickEvent
-                event={{ name: 'CANCEL_EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+                event={{ name: 'CANCEL_EDIT_TOUR_DATE_BUTTON_CLICK' }}
+                showBox={true}>
                 <Button
                   disabled={isSubmitting}
                   variant="outline"
@@ -167,7 +170,8 @@ const EditTourDate = () => {
                 </Button>
               </TrackClickEvent>
               <TrackClickEvent
-                event={{ name: 'SAVE_EDIT_TOUR_DATE_BUTTON_CLICK' }}>
+                event={{ name: 'SAVE_EDIT_TOUR_DATE_BUTTON_CLICK' }}
+                showBox={true}>
                 <Button
                   colorScheme="mapGreen"
                   type="submit"
