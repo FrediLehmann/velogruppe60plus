@@ -1,28 +1,33 @@
 import React from 'react';
+import { Box } from '@chakra-ui/react';
 
 import { TrackingEvent } from 'types/TrackingEvent.types';
 
 const TrackClickEvent = ({
   children,
-  event
+  event,
+  ...rest
 }: {
   children: React.ReactNode;
   event: TrackingEvent;
 }) => {
-  if (!children) return null;
-
-  let Component = children as React.ReactElement;
-  if (typeof children === 'string') Component = <>{children}</>;
-  return React.cloneElement(Component, {
-    onClickCapture: () => {
-      (
-        window as Window &
-          typeof globalThis & {
-            Tellytics: { trackEvent: (event: TrackingEvent) => Promise<void> };
-          }
-      ).Tellytics?.trackEvent(event);
-    }
-  });
+  return (
+    <Box
+      style={{ display: 'contents' }}
+      {...rest}
+      onClickCapture={() => {
+        (
+          window as Window &
+            typeof globalThis & {
+              Tellytics: {
+                trackEvent: (event: TrackingEvent) => Promise<void>;
+              };
+            }
+        ).Tellytics?.trackEvent(event);
+      }}>
+      {children}
+    </Box>
+  );
 };
 
 export default TrackClickEvent;
