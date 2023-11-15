@@ -19,9 +19,7 @@ const Tours = () => {
   if (tours.length === 0) return <Skeleton h="xl" />;
   return (
     <Accordion allowMultiple mt="8">
-      {tours?.map((tour, index) => (
-        <TourInfo key={index} {...tour} />
-      ))}
+      {tours?.map((tour, index) => <TourInfo key={index} {...tour} />)}
       <Center mt="8">
         <ButtonGroup size="lg" variant="outline" isAttached>
           {page !== 1 && (

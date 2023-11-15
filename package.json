@@ -7,32 +7,33 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "formatt": "prettier \"**/*\" --write --ignore-unknown --ignore-path",
+    "format": "prettier --write .",
     "types": "npx supabase gen types typescript --project-id \"bemryfdzntwpamztjgyr\" --schema public > types/Database.types.ts"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.8.1",
+    "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
-    "@supabase/auth-helpers-nextjs": "^0.8.1",
+    "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/auth-helpers-react": "^0.4.2",
-    "@supabase/supabase-js": "^2.37.0",
-    "@types/node": "20.8.0",
-    "@types/react": "18.2.24",
-    "@types/react-dom": "18.2.8",
-    "@vercel/analytics": "^1.0.2",
-    "eslint": "8.50.0",
-    "eslint-config-next": "13.5.3",
+    "@supabase/supabase-js": "^2.38.4",
+    "@vercel/analytics": "^1.1.1",
     "formik": "^2.4.5",
-    "framer-motion": "^10.16.4",
-    "next": "13.5.3",
+    "framer-motion": "^10.16.5",
+    "next": "14.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "sharp": "^0.32.6",
-    "typescript": "5.2.2",
     "yup": "^1.3.2"
   },
   "devDependencies": {
-    "eslint-config-prettier": "^9.0.0"
+    "@types/node": "20.9.0",
+    "@types/react": "18.2.37",
+    "@types/react-dom": "18.2.15",
+    "eslint": "8.53.0",
+    "eslint-config-next": "14.0.2",
+    "eslint-config-prettier": "^9.0.0",
+    "prettier": "^3.1.0",
+    "typescript": "5.2.2"
   }
 }
