@@ -43,7 +43,7 @@ const TourInfo = () => {
                 Jeden Mittwoch
               </Text>
               <Text maxW={['30ch', '22ch', '30ch']}>
-                Ab dem 26. April 2023 finden die Touren jeden Mittwoch statt.
+                Ab dem 24. April 2024 finden die Touren jeden Mittwoch statt.
               </Text>
             </Box>
           </Flex>
