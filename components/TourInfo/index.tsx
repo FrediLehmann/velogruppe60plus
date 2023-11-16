@@ -21,7 +21,7 @@ const TourInfo = () => {
         Was muss ich wissen?
       </Heading>
       <Text fontSize="lg">
-        Jede Woche fahren wir auf eine von über 30 Touren, die durch das schöne
+        Jede Woche fahren wir auf eine von über 50 Touren, die durch das schöne
         Freiburgerland und den benachbarten Kanton Bern führen. Dabei sind wir
         einen halben bis ganzen Tag unterwegs.
       </Text>
@@ -57,7 +57,7 @@ const TourInfo = () => {
               borderRadius="lg"
               color="white">
               <Text fontSize="lg" fontWeight="bold" m="auto">
-                30
+                50
                 <Text as="sup" fontWeight="bold">
                   +
                 </Text>
@@ -65,10 +65,10 @@ const TourInfo = () => {
             </Flex>
             <Box>
               <Text fontSize="lg" fontWeight="semibold">
-                Über 30 Touren
+                Über 50 Touren
               </Text>
               <Text maxW={['30ch', '22ch', '30ch']}>
-                Jede Woche wird eine andere von über 30 verfügbaren Touren
+                Jede Woche wird eine andere von über 50 verfügbaren Touren
                 gefahren.
               </Text>
               <NextLink href="/alle-touren" passHref legacyBehavior>
