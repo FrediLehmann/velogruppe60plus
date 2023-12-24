@@ -4,21 +4,7 @@ import Script from 'next/script';
 export default function Document() {
   return (
     <Html lang="de">
-      <Head>
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-E1N4BTYCY0"
-        />
-        <Script id="google-analytics">
-          {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
- 
-          gtag('config', 'G-E1N4BTYCY0');
-        `}
-        </Script>
-      </Head>
+      <Head />
       <body>
         <Script
           src="/tellytics.min.js"
