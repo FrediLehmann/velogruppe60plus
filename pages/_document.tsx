@@ -1,8 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
-import { GoogleTag } from 'components';
-
 export default function Document() {
   return (
     <Html lang="de">
@@ -11,7 +9,15 @@ export default function Document() {
           async
           src="https://www.googletagmanager.com/gtag/js?id=G-E1N4BTYCY0"
         />
-        <GoogleTag />
+        <Script id="google-analytics">
+          {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-E1N4BTYCY0');
+        `}
+        </Script>
       </Head>
       <body>
         <Script

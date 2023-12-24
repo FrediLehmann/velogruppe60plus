@@ -1,7 +1,6 @@
 export { default as AdditionalInfos } from './AdditionalInfos';
 export { default as AllTours } from './AllTours';
 export { default as Admin } from './Admin';
-export { default as GoogleTag } from './Google';
 export { default as Login } from './Login';
 export { default as Organisers } from './Organisers';
 export { default as PageFrame } from './PageFrame';
