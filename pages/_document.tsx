@@ -1,10 +1,18 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import Script from 'next/script';
 
+import { GoogleTag } from 'components';
+
 export default function Document() {
   return (
     <Html lang="de">
-      <Head />
+      <Head>
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-E1N4BTYCY0"
+        />
+        <GoogleTag />
+      </Head>
       <body>
         <Script
           src="/tellytics.min.js"
