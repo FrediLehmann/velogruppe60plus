@@ -7,10 +7,10 @@ import {
   LinkOverlay,
   Text
 } from '@chakra-ui/react';
-import { Tour } from 'types/Tours.types';
+import type { Tour } from 'types/Tours.types';
 import NextLink from 'next/link';
 
-const Tour = ({
+const CurrentTour = ({
   id,
   name,
   ascent,
@@ -65,4 +65,4 @@ const Tour = ({
   );
 };
 
-export default Tour;
+export default CurrentTour;
