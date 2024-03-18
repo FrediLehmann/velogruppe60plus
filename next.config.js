@@ -9,7 +9,6 @@ const nextConfig = {
     REGENERATE_TOKEN: regenerateToken
   },
   images: {
-    domains: ['localhost'],
     remotePatterns: [
       {
         protocol: imageDomain.split('://')[0],
