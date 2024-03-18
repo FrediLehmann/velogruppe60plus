@@ -8,9 +8,9 @@ export default function Document() {
       <body>
         <Script
           src="/tellytics.min.js"
-          data-tellytics-tracking-id="ef563f39-aa47-4d8c-b53f-c3265a49f90d"
+          data-tellytics="ef563f39-aa47-4d8c-b53f-c3265a49f90d"
           type="module"
-          strategy="beforeInteractive"
+          strategy="lazyOnload"
         />
         <Main />
         <NextScript />

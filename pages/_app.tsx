@@ -8,6 +8,7 @@ import Script from 'next/script';
 
 import { Database } from 'types/Database.types';
 import theme from 'lib/theme';
+import { Tracking } from 'components';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
@@ -35,6 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
         </ChakraProvider>
       </SessionContextProvider>
       <Analytics />
+      <Tracking />
     </>
   );
 }
