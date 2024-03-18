@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
-import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
@@ -10,9 +10,7 @@ import { Database } from 'types/Database.types';
 import theme from 'lib/theme';
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [supabaseClient] = useState(() =>
-    createBrowserSupabaseClient<Database>()
-  );
+  const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
 
   return (
     <>
