@@ -7,10 +7,9 @@ export default function Document() {
       <Head />
       <body>
         <Script
-          src="/tellytics.min.js"
-          data-tellytics="ef563f39-aa47-4d8c-b53f-c3265a49f90d"
+          src="https://tellytics.vercel.app/public/tellytics.min.js"
           type="module"
-          strategy="lazyOnload"
+          data-tellytics="e344db29-d13a-41cf-ab25-5d75fca3b810"
         />
         <Main />
         <NextScript />
