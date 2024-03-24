@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Script
-        src="https://tellytics.vercel.app/public/tellytics.min.js"
+        src="https://tellytics.vercel.app/script/tellytics.min.js"
         type="module"
         data-tellytics="e344db29-d13a-41cf-ab25-5d75fca3b810"
       />
