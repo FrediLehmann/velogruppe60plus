@@ -110,30 +110,6 @@ const TourInfo = () => {
               borderRadius="lg"
               justifyContent="center"
               color="white">
-              <Text fontSize="lg" fontWeight="bold" m="auto">
-                FN
-              </Text>
-            </Flex>
-            <Box>
-              <Text fontSize="lg" fontWeight="semibold">
-                Freiburger-Nachrichten
-              </Text>
-              <Text maxW={['30ch', '22ch', '30ch']}>
-                Die genauen Zeitpunkte der nächsten Tour werden jeweils Dienstag
-                und Mittwoch veröffentlicht.
-              </Text>
-            </Box>
-          </Flex>
-        </GridItem>
-        <GridItem>
-          <Flex gap="4">
-            <Flex
-              background="green.600"
-              w="50px"
-              h="50px"
-              borderRadius="lg"
-              justifyContent="center"
-              color="white">
               <MessageCircle boxSize="6" strokeWidth="3" my="auto" />
             </Flex>
             <Box>
