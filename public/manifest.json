@@ -1,0 +1,16 @@
+{
+  "name": "Velogruppe 60+ Sensetal",
+  "short_name": "Velogruppe",
+  "description": "Velogruppe 60+ Sensethal ist eine Velogruppe für Personen über 60. Wir fahren Touren im Senesetal bereich, die Teilnahme ist offen für alle.",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6da165",
+  "background_color": "#f7fafc"
+}
