@@ -5,7 +5,6 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
 import Script from 'next/script';
-import Head from 'next/head';
 
 import { Database } from 'types/Database.types';
 import theme from 'lib/theme';
@@ -28,9 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <link rel="manifest" href="/manifest.json" />
-      </Head>
       <Script
         src="https://www.tellytics.ch/script/tellytics.min.js"
         type="module"
