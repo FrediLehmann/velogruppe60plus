@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
@@ -12,18 +12,6 @@ import { Tracking } from 'components';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient<Database>());
-
-  useEffect(() => {
-    async function registerServiceWorker() {
-      try {
-        await navigator.serviceWorker.register('/sw.js');
-      } catch (e) {
-        console.error('Service Worker registration failed', e);
-      }
-    }
-
-    if ('serviceWorker' in navigator) registerServiceWorker();
-  }, []);
 
   return (
     <>

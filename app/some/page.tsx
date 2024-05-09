@@ -1,4 +1,6 @@
 import { createClient } from '@/lib/supabase/client';
+import { TourContextProvider } from '@/app/components/Providers';
+import { CurrentTour } from '@/components';
 
 export async function generateMetadata() {
   return {
@@ -19,6 +21,8 @@ export default async function Home() {
     .eq('next_tour', true)
     .single();
 
+  if (!tour || tourError) throw tourError;
+
   const { data: tourDate, error: tourDateError } = await supabase
     .from('tour_dates')
     .select('*')
@@ -26,5 +30,11 @@ export default async function Home() {
     .limit(1)
     .single();
 
-  return <>hello</>;
+  if (!tourDate || tourDateError) throw tourDateError;
+
+  return (
+    <TourContextProvider tour={tour} tourDate={tourDate}>
+      hello
+    </TourContextProvider>
+  );
 }
