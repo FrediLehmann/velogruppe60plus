@@ -1,6 +1,8 @@
+'use client';
+
 import { Box, Heading, ListItem, UnorderedList, Text } from '@chakra-ui/react';
 
-const EBikeSecurity = () => {
+export default function EBikeSecurity() {
   return (
     <Box as="section">
       <Heading as="h2" size="md" color="green.800">
@@ -55,6 +57,4 @@ const EBikeSecurity = () => {
       </UnorderedList>
     </Box>
   );
-};
-
-export default EBikeSecurity;
+}

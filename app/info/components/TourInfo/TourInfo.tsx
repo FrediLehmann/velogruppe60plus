@@ -1,17 +1,11 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  GridItem,
-  Heading,
-  Link,
-  Text
-} from '@chakra-ui/react';
-import { ArrowRight, Clock, MessageCircle } from 'icons';
-import NextLink from 'next/link';
-import { External } from 'icons';
+'use client';
 
-const TourInfo = () => {
+import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
+
+import { ArrowRight, Clock, External, MessageCircle } from '@/icons';
+
+export default function TourInfo() {
   return (
     <Box as="section">
       <Heading as="h2" size="md" color="green.800">
@@ -71,11 +65,13 @@ const TourInfo = () => {
                 Jede Woche wird eine andere von über 50 verfügbaren Touren
                 gefahren.
               </Text>
-              <NextLink href="/alle-touren" passHref legacyBehavior>
-                <Link display="block" mt="2" color="green.700">
-                  Touren ansehen <ArrowRight boxSize="4" />
-                </Link>
-              </NextLink>
+              <Link
+                href="/alle-touren"
+                display="block"
+                mt="2"
+                color="green.700">
+                Touren ansehen <ArrowRight boxSize="4" />
+              </Link>
             </Box>
           </Flex>
         </GridItem>
@@ -120,21 +116,18 @@ const TourInfo = () => {
                 Die Gruppe dient dazu die Teilnehmer über Änderungen zu
                 informieren.
               </Text>
-              <NextLink
+              <Link
                 href="https://chat.whatsapp.com/BRNlcAM9NttJzwiZ0IrotS"
-                passHref
-                legacyBehavior>
-                <Link display="block" mt="2" color="green.700" isExternal>
-                  Der WhatsApp-Gruppe beitreten{' '}
-                  <External mx="2px" boxSize="4" />
-                </Link>
-              </NextLink>
+                display="block"
+                mt="2"
+                color="green.700"
+                isExternal>
+                Der WhatsApp-Gruppe beitreten <External mx="2px" boxSize="4" />
+              </Link>
             </Box>
           </Flex>
         </GridItem>
       </Grid>
     </Box>
   );
-};
-
-export default TourInfo;
+}

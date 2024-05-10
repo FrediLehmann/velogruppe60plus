@@ -1,11 +1,12 @@
-import { Box, Button, Center, chakra, Flex, Text } from '@chakra-ui/react';
-import { TrackClickEvent } from 'components';
-import { Mail, Phone } from 'icons';
 import NextImage from 'next/image';
+import { Button, Center, chakra, Flex, Text } from '@chakra-ui/react';
+
+import { TrackClickEvent } from '@/components';
+import { Mail, Phone } from '@/icons';
 
 const Image = chakra(NextImage);
 
-const OrganiserCard = ({
+export default function OrganiserCard({
   name,
   phone,
   description,
@@ -17,7 +18,7 @@ const OrganiserCard = ({
   phone: string;
   objectPosition: string | string[] | any[];
   image: any;
-}) => {
+}) {
   return (
     <Flex
       flexDirection="column"
@@ -77,6 +78,4 @@ const OrganiserCard = ({
       </Flex>
     </Flex>
   );
-};
-
-export default OrganiserCard;
+}

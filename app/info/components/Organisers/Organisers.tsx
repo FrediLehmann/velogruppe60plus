@@ -1,4 +1,7 @@
+'use client';
+
 import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
+
 import { OrganiserCard } from './components';
 
 import arthur from './images/arthur.jpeg';
@@ -6,7 +9,7 @@ import paul from './images/paul.jpeg';
 import peter from './images/peter.jpeg';
 import hugo from './images/hugo.jpeg';
 
-const Organisers = () => {
+export default function Organisers() {
   return (
     <Box as="section">
       <Heading as="h2" size="md" color="green.800">
@@ -63,6 +66,4 @@ const Organisers = () => {
       </Grid>
     </Box>
   );
-};
-
-export default Organisers;
+}

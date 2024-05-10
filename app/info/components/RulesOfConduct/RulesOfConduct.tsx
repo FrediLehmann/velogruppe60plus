@@ -1,6 +1,8 @@
+'use client';
+
 import { Box, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
 
-const RulesOfConduct = () => {
+export default function RulesOfConduct() {
   return (
     <Box as="section">
       <Heading as="h2" size="md" color="green.800">
@@ -67,6 +69,4 @@ const RulesOfConduct = () => {
       </UnorderedList>
     </Box>
   );
-};
-
-export default RulesOfConduct;
+}
