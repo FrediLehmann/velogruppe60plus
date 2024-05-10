@@ -1,10 +1,7 @@
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
 import { Container } from '@chakra-ui/react';
 
 import { PageFrame, Providers } from './components';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export default async function RootLayout({
   children
@@ -13,7 +10,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="de">
-      <body className={inter.className}>
+      <body>
         <Script
           src="https://www.tellytics.ch/script/tellytics.min.js"
           type="module"
