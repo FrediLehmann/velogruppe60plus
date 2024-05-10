@@ -15,7 +15,7 @@ export async function generateMetadata() {
   };
 }
 
-const Information = () => {
+export default function Information() {
   return (
     <Stack>
       <TourInfo />
@@ -25,6 +25,4 @@ const Information = () => {
       <AdditionalInfos />
     </Stack>
   );
-};
-
-export default Information;
+}
