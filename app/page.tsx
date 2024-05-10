@@ -3,13 +3,11 @@ import { TourContextProvider } from '@/app/components/Providers';
 
 import { CurrentTour } from './components';
 
-export async function generateMetadata() {
-  return {
-    title: 'Velogruppe 60+ Sensetal',
-    description:
-      'Velogruppe 60+ Sensethal ist eine Velogruppe für Personen über 60. Wir fahren Touren im Senesetal bereich, die Teilnahme ist offen für alle.'
-  };
-}
+export const metadata = {
+  title: 'Velogruppe 60+ Sensetal',
+  description:
+    'Velogruppe 60+ Sensethal ist eine Velogruppe für Personen über 60. Wir fahren Touren im Senesetal bereich, die Teilnahme ist offen für alle.'
+};
 
 export default async function Home() {
   const supabase = createClient();

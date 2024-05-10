@@ -2,13 +2,11 @@ import { createClient } from '@/lib/supabase/server';
 
 import { AllTours, TourProviders } from './components';
 
-export async function generateMetadata() {
-  return {
-    title: 'Velogruppe 60+ Sensetal | Alle Touren',
-    description:
-      'Tour Übersicht von Velogruppe 60+ Sensetal. Sehen Sie alle Touren die durch unsere Gruppe befahren werden.'
-  };
-}
+export const metadata = {
+  title: 'Velogruppe 60+ Sensetal | Alle Touren',
+  description:
+    'Tour Übersicht von Velogruppe 60+ Sensetal. Sehen Sie alle Touren die durch unsere Gruppe befahren werden.'
+};
 
 export default async function AlleTouren() {
   const supabase = createClient();

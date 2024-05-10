@@ -1,12 +1,10 @@
 import { Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
 
-export async function generateMetadata() {
-  return {
-    title: 'Velogruppe 60+ Sensetal | E-Bikes',
-    description:
-      'Im Falle eines Unfalls mit einem eBike gibt es einige wichtige Schritte, die Sie beachten sollten'
-  };
-}
+export const metadata = {
+  title: 'Velogruppe 60+ Sensetal | E-Bikes',
+  description:
+    'Im Falle eines Unfalls mit einem eBike gibt es einige wichtige Schritte, die Sie beachten sollten'
+};
 
 export default function EBikes() {
   return (
