@@ -7,10 +7,10 @@ import {
   LinkOverlay,
   Text
 } from '@chakra-ui/react';
-import type { Tour } from 'types/Tours.types';
-import NextLink from 'next/link';
 
-const CurrentTour = ({
+import type { Tour } from 'types/Tours.types';
+
+export default function CurrentTour({
   id,
   name,
   ascent,
@@ -19,7 +19,7 @@ const CurrentTour = ({
   distance,
   duration,
   next_tour
-}: Tour) => {
+}: Tour) {
   return (
     <LinkBox
       as="article"
@@ -31,9 +31,7 @@ const CurrentTour = ({
       <Flex gap="6" justify="space-between">
         <Box>
           <Heading as="h2" pb="2" fontSize={['lg', 'xl']}>
-            <NextLink href={`tour/${id}`} passHref legacyBehavior>
-              <LinkOverlay>{name}</LinkOverlay>
-            </NextLink>
+            <LinkOverlay href={`tour/${id}`}>{name}</LinkOverlay>
           </Heading>
           {next_tour && (
             <Badge variant="outline" colorScheme="gray" mt="1" mb="2">
@@ -63,6 +61,4 @@ const CurrentTour = ({
       </Flex>
     </LinkBox>
   );
-};
-
-export default CurrentTour;
+}

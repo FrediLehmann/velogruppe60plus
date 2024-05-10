@@ -1,3 +1,6 @@
+'use client';
+
+import { useContext } from 'react';
 import {
   Box,
   Button,
@@ -10,19 +13,18 @@ import {
   Skeleton,
   Text
 } from '@chakra-ui/react';
-import { ChevronLeft, ChevronRight } from 'icons';
-import { AllTourListContext } from 'lib/contexts/AllTourListContext';
-import { useContext } from 'react';
-import { Tour } from './components';
-import { Print as PrintIcon } from 'icons';
-import { useRouter } from 'next/router';
-import { TrackClickEvent } from 'components';
+import { Link } from '@chakra-ui/next-js';
 
-const AllTours = () => {
+import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
+import { ChevronLeft, ChevronRight, Print as PrintIcon } from '@/icons';
+import { TrackClickEvent } from '@/app/components';
+
+import { Tour } from './components';
+
+export default function AllTours() {
   const { page, tours, totalTours, setPage, isLoading } =
     useContext(AllTourListContext);
   const totalPages = Math.ceil(totalTours / 10);
-  const router = useRouter();
 
   return (
     <Container maxW="container.md" mt={['4', '6', '12']}>
@@ -37,9 +39,7 @@ const AllTours = () => {
         </Box>
         <TrackClickEvent
           event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
-          <Button
-            leftIcon={<PrintIcon />}
-            onClick={() => router.push('/print')}>
+          <Button href="/print" as={Link} leftIcon={<PrintIcon />}>
             Drucken
           </Button>
         </TrackClickEvent>
@@ -89,6 +89,4 @@ const AllTours = () => {
       </Center>
     </Container>
   );
-};
-
-export default AllTours;
+}
