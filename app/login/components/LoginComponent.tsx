@@ -1,3 +1,8 @@
+'use client';
+
+import { useState } from 'react';
+import { object, string } from 'yup';
+import { Field, FieldProps, Form, Formik } from 'formik';
 import {
   Button,
   Center,
@@ -10,16 +15,16 @@ import {
   Stack,
   useToast
 } from '@chakra-ui/react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
-import { TrackClickEvent } from 'components';
-import { Field, FieldProps, Form, Formik } from 'formik';
-import { useState } from 'react';
-import { object, string } from 'yup';
 
-const Login = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const supabaseClient = useSupabaseClient();
+import { TrackClickEvent } from '@/app/components';
+import { createClient } from '@/lib/supabase/client';
+
+export default function LoginComponent() {
+  const supabase = createClient();
+
   const toast = useToast();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   return (
     <Container maxW="lg" mt={['32', '36']}>
@@ -43,7 +48,7 @@ const Login = () => {
           onSubmit={async ({ email }) => {
             setIsSubmitting(true);
 
-            const { error } = await supabaseClient.auth.signInWithOtp({
+            const { error } = await supabase.auth.signInWithOtp({
               email
             });
 
@@ -70,7 +75,7 @@ const Login = () => {
             });
             setIsSubmitting(false);
           }}>
-          {props => (
+          {_ => (
             <Form id="login">
               <Stack spacing="5">
                 <Field name="email">
@@ -104,6 +109,4 @@ const Login = () => {
       </Stack>
     </Container>
   );
-};
-
-export default Login;
+}
