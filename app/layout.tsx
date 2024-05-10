@@ -1,7 +1,7 @@
 import Script from 'next/script';
 import { Container } from '@chakra-ui/react';
 
-import { PageFrame, Providers } from './components';
+import { PageFrame, Providers, Tracking } from './components';
 
 export default async function RootLayout({
   children
@@ -22,6 +22,7 @@ export default async function RootLayout({
               {children}
             </Container>
           </PageFrame>
+          <Tracking />
         </Providers>
       </body>
     </html>
