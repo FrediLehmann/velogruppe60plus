@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/client';
 import { TourContextProvider } from '@/app/components/Providers';
-import { CurrentTour } from '@/components';
+
+import { CurrentTour } from './components';
 
 export async function generateMetadata() {
   return {
@@ -34,7 +35,7 @@ export default async function Home() {
 
   return (
     <TourContextProvider tour={tour} tourDate={tourDate}>
-      hello
+      <CurrentTour />
     </TourContextProvider>
   );
 }

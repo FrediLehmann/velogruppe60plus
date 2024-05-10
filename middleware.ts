@@ -5,10 +5,10 @@ import { updateSession } from '@/lib/supabase/middleware';
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({
     request: {
-      headers: request.headers,
-    },
-  })
-  
+      headers: request.headers
+    }
+  });
+
   return await updateSession(request, response);
 }
 

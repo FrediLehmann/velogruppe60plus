@@ -2,20 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import NextLink from 'next/link';
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Container,
-  Link,
-  Text
-} from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
 
 import { TrackClickEvent } from '@/components';
 import { createClient } from '@/lib/supabase/client';
 
-const Footer = () => {
+export default function Footer() {
   const router = useRouter();
   const supabase = createClient();
 
@@ -49,14 +42,13 @@ const Footer = () => {
         </Box>
         <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
           <TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-            <NextLink
+            <Button
               href="https://github.com/FrediLehmann/velogruppe60plus"
-              passHref
-              legacyBehavior>
-              <Button as={Link} aria-label="Github" isExternal>
-                Github
-              </Button>
-            </NextLink>
+              as={Link}
+              aria-label="Github"
+              isExternal>
+              Github
+            </Button>
           </TrackClickEvent>
           {signedIn && (
             <TrackClickEvent
@@ -75,23 +67,21 @@ const Footer = () => {
             <TrackClickEvent
               event={{ name: 'ADMIN_LINK_CLICK' }}
               showBox={true}>
-              <NextLink href="/admin" passHref legacyBehavior>
-                <Button as={Link}>Admin</Button>
-              </NextLink>
+              <Button href="/admin" as={Link}>
+                Admin
+              </Button>
             </TrackClickEvent>
           ) : (
             <TrackClickEvent
               event={{ name: 'LOGIN_LINK_CLICK' }}
               showBox={true}>
-              <NextLink href="/login" passHref legacyBehavior>
-                <Button as={Link}>Login</Button>
-              </NextLink>
+              <Button href="/login" as={Link}>
+                Login
+              </Button>
             </TrackClickEvent>
           )}
         </ButtonGroup>
       </Container>
     </Box>
   );
-};
-
-export default Footer;
+}

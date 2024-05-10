@@ -6,7 +6,7 @@ import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
 import { Info, List } from '@/icons';
 import { TrackClickEvent } from '@/components';
 
-const Header = () => {
+export default function Header() {
   return (
     <Box as="header" borderBottom="1px solid" borderColor="gray.200">
       <Container
@@ -54,6 +54,4 @@ const Header = () => {
       </Container>
     </Box>
   );
-};
-
-export default Header;
+}
