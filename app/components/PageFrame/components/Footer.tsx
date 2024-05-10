@@ -26,7 +26,13 @@ export default function Footer() {
   }, [supabase.auth]);
 
   return (
-    <Box as="footer" mt="8" py="3" borderTop="1px solid" borderColor="gray.200">
+    <Box
+      as="footer"
+      mt="8"
+      py="3"
+      borderTop="1px solid"
+      borderColor="gray.200"
+      sx={{ '@media print': { display: 'none' } }}>
       <Container
         maxW="container.md"
         display="flex"

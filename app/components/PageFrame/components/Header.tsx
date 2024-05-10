@@ -8,7 +8,11 @@ import { TrackClickEvent } from '@/components';
 
 export default function Header() {
   return (
-    <Box as="header" borderBottom="1px solid" borderColor="gray.200">
+    <Box
+      as="header"
+      borderBottom="1px solid"
+      borderColor="gray.200"
+      sx={{ '@media print': { display: 'none' } }}>
       <Container
         py="4"
         maxW="container.md"
