@@ -3,6 +3,8 @@ import { TourContextProvider } from '@/app/components/Providers';
 
 import { CurrentTour } from './components';
 
+export const revalidate = 3600
+
 export const metadata = {
   title: 'Velogruppe 60+ Sensetal',
   description:
