@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import { Container } from '@chakra-ui/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { PageFrame, Providers, Tracking } from '@/components';
 
@@ -24,6 +25,7 @@ export default async function RootLayout({
           </PageFrame>
           <Tracking />
         </Providers>
+        <SpeedInsights />
       </body>
     </html>
   );
