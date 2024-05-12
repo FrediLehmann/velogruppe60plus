@@ -1,7 +1,10 @@
-import { Box, Flex, Text } from '@chakra-ui/react';
-import { AlertTriangle } from 'icons';
+'use client';
 
-const TourCanceled = ({ tourDate = '' }: { tourDate?: string }) => {
+import { Box, Flex, Text } from '@chakra-ui/react';
+
+import { AlertTriangle } from '@/icons';
+
+export default function TourCanceled({ tourDate = '' }: { tourDate?: string }) {
   return (
     <Flex
       mt="4"
@@ -24,6 +27,4 @@ const TourCanceled = ({ tourDate = '' }: { tourDate?: string }) => {
       </Box>
     </Flex>
   );
-};
-
-export default TourCanceled;
+}

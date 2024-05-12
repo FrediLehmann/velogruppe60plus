@@ -3,7 +3,7 @@
 import { Button } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 
-import { TrackClickEvent } from '@/app/components';
+import { TrackClickEvent } from '@/components';
 import { ArrowLeft } from '@/icons';
 
 export default function BackToAllTours() {

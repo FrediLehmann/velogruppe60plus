@@ -16,7 +16,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 
-import { TrackClickEvent } from '@/app/components';
+import { TrackClickEvent } from '@/components';
 import { createClient } from '@/lib/supabase/client';
 
 export default function LoginComponent() {

@@ -1,25 +1,38 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Container,
-  Link,
-  Text
-} from '@chakra-ui/react';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
-import { TrackClickEvent } from 'components';
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
+'use client';
 
-const Footer = () => {
-  const user = useUser();
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Link } from '@chakra-ui/next-js';
+
+import { TrackClickEvent } from '@/components';
+import { createClient } from '@/lib/supabase/client';
+
+export default function Footer() {
   const router = useRouter();
-  const supabaseClient = useSupabaseClient();
+  const supabase = createClient();
 
-  const today = new Date().getFullYear();
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    async function checkSession() {
+      const {
+        data: { session }
+      } = await supabase.auth.getSession();
+      setSignedIn(session !== null);
+    }
+
+    checkSession();
+  }, [supabase.auth]);
 
   return (
-    <Box as="footer" mt="8" py="3" borderTop="1px solid" borderColor="gray.200">
+    <Box
+      as="footer"
+      mt="8"
+      py="3"
+      borderTop="1px solid"
+      borderColor="gray.200"
+      sx={{ '@media print': { display: 'none' } }}>
       <Container
         maxW="container.md"
         display="flex"
@@ -28,54 +41,53 @@ const Footer = () => {
         justifyContent="space-between"
         gap={['3', '8']}>
         <Box color="gray.700" fontSize={['xs', 'sm']}>
-          <Text>© Copyright {today} by Frederic Lehmann,</Text>
+          <Text>
+            © Copyright {new Date().getFullYear()} by Frederic Lehmann,
+          </Text>
           <Text>all rights reserved.</Text>
         </Box>
         <ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
           <TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-            <NextLink
+            <Button
               href="https://github.com/FrediLehmann/velogruppe60plus"
-              passHref
-              legacyBehavior>
-              <Button as={Link} aria-label="Github" isExternal>
-                Github
-              </Button>
-            </NextLink>
+              as={Link}
+              aria-label="Github"
+              isExternal>
+              Github
+            </Button>
           </TrackClickEvent>
-          {user && (
+          {signedIn && (
             <TrackClickEvent
               event={{ name: 'SIGNOUT_BUTTON_CLICK' }}
               showBox={true}>
               <Button
                 onClick={async () => {
-                  await supabaseClient.auth.signOut();
+                  await supabase.auth.signOut();
                   router.push('/');
                 }}>
                 Abmelden
               </Button>
             </TrackClickEvent>
           )}
-          {user ? (
+          {signedIn ? (
             <TrackClickEvent
               event={{ name: 'ADMIN_LINK_CLICK' }}
               showBox={true}>
-              <NextLink href="/admin" passHref legacyBehavior>
-                <Button as={Link}>Admin</Button>
-              </NextLink>
+              <Button href="/admin" as={Link}>
+                Admin
+              </Button>
             </TrackClickEvent>
           ) : (
             <TrackClickEvent
               event={{ name: 'LOGIN_LINK_CLICK' }}
               showBox={true}>
-              <NextLink href="/login" passHref legacyBehavior>
-                <Button as={Link}>Login</Button>
-              </NextLink>
+              <Button href="/login" as={Link}>
+                Login
+              </Button>
             </TrackClickEvent>
           )}
         </ButtonGroup>
       </Container>
     </Box>
   );
-};
-
-export default Footer;
+}

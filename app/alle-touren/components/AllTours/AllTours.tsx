@@ -17,7 +17,7 @@ import { Link } from '@chakra-ui/next-js';
 
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 import { ChevronLeft, ChevronRight, Print as PrintIcon } from '@/icons';
-import { TrackClickEvent } from '@/app/components';
+import { TrackClickEvent } from '@/components';
 
 import { Tour } from './components';
 

@@ -1,9 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
-import { TourContextProvider } from '@/app/components/Providers';
-
-import { CurrentTour } from './components';
-
-export const revalidate = 3600
+import { CurrentTour, TourContextProvider } from '@/components';
 
 export const metadata = {
   title: 'Velogruppe 60+ Sensetal',

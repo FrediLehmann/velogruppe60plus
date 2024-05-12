@@ -1,12 +1,12 @@
 import { Center, Spinner } from '@chakra-ui/react';
 
-const ImageFallback = ({
+export default function ImageFallback({
   height,
   width = 'auto'
 }: {
   height: string;
   width?: string;
-}) => {
+}) {
   return (
     <Center
       h={height}
@@ -19,6 +19,4 @@ const ImageFallback = ({
       <Spinner />
     </Center>
   );
-};
-
-export default ImageFallback;
+}

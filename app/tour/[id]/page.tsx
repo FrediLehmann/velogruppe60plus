@@ -1,8 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import { CurrentTour } from '@/app/components';
-import { TourContextProvider } from '@/app/components/Providers';
+import { CurrentTour, TourContextProvider } from '@/components';
 import { TourDate } from '@/types/TourDate.types';
 
 export async function generateStaticParams() {
@@ -16,7 +15,7 @@ export async function generateStaticParams() {
   if (error) throw error;
   if (!data) throw 'No data';
 
-  return data?.map(tour => ({ params: { id: tour.id.toString() } }));
+  return data.map(({ id }: { id: number }) => ({ id: id.toString() }));
 }
 
 export async function generateMetadata({

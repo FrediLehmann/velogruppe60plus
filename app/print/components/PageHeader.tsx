@@ -2,7 +2,7 @@
 
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
 
-import { TrackClickEvent } from '@/app/components';
+import { TrackClickEvent } from '@/components';
 import { Print } from '@/icons';
 
 export default function PageHeader() {

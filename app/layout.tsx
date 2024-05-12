@@ -1,7 +1,7 @@
 import Script from 'next/script';
 import { Container } from '@chakra-ui/react';
 
-import { PageFrame, Providers, Tracking } from './components';
+import { PageFrame, Providers, Tracking } from '@/components';
 
 export default async function RootLayout({
   children

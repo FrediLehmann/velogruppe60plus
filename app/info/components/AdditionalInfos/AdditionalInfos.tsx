@@ -3,7 +3,7 @@
 import { Box, Button, Flex, Heading } from '@chakra-ui/react';
 import { Link } from '@chakra-ui/next-js';
 
-import { TrackClickEvent } from '@/app/components';
+import { TrackClickEvent } from '@/components';
 import { ArrowRight } from '@/icons';
 
 export default function AdditionalInfos() {
