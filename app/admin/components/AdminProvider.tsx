@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useToast } from '@chakra-ui/react';
 import { revalidatePath } from 'next/cache';
 
@@ -75,6 +75,10 @@ export default function AdminProvider({
 
     if (tourDate) setTourDate(tourDate as TourDate);
   }, [page, supabase, toast]);
+
+  useEffect(() => {
+    load();
+  }, [load, page]);
 
   const setNextTour = useCallback(
     async (id: number) => {
