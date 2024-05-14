@@ -1,8 +1,10 @@
 import { createClient } from '@supabase/supabase-js';
 
 import { createClient as createServerClient } from '@/lib/supabase/server';
-import { CurrentTour, TourContextProvider } from '@/components';
+import { TourContextProvider } from '@/components';
 import { TourDate } from '@/types/TourDate.types';
+
+import { Tour } from './components';
 
 export async function generateStaticParams() {
   const supabase = createClient(
@@ -61,7 +63,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <TourContextProvider tour={data} tourDate={{} as TourDate}>
-      <CurrentTour />
+      <Tour />
     </TourContextProvider>
   );
 }
