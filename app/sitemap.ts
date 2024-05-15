@@ -9,7 +9,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const { data, error } = await supabase
     .from('touren')
-    .select('id, updated_at, next_tour')
+    .select('id, created_at, updated_at, next_tour')
     .eq('published', true);
 
   if (!data || error) {
@@ -29,9 +29,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: Date;
     changeFrequency: 'monthly';
     priority: number;
-  }[] = data.map(({ id, updated_at }) => ({
+  }[] = data.map(({ id, created_at, updated_at }) => ({
     url: `${VELOGRUPPE_URL}/tour/${id}`,
-    lastModified: new Date(updated_at),
+    lastModified: updated_at ? new Date(updated_at) : new Date(created_at),
     changeFrequency: 'monthly',
     priority: 0.8
   }));
@@ -39,7 +39,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     {
       url: VELOGRUPPE_URL,
-      lastModified: new Date(nextTour.updated_at),
+      lastModified: nextTour.updated_at
+        ? new Date(nextTour.updated_at)
+        : new Date(nextTour.created_at),
       changeFrequency: 'weekly',
       priority: 1
     },
