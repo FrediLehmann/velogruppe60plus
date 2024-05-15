@@ -1,8 +1,6 @@
 import { createClient } from '@/lib/supabase/server';
 import { CurrentTour, TourContextProvider } from '@/components';
 
-import { RefreshPage } from './components';
-
 export const metadata = {
   title: 'Velogruppe 60+ Sensetal',
   description:
@@ -33,7 +31,6 @@ export default async function Home() {
 
   return (
     <TourContextProvider tour={tour} tourDate={tourDate}>
-      <RefreshPage id={tour.id}/>
       <CurrentTour />
     </TourContextProvider>
   );
