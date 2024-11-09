@@ -1,18 +1,15 @@
-import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 
-export default async function AdminLayout({
-  children
-}: {
-  children: React.ReactNode;
-}) {
-  const supabase = createClient();
+import { createClient } from '@/lib/supabase/server';
 
-  const {
-    data: { session }
-  } = await supabase.auth.getSession();
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+	const supabase = createClient();
 
-  if (!session) redirect('/login');
+	const {
+		data: { session }
+	} = await supabase.auth.getSession();
 
-  return <>{children}</>;
+	if (!session) redirect('/login');
+
+	return <>{children}</>;
 }

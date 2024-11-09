@@ -5,7 +5,7 @@ const config = {
 	trailingComma: 'none',
 	printWidth: 100,
 	bracketSameLine: true,
-	plugins: ['@trivago/prettier-plugin-sort-imports', 'prettier-plugin-tailwindcss'],
+	plugins: ['@trivago/prettier-plugin-sort-imports'],
 	importOrder: ['^@/(.*)$', '^[./]'],
 	importOrderSeparation: true,
 	importOrderSortSpecifiers: true

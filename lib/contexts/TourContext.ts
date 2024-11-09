@@ -5,7 +5,7 @@ import { TourDate } from '@/types/TourDate.types';
 import { Tour } from '@/types/Tours.types';
 
 export const TourContext = createContext<TourContextData>({
-  tour: {} as Tour,
-  tourDate: {} as TourDate,
-  load: () => {}
+	tour: {} as Tour,
+	tourDate: {} as TourDate,
+	load: () => {}
 });
