@@ -61,7 +61,7 @@ export default function AdminProvider({
 			return;
 		}
 
-		if (tours) setTours(tours);
+		if (tours) setTours(tours as Tour[]);
 
 		const { error: tourDateError, data: tourDate } = await supabase
 			.from('tour_dates')

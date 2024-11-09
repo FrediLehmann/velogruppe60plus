@@ -1,5 +1,6 @@
 import { CurrentTour, TourContextProvider } from '@/components';
 import { createClient } from '@/lib/supabase/server';
+import { Tour } from '@/types/Tours.types';
 
 export const metadata = {
 	title: 'Velogruppe 60+ Sensetal',
@@ -8,7 +9,7 @@ export const metadata = {
 };
 
 export default async function Home() {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const { data: tour, error: tourError } = await supabase
 		.from('touren')
@@ -30,7 +31,7 @@ export default async function Home() {
 	if (!tourDate || tourDateError) throw tourDateError;
 
 	return (
-		<TourContextProvider tour={tour} tourDate={tourDate}>
+		<TourContextProvider tour={tour as Tour} tourDate={tourDate}>
 			<CurrentTour />
 		</TourContextProvider>
 	);

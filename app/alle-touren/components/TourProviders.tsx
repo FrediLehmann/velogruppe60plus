@@ -52,7 +52,7 @@ export default function TourProviders({
 				return;
 			}
 
-			if (data) setCurrentTours(data);
+			if (data) setCurrentTours(data as Tour[]);
 			setIsLoading(false);
 		},
 		[supabase, toast]

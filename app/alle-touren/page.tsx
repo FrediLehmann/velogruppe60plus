@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { Tour } from '@/types/Tours.types';
 
 import { AllTours, TourProviders } from './components';
 
@@ -9,7 +10,7 @@ export const metadata = {
 };
 
 export default async function AlleTouren() {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const { error, data, count } = await supabase
 		.from('touren')
@@ -25,7 +26,7 @@ export default async function AlleTouren() {
 	if (data.length < 1 || (count && count < 1)) throw 'No Data received';
 
 	return (
-		<TourProviders tours={data} totalTours={count || 0}>
+		<TourProviders tours={data as Tour[]} totalTours={count || 0}>
 			<AllTours />
 		</TourProviders>
 	);

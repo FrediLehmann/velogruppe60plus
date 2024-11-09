@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { Tour } from '@/types/Tours.types';
 
 import { AdminProvider, NewTourSection, NextTourSection, Tours } from './components';
 
@@ -11,7 +12,7 @@ export const metadata = {
 };
 
 export default async function Admin() {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const {
 		error: toursError,
@@ -39,7 +40,10 @@ export default async function Admin() {
 	if (tourDateError) throw tourDateError;
 
 	return (
-		<AdminProvider serverTours={tours} serverTourDate={tourDate} toursCount={toursCount || 0}>
+		<AdminProvider
+			serverTours={tours as Tour[]}
+			serverTourDate={tourDate}
+			toursCount={toursCount || 0}>
 			<NextTourSection />
 			<NewTourSection />
 			<Tours />

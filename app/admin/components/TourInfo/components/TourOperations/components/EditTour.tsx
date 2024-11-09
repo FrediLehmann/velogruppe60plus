@@ -19,6 +19,7 @@ import { TourForm } from '@/app/admin/components';
 import { TrackClickEvent } from '@/components';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
+import { Json } from '@/types/Database.types';
 import { TourFields } from '@/types/TourFields.types';
 import { Tour } from '@/types/Tours.types';
 
@@ -109,7 +110,7 @@ export default function EditTour({
 						path: img,
 						width: mapImageData.width,
 						height: mapImageData.height
-					},
+					} as Json,
 					startPoint: start,
 					endPoint: end,
 					pause,

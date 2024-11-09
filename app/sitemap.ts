@@ -5,7 +5,7 @@ import { createClient } from '@/lib/supabase/server';
 const VELOGRUPPE_URL = 'https://www.velogruppe60plus-sensetal.ch';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const { data, error } = await supabase
 		.from('touren')
@@ -31,7 +31,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		priority: number;
 	}[] = data.map(({ id, created_at, updated_at }) => ({
 		url: `${VELOGRUPPE_URL}/tour/${id}`,
-		lastModified: updated_at ? new Date(updated_at) : new Date(created_at),
+		lastModified: updated_at ? new Date(updated_at) : new Date(created_at as string),
 		changeFrequency: 'monthly',
 		priority: 0.8
 	}));
@@ -41,7 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			url: VELOGRUPPE_URL,
 			lastModified: nextTour.updated_at
 				? new Date(nextTour.updated_at)
-				: new Date(nextTour.created_at),
+				: new Date(nextTour.created_at as string),
 			changeFrequency: 'weekly',
 			priority: 1
 		},

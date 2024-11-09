@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { Tour } from '@/types/Tours.types';
 
 import { AllTours, BackToAllTours, PageContainer, PageHeader } from './components';
 
@@ -11,7 +12,7 @@ export const metadata = {
 };
 
 export default async function Print() {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const { data, error } = await supabase
 		.from('touren')
@@ -26,7 +27,7 @@ export default async function Print() {
 		<PageContainer>
 			<BackToAllTours />
 			<PageHeader />
-			<AllTours tours={data} />
+			<AllTours tours={data as Tour[]} />
 		</PageContainer>
 	);
 }

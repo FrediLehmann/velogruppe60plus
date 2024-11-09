@@ -13,7 +13,7 @@ export const metadata = {
 };
 
 export default async function Login() {
-	const supabase = createClient();
+	const supabase = await createClient();
 
 	const {
 		data: { session }
