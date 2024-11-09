@@ -17,9 +17,9 @@ export default function Footer() {
 	useEffect(() => {
 		async function checkSession() {
 			const {
-				data: { session }
-			} = await supabase.auth.getSession();
-			setSignedIn(session !== null);
+				data: { user }
+			} = await supabase.auth.getUser();
+			setSignedIn(user !== null);
 		}
 
 		checkSession();

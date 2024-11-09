@@ -16,10 +16,10 @@ export default async function Login() {
 	const supabase = await createClient();
 
 	const {
-		data: { session }
-	} = await supabase.auth.getSession();
+		data: { user }
+	} = await supabase.auth.getUser();
 
-	if (session) redirect('/admin');
+	if (user) redirect('/admin');
 
 	return <LoginComponent />;
 }
