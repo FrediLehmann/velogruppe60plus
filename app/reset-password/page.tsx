@@ -6,7 +6,7 @@ import { ResetPasswordComponents } from './components';
 
 export const metadata = {
 	title: 'Velogruppe 60+ Sensetal | Passwort Reset',
-	description: 'Passwort zurücksetzten Seite.',
+	description: 'Passwort zurücksetzten.',
 	robots: {
 		index: false
 	}
