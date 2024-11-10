@@ -1,7 +1,3 @@
-import { redirect } from 'next/navigation';
-
-import { createClient } from '@/lib/supabase/server';
-
 import { ResetPasswordComponent } from './components';
 
 export const metadata = {
@@ -13,13 +9,5 @@ export const metadata = {
 };
 
 export default async function ChangePassword() {
-	const supabase = await createClient();
-
-	const {
-		data: { user }
-	} = await supabase.auth.getUser();
-
-	if (!user) redirect('/');
-
 	return <ResetPasswordComponent />;
 }
