@@ -4,15 +4,18 @@ import {
 	Button,
 	Center,
 	Container,
+	Flex,
 	FormControl,
 	FormErrorMessage,
 	FormLabel,
 	Heading,
 	Input,
+	Link,
 	Stack,
 	useToast
 } from '@chakra-ui/react';
 import { Field, FieldProps, Form, Formik } from 'formik';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { object, string } from 'yup';
 
@@ -21,6 +24,7 @@ import { createClient } from '@/lib/supabase/client';
 
 export default function LoginComponent() {
 	const supabase = createClient();
+	const router = useRouter();
 
 	const toast = useToast();
 
@@ -39,17 +43,19 @@ export default function LoginComponent() {
 				boxShadow={['none', 'sm']}
 				borderRadius={['none', 'xl']}>
 				<Formik
-					initialValues={{ email: '' }}
+					initialValues={{ email: '', password: '' }}
 					validationSchema={object({
 						email: string()
 							.email('Invalide Email Addresse.')
-							.required('Email Addresse wird benötigt.')
+							.required('Email Addresse wird benötigt.'),
+						password: string().required('Passwort wird benötigt.')
 					})}
-					onSubmit={async ({ email }) => {
+					onSubmit={async ({ email, password }) => {
 						setIsSubmitting(true);
 
-						const { error } = await supabase.auth.signInWithOtp({
-							email
+						const { error } = await supabase.auth.signInWithPassword({
+							email,
+							password
 						});
 
 						if (error) {
@@ -65,15 +71,7 @@ export default function LoginComponent() {
 							return;
 						}
 
-						toast({
-							title: 'Anmeldung erfolgreich.',
-							description: 'Wir haben Ihnen einen Link zum einloggen gesendet.',
-							status: 'success',
-							duration: 9000,
-							isClosable: true,
-							position: 'top'
-						});
-						setIsSubmitting(false);
+						router.push('/admin');
 					}}>
 					{(_) => (
 						<Form id="login">
@@ -84,8 +82,24 @@ export default function LoginComponent() {
 											isRequired
 											isInvalid={(form.errors.email && form.touched.email) as boolean}>
 											<FormLabel>Email Addresse</FormLabel>
-											<Input {...field} />
+											<Input autoComplete="email" {...field} />
 											<FormErrorMessage>{form.errors?.email as string}</FormErrorMessage>
+										</FormControl>
+									)}
+								</Field>
+								<Field name="password">
+									{({ field, form }: FieldProps) => (
+										<FormControl
+											isRequired
+											isInvalid={(form.errors.password && form.touched.password) as boolean}>
+											<Flex justify="space-between">
+												<FormLabel>Password</FormLabel>
+												<Link href="/reset-password" color="green.700" fontSize="sm">
+													Passwort vergessen
+												</Link>
+											</Flex>
+											<Input type="password" autoComplete="current-password" {...field} />
+											<FormErrorMessage>{form.errors?.password as string}</FormErrorMessage>
 										</FormControl>
 									)}
 								</Field>

@@ -1,7 +1,13 @@
 import { createClient } from '@/lib/supabase/server';
 import { Tour } from '@/types/Tours.types';
 
-import { AdminProvider, NewTourSection, NextTourSection, Tours } from './components';
+import {
+	AdminProvider,
+	NewTourSection,
+	NextTourSection,
+	PasswordResetLink,
+	Tours
+} from './components';
 
 export const metadata = {
 	title: 'Velogruppe 60+ Sensetal | Admin',
@@ -44,6 +50,7 @@ export default async function Admin() {
 			serverTours={tours as Tour[]}
 			serverTourDate={tourDate}
 			toursCount={toursCount || 0}>
+			<PasswordResetLink />
 			<NextTourSection />
 			<NewTourSection />
 			<Tours />
