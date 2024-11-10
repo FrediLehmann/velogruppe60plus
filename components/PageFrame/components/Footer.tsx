@@ -25,6 +25,19 @@ export default function Footer() {
 		checkSession();
 	}, [supabase.auth]);
 
+	useEffect(() => {
+		const { data } = supabase.auth.onAuthStateChange((event) => {
+			if (event === 'SIGNED_IN') {
+				setSignedIn(true);
+			} else if (event === 'SIGNED_OUT') {
+				setSignedIn(false);
+			}
+		});
+
+		return () => data.subscription.unsubscribe();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<Box
 			as="footer"
