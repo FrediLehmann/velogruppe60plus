@@ -57,7 +57,7 @@ export default function AllTours() {
 							onClick={() => setPage(page - 1)}
 						/>
 					</TrackClickEvent>
-					{[...new Array(totalPages)].slice(page - 2, page + 2).map((_, index) => {
+					{[...new Array(totalPages)].map((_, index) => {
 						return (
 							<TrackClickEvent
 								key={index}
