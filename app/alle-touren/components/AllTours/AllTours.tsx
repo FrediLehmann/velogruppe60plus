@@ -49,16 +49,15 @@ export default function AllTours() {
 			</Flex>
 			<Center mt="8">
 				<ButtonGroup size="lg" variant="outline" isAttached>
-					{page !== 1 && (
-						<TrackClickEvent event={{ name: 'PAGINATION_PREV' }} showBox={true}>
-							<IconButton
-								aria-label="Previous page"
-								icon={<ChevronLeft boxSize="6" />}
-								onClick={() => setPage(page - 1)}
-							/>
-						</TrackClickEvent>
-					)}
-					{[...new Array(totalPages)].map((_, index) => {
+					<TrackClickEvent event={{ name: 'PAGINATION_PREV' }} showBox={true}>
+						<IconButton
+							disabled={page === 1}
+							aria-label="Previous page"
+							icon={<ChevronLeft boxSize="6" />}
+							onClick={() => setPage(page - 1)}
+						/>
+					</TrackClickEvent>
+					{[...new Array(totalPages)].slice(page - 2, page + 2).map((_, index) => {
 						return (
 							<TrackClickEvent
 								key={index}
@@ -72,15 +71,14 @@ export default function AllTours() {
 							</TrackClickEvent>
 						);
 					})}
-					{page < totalPages && (
-						<TrackClickEvent event={{ name: 'PAGINATION_NEXT' }} showBox={true}>
-							<IconButton
-								aria-label="Next page"
-								icon={<ChevronRight boxSize="6" />}
-								onClick={() => setPage(page + 1)}
-							/>
-						</TrackClickEvent>
-					)}
+					<TrackClickEvent event={{ name: 'PAGINATION_NEXT' }} showBox={true}>
+						<IconButton
+							disabled={page >= totalPages}
+							aria-label="Next page"
+							icon={<ChevronRight boxSize="6" />}
+							onClick={() => setPage(page + 1)}
+						/>
+					</TrackClickEvent>
 				</ButtonGroup>
 			</Center>
 		</Container>
