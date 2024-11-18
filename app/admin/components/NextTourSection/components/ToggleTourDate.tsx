@@ -9,9 +9,9 @@ import {
 	useDisclosure,
 	useToast
 } from '@chakra-ui/react';
-import { revalidatePath } from 'next/cache';
 import { useContext, useRef, useState } from 'react';
 
+import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
 import { Calendar, Slash } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
@@ -42,8 +42,8 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 				position: 'top'
 			});
 
-		revalidatePath('/');
-		revalidatePath(`/tour/${id}`);
+		await revalidatePaths(['/', `/tour/${id}`]);
+
 		onClose();
 		load();
 		setIsSubmitting(false);

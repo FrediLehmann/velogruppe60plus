@@ -12,9 +12,9 @@ import {
 	ModalOverlay,
 	useToast
 } from '@chakra-ui/react';
-import { revalidatePath } from 'next/cache';
 import { useCallback, useContext, useState } from 'react';
 
+import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TourForm } from '@/app/admin/components';
 import { TrackClickEvent } from '@/components';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
@@ -143,9 +143,8 @@ export default function EditTour({
 				position: 'top'
 			});
 
-			revalidatePath('/alle-touren');
-			revalidatePath('/print');
-			revalidatePath(`/tour/${tour.id}`);
+			await revalidatePaths(['/alle-touren', '/print', `/tour/${tour.id}`]);
+
 			setIsSubmitting(false);
 			onClose();
 			load();

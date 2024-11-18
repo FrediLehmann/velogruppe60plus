@@ -18,10 +18,10 @@ import {
 	useToast
 } from '@chakra-ui/react';
 import { Field, FieldProps, Form, Formik } from 'formik';
-import { revalidatePath } from 'next/cache';
 import { useContext, useMemo, useState } from 'react';
 import { boolean, object, string } from 'yup';
 
+import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
 import { Edit } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
@@ -69,8 +69,8 @@ export default function EditTourDate() {
 				position: 'top'
 			});
 
-		revalidatePath('/');
-		revalidatePath(`/tour/${tourDate.id}`);
+		await revalidatePaths(['/', `/tour/${tourDate.id}`]);
+
 		onClose();
 		setIsSubmitting(false);
 		load();

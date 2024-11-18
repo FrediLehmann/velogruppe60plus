@@ -10,9 +10,9 @@ import {
 	Button,
 	useToast
 } from '@chakra-ui/react';
-import { revalidatePath } from 'next/cache';
 import { useContext, useRef } from 'react';
 
+import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -51,8 +51,8 @@ export default function DeleteTour({
 				position: 'top'
 			});
 
-		revalidatePath('/alle-touren');
-		revalidatePath('/print');
+		await revalidatePaths(['/alle-touren', '/print']);
+
 		onClose();
 		load();
 	};

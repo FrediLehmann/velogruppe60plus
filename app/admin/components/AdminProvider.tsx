@@ -1,13 +1,14 @@
 'use client';
 
 import { useToast } from '@chakra-ui/react';
-import { revalidatePath } from 'next/cache';
 import { useCallback, useEffect, useState } from 'react';
 
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { TourDate } from '@/types/TourDate.types';
 import { Tour } from '@/types/Tours.types';
+
+import revalidatePaths from '../actions/revalidate';
 
 export default function AdminProvider({
 	serverTours,
@@ -130,7 +131,8 @@ export default function AdminProvider({
 			});
 
 			load();
-			revalidatePath('/');
+
+			await revalidatePaths(['/']);
 		},
 		[load, supabase, toast]
 	);
@@ -160,7 +162,8 @@ export default function AdminProvider({
 			});
 
 			load();
-			revalidatePath(`/tour/${id}`);
+
+			await revalidatePaths([`/tour/${id}`]);
 		},
 		[load, supabase, toast]
 	);
