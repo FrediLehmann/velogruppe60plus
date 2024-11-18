@@ -17,6 +17,7 @@ export { default as List } from './List';
 export { default as Mail } from './Mail';
 export { default as Menu } from './Menu';
 export { default as MessageCircle } from './MessageCircle';
+export { default as MoreHorizontal } from './MoreHorizontal';
 export { default as Phone } from './Phone';
 export { default as Plus } from './Plus';
 export { default as Print } from './Print';
