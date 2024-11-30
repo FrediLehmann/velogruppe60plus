@@ -9,7 +9,7 @@ export default function RulesOfConduct() {
 				Verhaltensregeln
 			</Heading>
 			<Heading as="h2" size="lg" mb="3">
-				Verhaltensregeln der Velogruppe 60 Plus Sensetal
+				Verhaltensregeln der Velogruppe
 			</Heading>
 			<Text fontSize="lg">
 				Die Velogruppe 60 Plus Sensetal legt grossen Wert auf die Sicherheit und das Wohlbefinden
