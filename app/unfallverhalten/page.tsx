@@ -20,7 +20,7 @@ export default function Unfallverhlaten() {
 			<OrderedList fontWeight="semibold" my="4" px="6">
 				<ListItem>
 					Ruhe bewahren und Überblick verschaffen
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Das eigene Verhalten hat massgeblichen Einfluss auf den weiteren Verlauf der
 						Unfallbewältigung. Ruhe zu bewahren und sich zu konzentrieren, ist daher essenziell.
 						Tiefe Atemzüge helfen dabei, Gedanken zu ordnen und die Situation klar zu erfassen.
@@ -28,7 +28,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Notruf verständigen
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Im Falle von Verletzungen ist der umgehende Notruf (in der Schweiz: 144) zu
 						kontaktieren. Dabei sind der Unfallort, die Art des Vorfalls sowie die Schwere der
 						Verletzungen präzise zu beschreiben.
@@ -36,7 +36,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Absicherung der Unfallstelle
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Die Unfallstelle ist, sofern möglich, abzusichern, um Folgeunfälle zu vermeiden. Dies
 						kann durch das Abstellen des eBikes an einem sicheren Ort oder das Platzieren von
 						Warndreiecken erfolgen.
@@ -44,7 +44,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Erste Hilfe leisten
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Die Versorgung von Verletzten hat oberste Priorität. Blutungen sollten, soweit möglich,
 						gestoppt, Verletzungen stabilisiert und betroffene Personen beruhigt werden.
 						Gleichzeitig ist darauf zu achten, die eigene Sicherheit nicht zu gefährden.
@@ -52,7 +52,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Unterstützung annehmen
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Hilfsangebote von anwesenden Personen sollten dankbar angenommen werden. Diese
 						Unterstützung kann bei der Absicherung, der Ersthilfe oder der Alarmierung des
 						Rettungsdienstes von entscheidender Bedeutung sein.
@@ -60,7 +60,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Anleitung durch Fachkräfte folgen
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Nach Eintreffen der Rettungskräfte ist es wichtig, deren Anweisungen zu folgen. Diese
 						sind speziell geschult und in der Lage, die Situation optimal zu beurteilen und
 						entsprechende Massnahmen einzuleiten.
@@ -68,7 +68,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Dokumentation des Unfalls
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Zur späteren Klärung ist eine umfassende Dokumentation ratsam:
 						<UnorderedList>
 							<ListItem>Fotos der Unfallstelle, des eBikes und etwaiger Schäden.</ListItem>
@@ -81,7 +81,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Meldung an Polizei und Versicherung
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Bei schweren Unfällen, Personenschäden oder erheblichen Sachschäden ist die Polizei (in
 						der Schweiz: 117) zu verständigen, um ein Unfallprotokoll zu erstellen. Dieses Dokument
 						ist später für die Schadensregulierung erforderlich. Ebenso ist die Versicherung zeitnah
@@ -129,32 +129,32 @@ export default function Unfallverhlaten() {
 			<OrderedList fontWeight="semibold" my="4" px="6">
 				<ListItem>
 					Sicherheit gewährleisten:
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Stellen Sie sicher, dass alle Beteiligten in Sicherheit sind und holen Sie
 						gegebenenfalls medizinische Hilfe.
 					</Text>
 				</ListItem>
 				<ListItem>
 					Unfall melden:
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Informieren Sie die Polizei und/oder den Unfallversicherer.
 					</Text>
 				</ListItem>
 				<ListItem>
 					Beweissicherung:
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Machen Sie Fotos von der Unfallstelle und sichern Sie relevante Beweise.
 					</Text>
 				</ListItem>
 				<ListItem>
 					Keine Schuldzuweisungen:
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Vermeiden Sie Vorwürfe und Schuldzuweisungen.
 					</Text>
 				</ListItem>
 				<ListItem>
 					Kooperation:
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Arbeiten Sie mit den Ermittlungsbehörden und Versicherungen zusammen, um den Unfall
 						schnell aufzuklären.
 					</Text>

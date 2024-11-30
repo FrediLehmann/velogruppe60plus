@@ -14,7 +14,7 @@ export default function Unfallverhlaten() {
 			<OrderedList fontWeight="semibold" my="4" px="6">
 				<ListItem>
 					Begrüssung und Einweisung
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Die eBike-Tour beginnt mit einer freundlichen Begrüssung durch den Tourenleiter, der für
 						die -Gesamtkoordination und einen reibungslosen Ablauf verantwortlich ist. Nach der
 						Vorstellung des Tourverlaufs und einer Sicherheitsunterweisung werden die Teilnehmenden
@@ -24,7 +24,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Aufwärmphase und Gruppenbildung (ca. 10 Minuten)
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Eine gemeinsame Aufwärmphase, durchgeführt von einer fachkundigen Person, dient zur
 						Vorbereitung der Muskulatur auf die bevorstehende Aktivität und minimiert
 						Verletzungsrisiken. Anschliessend erfolgt die endgültige Gruppenbildung in Einheiten von
@@ -35,7 +35,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Start der Tour und Hauptstrecke
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						<Text>
 							Nach einer kurzen Einweisung gibt der Tourenleiter das Startsignal, und die
 							Kleingruppen setzen sich nacheinander in Bewegung. Beim Überqueren befahrener Strassen
@@ -55,7 +55,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Rast und Verpflegung
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Nach der intensiven Etappe steht eine Pause in einem gemütlichen Restaurant auf dem
 						Programm. Die Teilnehmenden können sich bei Getränken und Snacks stärken und die
 						entspannte Atmosphäre geniessen. Diese Rast bietet auch eine ideale Gelegenheit, sich
@@ -65,7 +65,7 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Rückfahrt und Ausklang
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Die Rückfahrt erfolgt in einem gemässigten Tempo, damit alle die Umgebung geniessen
 						können. Gruppenleiter und Schlussmänner gewährleisten weiterhin Sicherheit und ein
 						harmonisches Miteinander in den Gruppen.
@@ -73,14 +73,14 @@ export default function Unfallverhlaten() {
 				</ListItem>
 				<ListItem>
 					Dehnübungen und Abschluss
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Zur Förderung der Regeneration wird eine kurze Einheit mit Dehnübungen angeboten. Diese
 						wird von einer geschulten Person geleitet und trägt zur Entspannung der Muskulatur bei.
 					</Text>
 				</ListItem>
 				<ListItem>
 					Verabschiedung und Ausblick auf die nächste Tour
-					<Text as="span" fontWeight="normal">
+					<Text as="span" fontWeight="normal" ml="1">
 						Zum Abschluss dankt der Tourenleiter den Teilnehmenden für ihr Engagement und gibt einen
 						Ausblick auf die nächste Tour, die auf der Website der Velogruppe angekündigt wird. Ein
 						motivierender Schlusspunkt, der die Vorfreude auf weitere gemeinsame Erlebnisse weckt.
