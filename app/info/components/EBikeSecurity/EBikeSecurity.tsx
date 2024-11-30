@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Heading, ListItem, Text, UnorderedList } from '@chakra-ui/react';
+import { Box, Heading, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react';
 
 export default function EBikeSecurity() {
 	return (
@@ -9,49 +9,169 @@ export default function EBikeSecurity() {
 				Sicherheit
 			</Heading>
 			<Heading as="h2" size="lg" mb="3">
-				Was sind die wichtigsten Sicherheitsaspekte für E-Bike Radtouren?
+				Sicherheitsaspekte für die Teilnehmer von E-Bike-Radtouren
 			</Heading>
 			<Text fontSize="lg">
-				Alle Beteiligten, sowohl Tourenleiter als auch Teilnehmer, sollten unbedingt auf diese
-				Sicherheitsaspekte achten, um das Risiko von Unfällen und Verletzungen bei den E-Bike
-				Radtouren zu minimieren.
+				Die Sicherheit der Teilnehmer steht bei den E-Bike-Radtouren der Velogruppe 60 Plus Sensetal
+				an erster Stelle. Sowohl die organisatorischen Massnahmen der Tourenleitung als auch die
+				persönliche Verantwortung der Teilnehmer tragen wesentlich dazu bei, Risiken zu minimieren.
+				Die nachstehenden Punkte sind speziell auf die Sicherheit und das Wohlbefinden der
+				Teilnehmer ausgerichtet.
 			</Text>
-			<UnorderedList my="4" px="6">
+			<OrderedList my="4" px="6">
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Regelmäßige Wartung und Überprüfung der E-Bikes auf ihre Verkehrssicherheit, um
-					sicherzustellen, dass sie keine Defekte aufweisen, die Unfälle verursachen können.
+					Individuelle Vorbereitung der Teilnehmer
+					<UnorderedList>
+						<ListItem>
+							Gesundheitliche Eignung
+							<Text fontWeight="normal" as="span" ml="1">
+								Jeder Teilnehmer sollte vor der Tour sicherstellen, dass seine körperliche
+								Verfassung für die geplante Strecke ausreichend ist. Bei gesundheitlichen
+								Einschränkungen ist eine vorherige Rücksprache mit der Tourenleitung oder einem Arzt
+								empfehlenswert.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Fahrtechnik
+							<Text fontWeight="normal" as="span" ml="1">
+								Teilnehmer sollten mit den Besonderheiten des E-Bikes, wie dem Ansprechverhalten des
+								Motors und dem Bremsverhalten, vertraut sein. Falls erforderlich, sind
+								Übungseinheiten vorab sinnvoll.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Teilnehmer sollten über die korrekte Nutzung des E-Bikes informiert sein, insbesondere
-					über das Bremsverhalten, den Umgang mit der Batterie und die Handhabung des
-					unterstützenden E-Motors.
+					Pflichtausrüstung und persönliche Sicherheit
+					<UnorderedList>
+						<ListItem>
+							Helmpflicht
+							<Text fontWeight="normal" as="span" ml="1">
+								Das Tragen eines geprüften Fahrradhelms ist obligatorisch. Helme müssen richtig
+								sitzen, um optimalen Schutz zu gewährleisten.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Sichtbarkeit
+							<Text fontWeight="normal" as="span" ml="1">
+								Gut sichtbare Kleidung und reflektierende Elemente erhöhen die Sicherheit, besonders
+								bei schlechten Lichtverhältnissen.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Schutzkleidung
+							<Text fontWeight="normal" as="span" ml="1">
+								Fahrradhandschuhe schützen bei Stürzen, und gepolsterte Fahrradhosen sorgen für
+								Komfort auf längeren Touren.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Vor jeder Tour sollten die Teilnehmer ihre fahrerischen Fähigkeiten und ihre körperliche
-					Verfassung realistisch einschätzen, um Überforderungen und daraus resultierende Unfälle zu
-					vermeiden.
+					Verantwortungsbewusstes Fahren in der Gruppe
+					<UnorderedList>
+						<ListItem>
+							Gruppenkoordination
+							<Text fontWeight="normal" as="span" ml="1">
+								Teilnehmer sollten die Geschwindigkeit an die Gruppe anpassen und keine riskanten
+								Überholmanöver durchführen. Abstände zwischen den Fahrern müssen ausreichend sein,
+								um plötzliche Bremsmanöver abzufangen.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Kommunikation
+							<Text fontWeight="normal" as="span" ml="1">
+								Klare Handzeichen und Absprachen innerhalb der Gruppe unterstützen ein sicheres
+								Fahren. Hinweise auf Gefahrenstellen oder Hindernisse sollten sofort weitergegeben
+								werden.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Das Tragen eines geeigneten Helms ist vorgeschrieben. Es wird auch empfohlen, passende
-					Schutzbekleidung wie Handschuhe und Fahrradhosen zu tragen.
+					Technische Sicherheit des E-Bikes
+					<UnorderedList>
+						<ListItem>
+							Eigenkontrolle vor der Tour
+							<Text fontWeight="normal" as="span" ml="1">
+								Jeder Teilnehmer ist für die Verkehrstüchtigkeit seines E-Bikes verantwortlich. Vor
+								Fahrtantritt sollten Bremsen, Beleuchtung, Reifen und der Akku überprüft werden.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Reichweite des Akkus
+							<Text fontWeight="normal" as="span" ml="1">
+								Teilnehmer sollten sicherstellen, dass der Akku ausreichend geladen ist, um die
+								geplante Strecke zu bewältigen.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Die Route sollte sorgfältig geplant werden, um gefährliche Straßenabschnitte, Baustellen
-					und andere Risikofaktoren zu vermeiden.
+					Risikominimierung auf der Route
+					<UnorderedList>
+						<ListItem>
+							Geeignete Routenwahl
+							<Text fontWeight="normal" as="span" ml="1">
+								Die Tourenleitung plant die Strecken, aber die Teilnehmer sollten sich der
+								Besonderheiten bewusst sein. Gefährliche Kreuzungen oder steile Abfahrten erfordern
+								erhöhte Aufmerksamkeit.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Pausen
+							<Text fontWeight="normal" as="span" ml="1">
+								Regelmässige Pausen zur Erholung sind wichtig, um die Konzentration
+								aufrechtzuerhalten und Übermüdung zu vermeiden.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Während der Tour sollten die Teilnehmer im Auge behalten werden, um sicherzustellen, dass
-					niemand verloren geht oder allein gelassen wird.
+					Notfallvorsorge
+					<UnorderedList>
+						<ListItem>
+							Notfallkontakt
+							<Text fontWeight="normal" as="span" ml="1">
+								Teilnehmer sollten stets einen Notfallausweis mit persönlichen Daten,
+								Kontaktinformationen und relevanten medizinischen Angaben bei sich führen.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Erste-Hilfe-Kenntnisse
+							<Text fontWeight="normal" as="span" ml="1">
+								Grundlagen der Ersten Hilfe sind hilfreich, um im Notfall schnell reagieren zu
+								können. Die Tourenleitung sorgt für ein Erste-Hilfe-Set.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
 				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Im Falle eines Unfalls oder Notfalls sollte ein Plan zur schnellen und effektiven
-					Hilfeleistung vorhanden sein.
+					Einhaltung von Verkehrsregeln
+					<UnorderedList>
+						<ListItem>
+							Respekt vor anderen Verkehrsteilnehmern
+							<Text fontWeight="normal" as="span" ml="1">
+								Teilnehmer sollten vorausschauend fahren, Handzeichen geben und sich stets an die
+								geltenden Verkehrsregeln halten.
+							</Text>
+						</ListItem>
+						<ListItem>
+							Radwegnutzung
+							<Text fontWeight="normal" as="span" ml="1">
+								Wenn vorhanden, sollten ausschliesslich Radwege genutzt werden, um Konflikte mit
+								motorisiertem Verkehr zu vermeiden.
+							</Text>
+						</ListItem>
+					</UnorderedList>
 				</ListItem>
-				<ListItem fontSize="lg" fontWeight="semibold" py="1">
-					Die Teilnehmer sollten über die lokalen Verkehrsregeln und -vorschriften informiert sein,
-					um sicherzustellen, dass sie sich an die örtlichen Gegebenheiten anpassen können.
-				</ListItem>
-			</UnorderedList>
+			</OrderedList>
+			<Text fontSize="lg">
+				Die Sicherheit der Teilnehmer ist eine gemeinsame Verantwortung von Tourenleitung und
+				Teilnehmern. Durch eine gute Vorbereitung, angemessene Vorsichtsmassnahmen und gegenseitige
+				Rücksichtnahme kann die Velogruppe 60 Plus Sensetal sichere und unbeschwerte Touren
+				geniessen.
+			</Text>
 		</Box>
 	);
 }
