@@ -16,7 +16,7 @@ export default function Unfallverhlaten() {
 					Begrüssung und Einweisung
 					<Text as="span" fontWeight="normal" ml="1">
 						Die eBike-Tour beginnt mit einer freundlichen Begrüssung durch den Tourenleiter, der für
-						die -Gesamtkoordination und einen reibungslosen Ablauf verantwortlich ist. Nach der
+						die Gesamtkoordination und einen reibungslosen Ablauf verantwortlich ist. Nach der
 						Vorstellung des Tourverlaufs und einer Sicherheitsunterweisung werden die Teilnehmenden
 						in Kleingruppen eingeteilt. Jede Gruppe steht unter der Leitung eines Gruppenleiters,
 						der für das Wohl und die Sicherheit der Gruppe verantwortlich zeichnet.
