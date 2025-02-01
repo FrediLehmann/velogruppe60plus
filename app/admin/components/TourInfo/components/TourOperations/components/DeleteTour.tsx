@@ -30,7 +30,7 @@ export default function DeleteTour({
 	isOpen: boolean;
 	onClose: () => void;
 }) {
-	const cancelRef = useRef(null);
+	const cancelRef = useRef<HTMLButtonElement>(null!);
 	const { load } = useContext(AdminTourListContext);
 
 	const toast = useToast();

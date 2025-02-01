@@ -22,7 +22,7 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 	const supabaseClient = createClient();
 	const toast = useToast();
 	const { isOpen, onOpen, onClose } = useDisclosure();
-	const cancelRef = useRef(null);
+	const cancelRef = useRef<HTMLButtonElement>(null!);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const toggleTour = async () => {

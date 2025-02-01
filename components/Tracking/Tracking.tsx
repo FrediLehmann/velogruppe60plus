@@ -13,7 +13,7 @@ declare global {
 
 export default function Tracking() {
 	const toast = useToast();
-	const toastIdRef = useRef<undefined | ToastId>();
+	const toastIdRef = useRef<ToastId>(null);
 
 	const accept = useCallback(() => {
 		window.Tellytics?.acceptTracking(true);

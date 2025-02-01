@@ -54,7 +54,7 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
 		.select(
 			'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
 		)
-		.eq('id', id)
+		.eq('id', Number(id))
 		.single();
 
 	if (error) throw error;
