@@ -6,7 +6,7 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: imageDomain.split('://')[0],
-				hostname: imageDomain.split('://')[1]
+				hostname: imageDomain.split('://')[1].split(':')[0]
 			}
 		]
 	}
