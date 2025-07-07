@@ -2,7 +2,7 @@
 
 import { useToast } from '@chakra-ui/react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -27,6 +27,11 @@ export default function TourProviders({
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [currentTours, setCurrentTours] = useState<Tour[]>(tours);
+
+	// Update tours when server-provided tours change (when navigating between pages)
+	useEffect(() => {
+		setCurrentTours(tours);
+	}, [tours]);
 
 	const setPage = useCallback(
 		(page: number) => {
