@@ -9,8 +9,18 @@ export const metadata = {
 		'Tour Übersicht von Velogruppe 60+ Sensetal. Sehen Sie alle Touren die durch unsere Gruppe befahren werden.'
 };
 
-export default async function AlleTouren() {
+export default async function AlleTouren({
+	searchParams
+}: {
+	searchParams: Promise<{ page?: string }>;
+}) {
 	const supabase = await createClient();
+
+	// Parse page parameter
+	const params = await searchParams;
+	const page = parseInt(params.page || '1', 10);
+	const pageSize = 10;
+	const offset = (page - 1) * pageSize;
 
 	const { error, data, count } = await supabase
 		.from('touren')
@@ -20,7 +30,7 @@ export default async function AlleTouren() {
 		)
 		.eq('published', true)
 		.order('name')
-		.range(0, 9);
+		.range(offset, offset + pageSize - 1);
 
 	if (error) throw error;
 	if (data.length < 1 || (count && count < 1)) throw 'No Data received';

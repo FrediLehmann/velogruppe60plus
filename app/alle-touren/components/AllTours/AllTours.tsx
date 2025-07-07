@@ -22,7 +22,7 @@ import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 import { Tour } from './components';
 
 export default function AllTours() {
-	const { page, tours, totalTours, setPage, isLoading } = useContext(AllTourListContext);
+	const { page, tours, totalTours, isLoading } = useContext(AllTourListContext);
 
 	const totalPages = useMemo(() => Math.ceil(totalTours / 10), [totalTours]);
 	const { start, end } = useMemo(() => {
@@ -64,12 +64,22 @@ export default function AllTours() {
 			</Flex>
 			<Center mt="8">
 				<ButtonGroup size={['md', 'lg']} variant="outline" isAttached>
-					<IconButton
-						isDisabled={page === 1}
-						aria-label="Previous page"
-						icon={<ChevronLeft boxSize={['4', '6']} />}
-						onClick={() => setPage(page - 1)}
-					/>
+					{/* Previous Page Button - Use Link for crawlability */}
+					{page === 1 ? (
+						<IconButton
+							isDisabled={true}
+							aria-label="Previous page"
+							icon={<ChevronLeft boxSize={['4', '6']} />}
+						/>
+					) : (
+						<IconButton
+							as={Link}
+							href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}
+							aria-label="Previous page"
+							icon={<ChevronLeft boxSize={['4', '6']} />}
+						/>
+					)}
+
 					{start >= 1 && (
 						<IconButton
 							aria-label=""
@@ -79,18 +89,27 @@ export default function AllTours() {
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
 						/>
 					)}
+
+					{/* Page Number Buttons - Use Links for crawlability */}
 					{[...new Array(totalPages)].slice(start, end).map((_, index) => {
 						const pageIndex = start + index + 1;
-						return (
+						const isCurrentPage = page === pageIndex;
+
+						return isCurrentPage ? (
+							<Button key={pageIndex} isDisabled={true} bg="gray.100">
+								{pageIndex}
+							</Button>
+						) : (
 							<Button
 								key={pageIndex}
-								isDisabled={page === pageIndex}
-								bg={page === pageIndex ? 'gray.100' : 'transparent'}
-								onClick={() => page !== pageIndex && setPage(pageIndex)}>
+								as={Link}
+								href={pageIndex === 1 ? '/alle-touren' : `/alle-touren?page=${pageIndex}`}
+								bg="transparent">
 								{pageIndex}
 							</Button>
 						);
 					})}
+
 					{end < totalPages && (
 						<IconButton
 							aria-label=""
@@ -100,12 +119,22 @@ export default function AllTours() {
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
 						/>
 					)}
-					<IconButton
-						isDisabled={page >= totalPages}
-						aria-label="Next page"
-						icon={<ChevronRight boxSize={['4', '6']} />}
-						onClick={() => setPage(page + 1)}
-					/>
+
+					{/* Next Page Button - Use Link for crawlability */}
+					{page >= totalPages ? (
+						<IconButton
+							isDisabled={true}
+							aria-label="Next page"
+							icon={<ChevronRight boxSize={['4', '6']} />}
+						/>
+					) : (
+						<IconButton
+							as={Link}
+							href={`/alle-touren?page=${page + 1}`}
+							aria-label="Next page"
+							icon={<ChevronRight boxSize={['4', '6']} />}
+						/>
+					)}
 				</ButtonGroup>
 			</Center>
 		</Container>

@@ -9,7 +9,7 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 ## Essential Commands
 
 - `pnpm dev` - Start development server
-- `pnpm build` - Build for production  
+- `pnpm build` - Build for production
 - `pnpm lint` - Run ESLint
 - `pnpm format` - Format code with Prettier
 - `pnpm types` - Generate TypeScript types from Supabase schema
@@ -17,6 +17,7 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 ## Architecture Overview
 
 ### Tech Stack
+
 - **Framework**: Next.js 15 with App Router (not Pages Router)
 - **Database**: Supabase (PostgreSQL) with server-side rendering
 - **UI**: Chakra UI v2 with custom theme (mapGreen palette)
@@ -52,16 +53,19 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 ### Key Patterns
 
 **Component Organization:**
+
 - Each component has its own folder with index.ts for clean imports
 - Sub-components organized in nested `components/` folders
 - Consistent PascalCase naming and export patterns
 
 **Data Flow:**
+
 - Server-side data fetching with Supabase client
 - React Context for tour state management (`TourContext`)
 - Protected routes using middleware-based authentication
 
 **Database Schema:**
+
 - `touren` table: Tour information with image data and routing
 - `tour_dates` table: Scheduling system with cancellation support
 - Automatic `updated_at` timestamps with triggers
@@ -70,6 +74,7 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 ### Authentication & Authorization
 
 The app uses Supabase Auth with:
+
 - Middleware-based session management in `middleware.ts`
 - Protected admin routes under `/admin`
 - Server-side user validation for admin operations
@@ -84,12 +89,14 @@ The app uses Supabase Auth with:
 ### Key Features
 
 **Public:**
+
 - Homepage displays current/next tour based on `next_tour` flag
 - All tours listing with search/filter capabilities
 - Individual tour detail pages with routing information
 - Print-optimized tour listings
 
 **Admin:**
+
 - Tour management (CRUD operations)
 - Date scheduling system
 - Image upload functionality
@@ -106,6 +113,7 @@ The app uses Supabase Auth with:
 ## Environment Variables
 
 Required for development:
+
 - `NEXT_PUBLIC_SUPABASE_URL`
 - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 - Supabase service role key (for server functions)

@@ -31,7 +31,9 @@ const Tours = () => {
 	if (tours.length === 0) return <Skeleton h="xl" />;
 	return (
 		<Accordion allowMultiple mt="8">
-			{tours?.map((tour, index) => <TourInfo key={index} {...tour} />)}
+			{tours?.map((tour, index) => (
+				<TourInfo key={index} {...tour} />
+			))}
 			<Center mt="8">
 				<ButtonGroup size={['md', 'lg']} variant="outline" isAttached>
 					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_PREV' }} showBox={true}>

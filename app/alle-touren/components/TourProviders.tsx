@@ -1,6 +1,7 @@
 'use client';
 
 import { useToast } from '@chakra-ui/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
@@ -17,18 +18,31 @@ export default function TourProviders({
 	children: React.ReactNode;
 }) {
 	const supabase = createClient();
-
+	const router = useRouter();
+	const searchParams = useSearchParams();
 	const toast = useToast();
+
+	// Get current page from URL search params
+	const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [currentTours, setCurrentTours] = useState<Tour[]>(tours);
-	const [currentPage, setCurrentPage] = useState(1);
 
+	const setPage = useCallback(
+		(page: number) => {
+			// Update URL with search parameter
+			const url = page === 1 ? '/alle-touren' : `/alle-touren?page=${page}`;
+			router.push(url);
+		},
+		[router]
+	);
+
+	// Optional: Keep client-side loading for better UX
 	const load = useCallback(
-		async (from: number, to: number) => {
-			document.body.scrollTop = 0; // For Safari
-			document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+		async (page: number) => {
 			setIsLoading(true);
+			const pageSize = 10;
+			const offset = (page - 1) * pageSize;
 
 			const { data, error } = await supabase
 				.from('touren')
@@ -37,7 +51,7 @@ export default function TourProviders({
 				)
 				.eq('published', true)
 				.order('name')
-				.range(from, to);
+				.range(offset, offset + pageSize - 1);
 
 			if (error) {
 				toast({
@@ -58,21 +72,11 @@ export default function TourProviders({
 		[supabase, toast]
 	);
 
-	function setPage(page: number) {
-		setCurrentPage(page);
-		const p = page - 1;
-		if (p === 0) {
-			load(0, 9);
-		} else {
-			load(Number(p.toString() + 0), Number(p.toString() + 9));
-		}
-	}
-
 	return (
 		<AllTourListContext.Provider
 			value={{
 				tours: currentTours,
-				page: currentPage,
+				page: currentPage, // Use search params
 				totalTours,
 				setPage,
 				isLoading
