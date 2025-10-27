@@ -1,6 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 
-export default function Info(props: any) {
+export default function Info(props: { [key: string]: unknown }) {
 	return (
 		<Icon
 			viewBox="0 0 24 24"

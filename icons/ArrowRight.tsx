@@ -1,6 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 
-export default function ArrowRight(props: any) {
+export default function ArrowRight(props: { [key: string]: unknown }) {
 	return (
 		<Icon
 			viewBox="0 0 24 24"

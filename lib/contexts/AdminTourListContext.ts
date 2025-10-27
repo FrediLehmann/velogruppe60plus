@@ -21,6 +21,6 @@ export const AdminTourListContext = createContext<{
 	page: 1,
 	load: () => {},
 	setPage: (_) => _,
-	setNextTour: (id) => {},
-	setPublished: (id, published) => {}
+	setNextTour: (id) => ({ id }),
+	setPublished: (id, published) => ({ id, published })
 });

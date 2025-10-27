@@ -76,7 +76,7 @@ export default function ResetPasswordComponents() {
 							position: 'top'
 						});
 					}}>
-					{(_) => (
+					{() => (
 						<Form id="login">
 							<Stack spacing="5">
 								<Field name="email">

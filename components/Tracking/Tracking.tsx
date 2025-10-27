@@ -32,7 +32,7 @@ export default function Tracking() {
 	}, [toast]);
 
 	useEffect(() => {
-		function handleTrackingLoaded(e: CustomEvent<any>) {
+		function handleTrackingLoaded(e: CustomEvent<{ acceptedTracking: boolean }>) {
 			if (!e.detail.acceptedTracking) {
 				toastIdRef.current = toast({
 					position: 'bottom-right',

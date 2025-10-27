@@ -1,4 +1,5 @@
 import { Button, Center, Flex, Text, chakra } from '@chakra-ui/react';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import NextImage from 'next/image';
 
 import { TrackClickEvent } from '@/components';
@@ -16,8 +17,8 @@ export default function OrganiserCard({
 	name: string;
 	description: string;
 	phone: string;
-	objectPosition: string | string[] | any[];
-	image: any;
+	objectPosition: string | string[];
+	image: string | StaticImport;
 }) {
 	return (
 		<Flex

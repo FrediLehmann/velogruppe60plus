@@ -73,7 +73,7 @@ export default function LoginComponent() {
 
 						router.push('/admin');
 					}}>
-					{(_) => (
+					{() => (
 						<Form id="login">
 							<Stack spacing="5">
 								<Field name="email">

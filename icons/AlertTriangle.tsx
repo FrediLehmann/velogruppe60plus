@@ -1,6 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 
-export default function AlertTriangle(props: any) {
+export default function AlertTriangle(props: { [key: string]: unknown }) {
 	return (
 		<Icon
 			viewBox="0 0 24 24"

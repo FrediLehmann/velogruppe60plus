@@ -60,9 +60,9 @@ export default function UploadInput({
 						return;
 					}
 
-					var fr = new FileReader();
+					const fr = new FileReader();
 					fr.onload = function () {
-						var img = new Image();
+						const img = new Image();
 
 						img.onload = function () {
 							fieldProps.form.setFieldValue('mapImageData', {

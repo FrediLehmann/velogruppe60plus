@@ -1,6 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 
-export default function MessageCircle(props: any) {
+export default function MessageCircle(props: { [key: string]: unknown }) {
 	return (
 		<Icon
 			viewBox="0 0 24 24"
