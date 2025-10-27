@@ -8,21 +8,24 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 
 ## Essential Commands
 
-- `pnpm dev` - Start development server
+- `pnpm dev` - Start development server (http://localhost:3000)
 - `pnpm build` - Build for production
-- `pnpm lint` - Run ESLint
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint (uses flat config with ESLint 9)
 - `pnpm format` - Format code with Prettier
-- `pnpm types` - Generate TypeScript types from Supabase schema
+- `pnpm types` - Generate TypeScript types from Supabase schema (run after schema changes)
 
 ## Architecture Overview
 
 ### Tech Stack
 
-- **Framework**: Next.js 15 with App Router (not Pages Router)
-- **Database**: Supabase (PostgreSQL) with server-side rendering
+- **Framework**: Next.js 16 with App Router (not Pages Router)
+- **React**: React 19.2 (latest)
+- **Database**: Supabase (PostgreSQL) with server-side rendering via @supabase/ssr
 - **UI**: Chakra UI v2 with custom theme (mapGreen palette)
 - **Authentication**: Supabase Auth with middleware-based session management
-- **Package Manager**: pnpm 9.12.3
+- **Package Manager**: pnpm 9.12.3 (required - uses packageManager field)
+- **TypeScript**: Strict mode enabled with path aliases (@/* → project root)
 
 ### Directory Structure
 
@@ -60,9 +63,11 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 
 **Data Flow:**
 
-- Server-side data fetching with Supabase client
-- React Context for tour state management (`TourContext`)
-- Protected routes using middleware-based authentication
+- Server-side data fetching with Supabase client (async `createClient()`)
+- React Context for tour state management (`TourContext`, `AdminTourListContext`, `AllTourListContext`)
+- Server Actions for mutations (use 'use server' directive)
+- Cache revalidation via `revalidatePath()` after data changes
+- Protected routes using layout-based authentication checks
 
 **Database Schema:**
 
@@ -75,9 +80,10 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 
 The app uses Supabase Auth with:
 
-- Middleware-based session management in `middleware.ts`
-- Protected admin routes under `/admin`
-- Server-side user validation for admin operations
+- Session refresh via `lib/supabase/middleware.ts` (updateSession function)
+- Protected admin routes under `/app/admin` with layout-based auth check
+- Server-side user validation using `supabase.auth.getUser()`
+- Redirect to `/login` for unauthenticated admin access
 
 ### Styling Approach
 
@@ -104,11 +110,31 @@ The app uses Supabase Auth with:
 
 ## Development Notes
 
+**Code Style:**
+- Uses tabs (not spaces) - configured in Prettier
+- Import sorting via @trivago/prettier-plugin-sort-imports
+- Import order: @/ imports first, then relative imports
+- Single quotes, no trailing commas, 100 char line width
+
+**Architecture Patterns:**
 - Use Server Components by default, Client Components only when needed
 - Follow existing import/export patterns with index.ts files
+- Use 'use server' for Server Actions (mutations and revalidations)
+- All async operations use proper TypeScript typing
 - Maintain TypeScript strict mode compliance
-- Run `pnpm types` after database schema changes
+
+**Database & Types:**
+- Run `pnpm types` after any Supabase schema changes
+- Types are generated in `/types/Database.types.ts`
+- Custom types extend/wrap database types (see `/types/*.types.ts`)
+- Three Supabase client types:
+  - `lib/supabase/server.ts` - Server Components/Actions (async createClient)
+  - `lib/supabase/client.ts` - Client Components
+  - `lib/supabase/middleware.ts` - Middleware session refresh
+
+**Content:**
 - All user-facing content is in German
+- HTML lang attribute is "de"
 
 ## Environment Variables
 
