@@ -25,7 +25,7 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 - **UI**: Chakra UI v2 with custom theme (mapGreen palette)
 - **Authentication**: Supabase Auth with middleware-based session management
 - **Package Manager**: pnpm 9.12.3 (required - uses packageManager field)
-- **TypeScript**: Strict mode enabled with path aliases (@/* → project root)
+- **TypeScript**: Strict mode enabled with path aliases (@/\* → project root)
 
 ### Directory Structure
 
@@ -111,12 +111,14 @@ The app uses Supabase Auth with:
 ## Development Notes
 
 **Code Style:**
+
 - Uses tabs (not spaces) - configured in Prettier
 - Import sorting via @trivago/prettier-plugin-sort-imports
 - Import order: @/ imports first, then relative imports
 - Single quotes, no trailing commas, 100 char line width
 
 **Architecture Patterns:**
+
 - Use Server Components by default, Client Components only when needed
 - Follow existing import/export patterns with index.ts files
 - Use 'use server' for Server Actions (mutations and revalidations)
@@ -124,6 +126,7 @@ The app uses Supabase Auth with:
 - Maintain TypeScript strict mode compliance
 
 **Database & Types:**
+
 - Run `pnpm types` after any Supabase schema changes
 - Types are generated in `/types/Database.types.ts`
 - Custom types extend/wrap database types (see `/types/*.types.ts`)
@@ -133,6 +136,7 @@ The app uses Supabase Auth with:
   - `lib/supabase/middleware.ts` - Middleware session refresh
 
 **Content:**
+
 - All user-facing content is in German
 - HTML lang attribute is "de"
 
