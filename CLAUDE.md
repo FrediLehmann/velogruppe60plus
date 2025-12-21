@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Next.js 15 application for a German cycling group (Velogruppe 60+) built with TypeScript, Chakra UI, and Supabase. The app provides public tour information and admin management capabilities.
+This is a Next.js 16 application for a German cycling group (Velogruppe 60+ Sensetal) built with TypeScript, Chakra UI, and Supabase. The app provides public tour information and admin management capabilities.
 
 ## Essential Commands
 
@@ -19,11 +19,12 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 
 ### Tech Stack
 
-- **Framework**: Next.js 16 with App Router (not Pages Router)
-- **React**: React 19.2 (latest)
+- **Framework**: Next.js 16.1 with App Router (not Pages Router)
+- **React**: React 19.2
 - **Database**: Supabase (PostgreSQL) with server-side rendering via @supabase/ssr
 - **UI**: Chakra UI v2 with custom theme (mapGreen palette)
-- **Authentication**: Supabase Auth with middleware-based session management
+- **Forms**: Formik + Yup for form handling and validation
+- **Authentication**: Supabase Auth with proxy-based session management
 - **Package Manager**: pnpm 9.12.3 (required - uses packageManager field)
 - **TypeScript**: Strict mode enabled with path aliases (@/\* → project root)
 
@@ -80,10 +81,12 @@ This is a Next.js 15 application for a German cycling group (Velogruppe 60+) bui
 
 The app uses Supabase Auth with:
 
-- Session refresh via `lib/supabase/middleware.ts` (updateSession function)
+- Session refresh via `proxy.ts` → `lib/supabase/middleware.ts` (updateSession function)
 - Protected admin routes under `/app/admin` with layout-based auth check
 - Server-side user validation using `supabase.auth.getUser()`
 - Redirect to `/login` for unauthenticated admin access
+
+Note: This project uses `proxy.ts` at the root instead of the standard `middleware.ts` naming convention.
 
 ### Styling Approach
 
@@ -105,8 +108,14 @@ The app uses Supabase Auth with:
 
 - Tour management (CRUD operations)
 - Date scheduling system
-- Image upload functionality
+- Image upload to Supabase Storage
 - Password reset functionality
+
+**Additional:**
+
+- `/icons/` directory contains custom SVG icon components
+- Tellytics analytics integration with consent UI
+- Vercel Analytics & Speed Insights
 
 ## Development Notes
 
