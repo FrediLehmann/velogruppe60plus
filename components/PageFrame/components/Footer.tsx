@@ -46,7 +46,8 @@ export default function Footer() {
 			borderColor="gray.200"
 			css={{ '@media print': { display: 'none' } }}>
 			<Container
-				maxW="container.md"
+				maxW="768px"
+				px="4"
 				display="flex"
 				alignItems={['flex-start', 'center']}
 				flexDirection={['column-reverse', 'row']}
@@ -58,15 +59,19 @@ export default function Footer() {
 				</Box>
 				<ButtonGroup gap="3" size="xs" colorScheme="black">
 					<TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-						<Button asChild>
-							<Link href="https://github.com/FrediLehmann/velogruppe60plus" target="_blank">
-								Github
-							</Link>
-						</Button>
+						<Link
+							href="https://github.com/FrediLehmann/velogruppe60plus"
+							target="_blank"
+							fontSize="xs"
+							fontWeight="bold">
+							Github
+						</Link>
 					</TrackClickEvent>
 					{signedIn && (
 						<TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }} showBox={true}>
 							<Button
+								fontSize="xs"
+								fontWeight="bold"
 								onClick={async () => {
 									await supabase.auth.signOut();
 									router.push('/');
@@ -77,15 +82,15 @@ export default function Footer() {
 					)}
 					{signedIn ? (
 						<TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }} showBox={true}>
-							<Button asChild>
-								<Link href="/admin">Admin</Link>
-							</Button>
+							<Link href="/admin" fontSize="xs" fontWeight="bold">
+								Admin
+							</Link>
 						</TrackClickEvent>
 					) : (
 						<TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }} showBox={true}>
-							<Button asChild>
-								<Link href="/login">Login</Link>
-							</Button>
+							<Link href="/login" fontSize="xs" fontWeight="bold">
+								Login
+							</Link>
 						</TrackClickEvent>
 					)}
 				</ButtonGroup>

@@ -13,15 +13,14 @@ export default function Header() {
 			borderColor="gray.200"
 			css={{ '@media print': { display: 'none' } }}>
 			<Container
-				py="4"
-				maxW="container.md"
+				p="4"
+				maxW="768px"
 				display="flex"
 				flexDirection={['column', null, 'row']}
 				alignItems={['flex-start', null, 'center']}
 				justifyContent="space-between">
 				<Link
 					href="/"
-					as={Text}
 					fontSize={['xl', '2xl']}
 					fontWeight="bold"
 					_hover={{ textDecoration: 'none' }}>
@@ -29,8 +28,8 @@ export default function Header() {
 				</Link>
 				<ButtonGroup size="md" variant="ghost" colorScheme="gray" gap="2" mt={['4', null, '0']}>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }} showBox={true}>
-						<Button asChild>
-							<Link href="/alle-touren">
+						<Button asChild _hover={{ background: 'bgGray.200' }}>
+							<Link href="/alle-touren" fontWeight="semibold" fontSize="md">
 								<Icon boxSize={['4', '5']}>
 									<FiList />
 								</Icon>
@@ -39,8 +38,8 @@ export default function Header() {
 						</Button>
 					</TrackClickEvent>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }} showBox={true}>
-						<Button asChild>
-							<Link href="/info">
+						<Button asChild _hover={{ background: 'bgGray.200' }}>
+							<Link href="/info" fontWeight="semibold" fontSize="md">
 								<Icon boxSize={['4', '5']}>
 									<FiInfo />
 								</Icon>

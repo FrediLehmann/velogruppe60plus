@@ -6,10 +6,10 @@ import { FiArrowRight, FiClock, FiExternalLink, FiMessageCircle } from 'react-ic
 export default function TourInfo() {
 	return (
 		<Box as="section">
-			<Heading as="h2" size="md" color="green.800">
+			<Heading as="h2" size="xl" color="green.800">
 				Touren
 			</Heading>
-			<Heading as="h2" size="lg" mb="3">
+			<Heading as="h2" size="3xl" mb="3">
 				Was muss ich wissen?
 			</Heading>
 			<Text fontSize="lg">
@@ -19,7 +19,7 @@ export default function TourInfo() {
 			<Grid mt="8" templateColumns={['1fr', 'repeat(2, 1fr)']} gap="6">
 				<GridItem>
 					<Flex gap="4">
-						<Flex background="green.600" w="50px" h="50px" borderRadius="lg" color="white">
+						<Flex background="green.fg" w="50px" h="50px" borderRadius="lg" color="white">
 							<Text fontSize="lg" fontWeight="bold" m="auto">
 								Mi
 							</Text>
@@ -36,7 +36,7 @@ export default function TourInfo() {
 				</GridItem>
 				<GridItem>
 					<Flex gap="4">
-						<Flex background="green.600" w="50px" h="50px" borderRadius="lg" color="white">
+						<Flex background="green.fg" w="50px" h="50px" borderRadius="lg" color="white">
 							<Text fontSize="lg" fontWeight="bold" m="auto">
 								50
 								<Text as="sup" fontWeight="bold">
@@ -63,7 +63,7 @@ export default function TourInfo() {
 				<GridItem>
 					<Flex gap="4">
 						<Flex
-							background="green.600"
+							background="green.fg"
 							w="50px"
 							h="50px"
 							borderRadius="lg"
@@ -87,7 +87,7 @@ export default function TourInfo() {
 				<GridItem>
 					<Flex gap="4">
 						<Flex
-							background="green.600"
+							background="green.fg"
 							w="50px"
 							h="50px"
 							borderRadius="lg"

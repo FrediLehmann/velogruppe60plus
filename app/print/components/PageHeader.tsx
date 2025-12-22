@@ -20,12 +20,17 @@ export default function PageHeader() {
 					css={{ '@media print': { display: 'none' } }}>
 					Alle Touren
 				</Text>
-				<Heading as="h1" size="lg" mb="6">
+				<Heading as="h1" size="3xl" mb="6">
 					Velogruppe 60+ Sensetal
 				</Heading>
 			</Box>
 			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
-				<Button onClick={printPage} css={{ '@media print': { display: 'none' } }}>
+				<Button
+					onClick={printPage}
+					variant="subtle"
+					bgColor="bgGray.100"
+					_hover={{ background: 'bgGray.200' }}
+					css={{ '@media print': { display: 'none' } }}>
 					<Icon boxSize="5">
 						<FiPrinter />
 					</Icon>

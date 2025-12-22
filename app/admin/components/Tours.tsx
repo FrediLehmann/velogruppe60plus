@@ -75,8 +75,9 @@ const Tours = () => {
 								<Button
 									key={pageIndex}
 									disabled={page === pageIndex}
-									bg={page === pageIndex ? 'gray.100' : 'transparent'}
-									onClick={() => page !== pageIndex && setPage(pageIndex)}>
+									bg={page === pageIndex ? 'bgGray.100' : 'transparent'}
+									onClick={() => page !== pageIndex && setPage(pageIndex)}
+									css={{ '&:hover': { backgroundColor: 'bgGray.200' } }}>
 									{pageIndex}
 								</Button>
 							</TrackClickEvent>

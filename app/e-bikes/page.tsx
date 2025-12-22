@@ -9,7 +9,7 @@ export const metadata = {
 export default function EBikes() {
 	return (
 		<>
-			<Heading as="h2" size="lg" mt="8" mb="4">
+			<Heading as="h2" size="3xl" mt="8" mb="4">
 				Gesetzliche Regeln für E-Bikes
 			</Heading>
 			<Text>

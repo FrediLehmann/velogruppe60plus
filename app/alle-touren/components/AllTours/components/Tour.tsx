@@ -14,11 +14,11 @@ export default function CurrentTour({
 	return (
 		<LinkBox
 			as="article"
-			bg="gray.100"
+			bg="bgGray.100"
 			borderRadius="sm"
 			py={['3', '4']}
 			px={['3', '4']}
-			_hover={{ bg: 'gray.200' }}>
+			_hover={{ bg: 'bgGray.200' }}>
 			<Flex gap="6" justify="space-between">
 				<Box>
 					<Heading as="h2" pb="2" fontSize={['lg', 'xl']}>

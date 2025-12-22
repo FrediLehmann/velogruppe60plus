@@ -5,10 +5,10 @@ import { Box, Heading, List, Text } from '@chakra-ui/react';
 export default function RulesOfConduct() {
 	return (
 		<Box as="section">
-			<Heading as="h2" size="md" color="green.800">
+			<Heading as="h2" size="xl" color="green.800">
 				Verhaltensregeln
 			</Heading>
-			<Heading as="h2" size="lg" mb="3">
+			<Heading as="h2" size="3xl" mb="3">
 				Verhaltensregeln der Velogruppe
 			</Heading>
 			<Text fontSize="lg">

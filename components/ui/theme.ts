@@ -16,6 +16,11 @@ export const customConfig = createSystem(defaultConfig, {
 					800: { value: '#477555' },
 					900: { value: '#385E4C' },
 					950: { value: '#2C4A3C' }
+				},
+				bgGray: {
+					50: { value: '#F7FAFC' },
+					100: { value: '#EDF2F7' },
+					200: { value: '#E2E8F0' }
 				}
 			}
 		},
@@ -39,7 +44,7 @@ export const customConfig = createSystem(defaultConfig, {
 	},
 	globalCss: {
 		body: {
-			bg: 'gray.50'
+			bg: 'bgGray.50'
 		}
 	}
 });

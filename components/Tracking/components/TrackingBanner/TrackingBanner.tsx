@@ -13,7 +13,7 @@ export function TrackingBanner({ onAccept, onDecline }: TrackingBannerProps) {
 			position="fixed"
 			bottom={[5]}
 			right={[4]}
-			maxWidth="md"
+			maxWidth="xl"
 			mb={[5]}
 			px={[4]}
 			py={[3]}

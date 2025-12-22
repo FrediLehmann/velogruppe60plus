@@ -17,7 +17,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 				/>
 				<Provider>
 					<PageFrame>
-						<Container as="main" maxW="container.md" mt={['4', '6', '12']}>
+						<Container as="main" maxW="768px" px="4" mt={['4', '6', '12']}>
 							{children}
 						</Container>
 					</PageFrame>

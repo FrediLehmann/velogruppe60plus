@@ -49,7 +49,14 @@ export default function OrganiserCard({
 			</Center>
 			<Flex borderTop="1px solid" borderColor="gray.200" mt="6">
 				<TrackClickEvent event={{ name: 'SEND_EMAIL_BUTTON_CLICK' }}>
-					<Button asChild w="50%" variant="ghost" borderRight="1px solid" borderColor="gray.200">
+					<Button
+						asChild
+						w="50%"
+						variant="ghost"
+						border="none"
+						borderRight="1px solid"
+						borderRightRadius="none"
+						borderColor="gray.200">
 						<Link href="mailto:velogruppe60plus-sensetal@bluewin.ch">
 							<Icon boxSize="5">
 								<FiMail />

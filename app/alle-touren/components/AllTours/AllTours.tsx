@@ -42,7 +42,7 @@ export default function AllTours() {
 	}, [totalPages, page]);
 
 	return (
-		<Container maxW="container.md" mt={['4', '6', '12']}>
+		<Container p="0" maxW="768px" mt={['4', '6', '12']}>
 			<Flex align="flex-end" justify="space-between" mb="8">
 				<Box>
 					<Heading as="h1" fontSize={['lg', 'xl']}>
@@ -53,7 +53,7 @@ export default function AllTours() {
 					</Text>
 				</Box>
 				<TrackClickEvent event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
-					<Button asChild>
+					<Button asChild variant="subtle" bgColor="bgGray.100">
 						<Link href="/print">
 							<Icon boxSize="5">
 								<FiPrinter />
@@ -105,7 +105,7 @@ export default function AllTours() {
 						const isCurrentPage = page === pageIndex;
 
 						return isCurrentPage ? (
-							<Button key={pageIndex} disabled={true} bg="gray.100">
+							<Button key={pageIndex} disabled={true} bg="bgGray.100">
 								{pageIndex}
 							</Button>
 						) : (

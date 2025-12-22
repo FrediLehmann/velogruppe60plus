@@ -9,7 +9,7 @@ export const metadata = {
 export default function Unfallverhlaten() {
 	return (
 		<>
-			<Heading as="h2" size="lg" mt="8" mb="4">
+			<Heading as="h2" size="3xl" mt="8" mb="4">
 				Unfallverhalten
 			</Heading>
 			<Text>
@@ -95,7 +95,7 @@ export default function Unfallverhlaten() {
 				Schritte bieten einen praktischen Leitfaden, der sowohl Sicherheit als auch Effizienz
 				gewährleistet.
 			</Text>
-			<Heading as="h3" size="md" mt="8" mb="4">
+			<Heading as="h3" size="xl" mt="8" mb="4">
 				Fortsetzung einer eBike-Tour nach einem Unfall
 			</Heading>
 			<Text>
@@ -111,7 +111,7 @@ export default function Unfallverhlaten() {
 				die Verkehrsregeln befolgen und aufeinander achten. Eine gute Kommunikation und Koordination
 				sind wichtig, um die Tour verantwortungsbewusst und sicher fortzusetzen.
 			</Text>
-			<Heading as="h3" size="md" mt="8" mb="4">
+			<Heading as="h3" size="xl" mt="8" mb="4">
 				EchoSOS: Notfall-App zur Sicherheitsunterstützung
 			</Heading>
 			<Text>
@@ -122,7 +122,7 @@ export default function Unfallverhlaten() {
 				wählen. Dennoch ersetzt EchoSOS nicht den Notruf (Schweiz: 144) und sollte als ergänzende
 				Sicherheitsmaßnahme betrachtet werden.
 			</Text>
-			<Heading as="h3" size="md" mt="8" mb="4">
+			<Heading as="h3" size="xl" mt="8" mb="4">
 				Verhaltenskodex nach einem Unfall
 			</Heading>
 			<Text>Nach einem Unfall sollten folgende Verhaltensregeln beachtet werden:</Text>

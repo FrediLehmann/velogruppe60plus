@@ -29,7 +29,9 @@ export default function LoginComponent() {
 	return (
 		<Container maxW="lg" mt={['32', '36']}>
 			<Center>
-				<Heading mb="8">Anmeldung</Heading>
+				<Heading size="4xl" mb="8">
+					Anmeldung
+				</Heading>
 			</Center>
 			<Stack
 				gap="6"
@@ -90,12 +92,16 @@ export default function LoginComponent() {
 										<Field.Root
 											required
 											invalid={(form.errors.password && form.touched.password) as boolean}>
-											<Flex justify="space-between">
+											<Flex justify="space-between" width="full">
 												<Field.Label>
 													Password
 													<Field.RequiredIndicator />
 												</Field.Label>
-												<Link href="/reset-password" color="green.700" fontSize="sm">
+												<Link
+													href="/reset-password"
+													color="green.700"
+													fontSize="sm"
+													marginLeft="auto">
 													Passwort vergessen
 												</Link>
 											</Flex>
@@ -109,7 +115,7 @@ export default function LoginComponent() {
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" loading={isSubmitting}>
+					<Button type="submit" form="login" colorPalette="green" loading={isSubmitting}>
 						Einloggen
 					</Button>
 				</TrackClickEvent>

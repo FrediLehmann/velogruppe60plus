@@ -11,10 +11,10 @@ import peter from './images/peter.jpeg';
 export default function Organisers() {
 	return (
 		<Box as="section">
-			<Heading as="h2" size="md" color="green.800">
+			<Heading as="h2" size="xl" color="green.800">
 				Kontakte
 			</Heading>
-			<Heading as="h2" size="lg" mb="3">
+			<Heading as="h2" size="3xl" mb="3">
 				Bei wem kann ich mich melden?
 			</Heading>
 			<Text fontSize="lg">

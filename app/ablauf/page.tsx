@@ -8,7 +8,7 @@ export const metadata = {
 export default function Unfallverhlaten() {
 	return (
 		<>
-			<Heading as="h2" size="lg" mt="8" mb="4">
+			<Heading as="h2" size="3xl" mt="8" mb="4">
 				Ablauf der eBike-Tour mit Tourenleitung, Gruppenleitung, Schlussmann und Patrouillendienst
 			</Heading>
 			<List.Root fontWeight="semibold" my="4" px="6" as="ol">
