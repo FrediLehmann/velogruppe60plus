@@ -1,12 +1,12 @@
-import { Button, ButtonGroup, Checkbox, Dialog, Field, Input, Stack } from '@chakra-ui/react';
+import { Button, ButtonGroup, Checkbox, Dialog, Field, Icon, Input, Stack } from '@chakra-ui/react';
 import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { useContext, useMemo, useState } from 'react';
+import { FiEdit } from 'react-icons/fi';
 import { boolean, object, string } from 'yup';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
-import { Edit } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 
@@ -61,7 +61,9 @@ export default function EditTourDate() {
 		<>
 			<TrackClickEvent event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }} showBox={true}>
 				<Button onClick={() => setOpen(true)}>
-					<Edit boxSize="5" />
+					<Icon boxSize="5">
+						<FiEdit />
+					</Icon>
 					Ändern
 				</Button>
 			</TrackClickEvent>

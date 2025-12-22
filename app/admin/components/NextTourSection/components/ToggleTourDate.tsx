@@ -1,10 +1,10 @@
-import { Button, Dialog } from '@chakra-ui/react';
+import { Button, Dialog, Icon } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
+import { FiCalendar, FiSlash } from 'react-icons/fi';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
-import { Calendar, Slash } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 
@@ -43,7 +43,7 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 				event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
 				showBox={true}>
 				<Button onClick={() => setOpen(true)}>
-					{isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
+					<Icon boxSize="5">{isCanceled ? <FiCalendar /> : <FiSlash />}</Icon>
 					{isCanceled ? 'Aktivieren' : 'Absagen'}
 				</Button>
 			</TrackClickEvent>

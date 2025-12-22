@@ -1,11 +1,11 @@
 'use client';
 
-import { Button, ButtonGroup, Dialog, Separator } from '@chakra-ui/react';
+import { Button, ButtonGroup, Dialog, Icon, Separator } from '@chakra-ui/react';
 import { useCallback, useContext, useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
-import { Plus } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { TourFields } from '@/types/TourFields.types';
@@ -120,7 +120,9 @@ export default function NewTourSection() {
 			<TrackClickEvent event={{ name: 'START_CREATE_NEW_TOUR_BUTTON_CLICK' }}>
 				<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={() => setOpen(true)}>
 					Neue Tour erfassen
-					<Plus boxSize="5" />
+					<Icon boxSize="5">
+						<FiPlus />
+					</Icon>
 				</Button>
 			</TrackClickEvent>
 			<Separator borderColor="gray.500" my="3" />

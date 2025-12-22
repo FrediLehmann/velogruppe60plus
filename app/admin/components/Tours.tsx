@@ -1,10 +1,18 @@
 'use client';
 
-import { Accordion, Button, ButtonGroup, Center, IconButton, Skeleton } from '@chakra-ui/react';
+import {
+	Accordion,
+	Button,
+	ButtonGroup,
+	Center,
+	Icon,
+	IconButton,
+	Skeleton
+} from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
+import { FiChevronLeft, FiChevronRight, FiMoreHorizontal } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { ChevronLeft, ChevronRight, MoreHorizontal } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 
 import { TourInfo } from '.';
@@ -41,7 +49,9 @@ const Tours = () => {
 							disabled={page === 1}
 							aria-label="Previous page"
 							onClick={() => setPage(page - 1)}>
-							<ChevronLeft boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiChevronLeft />
+							</Icon>
 						</IconButton>
 					</TrackClickEvent>
 					{start >= 1 && (
@@ -50,7 +60,9 @@ const Tours = () => {
 							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
-							<ChevronRight boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiMoreHorizontal />
+							</Icon>
 						</IconButton>
 					)}
 					{[...new Array(totalPages)].slice(start, end).map((_, index) => {
@@ -76,7 +88,9 @@ const Tours = () => {
 							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
-							<ChevronRight boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiMoreHorizontal />
+							</Icon>
 						</IconButton>
 					)}
 					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }} showBox={true}>
@@ -84,7 +98,9 @@ const Tours = () => {
 							disabled={page >= totalPages}
 							aria-label="Next page"
 							onClick={() => setPage(page + 1)}>
-							<ChevronRight boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiChevronRight />
+							</Icon>
 						</IconButton>
 					</TrackClickEvent>
 				</ButtonGroup>

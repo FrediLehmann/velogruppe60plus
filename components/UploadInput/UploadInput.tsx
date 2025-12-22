@@ -1,11 +1,11 @@
 'use client';
 
-import { Button, Image as ChakraImage, Field, Flex } from '@chakra-ui/react';
+import { Button, Image as ChakraImage, Field, Flex, Icon } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
 import { useMemo, useRef, useState } from 'react';
+import { FiUpload } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Upload } from '@/icons';
 import { createClient } from '@/lib/supabase/client';
 
 import { ImageFallback } from './components';
@@ -97,7 +97,9 @@ export default function UploadInput({
 							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
 							inputRef?.current?.click();
 						}}>
-						<Upload boxSize="5" />
+						<Icon boxSize="5">
+							<FiUpload />
+						</Icon>
 						{buttonLabel}
 					</Button>
 				</TrackClickEvent>

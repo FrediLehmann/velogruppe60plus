@@ -8,15 +8,16 @@ import {
 	Container,
 	Flex,
 	Heading,
+	Icon,
 	IconButton,
 	Link,
 	Skeleton,
 	Text
 } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
+import { FiChevronLeft, FiChevronRight, FiMoreHorizontal, FiPrinter } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { ChevronLeft, ChevronRight, MoreHorizontal, Print as PrintIcon } from '@/icons';
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 
 import { Tour } from './components';
@@ -54,7 +55,9 @@ export default function AllTours() {
 				<TrackClickEvent event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
 					<Button asChild>
 						<Link href="/print">
-							<PrintIcon />
+							<Icon boxSize="5">
+								<FiPrinter />
+							</Icon>
 							Drucken
 						</Link>
 					</Button>
@@ -70,12 +73,16 @@ export default function AllTours() {
 					{/* Previous Page Button - Use Link for crawlability */}
 					{page === 1 ? (
 						<IconButton disabled={true} aria-label="Previous page">
-							<ChevronLeft boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiChevronLeft />
+							</Icon>
 						</IconButton>
 					) : (
 						<IconButton asChild aria-label="Previous page">
 							<Link href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}>
-								<ChevronLeft boxSize={['4', '6']} />
+								<Icon boxSize={['4', '6']}>
+									<FiChevronLeft />
+								</Icon>
 							</Link>
 						</IconButton>
 					)}
@@ -86,7 +93,9 @@ export default function AllTours() {
 							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
-							<MoreHorizontal boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiMoreHorizontal />
+							</Icon>
 						</IconButton>
 					)}
 
@@ -114,19 +123,25 @@ export default function AllTours() {
 							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
-							<MoreHorizontal boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiMoreHorizontal />
+							</Icon>
 						</IconButton>
 					)}
 
 					{/* Next Page Button - Use Link for crawlability */}
 					{page >= totalPages ? (
 						<IconButton disabled={true} aria-label="Next page">
-							<ChevronRight boxSize={['4', '6']} />
+							<Icon boxSize={['4', '6']}>
+								<FiChevronRight />
+							</Icon>
 						</IconButton>
 					) : (
 						<IconButton asChild aria-label="Next page">
 							<Link href={`/alle-touren?page=${page + 1}`}>
-								<ChevronRight boxSize={['4', '6']} />
+								<Icon boxSize={['4', '6']}>
+									<FiChevronRight />
+								</Icon>
 							</Link>
 						</IconButton>
 					)}

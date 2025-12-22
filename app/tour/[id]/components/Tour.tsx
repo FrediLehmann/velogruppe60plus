@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, Container, Heading, Link } from '@chakra-ui/react';
+import { Button, Container, Heading, Icon, Link } from '@chakra-ui/react';
 import { useContext } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import { TourView, TrackClickEvent } from '@/components';
-import { ArrowLeft } from '@/icons';
 import { TourContext } from '@/lib/contexts/TourContext';
 
 export default function Tour() {
@@ -15,7 +15,9 @@ export default function Tour() {
 			<TrackClickEvent event={{ name: 'NAVIGATE_BACK_TO_ALL_TOURS_BUTTON_CLICK' }}>
 				<Button asChild mb="4" color="green.700" alignItems="center">
 					<Link href="/alle-touren">
-						<ArrowLeft boxSize="5" />
+						<Icon boxSize="5">
+							<FiArrowLeft />
+						</Icon>
 						Zurück zu den Touren
 					</Link>
 				</Button>

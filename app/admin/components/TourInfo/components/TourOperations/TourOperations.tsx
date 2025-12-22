@@ -1,9 +1,9 @@
 'use client';
 
-import { Button, Menu } from '@chakra-ui/react';
+import { Button, Icon, Menu } from '@chakra-ui/react';
 import { useContext, useState } from 'react';
+import { FiChevronDown, FiEdit, FiEye, FiEyeOff, FiTarget, FiTrash2 } from 'react-icons/fi';
 
-import { ChevronDown, Delete, Edit, Eye, EyeOff, Target } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { Tour } from '@/types/Tours.types';
 
@@ -19,7 +19,9 @@ export default function TourOperations({ tour }: { tour: Tour }) {
 			<Menu.Root closeOnSelect={false}>
 				<Menu.Trigger as={Button} mt="4">
 					Änderungen vornehemen
-					<ChevronDown />
+					<Icon boxSize="5">
+						<FiChevronDown />
+					</Icon>
 				</Menu.Trigger>
 				<Menu.Positioner>
 					<Menu.Content>
@@ -27,12 +29,16 @@ export default function TourOperations({ tour }: { tour: Tour }) {
 							value="next_tour"
 							disabled={tour.next_tour || !tour.published}
 							onClick={() => setNextTour(tour.id)}>
-							<Target boxSize="5" />
+							<Icon boxSize="5">
+								<FiTarget />
+							</Icon>
 							Als nächste Tour festlegen
 						</Menu.Item>
 						{!tour.published && (
 							<Menu.Item value="publish" onClick={() => setPublished(tour.id, true)}>
-								<Eye boxSize="5" />
+								<Icon boxSize="5">
+									<FiEye />
+								</Icon>
 								Veröffentlichen
 							</Menu.Item>
 						)}
@@ -41,19 +47,25 @@ export default function TourOperations({ tour }: { tour: Tour }) {
 								value="unpublish"
 								onClick={() => setPublished(tour.id, false)}
 								disabled={tour.next_tour}>
-								<EyeOff boxSize="5" />
+								<Icon boxSize="5">
+									<FiEyeOff />
+								</Icon>
 								Veröffentlichung aufheben
 							</Menu.Item>
 						)}
 						<Menu.Item value="edit" onClick={() => setEditIsOpen(true)}>
-							<Edit boxSize="5" />
+							<Icon boxSize="5">
+								<FiEdit />
+							</Icon>
 							Bearbeiten
 						</Menu.Item>
 						<Menu.Item
 							value="delete"
 							disabled={tour.next_tour}
 							onClick={() => setDeleteIsOpen(true)}>
-							<Delete boxSize="5" />
+							<Icon boxSize="5">
+								<FiTrash2 />
+							</Icon>
 							Löschen
 						</Menu.Item>
 					</Menu.Content>

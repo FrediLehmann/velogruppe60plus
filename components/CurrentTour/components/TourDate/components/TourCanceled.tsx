@@ -1,8 +1,7 @@
 'use client';
 
-import { Box, Flex, Text } from '@chakra-ui/react';
-
-import { AlertTriangle } from '@/icons';
+import { Box, Flex, Icon, Text } from '@chakra-ui/react';
+import { FiAlertTriangle } from 'react-icons/fi';
 
 export default function TourCanceled({ tourDate = '' }: { tourDate?: string }) {
 	return (
@@ -16,7 +15,9 @@ export default function TourCanceled({ tourDate = '' }: { tourDate?: string }) {
 			borderColor="red.100"
 			borderRadius="sm"
 			alignItems="center">
-			<AlertTriangle boxSize={['8', '10']} />
+			<Icon boxSize={['8', '10']}>
+				<FiAlertTriangle />
+			</Icon>
 			<Box>
 				<Text fontSize="sm" fontWeight="semibold" color="gray.700">
 					Tour abgesagt

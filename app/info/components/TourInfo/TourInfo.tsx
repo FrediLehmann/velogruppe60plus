@@ -1,8 +1,7 @@
 'use client';
 
-import { Box, Flex, Grid, GridItem, Heading, Link, Text } from '@chakra-ui/react';
-
-import { ArrowRight, Clock, External, MessageCircle } from '@/icons';
+import { Box, Flex, Grid, GridItem, Heading, Icon, Link, Text } from '@chakra-ui/react';
+import { FiArrowRight, FiClock, FiExternalLink, FiMessageCircle } from 'react-icons/fi';
 
 export default function TourInfo() {
 	return (
@@ -53,7 +52,10 @@ export default function TourInfo() {
 								Jede Woche wird eine andere von über 80 verfügbaren Touren gefahren.
 							</Text>
 							<Link href="/alle-touren" display="block" mt="2" color="green.700">
-								Touren ansehen <ArrowRight boxSize="4" />
+								Touren ansehen{' '}
+								<Icon boxSize="4">
+									<FiArrowRight />
+								</Icon>
 							</Link>
 						</Box>
 					</Flex>
@@ -67,7 +69,9 @@ export default function TourInfo() {
 							borderRadius="lg"
 							justifyContent="center"
 							color="white">
-							<Clock boxSize="6" strokeWidth="3" my="auto" />
+							<Icon boxSize="6" strokeWidth="3" my="auto">
+								<FiClock />
+							</Icon>
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
@@ -89,7 +93,9 @@ export default function TourInfo() {
 							borderRadius="lg"
 							justifyContent="center"
 							color="white">
-							<MessageCircle boxSize="6" strokeWidth="3" my="auto" />
+							<Icon boxSize="6" strokeWidth="3" my="auto">
+								<FiMessageCircle />
+							</Icon>
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
@@ -104,7 +110,10 @@ export default function TourInfo() {
 								mt="2"
 								color="green.700"
 								target="_blank">
-								Der WhatsApp-Gruppe beitreten <External mx="2px" boxSize="4" />
+								Der WhatsApp-Gruppe beitreten{' '}
+								<Icon mx="2px" boxSize="4">
+									<FiExternalLink />
+								</Icon>
 							</Link>
 						</Box>
 					</Flex>

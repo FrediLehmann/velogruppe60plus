@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Icon, Text } from '@chakra-ui/react';
+import { FiPrinter } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Print } from '@/icons';
 
 export default function PageHeader() {
 	function printPage() {
@@ -26,7 +26,9 @@ export default function PageHeader() {
 			</Box>
 			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
 				<Button onClick={printPage} css={{ '@media print': { display: 'none' } }}>
-					<Print boxSize="5" />
+					<Icon boxSize="5">
+						<FiPrinter />
+					</Icon>
 					Jetzt Drucken
 				</Button>
 			</TrackClickEvent>

@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, Flex, Heading, Link } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Icon, Link } from '@chakra-ui/react';
+import { FiArrowRight } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { ArrowRight } from '@/icons';
 
 export default function AdditionalInfos() {
 	return (
@@ -19,7 +19,9 @@ export default function AdditionalInfos() {
 					<Button asChild>
 						<Link href="/ablauf">
 							Ablauf
-							<ArrowRight boxSize="5" />
+							<Icon boxSize="5">
+								<FiArrowRight />
+							</Icon>
 						</Link>
 					</Button>
 				</TrackClickEvent>
@@ -27,7 +29,9 @@ export default function AdditionalInfos() {
 					<Button asChild>
 						<Link href="/unfallverhalten">
 							Unfallverhalten
-							<ArrowRight boxSize="5" />
+							<Icon boxSize="5">
+								<FiArrowRight />
+							</Icon>
 						</Link>
 					</Button>
 				</TrackClickEvent>
@@ -35,7 +39,9 @@ export default function AdditionalInfos() {
 					<Button asChild>
 						<Link href="/e-bikes">
 							Gesetzliche Regelung E-Bikes
-							<ArrowRight boxSize="5" />
+							<Icon boxSize="5">
+								<FiArrowRight />
+							</Icon>
 						</Link>
 					</Button>
 				</TrackClickEvent>

@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, ButtonGroup, Container, Link, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Icon, Link, Text } from '@chakra-ui/react';
+import { FiInfo, FiList } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Info, List } from '@/icons';
 
 export default function Header() {
 	return (
@@ -31,7 +31,9 @@ export default function Header() {
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }} showBox={true}>
 						<Button asChild>
 							<Link href="/alle-touren">
-								<List boxSize={['4', '5']} />
+								<Icon boxSize={['4', '5']}>
+									<FiList />
+								</Icon>
 								Touren
 							</Link>
 						</Button>
@@ -39,7 +41,9 @@ export default function Header() {
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }} showBox={true}>
 						<Button asChild>
 							<Link href="/info">
-								<Info boxSize={['4', '5']} />
+								<Icon boxSize={['4', '5']}>
+									<FiInfo />
+								</Icon>
 								Informationen
 							</Link>
 						</Button>

@@ -1,9 +1,9 @@
 'use client';
 
-import { AspectRatio, Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, Heading, Icon, Link, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import { FiExternalLink } from 'react-icons/fi';
 
-import { External } from '@/icons';
 import { createClient } from '@/lib/supabase/client';
 import { Tour } from '@/types/Tours.types';
 
@@ -46,7 +46,10 @@ export default function TourView({ tour }: { tour: Tour }) {
 				</Flex>
 			</Flex>
 			<Link href={tour.mapUrl} display="block" my="2" target="_blank" color="green.700">
-				Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
+				Auf Schweiz Mobil anschauen{' '}
+				<Icon mx="2px" boxSize="4">
+					<FiExternalLink />
+				</Icon>
 			</Link>
 			<AspectRatio
 				maxW="736px"
