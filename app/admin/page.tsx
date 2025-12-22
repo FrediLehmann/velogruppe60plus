@@ -1,3 +1,5 @@
+import { Metadata } from 'next';
+
 import { createClient } from '@/lib/supabase/server';
 import { Tour } from '@/types/Tours.types';
 
@@ -9,7 +11,7 @@ import {
 	Tours
 } from './components';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Admin',
 	description: 'Admin bereich',
 	robots: {

@@ -1,8 +1,10 @@
+import { Metadata } from 'next';
+
 import { CurrentTour, TourContextProvider } from '@/components';
 import { createClient } from '@/lib/supabase/server';
 import { Tour } from '@/types/Tours.types';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal',
 	description:
 		'Velogruppe 60+ Sensethal ist eine Velogruppe für Personen über 60. Wir fahren Touren im Senesetal bereich, die Teilnahme ist offen für alle.'

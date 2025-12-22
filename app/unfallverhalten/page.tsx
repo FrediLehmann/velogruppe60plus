@@ -1,6 +1,7 @@
 import { Heading, List, Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Unfallverhalten',
 	description:
 		'Im Falle eines Unfalls mit einem eBike gibt es einige wichtige Schritte, die Sie beachten sollten'

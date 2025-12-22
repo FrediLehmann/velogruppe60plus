@@ -1,6 +1,7 @@
 import { Heading, List, Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Ablauf',
 	description: 'Ablauf einer Fahrradtour der Velogruppe 60+ Sensetal'
 };
