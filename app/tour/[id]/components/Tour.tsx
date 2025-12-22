@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Button, Container, Heading } from '@chakra-ui/react';
+import { Button, Container, Heading, Link } from '@chakra-ui/react';
 import { useContext } from 'react';
 
 import { TourView, TrackClickEvent } from '@/components';
@@ -20,8 +19,8 @@ export default function Tour() {
 					mb="4"
 					variant="link"
 					color="green.700"
-					alignItems="center"
-					leftIcon={<ArrowLeft boxSize="5" />}>
+					alignItems="center">
+					<ArrowLeft boxSize="5" />
 					Zurück zu den Touren
 				</Button>
 			</TrackClickEvent>

@@ -25,10 +25,8 @@ export default function PageHeader() {
 				</Heading>
 			</Box>
 			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
-				<Button
-					leftIcon={<Print boxSize="5" />}
-					onClick={printPage}
-					sx={{ '@media print': { display: 'none' } }}>
+				<Button onClick={printPage} sx={{ '@media print': { display: 'none' } }}>
+					<Print boxSize="5" />
 					Jetzt Drucken
 				</Button>
 			</TrackClickEvent>

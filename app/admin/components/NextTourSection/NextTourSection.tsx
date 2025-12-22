@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, ButtonGroup, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, ButtonGroup, Flex, Separator, Text } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
 
 import { AlertTriangle } from '@/icons';
@@ -25,7 +25,7 @@ export default function NextTourSection() {
 			<Text fontSize="xl" fontWeight="semibold">
 				Datum für die Nächste Tour
 			</Text>
-			<Divider borderColor="gray.500" my="3" />
+			<Separator borderColor="gray.500" my="3" />
 			{tourDate.is_canceled && (
 				<Flex
 					px="4"

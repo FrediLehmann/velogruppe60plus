@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Link, Text } from '@chakra-ui/react';
 
 import { TrackClickEvent } from '@/components';
 import { Info, List } from '@/icons';
@@ -30,12 +29,14 @@ export default function Header() {
 				</Link>
 				<ButtonGroup size="md" variant="ghost" colorScheme="gray" spacing="2" mt={['4', null, '0']}>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/alle-touren" as="a" leftIcon={<List boxSize={['4', '5']} />}>
+						<Button href="/alle-touren" as="a">
+							<List boxSize={['4', '5']} />
 							Touren
 						</Button>
 					</TrackClickEvent>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/info" as="a" leftIcon={<Info boxSize={['4', '5']} />}>
+						<Button href="/info" as="a">
+							<Info boxSize={['4', '5']} />
 							Informationen
 						</Button>
 					</TrackClickEvent>

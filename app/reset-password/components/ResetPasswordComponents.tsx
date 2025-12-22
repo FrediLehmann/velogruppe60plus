@@ -4,21 +4,19 @@ import {
 	Button,
 	Center,
 	Container,
+	Field,
 	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
 	Heading,
 	Input,
 	Link,
-	Stack,
-	useToast
+	Stack
 } from '@chakra-ui/react';
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { useState } from 'react';
 import { object, string } from 'yup';
 
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { createClient } from '@/lib/supabase/client';
 
 export default function ResetPasswordComponents() {
@@ -26,15 +24,13 @@ export default function ResetPasswordComponents() {
 
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const toast = useToast();
-
 	return (
 		<Container maxW="lg" mt={['32', '36']}>
 			<Center>
 				<Heading mb="8">Passwort zurücksetzten</Heading>
 			</Center>
 			<Stack
-				spacing="6"
+				gap="6"
 				py={['0', '8']}
 				px={['4', '10']}
 				bg={['transparent', 'white']}
@@ -55,7 +51,7 @@ export default function ResetPasswordComponents() {
 						});
 
 						if (error) {
-							toast({
+							toaster.create({
 								title: 'Anmeldung fehlgeschlagen.',
 								description: 'Wir konnten die Anmeldung nicht durchführen.',
 								status: 'error',
@@ -67,7 +63,7 @@ export default function ResetPasswordComponents() {
 							return;
 						}
 
-						toast({
+						toaster.create({
 							title: 'Passwort zurücksetzten.',
 							description: 'Wir haben dir einen Link geschickt um ein neues Passwort zu erstellen.',
 							status: 'success',
@@ -78,23 +74,26 @@ export default function ResetPasswordComponents() {
 					}}>
 					{() => (
 						<Form id="login">
-							<Stack spacing="5">
-								<Field name="email">
+							<Stack gap="5">
+								<FormikField name="email">
 									{({ field, form }: FieldProps) => (
-										<FormControl
+										<Field.Root
 											isRequired
 											isInvalid={(form.errors.email && form.touched.email) as boolean}>
 											<Flex justify="space-between">
-												<FormLabel>Email Addresse</FormLabel>
+												<Field.Label>
+													Email Addresse
+													<Field.RequiredIndicator />
+												</Field.Label>
 												<Link href="/login" color="green.700" fontSize="sm">
 													Zurück zum Login
 												</Link>
 											</Flex>
 											<Input autoComplete="email" {...field} />
-											<FormErrorMessage>{form.errors?.email as string}</FormErrorMessage>
-										</FormControl>
+											<Field.ErrorText>{form.errors?.email as string}</Field.ErrorText>
+										</Field.Root>
 									)}
-								</Field>
+								</FormikField>
 							</Stack>
 						</Form>
 					)}

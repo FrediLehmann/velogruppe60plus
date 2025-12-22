@@ -1,7 +1,9 @@
 'use client';
 
-import { Box, Button, Flex, Text, ToastId, useToast } from '@chakra-ui/react';
+import { Box, Button, Flex, Text, ToastId } from '@chakra-ui/react';
 import { useCallback, useEffect, useRef } from 'react';
+
+import { toaster } from '../ui/toaster';
 
 declare global {
 	interface Window {
@@ -12,29 +14,28 @@ declare global {
 }
 
 export default function Tracking() {
-	const toast = useToast();
 	const toastIdRef = useRef<ToastId>(null);
 
 	const accept = useCallback(() => {
 		window.Tellytics?.acceptTracking(true);
 
 		if (toastIdRef.current) {
-			toast.close(toastIdRef.current);
+			toaster.dismiss(toastIdRef.current);
 		}
-	}, [toast]);
+	}, []);
 
 	const decline = useCallback(() => {
 		window.Tellytics?.acceptTracking(false);
 
 		if (toastIdRef.current) {
-			toast.close(toastIdRef.current);
+			toaster.dismiss(toastIdRef.current);
 		}
-	}, [toast]);
+	}, []);
 
 	useEffect(() => {
 		function handleTrackingLoaded(e: CustomEvent<{ acceptedTracking: boolean }>) {
 			if (!e.detail.acceptedTracking) {
-				toastIdRef.current = toast({
+				toastIdRef.current = toaster.create({
 					position: 'bottom-right',
 					duration: null,
 					render: () => (
@@ -68,7 +69,7 @@ export default function Tracking() {
 		return () => {
 			document.removeEventListener('tellyticsLoaded', handleTrackingLoaded as EventListener);
 		};
-	}, [accept, decline, toast]);
+	}, [accept, decline]);
 
 	return null;
 }

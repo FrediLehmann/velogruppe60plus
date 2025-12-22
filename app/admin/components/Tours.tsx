@@ -40,18 +40,18 @@ const Tours = () => {
 						<IconButton
 							isDisabled={page === 1}
 							aria-label="Previous page"
-							icon={<ChevronLeft boxSize={['4', '6']} />}
-							onClick={() => setPage(page - 1)}
-						/>
+							onClick={() => setPage(page - 1)}>
+							<ChevronLeft boxSize={['4', '6']} />
+						</IconButton>
 					</TrackClickEvent>
 					{start >= 1 && (
 						<IconButton
 							aria-label=""
 							isDisabled
 							px="3"
-							icon={<MoreHorizontal boxSize={['4', '6']} />}
-							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
-						/>
+							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
+							<ChevronRight boxSize={['4', '6']} />
+						</IconButton>
 					)}
 					{[...new Array(totalPages)].slice(start, end).map((_, index) => {
 						const pageIndex = start + index + 1;
@@ -75,17 +75,17 @@ const Tours = () => {
 							aria-label=""
 							isDisabled
 							px="3"
-							icon={<MoreHorizontal boxSize={['4', '6']} />}
-							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
-						/>
+							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
+							<ChevronRight boxSize={['4', '6']} />
+						</IconButton>
 					)}
 					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }} showBox={true}>
 						<IconButton
 							isDisabled={page >= totalPages}
 							aria-label="Next page"
-							icon={<ChevronRight boxSize={['4', '6']} />}
-							onClick={() => setPage(page + 1)}
-						/>
+							onClick={() => setPage(page + 1)}>
+							<ChevronRight boxSize={['4', '6']} />
+						</IconButton>
 					</TrackClickEvent>
 				</ButtonGroup>
 			</Center>

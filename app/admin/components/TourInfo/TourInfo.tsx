@@ -1,11 +1,4 @@
-import {
-	AccordionButton,
-	AccordionIcon,
-	AccordionItem,
-	AccordionPanel,
-	Badge,
-	Flex
-} from '@chakra-ui/react';
+import { Accordion, Badge, Flex } from '@chakra-ui/react';
 
 import { TourView } from '@/components';
 import { Tour } from '@/types/Tours.types';
@@ -14,9 +7,9 @@ import { TourOperations } from './components';
 
 export default function TourInfo(tour: Tour) {
 	return (
-		<AccordionItem>
+		<Accordion.Item>
 			<h2>
-				<AccordionButton>
+				<Accordion.ItemTrigger>
 					<Flex
 						align="center"
 						flex="1"
@@ -36,13 +29,15 @@ export default function TourInfo(tour: Tour) {
 							</Badge>
 						)}
 					</Flex>
-					<AccordionIcon />
-				</AccordionButton>
+					<Accordion.ItemIndicator />
+				</Accordion.ItemTrigger>
 			</h2>
-			<AccordionPanel>
-				<TourOperations tour={tour} />
-				<TourView tour={tour} />
-			</AccordionPanel>
-		</AccordionItem>
+			<Accordion.ItemContent>
+				<Accordion.ItemBody>
+					<TourOperations tour={tour} />
+					<TourView tour={tour} />
+				</Accordion.ItemBody>
+			</Accordion.ItemContent>
+		</Accordion.Item>
 	);
 }

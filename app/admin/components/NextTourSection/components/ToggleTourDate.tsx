@@ -1,18 +1,9 @@
-import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogOverlay,
-	Button,
-	useDisclosure,
-	useToast
-} from '@chakra-ui/react';
+import { Button, Dialog, useDisclosure } from '@chakra-ui/react';
 import { useContext, useRef, useState } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { Calendar, Slash } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -20,8 +11,7 @@ import { createClient } from '@/lib/supabase/client';
 export default function ToggleTourDate({ id, isCanceled }: { id: number; isCanceled: boolean }) {
 	const { load } = useContext(AdminTourListContext);
 	const supabaseClient = createClient();
-	const toast = useToast();
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const { open, onOpen, onClose } = useDisclosure();
 	const cancelRef = useRef<HTMLButtonElement>(null!);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,7 +23,7 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			.eq('id', id);
 
 		if (error)
-			toast({
+			toaster.create({
 				title: 'Speichern fehlgeschlagen.',
 				description: 'Tourdaten konnte nicht gespeichert werden.',
 				status: 'error',
@@ -54,20 +44,22 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			<TrackClickEvent
 				event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
 				showBox={true}>
-				<Button
-					leftIcon={isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
-					onClick={onOpen}>
+				<Button onClick={onOpen}>
+					{isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
 					{isCanceled ? 'Aktivieren' : 'Absagen'}
 				</Button>
 			</TrackClickEvent>
-			<AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
-				<AlertDialogOverlay>
-					<AlertDialogContent>
-						<AlertDialogHeader>{isCanceled ? 'Tour Aktivieren' : 'Tour Absagen'}</AlertDialogHeader>
-						<AlertDialogBody>
+			<Dialog.Root open={open} leastDestructiveRef={cancelRef} onClose={onClose}>
+				<Dialog.Backdrop />
+				<Dialog.Positioner>
+					<Dialog.Content>
+						<Dialog.Header>
+							<Dialog.Title>{isCanceled ? 'Tour Aktivieren' : 'Tour Absagen'}</Dialog.Title>
+						</Dialog.Header>
+						<Dialog.Body>
 							Wollen Sie die nächste Tour wirklich {isCanceled ? 'wieder aktivieren' : 'absagen'}?
-						</AlertDialogBody>
-						<AlertDialogFooter>
+						</Dialog.Body>
+						<Dialog.Footer>
 							<TrackClickEvent
 								event={{
 									name: `CANCEL_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
@@ -84,10 +76,10 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 									{isCanceled ? 'Aktivieren' : 'Absagen'}
 								</Button>
 							</TrackClickEvent>
-						</AlertDialogFooter>
-					</AlertDialogContent>
-				</AlertDialogOverlay>
-			</AlertDialog>
+						</Dialog.Footer>
+					</Dialog.Content>
+				</Dialog.Positioner>
+			</Dialog.Root>
 		</>
 	);
 }

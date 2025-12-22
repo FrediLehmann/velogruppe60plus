@@ -1,13 +1,6 @@
 'use client';
 
-import {
-	Button,
-	Image as ChakraImage,
-	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormLabel
-} from '@chakra-ui/react';
+import { Button, Image as ChakraImage, Field, Flex } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
 import { useMemo, useRef } from 'react';
 
@@ -39,12 +32,12 @@ export default function UploadInput({
 	}, [supabaseClient.storage, fieldProps.field.value]);
 
 	return (
-		<FormControl
+		<Field.Root
 			isInvalid={
 				(fieldProps.form.errors[fieldProps.field.name] &&
 					fieldProps.form.touched[fieldProps.field.name]) as boolean
 			}>
-			<FormLabel>{label}</FormLabel>
+			<Field.Label>{label}</Field.Label>
 			<input
 				type="file"
 				accept={acceptedFileTypes}
@@ -92,16 +85,16 @@ export default function UploadInput({
 				<TrackClickEvent event={{ name: 'UPLOAD_BUTTON_CLICK' }}>
 					<Button
 						variant="outline"
-						leftIcon={<Upload boxSize="5" />}
 						onClick={() => {
 							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
 							inputRef?.current?.click();
 						}}>
+						<Upload boxSize="5" />
 						{buttonLabel}
 					</Button>
 				</TrackClickEvent>
 			</Flex>
-			<FormErrorMessage>{fieldProps.form.errors[fieldProps.field.name] as string}</FormErrorMessage>
-		</FormControl>
+			<Field.ErrorText>{fieldProps.form.errors[fieldProps.field.name] as string}</Field.ErrorText>
+		</Field.Root>
 	);
 }

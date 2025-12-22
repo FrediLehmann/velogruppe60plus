@@ -1,22 +1,12 @@
 'use client';
 
-import {
-	Button,
-	ButtonGroup,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	useToast
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Dialog } from '@chakra-ui/react';
 import { useCallback, useContext, useState } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TourForm } from '@/app/admin/components';
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { Json } from '@/types/Database.types';
@@ -36,7 +26,6 @@ export default function EditTour({
 	const { load } = useContext(AdminTourListContext);
 
 	const supabaseClient = createClient();
-	const toast = useToast();
 
 	const editTour = useCallback(
 		async ({
@@ -63,7 +52,7 @@ export default function EditTour({
 					.remove([tour.image_data.path]);
 
 				if (imageRemovalError) {
-					toast({
+					toaster.create({
 						title: 'Bild upload fehlgeschlagen.',
 						description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
 						status: 'error',
@@ -83,7 +72,7 @@ export default function EditTour({
 					});
 
 				if (imageUploadError) {
-					toast({
+					toaster.create({
 						title: 'Bild upload fehlgeschlagen.',
 						description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
 						status: 'error',
@@ -122,7 +111,7 @@ export default function EditTour({
 				.eq('id', tour.id);
 
 			if (error) {
-				toast({
+				toaster.create({
 					title: 'Speichern fehlgeschlagen.',
 					description: 'Tour konnte nicht gespeichert werden.',
 					status: 'error',
@@ -134,7 +123,7 @@ export default function EditTour({
 				return;
 			}
 
-			toast({
+			toaster.create({
 				title: 'Tour gespeichert.',
 				description: 'Ihre Tour wurde gespeichert.',
 				status: 'success',
@@ -149,51 +138,59 @@ export default function EditTour({
 			onClose();
 			load();
 		},
-		[load, onClose, supabaseClient, toast, tour.id, tour.image_data.path]
+		[load, onClose, supabaseClient, tour.id, tour.image_data.path]
 	);
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} size="xl">
-			<ModalOverlay />
-			<ModalContent>
-				<ModalCloseButton />
-				<ModalHeader>Tour bearbeiten</ModalHeader>
-				<ModalBody>
-					<TourForm
-						formName="editTour"
-						initialValues={{
-							name: tour.name,
-							description: tour.description,
-							route: tour.route,
-							mapLink: tour.mapUrl,
-							mapImage: tour.image_data.path,
-							mapImageData: tour.image_data,
-							distance: tour.distance,
-							ascent: tour.ascent,
-							descent: tour.descent,
-							duration: tour.duration,
-							start: tour.startPoint,
-							end: tour.endPoint,
-							pause: tour.pause
-						}}
-						submit={editTour}
-					/>
-				</ModalBody>
-				<ModalFooter>
-					<ButtonGroup>
-						<TrackClickEvent event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
-							<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
-								Abbrechen
-							</Button>
-						</TrackClickEvent>
-						<TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
-							<Button colorScheme="mapGreen" type="submit" form="editTour" isLoading={isSubmitting}>
-								Speichern
-							</Button>
-						</TrackClickEvent>
-					</ButtonGroup>
-				</ModalFooter>
-			</ModalContent>
-		</Modal>
+		<Dialog.Root open={isOpen} onClose={onClose} size="xl">
+			<Dialog.Backdrop />
+			<Dialog.Positioner>
+				<Dialog.Content>
+					<Dialog.CloseTrigger />
+					<Dialog.Header>
+						<Dialog.Title>Tour bearbeiten</Dialog.Title>
+					</Dialog.Header>
+					<Dialog.Body>
+						<TourForm
+							formName="editTour"
+							initialValues={{
+								name: tour.name,
+								description: tour.description,
+								route: tour.route,
+								mapLink: tour.mapUrl,
+								mapImage: tour.image_data.path,
+								mapImageData: tour.image_data,
+								distance: tour.distance,
+								ascent: tour.ascent,
+								descent: tour.descent,
+								duration: tour.duration,
+								start: tour.startPoint,
+								end: tour.endPoint,
+								pause: tour.pause
+							}}
+							submit={editTour}
+						/>
+					</Dialog.Body>
+					<Dialog.Footer>
+						<ButtonGroup>
+							<TrackClickEvent event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
+								<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
+									Abbrechen
+								</Button>
+							</TrackClickEvent>
+							<TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
+								<Button
+									colorScheme="mapGreen"
+									type="submit"
+									form="editTour"
+									isLoading={isSubmitting}>
+									Speichern
+								</Button>
+							</TrackClickEvent>
+						</ButtonGroup>
+					</Dialog.Footer>
+				</Dialog.Content>
+			</Dialog.Positioner>
+		</Dialog.Root>
 	);
 }

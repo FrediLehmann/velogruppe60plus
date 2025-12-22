@@ -1,4 +1,4 @@
-import { Heading, ListItem, OrderedList, Text, UnorderedList } from '@chakra-ui/react';
+import { Heading, List, Text } from '@chakra-ui/react';
 
 export const metadata = {
 	title: 'Velogruppe 60+ Sensetal | Unfallverhalten',
@@ -17,69 +17,69 @@ export default function Unfallverhlaten() {
 				entscheidend, um die Situation sicher zu bewältigen. Im Folgenden wird eine strukturierte
 				Anleitung für das Verhalten im Falle eines Unfalls dargestellt.
 			</Text>
-			<OrderedList fontWeight="semibold" my="4" px="6">
-				<ListItem>
+			<List.Root as="ol" fontWeight="semibold" my="4" px="6">
+				<List.Item>
 					Ruhe bewahren und Überblick verschaffen
 					<Text as="span" fontWeight="normal" ml="1">
 						Das eigene Verhalten hat massgeblichen Einfluss auf den weiteren Verlauf der
 						Unfallbewältigung. Ruhe zu bewahren und sich zu konzentrieren, ist daher essenziell.
 						Tiefe Atemzüge helfen dabei, Gedanken zu ordnen und die Situation klar zu erfassen.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Notruf verständigen
 					<Text as="span" fontWeight="normal" ml="1">
 						Im Falle von Verletzungen ist der umgehende Notruf (in der Schweiz: 144) zu
 						kontaktieren. Dabei sind der Unfallort, die Art des Vorfalls sowie die Schwere der
 						Verletzungen präzise zu beschreiben.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Absicherung der Unfallstelle
 					<Text as="span" fontWeight="normal" ml="1">
 						Die Unfallstelle ist, sofern möglich, abzusichern, um Folgeunfälle zu vermeiden. Dies
 						kann durch das Abstellen des eBikes an einem sicheren Ort oder das Platzieren von
 						Warndreiecken erfolgen.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Erste Hilfe leisten
 					<Text as="span" fontWeight="normal" ml="1">
 						Die Versorgung von Verletzten hat oberste Priorität. Blutungen sollten, soweit möglich,
 						gestoppt, Verletzungen stabilisiert und betroffene Personen beruhigt werden.
 						Gleichzeitig ist darauf zu achten, die eigene Sicherheit nicht zu gefährden.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Unterstützung annehmen
 					<Text as="span" fontWeight="normal" ml="1">
 						Hilfsangebote von anwesenden Personen sollten dankbar angenommen werden. Diese
 						Unterstützung kann bei der Absicherung, der Ersthilfe oder der Alarmierung des
 						Rettungsdienstes von entscheidender Bedeutung sein.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Anleitung durch Fachkräfte folgen
 					<Text as="span" fontWeight="normal" ml="1">
 						Nach Eintreffen der Rettungskräfte ist es wichtig, deren Anweisungen zu folgen. Diese
 						sind speziell geschult und in der Lage, die Situation optimal zu beurteilen und
 						entsprechende Massnahmen einzuleiten.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Dokumentation des Unfalls
 					<Text as="span" fontWeight="normal" ml="1">
 						Zur späteren Klärung ist eine umfassende Dokumentation ratsam:
-						<UnorderedList>
-							<ListItem>Fotos der Unfallstelle, des eBikes und etwaiger Schäden.</ListItem>
-							<ListItem>
+						<List.Root>
+							<List.Item>Fotos der Unfallstelle, des eBikes und etwaiger Schäden.</List.Item>
+							<List.Item>
 								Notizen zu relevanten Details wie Unfallzeit, Wetterbedingungen und den genauen
 								Hergang.
-							</ListItem>
-						</UnorderedList>
+							</List.Item>
+						</List.Root>
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Meldung an Polizei und Versicherung
 					<Text as="span" fontWeight="normal" ml="1">
 						Bei schweren Unfällen, Personenschäden oder erheblichen Sachschäden ist die Polizei (in
@@ -87,8 +87,8 @@ export default function Unfallverhlaten() {
 						ist später für die Schadensregulierung erforderlich. Ebenso ist die Versicherung zeitnah
 						zu informieren, wobei alle relevanten Unterlagen bereitzuhalten sind.
 					</Text>
-				</ListItem>
-			</OrderedList>
+				</List.Item>
+			</List.Root>
 			<Text>
 				Eine klare Struktur und umsichtiges Handeln im Falle eines eBike-Unfalls sind essenziell, um
 				Verletzungen zu minimieren und die Klärung des Vorfalls zu unterstützen. Die oben genannten
@@ -126,40 +126,40 @@ export default function Unfallverhlaten() {
 				Verhaltenskodex nach einem Unfall
 			</Heading>
 			<Text>Nach einem Unfall sollten folgende Verhaltensregeln beachtet werden:</Text>
-			<OrderedList fontWeight="semibold" my="4" px="6">
-				<ListItem>
+			<List.Root as="ol" fontWeight="semibold" my="4" px="6">
+				<List.Item>
 					Sicherheit gewährleisten:
 					<Text as="span" fontWeight="normal" ml="1">
 						Stellen Sie sicher, dass alle Beteiligten in Sicherheit sind und holen Sie
 						gegebenenfalls medizinische Hilfe.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Unfall melden:
 					<Text as="span" fontWeight="normal" ml="1">
 						Informieren Sie die Polizei und/oder den Unfallversicherer.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Beweissicherung:
 					<Text as="span" fontWeight="normal" ml="1">
 						Machen Sie Fotos von der Unfallstelle und sichern Sie relevante Beweise.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Keine Schuldzuweisungen:
 					<Text as="span" fontWeight="normal" ml="1">
 						Vermeiden Sie Vorwürfe und Schuldzuweisungen.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Kooperation:
 					<Text as="span" fontWeight="normal" ml="1">
 						Arbeiten Sie mit den Ermittlungsbehörden und Versicherungen zusammen, um den Unfall
 						schnell aufzuklären.
 					</Text>
-				</ListItem>
-			</OrderedList>
+				</List.Item>
+			</List.Root>
 			<Text fontWeight="semibold">
 				Diese Regeln helfen, den Unfall sachgerecht zu klären und Konflikte zu vermeiden.
 			</Text>

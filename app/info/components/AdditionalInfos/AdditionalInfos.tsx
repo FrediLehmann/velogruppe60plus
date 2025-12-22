@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Button, Flex, Heading } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Link } from '@chakra-ui/react';
 
 import { TrackClickEvent } from '@/components';
 import { ArrowRight } from '@/icons';
@@ -17,18 +16,21 @@ export default function AdditionalInfos() {
 			</Heading>
 			<Flex flexDirection={['column', 'row']} gap={['2', '6']}>
 				<TrackClickEvent event={{ name: 'TIMELINE_PAGE_LINK_CLICK' }}>
-					<Button href="/ablauf" as={Link} rightIcon={<ArrowRight boxSize="5" />}>
+					<Button href="/ablauf" as={Link}>
 						Ablauf
+						<ArrowRight boxSize="5" />
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: 'ACCIDENT_PAGE_LINK_CLICK' }}>
-					<Button href="/unfallverhalten" as={Link} rightIcon={<ArrowRight boxSize="5" />}>
+					<Button href="/unfallverhalten" as={Link}>
 						Unfallverhalten
+						<ArrowRight boxSize="5" />
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: 'EBIKE_PAGE_LINK_CLICK' }}>
-					<Button href="/e-bikes" as={Link} rightIcon={<ArrowRight boxSize="5" />}>
+					<Button href="/e-bikes" as={Link}>
 						Gesetzliche Regelung E-Bikes
+						<ArrowRight boxSize="5" />
 					</Button>
 				</TrackClickEvent>
 			</Flex>

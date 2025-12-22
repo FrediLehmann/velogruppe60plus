@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
+import { Box, Flex, Grid, GridItem, Heading, Link, Text } from '@chakra-ui/react';
 
 import { ArrowRight, Clock, External, MessageCircle } from '@/icons';
 
@@ -104,7 +103,7 @@ export default function TourInfo() {
 								display="block"
 								mt="2"
 								color="green.700"
-								isExternal>
+								target="_blank">
 								Der WhatsApp-Gruppe beitreten <External mx="2px" boxSize="4" />
 							</Link>
 						</Box>

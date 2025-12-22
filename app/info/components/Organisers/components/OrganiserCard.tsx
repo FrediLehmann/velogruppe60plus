@@ -55,18 +55,14 @@ export default function OrganiserCard({
 						w="50%"
 						variant="ghost"
 						borderRight="1px solid"
-						borderColor="gray.200"
-						leftIcon={<Mail boxSize="5" />}>
+						borderColor="gray.200">
+						<Mail boxSize="5" />
 						Email
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: `CALL_${name.toUpperCase()}_BUTTON_CLICK` }}>
-					<Button
-						as="a"
-						href={`tel:${phone}`}
-						w="50%"
-						variant="ghost"
-						leftIcon={<Phone boxSize="5" />}>
+					<Button as="a" href={`tel:${phone}`} w="50%" variant="ghost">
+						<Phone boxSize="5" />
 						Telefon
 					</Button>
 				</TrackClickEvent>

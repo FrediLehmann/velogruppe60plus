@@ -1,19 +1,11 @@
 'use client';
 
-import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogOverlay,
-	Button,
-	useToast
-} from '@chakra-ui/react';
+import { Button, Dialog } from '@chakra-ui/react';
 import { useContext, useRef } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 
@@ -33,8 +25,6 @@ export default function DeleteTour({
 	const cancelRef = useRef<HTMLButtonElement>(null!);
 	const { load } = useContext(AdminTourListContext);
 
-	const toast = useToast();
-
 	const supabaseClient = createClient();
 
 	const deleteTour = async () => {
@@ -42,7 +32,7 @@ export default function DeleteTour({
 		const { error } = await supabaseClient.from('touren').delete().eq('id', id);
 
 		if (error)
-			toast({
+			toaster.create({
 				title: 'Fehler beim löschen der Tour.',
 				description: 'Tour konnte nicht gelöscht werden. Versuchen Sie es später erneut.',
 				status: 'error',
@@ -58,14 +48,15 @@ export default function DeleteTour({
 	};
 
 	return (
-		<AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
-			<AlertDialogOverlay>
-				<AlertDialogContent>
-					<AlertDialogHeader fontSize="lg" fontWeight="bold">
-						Tour löschen
-					</AlertDialogHeader>
-					<AlertDialogBody>Soll die Tour &quot;{name}&quot; gelöscht werden?</AlertDialogBody>
-					<AlertDialogFooter>
+		<Dialog.Root open={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} role="alertdialog">
+			<Dialog.Backdrop />
+			<Dialog.Positioner>
+				<Dialog.Content>
+					<Dialog.Header fontSize="lg" fontWeight="bold">
+						<Dialog.Title>Tour löschen</Dialog.Title>
+					</Dialog.Header>
+					<Dialog.Body>Soll die Tour &quot;{name}&quot; gelöscht werden?</Dialog.Body>
+					<Dialog.Footer>
 						<TrackClickEvent event={{ name: 'CANCEL_DELETE_TOUR' }}>
 							<Button ref={cancelRef} onClick={onClose}>
 								Abbrechen
@@ -76,9 +67,9 @@ export default function DeleteTour({
 								Löschen
 							</Button>
 						</TrackClickEvent>
-					</AlertDialogFooter>
-				</AlertDialogContent>
-			</AlertDialogOverlay>
-		</AlertDialog>
+					</Dialog.Footer>
+				</Dialog.Content>
+			</Dialog.Positioner>
+		</Dialog.Root>
 	);
 }

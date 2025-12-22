@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Link, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -63,7 +62,7 @@ export default function Footer() {
 							href="https://github.com/FrediLehmann/velogruppe60plus"
 							as={Link}
 							aria-label="Github"
-							isExternal>
+							target="_blank">
 							Github
 						</Button>
 					</TrackClickEvent>

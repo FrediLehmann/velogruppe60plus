@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { AspectRatio, Box, Flex, Heading, Text } from '@chakra-ui/react';
+import { AspectRatio, Box, Flex, Heading, Link, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 
 import { External } from '@/icons';
@@ -46,7 +45,7 @@ export default function TourView({ tour }: { tour: Tour }) {
 					<Fact label="Kaffeepause" value={tour.pause} />
 				</Flex>
 			</Flex>
-			<Link href={tour.mapUrl} display="block" my="2" isExternal color="green.700">
+			<Link href={tour.mapUrl} display="block" my="2" target="_blank" color="green.700">
 				Auf Schweiz Mobil anschauen <External mx="2px" boxSize="4" />
 			</Link>
 			<AspectRatio

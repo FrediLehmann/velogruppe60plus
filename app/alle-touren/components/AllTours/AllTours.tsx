@@ -1,6 +1,5 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
 import {
 	Box,
 	Button,
@@ -10,6 +9,7 @@ import {
 	Flex,
 	Heading,
 	IconButton,
+	Link,
 	Skeleton,
 	Text
 } from '@chakra-ui/react';
@@ -52,7 +52,8 @@ export default function AllTours() {
 					</Text>
 				</Box>
 				<TrackClickEvent event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
-					<Button href="/print" as={Link} leftIcon={<PrintIcon />}>
+					<Button href="/print" as={Link}>
+						<PrintIcon />
 						Drucken
 					</Button>
 				</TrackClickEvent>
@@ -66,18 +67,16 @@ export default function AllTours() {
 				<ButtonGroup size={['md', 'lg']} variant="outline" isAttached>
 					{/* Previous Page Button - Use Link for crawlability */}
 					{page === 1 ? (
-						<IconButton
-							isDisabled={true}
-							aria-label="Previous page"
-							icon={<ChevronLeft boxSize={['4', '6']} />}
-						/>
+						<IconButton isDisabled={true} aria-label="Previous page">
+							<ChevronLeft boxSize={['4', '6']} />
+						</IconButton>
 					) : (
 						<IconButton
 							as={Link}
 							href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}
-							aria-label="Previous page"
-							icon={<ChevronLeft boxSize={['4', '6']} />}
-						/>
+							aria-label="Previous page">
+							<ChevronLeft boxSize={['4', '6']} />
+						</IconButton>
 					)}
 
 					{start >= 1 && (
@@ -85,9 +84,9 @@ export default function AllTours() {
 							aria-label=""
 							isDisabled
 							px="3"
-							icon={<MoreHorizontal boxSize={['4', '6']} />}
-							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
-						/>
+							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
+							<MoreHorizontal boxSize={['4', '6']} />
+						</IconButton>
 					)}
 
 					{/* Page Number Buttons - Use Links for crawlability */}
@@ -115,25 +114,20 @@ export default function AllTours() {
 							aria-label=""
 							isDisabled
 							px="3"
-							icon={<MoreHorizontal boxSize={['4', '6']} />}
-							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}
-						/>
+							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
+							<MoreHorizontal boxSize={['4', '6']} />
+						</IconButton>
 					)}
 
 					{/* Next Page Button - Use Link for crawlability */}
 					{page >= totalPages ? (
-						<IconButton
-							isDisabled={true}
-							aria-label="Next page"
-							icon={<ChevronRight boxSize={['4', '6']} />}
-						/>
+						<IconButton isDisabled={true} aria-label="Next page">
+							<ChevronRight boxSize={['4', '6']} />
+						</IconButton>
 					) : (
-						<IconButton
-							as={Link}
-							href={`/alle-touren?page=${page + 1}`}
-							aria-label="Next page"
-							icon={<ChevronRight boxSize={['4', '6']} />}
-						/>
+						<IconButton as={Link} href={`/alle-touren?page=${page + 1}`} aria-label="Next page">
+							<ChevronRight boxSize={['4', '6']} />
+						</IconButton>
 					)}
 				</ButtonGroup>
 			</Center>
