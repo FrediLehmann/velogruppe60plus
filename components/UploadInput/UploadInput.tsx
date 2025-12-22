@@ -2,7 +2,7 @@
 
 import { Button, Image as ChakraImage, Field, Flex } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { TrackClickEvent } from '@/components';
 import { Upload } from '@/icons';
@@ -23,8 +23,10 @@ export default function UploadInput({
 }) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const supabaseClient = createClient();
+	const [imageError, setImageError] = useState(false);
 
 	const image = useMemo(() => {
+		setImageError(false);
 		return typeof fieldProps.field.value === 'string'
 			? supabaseClient.storage.from('map-images').getPublicUrl(fieldProps.field.value).data
 					.publicUrl
@@ -33,7 +35,7 @@ export default function UploadInput({
 
 	return (
 		<Field.Root
-			isInvalid={
+			invalid={
 				(fieldProps.form.errors[fieldProps.field.name] &&
 					fieldProps.form.touched[fieldProps.field.name]) as boolean
 			}>
@@ -74,13 +76,19 @@ export default function UploadInput({
 			/>
 			<Flex align="flex-start" gap="6">
 				{fieldProps.field.value && (
-					<ChakraImage
-						borderRadius="md"
-						alt="Bild der Karte"
-						boxSize="125px"
-						fallback={<ImageFallback height="125px" width="125px" />}
-						src={image}
-					/>
+					<>
+						{imageError ? (
+							<ImageFallback height="125px" width="125px" />
+						) : (
+							<ChakraImage
+								borderRadius="md"
+								alt="Bild der Karte"
+								boxSize="125px"
+								src={image}
+								onError={() => setImageError(true)}
+							/>
+						)}
+					</>
 				)}
 				<TrackClickEvent event={{ name: 'UPLOAD_BUTTON_CLICK' }}>
 					<Button

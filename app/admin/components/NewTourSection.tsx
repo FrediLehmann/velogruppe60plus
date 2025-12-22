@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, ButtonGroup, Dialog, Separator, useDisclosure } from '@chakra-ui/react';
+import { Button, ButtonGroup, Dialog, Separator } from '@chakra-ui/react';
 import { useCallback, useContext, useState } from 'react';
 
 import { TrackClickEvent } from '@/components';
@@ -14,8 +14,7 @@ import { TourForm } from '.';
 
 export default function NewTourSection() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-
-	const { open, onOpen, onClose } = useDisclosure();
+	const [open, setOpen] = useState(false);
 
 	const supabaseClient = createClient();
 	const { load } = useContext(AdminTourListContext);
@@ -62,10 +61,9 @@ export default function NewTourSection() {
 				toaster.create({
 					title: 'Speichern fehlgeschlagen.',
 					description: 'Tour konnte nicht gespeichert werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsSubmitting(false);
 				return;
@@ -82,10 +80,9 @@ export default function NewTourSection() {
 				toaster.create({
 					title: 'Bild upload fehlgeschlagen.',
 					description: 'Bild konnte nicht hochgeladen werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsSubmitting(false);
 				return;
@@ -106,29 +103,28 @@ export default function NewTourSection() {
 			toaster.create({
 				title: 'Tour gespeichert.',
 				description: 'Ihre Tour wurde gespeichert.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			setIsSubmitting(false);
-			onClose();
+			setOpen(false);
 			load();
 		},
-		[load, onClose, supabaseClient]
+		[load, supabaseClient]
 	);
 
 	return (
 		<>
 			<TrackClickEvent event={{ name: 'START_CREATE_NEW_TOUR_BUTTON_CLICK' }}>
-				<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={onOpen}>
+				<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={() => setOpen(true)}>
 					Neue Tour erfassen
 					<Plus boxSize="5" />
 				</Button>
 			</TrackClickEvent>
 			<Separator borderColor="gray.500" my="3" />
-			<Dialog.Root>
+			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
 					<Dialog.Content>
@@ -144,7 +140,7 @@ export default function NewTourSection() {
 								<TrackClickEvent
 									event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}
 									showBox={true}>
-									<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
+									<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
 										Abbrechen
 									</Button>
 								</TrackClickEvent>
@@ -153,7 +149,7 @@ export default function NewTourSection() {
 										colorScheme="mapGreen"
 										type="submit"
 										form="createTour"
-										isLoading={isSubmitting}>
+										loading={isSubmitting}>
 										Speichern
 									</Button>
 								</TrackClickEvent>

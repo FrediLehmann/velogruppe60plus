@@ -13,15 +13,11 @@ export default function Tour() {
 	return (
 		<Container as="main" maxW="container.md" mt={['4', '6', '12']}>
 			<TrackClickEvent event={{ name: 'NAVIGATE_BACK_TO_ALL_TOURS_BUTTON_CLICK' }}>
-				<Button
-					href="/alle-touren"
-					as={Link}
-					mb="4"
-					variant="link"
-					color="green.700"
-					alignItems="center">
-					<ArrowLeft boxSize="5" />
-					Zurück zu den Touren
+				<Button asChild mb="4" color="green.700" alignItems="center">
+					<Link href="/alle-touren">
+						<ArrowLeft boxSize="5" />
+						Zurück zu den Touren
+					</Link>
 				</Button>
 			</TrackClickEvent>
 			<Heading as="h1" fontSize={['xl', '2xl']}>

@@ -45,9 +45,7 @@ export default function TourForm({
 					<Stack gap="5">
 						<FormikField name="name">
 							{({ field, form }: FieldProps) => (
-								<Field.Root
-									isRequired
-									isInvalid={(form.errors.name && form.touched.name) as boolean}>
+								<Field.Root required invalid={(form.errors.name && form.touched.name) as boolean}>
 									<Field.Label>
 										Name
 										<Field.RequiredIndicator />
@@ -60,8 +58,8 @@ export default function TourForm({
 						<FormikField name="description">
 							{({ field, form }: FieldProps) => (
 								<Field.Root
-									isRequired
-									isInvalid={(form.errors.description && form.touched.description) as boolean}>
+									required
+									invalid={(form.errors.description && form.touched.description) as boolean}>
 									<Field.Label>
 										Beschreibung
 										<Field.RequiredIndicator />
@@ -73,9 +71,7 @@ export default function TourForm({
 						</FormikField>
 						<FormikField name="route">
 							{({ field, form }: FieldProps) => (
-								<Field.Root
-									isRequired
-									isInvalid={(form.errors.route && form.touched.route) as boolean}>
+								<Field.Root required invalid={(form.errors.route && form.touched.route) as boolean}>
 									<Field.Label>
 										Route
 										<Field.RequiredIndicator />
@@ -88,8 +84,8 @@ export default function TourForm({
 						<FormikField name="mapLink">
 							{({ field, form }: FieldProps) => (
 								<Field.Root
-									isRequired
-									isInvalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
+									required
+									invalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
 									<Field.Label>
 										Url zur Schweiz Mobil Karte
 										<Field.RequiredIndicator />
@@ -113,8 +109,8 @@ export default function TourForm({
 							<FormikField name="start">
 								{({ field, form }: FieldProps) => (
 									<Field.Root
-										isRequired
-										isInvalid={(form.errors.start && form.touched.start) as boolean}>
+										required
+										invalid={(form.errors.start && form.touched.start) as boolean}>
 										<Field.Label>
 											Startpunk
 											<Field.RequiredIndicator />
@@ -126,9 +122,7 @@ export default function TourForm({
 							</FormikField>
 							<FormikField name="end">
 								{({ field, form }: FieldProps) => (
-									<Field.Root
-										isRequired
-										isInvalid={(form.errors.end && form.touched.end) as boolean}>
+									<Field.Root required invalid={(form.errors.end && form.touched.end) as boolean}>
 										<Field.Label>
 											Endpunkt
 											<Field.RequiredIndicator />
@@ -141,9 +135,7 @@ export default function TourForm({
 						</HStack>
 						<FormikField name="pause">
 							{({ field, form }: FieldProps) => (
-								<Field.Root
-									isRequired
-									isInvalid={(form.errors.pause && form.touched.pause) as boolean}>
+								<Field.Root required invalid={(form.errors.pause && form.touched.pause) as boolean}>
 									<Field.Label>
 										Pausenort
 										<Field.RequiredIndicator />
@@ -157,8 +149,8 @@ export default function TourForm({
 							<FormikField name="distance">
 								{({ field, form }: FieldProps) => (
 									<Field.Root
-										isRequired
-										isInvalid={(form.errors.distance && form.touched.distance) as boolean}>
+										required
+										invalid={(form.errors.distance && form.touched.distance) as boolean}>
 										<Field.Label>
 											Distanz
 											<Field.RequiredIndicator />
@@ -171,8 +163,8 @@ export default function TourForm({
 							<FormikField name="duration">
 								{({ field, form }: FieldProps) => (
 									<Field.Root
-										isRequired
-										isInvalid={(form.errors.duration && form.touched.duration) as boolean}>
+										required
+										invalid={(form.errors.duration && form.touched.duration) as boolean}>
 										<Field.Label>
 											Dauer
 											<Field.RequiredIndicator />
@@ -187,8 +179,8 @@ export default function TourForm({
 							<FormikField name="ascent">
 								{({ field, form }: FieldProps) => (
 									<Field.Root
-										isRequired
-										isInvalid={(form.errors.ascent && form.touched.ascent) as boolean}>
+										required
+										invalid={(form.errors.ascent && form.touched.ascent) as boolean}>
 										<Field.Label>
 											Aufstieg
 											<Field.RequiredIndicator />
@@ -201,8 +193,8 @@ export default function TourForm({
 							<FormikField name="descent">
 								{({ field, form }: FieldProps) => (
 									<Field.Root
-										isRequired
-										isInvalid={(form.errors.descent && form.touched.descent) as boolean}>
+										required
+										invalid={(form.errors.descent && form.touched.descent) as boolean}>
 										<Field.Label>Abstieg</Field.Label>
 										<Input {...field} />
 										<Field.ErrorText>{form.errors?.descent as string}</Field.ErrorText>

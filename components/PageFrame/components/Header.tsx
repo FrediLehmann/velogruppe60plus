@@ -11,7 +11,7 @@ export default function Header() {
 			as="header"
 			borderBottom="1px solid"
 			borderColor="gray.200"
-			sx={{ '@media print': { display: 'none' } }}>
+			css={{ '@media print': { display: 'none' } }}>
 			<Container
 				py="4"
 				maxW="container.md"
@@ -27,17 +27,21 @@ export default function Header() {
 					_hover={{ textDecoration: 'none' }}>
 					Velogruppe 60+ Sensetal
 				</Link>
-				<ButtonGroup size="md" variant="ghost" colorScheme="gray" spacing="2" mt={['4', null, '0']}>
+				<ButtonGroup size="md" variant="ghost" colorScheme="gray" gap="2" mt={['4', null, '0']}>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/alle-touren" as="a">
-							<List boxSize={['4', '5']} />
-							Touren
+						<Button asChild>
+							<Link href="/alle-touren">
+								<List boxSize={['4', '5']} />
+								Touren
+							</Link>
 						</Button>
 					</TrackClickEvent>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/info" as="a">
-							<Info boxSize={['4', '5']} />
-							Informationen
+						<Button asChild>
+							<Link href="/info">
+								<Info boxSize={['4', '5']} />
+								Informationen
+							</Link>
 						</Button>
 					</TrackClickEvent>
 				</ButtonGroup>

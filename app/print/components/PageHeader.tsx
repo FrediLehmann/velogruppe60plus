@@ -17,7 +17,7 @@ export default function PageHeader() {
 					fontSize="md"
 					fontWeight="semibold"
 					color="gray.700"
-					sx={{ '@media print': { display: 'none' } }}>
+					css={{ '@media print': { display: 'none' } }}>
 					Alle Touren
 				</Text>
 				<Heading as="h1" size="lg" mb="6">
@@ -25,7 +25,7 @@ export default function PageHeader() {
 				</Heading>
 			</Box>
 			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
-				<Button onClick={printPage} sx={{ '@media print': { display: 'none' } }}>
+				<Button onClick={printPage} css={{ '@media print': { display: 'none' } }}>
 					<Print boxSize="5" />
 					Jetzt Drucken
 				</Button>

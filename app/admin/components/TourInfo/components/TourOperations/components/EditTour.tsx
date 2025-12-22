@@ -55,10 +55,9 @@ export default function EditTour({
 					toaster.create({
 						title: 'Bild upload fehlgeschlagen.',
 						description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
-						status: 'error',
+						type: 'error',
 						duration: 9000,
-						isClosable: true,
-						position: 'top'
+						closable: true
 					});
 
 					setIsSubmitting(false);
@@ -75,10 +74,9 @@ export default function EditTour({
 					toaster.create({
 						title: 'Bild upload fehlgeschlagen.',
 						description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
-						status: 'error',
+						type: 'error',
 						duration: 9000,
-						isClosable: true,
-						position: 'top'
+						closable: true
 					});
 
 					setIsSubmitting(false);
@@ -114,10 +112,9 @@ export default function EditTour({
 				toaster.create({
 					title: 'Speichern fehlgeschlagen.',
 					description: 'Tour konnte nicht gespeichert werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsSubmitting(false);
 				return;
@@ -126,10 +123,9 @@ export default function EditTour({
 			toaster.create({
 				title: 'Tour gespeichert.',
 				description: 'Ihre Tour wurde gespeichert.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			await revalidatePaths(['/alle-touren', '/print', `/tour/${tour.id}`]);
@@ -142,7 +138,10 @@ export default function EditTour({
 	);
 
 	return (
-		<Dialog.Root open={isOpen} onClose={onClose} size="xl">
+		<Dialog.Root
+			open={isOpen}
+			onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+			size="xl">
 			<Dialog.Backdrop />
 			<Dialog.Positioner>
 				<Dialog.Content>
@@ -179,11 +178,7 @@ export default function EditTour({
 								</Button>
 							</TrackClickEvent>
 							<TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
-								<Button
-									colorScheme="mapGreen"
-									type="submit"
-									form="editTour"
-									isLoading={isSubmitting}>
+								<Button colorScheme="mapGreen" type="submit" form="editTour" loading={isSubmitting}>
 									Speichern
 								</Button>
 							</TrackClickEvent>

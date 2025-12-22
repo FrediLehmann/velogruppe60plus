@@ -1,4 +1,4 @@
-import { Button, Center, Flex, Text, chakra } from '@chakra-ui/react';
+import { Button, Center, Flex, Link, Text, chakra } from '@chakra-ui/react';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import NextImage from 'next/image';
 
@@ -38,7 +38,7 @@ export default function OrganiserCard({
 					src={image}
 					width="100px"
 					height="100px"
-					sx={{ filter: 'grayscale(60%)' }}
+					css={{ filter: 'grayscale(60%)' }}
 				/>
 				<Text fontSize="lg" fontWeight="semibold" mt="2" mb="1">
 					{name}
@@ -49,21 +49,19 @@ export default function OrganiserCard({
 			</Center>
 			<Flex borderTop="1px solid" borderColor="gray.200" mt="6">
 				<TrackClickEvent event={{ name: 'SEND_EMAIL_BUTTON_CLICK' }}>
-					<Button
-						as="a"
-						href="mailto:velogruppe60plus-sensetal@bluewin.ch"
-						w="50%"
-						variant="ghost"
-						borderRight="1px solid"
-						borderColor="gray.200">
-						<Mail boxSize="5" />
-						Email
+					<Button asChild w="50%" variant="ghost" borderRight="1px solid" borderColor="gray.200">
+						<Link href="mailto:velogruppe60plus-sensetal@bluewin.ch">
+							<Mail boxSize="5" />
+							Email
+						</Link>
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: `CALL_${name.toUpperCase()}_BUTTON_CLICK` }}>
-					<Button as="a" href={`tel:${phone}`} w="50%" variant="ghost">
-						<Phone boxSize="5" />
-						Telefon
+					<Button asChild w="50%" variant="ghost">
+						<Link href={`tel:${phone}`}>
+							<Phone boxSize="5" />
+							Telefon
+						</Link>
 					</Button>
 				</TrackClickEvent>
 			</Flex>

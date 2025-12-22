@@ -29,7 +29,7 @@ export default function CurrentTour({
 							Aktuelle Tour
 						</Badge>
 					)}
-					<Text noOfLines={next_tour ? 2 : 3}>{description}</Text>
+					<Text lineClamp={next_tour ? 2 : 3}>{description}</Text>
 				</Box>
 			</Flex>
 			<Flex wrap="wrap" gap="4" mt="2">

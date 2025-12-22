@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, Dialog } from '@chakra-ui/react';
-import { useContext, useRef } from 'react';
+import { useContext } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
@@ -22,7 +22,6 @@ export default function DeleteTour({
 	isOpen: boolean;
 	onClose: () => void;
 }) {
-	const cancelRef = useRef<HTMLButtonElement>(null!);
 	const { load } = useContext(AdminTourListContext);
 
 	const supabaseClient = createClient();
@@ -35,10 +34,9 @@ export default function DeleteTour({
 			toaster.create({
 				title: 'Fehler beim löschen der Tour.',
 				description: 'Tour konnte nicht gelöscht werden. Versuchen Sie es später erneut.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 		await revalidatePaths(['/alle-touren', '/print']);
@@ -48,7 +46,10 @@ export default function DeleteTour({
 	};
 
 	return (
-		<Dialog.Root open={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} role="alertdialog">
+		<Dialog.Root
+			open={isOpen}
+			onOpenChange={(e: { open: boolean }) => !e.open && onClose()}
+			role="alertdialog">
 			<Dialog.Backdrop />
 			<Dialog.Positioner>
 				<Dialog.Content>
@@ -58,9 +59,7 @@ export default function DeleteTour({
 					<Dialog.Body>Soll die Tour &quot;{name}&quot; gelöscht werden?</Dialog.Body>
 					<Dialog.Footer>
 						<TrackClickEvent event={{ name: 'CANCEL_DELETE_TOUR' }}>
-							<Button ref={cancelRef} onClick={onClose}>
-								Abbrechen
-							</Button>
+							<Button onClick={onClose}>Abbrechen</Button>
 						</TrackClickEvent>
 						<TrackClickEvent event={{ name: 'DELETE_TOUR' }}>
 							<Button colorScheme="red" onClick={deleteTour} ml={3}>

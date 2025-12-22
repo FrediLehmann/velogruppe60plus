@@ -44,7 +44,7 @@ export default function Footer() {
 			py="3"
 			borderTop="1px solid"
 			borderColor="gray.200"
-			sx={{ '@media print': { display: 'none' } }}>
+			css={{ '@media print': { display: 'none' } }}>
 			<Container
 				maxW="container.md"
 				display="flex"
@@ -56,14 +56,12 @@ export default function Footer() {
 					<Text>© Copyright {new Date().getFullYear()} by Frederic Lehmann,</Text>
 					<Text>all rights reserved.</Text>
 				</Box>
-				<ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
+				<ButtonGroup gap="3" size="xs" colorScheme="black">
 					<TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-						<Button
-							href="https://github.com/FrediLehmann/velogruppe60plus"
-							as={Link}
-							aria-label="Github"
-							target="_blank">
-							Github
+						<Button asChild>
+							<Link href="https://github.com/FrediLehmann/velogruppe60plus" target="_blank">
+								Github
+							</Link>
 						</Button>
 					</TrackClickEvent>
 					{signedIn && (
@@ -79,14 +77,14 @@ export default function Footer() {
 					)}
 					{signedIn ? (
 						<TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }} showBox={true}>
-							<Button href="/admin" as={Link}>
-								Admin
+							<Button asChild>
+								<Link href="/admin">Admin</Link>
 							</Button>
 						</TrackClickEvent>
 					) : (
 						<TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }} showBox={true}>
-							<Button href="/login" as={Link}>
-								Login
+							<Button asChild>
+								<Link href="/login">Login</Link>
 							</Button>
 						</TrackClickEvent>
 					)}

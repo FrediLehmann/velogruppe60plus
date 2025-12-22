@@ -16,21 +16,27 @@ export default function AdditionalInfos() {
 			</Heading>
 			<Flex flexDirection={['column', 'row']} gap={['2', '6']}>
 				<TrackClickEvent event={{ name: 'TIMELINE_PAGE_LINK_CLICK' }}>
-					<Button href="/ablauf" as={Link}>
-						Ablauf
-						<ArrowRight boxSize="5" />
+					<Button asChild>
+						<Link href="/ablauf">
+							Ablauf
+							<ArrowRight boxSize="5" />
+						</Link>
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: 'ACCIDENT_PAGE_LINK_CLICK' }}>
-					<Button href="/unfallverhalten" as={Link}>
-						Unfallverhalten
-						<ArrowRight boxSize="5" />
+					<Button asChild>
+						<Link href="/unfallverhalten">
+							Unfallverhalten
+							<ArrowRight boxSize="5" />
+						</Link>
 					</Button>
 				</TrackClickEvent>
 				<TrackClickEvent event={{ name: 'EBIKE_PAGE_LINK_CLICK' }}>
-					<Button href="/e-bikes" as={Link}>
-						Gesetzliche Regelung E-Bikes
-						<ArrowRight boxSize="5" />
+					<Button asChild>
+						<Link href="/e-bikes">
+							Gesetzliche Regelung E-Bikes
+							<ArrowRight boxSize="5" />
+						</Link>
 					</Button>
 				</TrackClickEvent>
 			</Flex>

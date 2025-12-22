@@ -53,10 +53,9 @@ export default function AdminProvider({
 			toaster.create({
 				title: 'Fehler beim laden der Touren.',
 				description: 'Tour konnte nicht geladen werden. Versuchen Sie es später erneut.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 			return;
 		}
@@ -94,10 +93,9 @@ export default function AdminProvider({
 				toaster.create({
 					title: 'Fehler beim speichern der nächsten Tour.',
 					description: 'Es ist ein Fehler aufgetreten beim speichern der nächsten Tour.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				return;
 			}
@@ -112,10 +110,9 @@ export default function AdminProvider({
 					toaster.create({
 						title: 'Fehler beim speichern.',
 						description: 'Aktuelle Tour konnte nicht entfernt werden.',
-						status: 'error',
+						type: 'error',
 						duration: 9000,
-						isClosable: true,
-						position: 'top'
+						closable: true
 					});
 					return;
 				}
@@ -124,10 +121,9 @@ export default function AdminProvider({
 			toaster.create({
 				title: 'Nächste Tour festgelegt.',
 				description: 'Die nächste Tour wurde erfolgreich festgelegt.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			load();
@@ -145,20 +141,18 @@ export default function AdminProvider({
 				toaster.create({
 					title: 'Fehler beim publizieren.',
 					description: 'Aktuelle Tour konnte nicht Veröffentlicht werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 			}
 
 			toaster.create({
 				title: 'Veröffentlichung geändert.',
 				description: 'Der Veröffentlichungsstatus wurde erfolgreich geändert.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			load();

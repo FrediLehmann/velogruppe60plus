@@ -1,13 +1,4 @@
-import {
-	Button,
-	ButtonGroup,
-	Checkbox,
-	Dialog,
-	Field,
-	Input,
-	Stack,
-	useDisclosure
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Checkbox, Dialog, Field, Input, Stack } from '@chakra-ui/react';
 import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { useContext, useMemo, useState } from 'react';
 import { boolean, object, string } from 'yup';
@@ -25,7 +16,7 @@ export default function EditTourDate() {
 	const supabaseClient = createClient();
 	const { tourDate, load } = useContext(AdminTourListContext);
 	const [isSubmitting, setIsSubmitting] = useState(false);
-	const { open, onOpen, onClose } = useDisclosure();
+	const [open, setOpen] = useState(false);
 
 	const dateString = useMemo(() => {
 		const date = new Date(tourDate.tour_date || '');
@@ -54,15 +45,14 @@ export default function EditTourDate() {
 			toaster.create({
 				title: 'Speichern fehlgeschlagen.',
 				description: 'Tourdaten konnte nicht gespeichert werden.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 		await revalidatePaths(['/', `/tour/${tourDate.id}`]);
 
-		onClose();
+		setOpen(false);
 		setIsSubmitting(false);
 		load();
 	};
@@ -70,12 +60,12 @@ export default function EditTourDate() {
 	return (
 		<>
 			<TrackClickEvent event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }} showBox={true}>
-				<Button onClick={onOpen}>
+				<Button onClick={() => setOpen(true)}>
 					<Edit boxSize="5" />
 					Ändern
 				</Button>
 			</TrackClickEvent>
-			<Dialog.Root open={open} onClose={onClose}>
+			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
 					<Dialog.Content>
@@ -99,8 +89,8 @@ export default function EditTourDate() {
 										<FormikField name="tour_date">
 											{({ field, form }: FieldProps) => (
 												<Field.Root
-													isRequired
-													isInvalid={(form.errors.tour_date && form.touched.tour_date) as boolean}>
+													required
+													invalid={(form.errors.tour_date && form.touched.tour_date) as boolean}>
 													<Field.Label>
 														Tour Datum
 														<Field.RequiredIndicator />
@@ -113,12 +103,16 @@ export default function EditTourDate() {
 										<FormikField name="halfday_tour">
 											{({ field, form }: FieldProps) => (
 												<Field.Root
-													isInvalid={
+													invalid={
 														(form.errors.halfday_tour && form.touched.halfday_tour) as boolean
 													}>
-													<Checkbox colorScheme="green" isChecked={field.value} {...field}>
-														Halbtagestour
-													</Checkbox>
+													<Checkbox.Root colorScheme="green" checked={field.value} {...field}>
+														<Checkbox.HiddenInput />
+														<Checkbox.Control>
+															<Checkbox.Indicator />
+															Halbtagestour
+														</Checkbox.Control>
+													</Checkbox.Root>
 													<Field.ErrorText>{form.errors?.halfday_tour as string}</Field.ErrorText>
 												</Field.Root>
 											)}
@@ -132,7 +126,7 @@ export default function EditTourDate() {
 								<TrackClickEvent
 									event={{ name: 'CANCEL_EDIT_TOUR_DATE_BUTTON_CLICK' }}
 									showBox={true}>
-									<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
+									<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
 										Abbrechen
 									</Button>
 								</TrackClickEvent>
@@ -143,7 +137,7 @@ export default function EditTourDate() {
 										colorScheme="mapGreen"
 										type="submit"
 										form={EDIT_FORM}
-										isLoading={isSubmitting}>
+										loading={isSubmitting}>
 										Speichern
 									</Button>
 								</TrackClickEvent>

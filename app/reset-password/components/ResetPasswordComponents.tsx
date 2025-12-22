@@ -54,10 +54,9 @@ export default function ResetPasswordComponents() {
 							toaster.create({
 								title: 'Anmeldung fehlgeschlagen.',
 								description: 'Wir konnten die Anmeldung nicht durchführen.',
-								status: 'error',
+								type: 'error',
 								duration: 9000,
-								isClosable: true,
-								position: 'top'
+								closable: true
 							});
 							setIsSubmitting(false);
 							return;
@@ -66,10 +65,9 @@ export default function ResetPasswordComponents() {
 						toaster.create({
 							title: 'Passwort zurücksetzten.',
 							description: 'Wir haben dir einen Link geschickt um ein neues Passwort zu erstellen.',
-							status: 'success',
+							type: 'success',
 							duration: 9000,
-							isClosable: true,
-							position: 'top'
+							closable: true
 						});
 					}}>
 					{() => (
@@ -78,8 +76,8 @@ export default function ResetPasswordComponents() {
 								<FormikField name="email">
 									{({ field, form }: FieldProps) => (
 										<Field.Root
-											isRequired
-											isInvalid={(form.errors.email && form.touched.email) as boolean}>
+											required
+											invalid={(form.errors.email && form.touched.email) as boolean}>
 											<Flex justify="space-between">
 												<Field.Label>
 													Email Addresse
@@ -99,7 +97,7 @@ export default function ResetPasswordComponents() {
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" isLoading={isSubmitting}>
+					<Button type="submit" form="login" colorScheme="mapGreen" loading={isSubmitting}>
 						Zurücksetzten
 					</Button>
 				</TrackClickEvent>

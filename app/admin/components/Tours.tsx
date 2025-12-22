@@ -30,15 +30,15 @@ const Tours = () => {
 
 	if (tours.length === 0) return <Skeleton h="xl" />;
 	return (
-		<Accordion allowMultiple mt="8">
+		<Accordion.Root multiple mt="8">
 			{tours?.map((tour, index) => (
 				<TourInfo key={index} {...tour} />
 			))}
 			<Center mt="8">
-				<ButtonGroup size={['md', 'lg']} variant="outline" isAttached>
+				<ButtonGroup size={['md', 'lg']} variant="outline" attached>
 					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_PREV' }} showBox={true}>
 						<IconButton
-							isDisabled={page === 1}
+							disabled={page === 1}
 							aria-label="Previous page"
 							onClick={() => setPage(page - 1)}>
 							<ChevronLeft boxSize={['4', '6']} />
@@ -47,7 +47,7 @@ const Tours = () => {
 					{start >= 1 && (
 						<IconButton
 							aria-label=""
-							isDisabled
+							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
 							<ChevronRight boxSize={['4', '6']} />
@@ -62,7 +62,7 @@ const Tours = () => {
 								event={{ name: `ADMIN_PAGINATION_PAGE_${index}` }}>
 								<Button
 									key={pageIndex}
-									isDisabled={page === pageIndex}
+									disabled={page === pageIndex}
 									bg={page === pageIndex ? 'gray.100' : 'transparent'}
 									onClick={() => page !== pageIndex && setPage(pageIndex)}>
 									{pageIndex}
@@ -73,7 +73,7 @@ const Tours = () => {
 					{end < totalPages && (
 						<IconButton
 							aria-label=""
-							isDisabled
+							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
 							<ChevronRight boxSize={['4', '6']} />
@@ -81,7 +81,7 @@ const Tours = () => {
 					)}
 					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }} showBox={true}>
 						<IconButton
-							isDisabled={page >= totalPages}
+							disabled={page >= totalPages}
 							aria-label="Next page"
 							onClick={() => setPage(page + 1)}>
 							<ChevronRight boxSize={['4', '6']} />
@@ -89,7 +89,7 @@ const Tours = () => {
 					</TrackClickEvent>
 				</ButtonGroup>
 			</Center>
-		</Accordion>
+		</Accordion.Root>
 	);
 };
 

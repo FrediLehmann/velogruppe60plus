@@ -7,7 +7,7 @@ import { TourOperations } from './components';
 
 export default function TourInfo(tour: Tour) {
 	return (
-		<Accordion.Item>
+		<Accordion.Item value={tour.name}>
 			<h2>
 				<Accordion.ItemTrigger>
 					<Flex

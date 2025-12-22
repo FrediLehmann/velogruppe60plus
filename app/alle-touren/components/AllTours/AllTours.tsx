@@ -52,9 +52,11 @@ export default function AllTours() {
 					</Text>
 				</Box>
 				<TrackClickEvent event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
-					<Button href="/print" as={Link}>
-						<PrintIcon />
-						Drucken
+					<Button asChild>
+						<Link href="/print">
+							<PrintIcon />
+							Drucken
+						</Link>
 					</Button>
 				</TrackClickEvent>
 			</Flex>
@@ -64,25 +66,24 @@ export default function AllTours() {
 					: tours.map((tour, index) => <Tour key={index} {...tour} />)}
 			</Flex>
 			<Center mt="8">
-				<ButtonGroup size={['md', 'lg']} variant="outline" isAttached>
+				<ButtonGroup size={['md', 'lg']} variant="outline" attached>
 					{/* Previous Page Button - Use Link for crawlability */}
 					{page === 1 ? (
-						<IconButton isDisabled={true} aria-label="Previous page">
+						<IconButton disabled={true} aria-label="Previous page">
 							<ChevronLeft boxSize={['4', '6']} />
 						</IconButton>
 					) : (
-						<IconButton
-							as={Link}
-							href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}
-							aria-label="Previous page">
-							<ChevronLeft boxSize={['4', '6']} />
+						<IconButton asChild aria-label="Previous page">
+							<Link href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}>
+								<ChevronLeft boxSize={['4', '6']} />
+							</Link>
 						</IconButton>
 					)}
 
 					{start >= 1 && (
 						<IconButton
 							aria-label=""
-							isDisabled
+							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
 							<MoreHorizontal boxSize={['4', '6']} />
@@ -95,16 +96,14 @@ export default function AllTours() {
 						const isCurrentPage = page === pageIndex;
 
 						return isCurrentPage ? (
-							<Button key={pageIndex} isDisabled={true} bg="gray.100">
+							<Button key={pageIndex} disabled={true} bg="gray.100">
 								{pageIndex}
 							</Button>
 						) : (
-							<Button
-								key={pageIndex}
-								as={Link}
-								href={pageIndex === 1 ? '/alle-touren' : `/alle-touren?page=${pageIndex}`}
-								bg="transparent">
-								{pageIndex}
+							<Button key={pageIndex} asChild bg="transparent">
+								<Link href={pageIndex === 1 ? '/alle-touren' : `/alle-touren?page=${pageIndex}`}>
+									{pageIndex}
+								</Link>
 							</Button>
 						);
 					})}
@@ -112,7 +111,7 @@ export default function AllTours() {
 					{end < totalPages && (
 						<IconButton
 							aria-label=""
-							isDisabled
+							disabled
 							px="3"
 							style={{ paddingInline: '0', width: '24px', minWidth: '24px' }}>
 							<MoreHorizontal boxSize={['4', '6']} />
@@ -121,12 +120,14 @@ export default function AllTours() {
 
 					{/* Next Page Button - Use Link for crawlability */}
 					{page >= totalPages ? (
-						<IconButton isDisabled={true} aria-label="Next page">
+						<IconButton disabled={true} aria-label="Next page">
 							<ChevronRight boxSize={['4', '6']} />
 						</IconButton>
 					) : (
-						<IconButton as={Link} href={`/alle-touren?page=${page + 1}`} aria-label="Next page">
-							<ChevronRight boxSize={['4', '6']} />
+						<IconButton asChild aria-label="Next page">
+							<Link href={`/alle-touren?page=${page + 1}`}>
+								<ChevronRight boxSize={['4', '6']} />
+							</Link>
 						</IconButton>
 					)}
 				</ButtonGroup>

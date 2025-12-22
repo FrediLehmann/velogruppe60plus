@@ -61,10 +61,9 @@ export default function TourProviders({
 				toaster.create({
 					title: 'Fehler beim laden der Touren.',
 					description: 'Tour konnte nicht geladen werden. Versuchen Sie es später erneut.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsLoading(false);
 				return;

@@ -1,5 +1,5 @@
-import { Button, Dialog, useDisclosure } from '@chakra-ui/react';
-import { useContext, useRef, useState } from 'react';
+import { Button, Dialog } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
@@ -11,8 +11,7 @@ import { createClient } from '@/lib/supabase/client';
 export default function ToggleTourDate({ id, isCanceled }: { id: number; isCanceled: boolean }) {
 	const { load } = useContext(AdminTourListContext);
 	const supabaseClient = createClient();
-	const { open, onOpen, onClose } = useDisclosure();
-	const cancelRef = useRef<HTMLButtonElement>(null!);
+	const [open, setOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const toggleTour = async () => {
@@ -26,15 +25,14 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			toaster.create({
 				title: 'Speichern fehlgeschlagen.',
 				description: 'Tourdaten konnte nicht gespeichert werden.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 		await revalidatePaths(['/', `/tour/${id}`]);
 
-		onClose();
+		setOpen(false);
 		load();
 		setIsSubmitting(false);
 	};
@@ -44,12 +42,12 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			<TrackClickEvent
 				event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
 				showBox={true}>
-				<Button onClick={onOpen}>
+				<Button onClick={() => setOpen(true)}>
 					{isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
 					{isCanceled ? 'Aktivieren' : 'Absagen'}
 				</Button>
 			</TrackClickEvent>
-			<Dialog.Root open={open} leastDestructiveRef={cancelRef} onClose={onClose}>
+			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
 					<Dialog.Content>
@@ -64,7 +62,7 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 								event={{
 									name: `CANCEL_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
 								}}>
-								<Button ref={cancelRef} onClick={onClose} isLoading={isSubmitting}>
+								<Button onClick={() => setOpen(false)} loading={isSubmitting}>
 									Abbrechen
 								</Button>
 							</TrackClickEvent>
@@ -72,7 +70,7 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 								event={{
 									name: `SAVE_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
 								}}>
-								<Button colorScheme="red" onClick={toggleTour} ml={3} isLoading={isSubmitting}>
+								<Button colorScheme="red" onClick={toggleTour} ml={3} loading={isSubmitting}>
 									{isCanceled ? 'Aktivieren' : 'Absagen'}
 								</Button>
 							</TrackClickEvent>

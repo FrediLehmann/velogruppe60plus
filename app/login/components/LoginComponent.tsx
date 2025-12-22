@@ -58,10 +58,9 @@ export default function LoginComponent() {
 							toaster.create({
 								title: 'Anmeldung fehlgeschlagen.',
 								description: 'Wir konnten die Anmeldung nicht durchführen.',
-								status: 'error',
+								type: 'error',
 								duration: 9000,
-								isClosable: true,
-								position: 'top'
+								closable: true
 							});
 							setIsSubmitting(false);
 							return;
@@ -75,8 +74,8 @@ export default function LoginComponent() {
 								<FormikField name="email">
 									{({ field, form }: FieldProps) => (
 										<Field.Root
-											isRequired
-											isInvalid={(form.errors.email && form.touched.email) as boolean}>
+											required
+											invalid={(form.errors.email && form.touched.email) as boolean}>
 											<Field.Label>
 												Email Addresse
 												<Field.RequiredIndicator />
@@ -89,8 +88,8 @@ export default function LoginComponent() {
 								<FormikField name="password">
 									{({ field, form }: FieldProps) => (
 										<Field.Root
-											isRequired
-											isInvalid={(form.errors.password && form.touched.password) as boolean}>
+											required
+											invalid={(form.errors.password && form.touched.password) as boolean}>
 											<Flex justify="space-between">
 												<Field.Label>
 													Password
@@ -110,7 +109,7 @@ export default function LoginComponent() {
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" isLoading={isSubmitting}>
+					<Button type="submit" form="login" colorScheme="mapGreen" loading={isSubmitting}>
 						Einloggen
 					</Button>
 				</TrackClickEvent>

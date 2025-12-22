@@ -50,7 +50,7 @@ export default function RulesOfConduct() {
 			<Heading as="h3" size="md" mb="3" mt="6">
 				Ausrüstung
 			</Heading>
-			<List.Root as="ol" my="4" px="6" start={5}>
+			<List.Root as="ol" my="4" px="6" style={{ counterReset: 'list-item 4' }}>
 				<List.Item fontSize="lg" fontWeight="semibold" py="1">
 					Getränke und Snacks:
 					<Text fontWeight="normal" as="span" ml="1">
@@ -68,7 +68,7 @@ export default function RulesOfConduct() {
 			<Heading as="h3" size="md" mb="3" mt="6">
 				Verhalten während der Tour
 			</Heading>
-			<List.Root as="ol" my="4" px="6" start={7}>
+			<List.Root as="ol" my="4" px="6" style={{ counterReset: 'list-item 6' }}>
 				<List.Item fontSize="lg" fontWeight="semibold" py="1">
 					Anweisungen:
 					<Text fontWeight="normal" as="span" ml="1">
@@ -113,7 +113,7 @@ export default function RulesOfConduct() {
 			<Heading as="h3" size="md" mb="3" mt="6">
 				Organisatorische Hinweise
 			</Heading>
-			<List.Root as="ol" my="4" px="6" start={12}>
+			<List.Root as="ol" my="4" px="6" style={{ counterReset: 'list-item 11' }}>
 				<List.Item fontSize="lg" fontWeight="semibold" py="1">
 					Kostenbeteiligung:
 					<Text fontWeight="normal" as="span" ml="1">

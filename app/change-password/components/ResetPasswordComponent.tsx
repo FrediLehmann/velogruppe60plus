@@ -57,10 +57,9 @@ export default function ResetPasswordComponent() {
 							toaster.create({
 								title: 'Passwort änderun fehlgeschlgen.',
 								description: 'Wir konnten das Passwort nicht ändern.',
-								status: 'error',
+								type: 'error',
 								duration: 9000,
-								isClosable: true,
-								position: 'top'
+								closable: true
 							});
 							setIsSubmitting(false);
 							return;
@@ -73,8 +72,8 @@ export default function ResetPasswordComponent() {
 								<FormikField name="password">
 									{({ field, form }: FieldProps) => (
 										<Field.Root
-											isRequired
-											isInvalid={(form.errors.password && form.touched.password) as boolean}>
+											required
+											invalid={(form.errors.password && form.touched.password) as boolean}>
 											<Field.Label>
 												Passwort
 												<Field.RequiredIndicator />
@@ -87,8 +86,8 @@ export default function ResetPasswordComponent() {
 								<FormikField name="passwordConfirmation">
 									{({ field, form }: FieldProps) => (
 										<Field.Root
-											isRequired
-											isInvalid={
+											required
+											invalid={
 												(form.errors.passwordConfirmation &&
 													form.touched.passwordConfirmation) as boolean
 											}>
@@ -108,7 +107,7 @@ export default function ResetPasswordComponent() {
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" isLoading={isSubmitting}>
+					<Button type="submit" form="login" colorScheme="mapGreen" loading={isSubmitting}>
 						Ändern
 					</Button>
 				</TrackClickEvent>
