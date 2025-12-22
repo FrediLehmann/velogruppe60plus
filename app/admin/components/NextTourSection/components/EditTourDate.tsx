@@ -110,10 +110,8 @@ export default function EditTourDate() {
 													}>
 													<Checkbox.Root colorScheme="green" checked={field.value} {...field}>
 														<Checkbox.HiddenInput />
-														<Checkbox.Control>
-															<Checkbox.Indicator />
-															Halbtagestour
-														</Checkbox.Control>
+														<Checkbox.Control />
+														<Checkbox.Label>Halbtagestour</Checkbox.Label>
 													</Checkbox.Root>
 													<Field.ErrorText>{form.errors?.halfday_tour as string}</Field.ErrorText>
 												</Field.Root>

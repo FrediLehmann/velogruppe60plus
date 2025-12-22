@@ -70,6 +70,7 @@ export default function Footer() {
 					{signedIn && (
 						<TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }} showBox={true}>
 							<Button
+								variant="ghost"
 								fontSize="xs"
 								fontWeight="bold"
 								onClick={async () => {
