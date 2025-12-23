@@ -17,7 +17,6 @@ import {
 import { useContext, useMemo } from 'react';
 import { FiChevronLeft, FiChevronRight, FiMoreHorizontal, FiPrinter } from 'react-icons/fi';
 
-import { TrackClickEvent } from '@/components';
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 
 import { Tour } from './components';
@@ -52,16 +51,14 @@ export default function AllTours() {
 						{totalTours} Touren
 					</Text>
 				</Box>
-				<TrackClickEvent event={{ name: 'NAVIGATE_TO_PRINT_TOURS_BUTTON_CLICK' }}>
-					<Button asChild variant="subtle" bgColor="bgGray.100">
-						<Link href="/print">
-							<Icon boxSize="5">
-								<FiPrinter />
-							</Icon>
-							Drucken
-						</Link>
-					</Button>
-				</TrackClickEvent>
+				<Button asChild variant="subtle" bgColor="bgGray.100">
+					<Link href="/print">
+						<Icon boxSize="5">
+							<FiPrinter />
+						</Icon>
+						Drucken
+					</Link>
+				</Button>
 			</Flex>
 			<Flex gap={['4', '6']} direction="column">
 				{isLoading

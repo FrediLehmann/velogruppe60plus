@@ -16,7 +16,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { object, string } from 'yup';
 
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { createClient } from '@/lib/supabase/client';
 
@@ -114,11 +113,9 @@ export default function LoginComponent() {
 						</Form>
 					)}
 				</Formik>
-				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorPalette="green" loading={isSubmitting}>
-						Einloggen
-					</Button>
-				</TrackClickEvent>
+				<Button type="submit" form="login" colorPalette="green" loading={isSubmitting}>
+					Einloggen
+				</Button>
 			</Stack>
 		</Container>
 	);

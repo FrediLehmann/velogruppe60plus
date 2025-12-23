@@ -5,7 +5,6 @@ import { useCallback, useContext, useState } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TourForm } from '@/app/admin/components';
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -207,16 +206,12 @@ export default function EditTour({
 					</Dialog.Body>
 					<Dialog.Footer>
 						<ButtonGroup>
-							<TrackClickEvent event={{ name: 'CANCEL_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
-								<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
-									Abbrechen
-								</Button>
-							</TrackClickEvent>
-							<TrackClickEvent event={{ name: 'SAVE_EDIT_TOUR_BUTTON_CLICK' }} showBox={true}>
-								<Button colorScheme="mapGreen" type="submit" form="editTour" loading={isSubmitting}>
-									Speichern
-								</Button>
-							</TrackClickEvent>
+							<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
+								Abbrechen
+							</Button>
+							<Button colorScheme="mapGreen" type="submit" form="editTour" loading={isSubmitting}>
+								Speichern
+							</Button>
 						</ButtonGroup>
 					</Dialog.Footer>
 				</Dialog.Content>

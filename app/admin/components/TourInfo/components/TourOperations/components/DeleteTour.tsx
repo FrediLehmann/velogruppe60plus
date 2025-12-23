@@ -4,7 +4,6 @@ import { Button, Dialog } from '@chakra-ui/react';
 import { useContext } from 'react';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -65,14 +64,10 @@ export default function DeleteTour({
 					</Dialog.Header>
 					<Dialog.Body>Soll die Tour &quot;{name}&quot; gelöscht werden?</Dialog.Body>
 					<Dialog.Footer>
-						<TrackClickEvent event={{ name: 'CANCEL_DELETE_TOUR' }}>
-							<Button onClick={onClose}>Abbrechen</Button>
-						</TrackClickEvent>
-						<TrackClickEvent event={{ name: 'DELETE_TOUR' }}>
-							<Button colorScheme="red" onClick={deleteTour} ml={3}>
-								Löschen
-							</Button>
-						</TrackClickEvent>
+						<Button onClick={onClose}>Abbrechen</Button>
+						<Button colorScheme="red" onClick={deleteTour} ml={3}>
+							Löschen
+						</Button>
 					</Dialog.Footer>
 				</Dialog.Content>
 			</Dialog.Positioner>

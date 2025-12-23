@@ -12,7 +12,6 @@ import {
 import { useContext, useMemo } from 'react';
 import { FiChevronLeft, FiChevronRight, FiMoreHorizontal } from 'react-icons/fi';
 
-import { TrackClickEvent } from '@/components';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 
 import { TourInfo } from '.';
@@ -44,16 +43,14 @@ const Tours = () => {
 			))}
 			<Center mt="8">
 				<ButtonGroup size={['md', 'lg']} variant="outline" attached>
-					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_PREV' }} showBox={true}>
-						<IconButton
-							disabled={page === 1}
-							aria-label="Previous page"
-							onClick={() => setPage(page - 1)}>
-							<Icon boxSize={['4', '6']}>
-								<FiChevronLeft />
-							</Icon>
-						</IconButton>
-					</TrackClickEvent>
+					<IconButton
+						disabled={page === 1}
+						aria-label="Previous page"
+						onClick={() => setPage(page - 1)}>
+						<Icon boxSize={['4', '6']}>
+							<FiChevronLeft />
+						</Icon>
+					</IconButton>
 					{start >= 1 && (
 						<IconButton
 							aria-label=""
@@ -68,19 +65,14 @@ const Tours = () => {
 					{[...new Array(totalPages)].slice(start, end).map((_, index) => {
 						const pageIndex = start + index + 1;
 						return (
-							<TrackClickEvent
-								key={index}
-								showBox={true}
-								event={{ name: `ADMIN_PAGINATION_PAGE_${index}` }}>
-								<Button
-									key={pageIndex}
-									disabled={page === pageIndex}
-									bg={page === pageIndex ? 'bgGray.100' : 'transparent'}
-									onClick={() => page !== pageIndex && setPage(pageIndex)}
-									css={{ '&:hover': { backgroundColor: 'bgGray.200' } }}>
-									{pageIndex}
-								</Button>
-							</TrackClickEvent>
+							<Button
+								key={pageIndex}
+								disabled={page === pageIndex}
+								bg={page === pageIndex ? 'bgGray.100' : 'transparent'}
+								onClick={() => page !== pageIndex && setPage(pageIndex)}
+								css={{ '&:hover': { backgroundColor: 'bgGray.200' } }}>
+								{pageIndex}
+							</Button>
 						);
 					})}
 					{end < totalPages && (
@@ -94,16 +86,14 @@ const Tours = () => {
 							</Icon>
 						</IconButton>
 					)}
-					<TrackClickEvent event={{ name: 'ADMIN_PAGINATION_NEXT' }} showBox={true}>
-						<IconButton
-							disabled={page >= totalPages}
-							aria-label="Next page"
-							onClick={() => setPage(page + 1)}>
-							<Icon boxSize={['4', '6']}>
-								<FiChevronRight />
-							</Icon>
-						</IconButton>
-					</TrackClickEvent>
+					<IconButton
+						disabled={page >= totalPages}
+						aria-label="Next page"
+						onClick={() => setPage(page + 1)}>
+						<Icon boxSize={['4', '6']}>
+							<FiChevronRight />
+						</Icon>
+					</IconButton>
 				</ButtonGroup>
 			</Center>
 		</Accordion.Root>

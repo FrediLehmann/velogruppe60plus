@@ -4,7 +4,6 @@ import { Box, Button, ButtonGroup, Container, Link, Text } from '@chakra-ui/reac
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { TrackClickEvent } from '@/components';
 import { createClient } from '@/lib/supabase/client';
 
 export default function Footer() {
@@ -58,41 +57,33 @@ export default function Footer() {
 					<Text>all rights reserved.</Text>
 				</Box>
 				<ButtonGroup gap="3" size="xs" colorScheme="black">
-					<TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-						<Link
-							href="https://github.com/FrediLehmann/velogruppe60plus"
-							target="_blank"
-							fontSize="xs"
-							fontWeight="bold">
-							Github
-						</Link>
-					</TrackClickEvent>
+					<Link
+						href="https://github.com/FrediLehmann/velogruppe60plus"
+						target="_blank"
+						fontSize="xs"
+						fontWeight="bold">
+						Github
+					</Link>
 					{signedIn && (
-						<TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }} showBox={true}>
-							<Button
-								variant="ghost"
-								fontSize="xs"
-								fontWeight="bold"
-								onClick={async () => {
-									await supabase.auth.signOut();
-									router.push('/');
-								}}>
-								Abmelden
-							</Button>
-						</TrackClickEvent>
+						<Button
+							variant="ghost"
+							fontSize="xs"
+							fontWeight="bold"
+							onClick={async () => {
+								await supabase.auth.signOut();
+								router.push('/');
+							}}>
+							Abmelden
+						</Button>
 					)}
 					{signedIn ? (
-						<TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }} showBox={true}>
-							<Link href="/admin" fontSize="xs" fontWeight="bold">
-								Admin
-							</Link>
-						</TrackClickEvent>
+						<Link href="/admin" fontSize="xs" fontWeight="bold">
+							Admin
+						</Link>
 					) : (
-						<TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }} showBox={true}>
-							<Link href="/login" fontSize="xs" fontWeight="bold">
-								Login
-							</Link>
-						</TrackClickEvent>
+						<Link href="/login" fontSize="xs" fontWeight="bold">
+							Login
+						</Link>
 					)}
 				</ButtonGroup>
 			</Container>
