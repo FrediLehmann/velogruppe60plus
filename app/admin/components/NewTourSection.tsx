@@ -1,23 +1,11 @@
 'use client';
 
-import {
-	Button,
-	ButtonGroup,
-	Divider,
-	Modal,
-	ModalBody,
-	ModalCloseButton,
-	ModalContent,
-	ModalFooter,
-	ModalHeader,
-	ModalOverlay,
-	useDisclosure,
-	useToast
-} from '@chakra-ui/react';
+import { Button, ButtonGroup, Dialog, Icon, Separator } from '@chakra-ui/react';
 import { useCallback, useContext, useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Plus } from '@/icons';
+import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { TourFields } from '@/types/TourFields.types';
@@ -26,9 +14,7 @@ import { TourForm } from '.';
 
 export default function NewTourSection() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
-
-	const toast = useToast();
-	const { isOpen, onOpen, onClose } = useDisclosure();
+	const [open, setOpen] = useState(false);
 
 	const supabaseClient = createClient();
 	const { load } = useContext(AdminTourListContext);
@@ -72,13 +58,12 @@ export default function NewTourSection() {
 				.select();
 
 			if (error) {
-				toast({
+				toaster.create({
 					title: 'Speichern fehlgeschlagen.',
 					description: 'Tour konnte nicht gespeichert werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsSubmitting(false);
 				return;
@@ -92,13 +77,12 @@ export default function NewTourSection() {
 				});
 
 			if (imageUploadError) {
-				toast({
+				toaster.create({
 					title: 'Bild upload fehlgeschlagen.',
 					description: 'Bild konnte nicht hochgeladen werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsSubmitting(false);
 				return;
@@ -116,64 +100,66 @@ export default function NewTourSection() {
 				})
 				.eq('id', data[0].id);
 
-			toast({
+			toaster.create({
 				title: 'Tour gespeichert.',
 				description: 'Ihre Tour wurde gespeichert.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			setIsSubmitting(false);
-			onClose();
+			setOpen(false);
 			load();
 		},
-		[load, onClose, supabaseClient, toast]
+		[load, supabaseClient]
 	);
 
 	return (
 		<>
 			<TrackClickEvent event={{ name: 'START_CREATE_NEW_TOUR_BUTTON_CLICK' }}>
-				<Button
-					size={['sm', 'md']}
-					colorScheme="mapGreen"
-					rightIcon={<Plus boxSize="5" />}
-					onClick={onOpen}>
+				<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={() => setOpen(true)}>
 					Neue Tour erfassen
+					<Icon boxSize="5">
+						<FiPlus />
+					</Icon>
 				</Button>
 			</TrackClickEvent>
-			<Divider borderColor="gray.500" my="3" />
-			<Modal isOpen={isOpen} onClose={onClose} size="xl">
-				<ModalOverlay />
-				<ModalContent>
-					<ModalCloseButton />
-					<ModalHeader>Tour erfassen</ModalHeader>
-					<ModalBody>
-						<TourForm formName="createTour" submit={saveNewTour} />
-					</ModalBody>
-					<ModalFooter>
-						<ButtonGroup>
-							<TrackClickEvent
-								event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}
-								showBox={true}>
-								<Button disabled={isSubmitting} variant="outline" onClick={onClose}>
-									Abbrechen
-								</Button>
-							</TrackClickEvent>
-							<TrackClickEvent event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }} showBox={true}>
-								<Button
-									colorScheme="mapGreen"
-									type="submit"
-									form="createTour"
-									isLoading={isSubmitting}>
-									Speichern
-								</Button>
-							</TrackClickEvent>
-						</ButtonGroup>
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
+			<Separator borderColor="gray.500" my="3" />
+			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
+				<Dialog.Backdrop />
+				<Dialog.Positioner>
+					<Dialog.Content>
+						<Dialog.CloseTrigger />
+						<Dialog.Header>
+							<Dialog.Title>Tour erfassen</Dialog.Title>
+						</Dialog.Header>
+						<Dialog.Body>
+							<TourForm formName="createTour" submit={saveNewTour} />
+						</Dialog.Body>
+						<Dialog.Footer>
+							<ButtonGroup>
+								<TrackClickEvent
+									event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}
+									showBox={true}>
+									<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
+										Abbrechen
+									</Button>
+								</TrackClickEvent>
+								<TrackClickEvent event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }} showBox={true}>
+									<Button
+										colorScheme="mapGreen"
+										type="submit"
+										form="createTour"
+										loading={isSubmitting}>
+										Speichern
+									</Button>
+								</TrackClickEvent>
+							</ButtonGroup>
+						</Dialog.Footer>
+					</Dialog.Content>
+				</Dialog.Positioner>
+			</Dialog.Root>
 		</>
 	);
 }

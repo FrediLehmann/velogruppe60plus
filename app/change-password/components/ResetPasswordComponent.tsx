@@ -1,31 +1,19 @@
 'use client';
 
-import {
-	Button,
-	Center,
-	Container,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	Heading,
-	Input,
-	Stack,
-	useToast
-} from '@chakra-ui/react';
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { Button, Center, Container, Field, Heading, Input, Stack } from '@chakra-ui/react';
+import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { object, string } from 'yup';
 
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { createClient } from '@/lib/supabase/client';
 
 export default function ResetPasswordComponent() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const router = useRouter();
-
-	const toast = useToast();
 
 	const supabase = createClient();
 
@@ -35,7 +23,7 @@ export default function ResetPasswordComponent() {
 				<Heading mb="8">Reset Password</Heading>
 			</Center>
 			<Stack
-				spacing="6"
+				gap="6"
 				py={['0', '8']}
 				px={['4', '10']}
 				bg={['transparent', 'white']}
@@ -66,13 +54,12 @@ export default function ResetPasswordComponent() {
 						});
 
 						if (error) {
-							toast({
+							toaster.create({
 								title: 'Passwort änderun fehlgeschlgen.',
 								description: 'Wir konnten das Passwort nicht ändern.',
-								status: 'error',
+								type: 'error',
 								duration: 9000,
-								isClosable: true,
-								position: 'top'
+								closable: true
 							});
 							setIsSubmitting(false);
 							return;
@@ -81,40 +68,46 @@ export default function ResetPasswordComponent() {
 					}}>
 					{() => (
 						<Form id="login">
-							<Stack spacing="5">
-								<Field name="password">
+							<Stack gap="5">
+								<FormikField name="password">
 									{({ field, form }: FieldProps) => (
-										<FormControl
-											isRequired
-											isInvalid={(form.errors.password && form.touched.password) as boolean}>
-											<FormLabel>Passwort</FormLabel>
+										<Field.Root
+											required
+											invalid={(form.errors.password && form.touched.password) as boolean}>
+											<Field.Label>
+												Passwort
+												<Field.RequiredIndicator />
+											</Field.Label>
 											<Input type="password" autoComplete="password" {...field} />
-											<FormErrorMessage>{form.errors?.password as string}</FormErrorMessage>
-										</FormControl>
+											<Field.ErrorText>{form.errors?.password as string}</Field.ErrorText>
+										</Field.Root>
 									)}
-								</Field>
-								<Field name="passwordConfirmation">
+								</FormikField>
+								<FormikField name="passwordConfirmation">
 									{({ field, form }: FieldProps) => (
-										<FormControl
-											isRequired
-											isInvalid={
+										<Field.Root
+											required
+											invalid={
 												(form.errors.passwordConfirmation &&
 													form.touched.passwordConfirmation) as boolean
 											}>
-											<FormLabel>Passwort bestätigen</FormLabel>
+											<Field.Label>
+												Passwort bestätigen
+												<Field.RequiredIndicator />
+											</Field.Label>
 											<Input type="password" autoComplete="new-password" {...field} />
-											<FormErrorMessage>
+											<Field.ErrorText>
 												{form.errors?.passwordConfirmation as string}
-											</FormErrorMessage>
-										</FormControl>
+											</Field.ErrorText>
+										</Field.Root>
 									)}
-								</Field>
+								</FormikField>
 							</Stack>
 						</Form>
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" isLoading={isSubmitting}>
+					<Button type="submit" form="login" colorScheme="mapGreen" loading={isSubmitting}>
 						Ändern
 					</Button>
 				</TrackClickEvent>

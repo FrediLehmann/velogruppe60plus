@@ -1,28 +1,17 @@
-import {
-	AlertDialog,
-	AlertDialogBody,
-	AlertDialogContent,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogOverlay,
-	Button,
-	useDisclosure,
-	useToast
-} from '@chakra-ui/react';
-import { useContext, useRef, useState } from 'react';
+import { Button, Dialog, Icon } from '@chakra-ui/react';
+import { useContext, useState } from 'react';
+import { FiCalendar, FiSlash } from 'react-icons/fi';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
 import { TrackClickEvent } from '@/components';
-import { Calendar, Slash } from '@/icons';
+import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 
 export default function ToggleTourDate({ id, isCanceled }: { id: number; isCanceled: boolean }) {
 	const { load } = useContext(AdminTourListContext);
 	const supabaseClient = createClient();
-	const toast = useToast();
-	const { isOpen, onOpen, onClose } = useDisclosure();
-	const cancelRef = useRef<HTMLButtonElement>(null!);
+	const [open, setOpen] = useState(false);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	const toggleTour = async () => {
@@ -33,18 +22,17 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			.eq('id', id);
 
 		if (error)
-			toast({
+			toaster.create({
 				title: 'Speichern fehlgeschlagen.',
 				description: 'Tourdaten konnte nicht gespeichert werden.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 		await revalidatePaths(['/', `/tour/${id}`]);
 
-		onClose();
+		setOpen(false);
 		load();
 		setIsSubmitting(false);
 	};
@@ -54,25 +42,27 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 			<TrackClickEvent
 				event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
 				showBox={true}>
-				<Button
-					leftIcon={isCanceled ? <Calendar boxSize="5" /> : <Slash boxSize="5" />}
-					onClick={onOpen}>
+				<Button onClick={() => setOpen(true)}>
+					<Icon boxSize="5">{isCanceled ? <FiCalendar /> : <FiSlash />}</Icon>
 					{isCanceled ? 'Aktivieren' : 'Absagen'}
 				</Button>
 			</TrackClickEvent>
-			<AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose}>
-				<AlertDialogOverlay>
-					<AlertDialogContent>
-						<AlertDialogHeader>{isCanceled ? 'Tour Aktivieren' : 'Tour Absagen'}</AlertDialogHeader>
-						<AlertDialogBody>
+			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
+				<Dialog.Backdrop />
+				<Dialog.Positioner>
+					<Dialog.Content>
+						<Dialog.Header>
+							<Dialog.Title>{isCanceled ? 'Tour Aktivieren' : 'Tour Absagen'}</Dialog.Title>
+						</Dialog.Header>
+						<Dialog.Body>
 							Wollen Sie die nächste Tour wirklich {isCanceled ? 'wieder aktivieren' : 'absagen'}?
-						</AlertDialogBody>
-						<AlertDialogFooter>
+						</Dialog.Body>
+						<Dialog.Footer>
 							<TrackClickEvent
 								event={{
 									name: `CANCEL_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
 								}}>
-								<Button ref={cancelRef} onClick={onClose} isLoading={isSubmitting}>
+								<Button onClick={() => setOpen(false)} loading={isSubmitting}>
 									Abbrechen
 								</Button>
 							</TrackClickEvent>
@@ -80,14 +70,14 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 								event={{
 									name: `SAVE_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
 								}}>
-								<Button colorScheme="red" onClick={toggleTour} ml={3} isLoading={isSubmitting}>
+								<Button colorScheme="red" onClick={toggleTour} ml={3} loading={isSubmitting}>
 									{isCanceled ? 'Aktivieren' : 'Absagen'}
 								</Button>
 							</TrackClickEvent>
-						</AlertDialogFooter>
-					</AlertDialogContent>
-				</AlertDialogOverlay>
-			</AlertDialog>
+						</Dialog.Footer>
+					</Dialog.Content>
+				</Dialog.Positioner>
+			</Dialog.Root>
 		</>
 	);
 }

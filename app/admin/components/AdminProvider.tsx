@@ -1,8 +1,8 @@
 'use client';
 
-import { useToast } from '@chakra-ui/react';
 import { useCallback, useEffect, useState } from 'react';
 
+import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { TourDate } from '@/types/TourDate.types';
@@ -22,7 +22,6 @@ export default function AdminProvider({
 	children: React.ReactNode;
 }) {
 	const supabase = createClient();
-	const toast = useToast();
 
 	const [tours, setTours] = useState(serverTours);
 	const [tourDate, setTourDate] = useState(serverTourDate);
@@ -51,13 +50,12 @@ export default function AdminProvider({
 			.range(from, to);
 
 		if (toursError) {
-			toast({
+			toaster.create({
 				title: 'Fehler beim laden der Touren.',
 				description: 'Tour konnte nicht geladen werden. Versuchen Sie es später erneut.',
-				status: 'error',
+				type: 'error',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 			return;
 		}
@@ -74,7 +72,7 @@ export default function AdminProvider({
 		if (tourDateError) throw tourDateError;
 
 		if (tourDate) setTourDate(tourDate as TourDate);
-	}, [page, supabase, toast]);
+	}, [page, supabase]);
 
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/set-state-in-effect
@@ -92,13 +90,12 @@ export default function AdminProvider({
 			const { error } = await supabase.from('touren').update({ next_tour: true }).eq('id', id);
 
 			if (error) {
-				toast({
+				toaster.create({
 					title: 'Fehler beim speichern der nächsten Tour.',
 					description: 'Es ist ein Fehler aufgetreten beim speichern der nächsten Tour.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				return;
 			}
@@ -110,32 +107,30 @@ export default function AdminProvider({
 					.eq('id', activeNextTourId.data.id);
 
 				if (nextTourError) {
-					toast({
+					toaster.create({
 						title: 'Fehler beim speichern.',
 						description: 'Aktuelle Tour konnte nicht entfernt werden.',
-						status: 'error',
+						type: 'error',
 						duration: 9000,
-						isClosable: true,
-						position: 'top'
+						closable: true
 					});
 					return;
 				}
 			}
 
-			toast({
+			toaster.create({
 				title: 'Nächste Tour festgelegt.',
 				description: 'Die nächste Tour wurde erfolgreich festgelegt.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			load();
 
 			await revalidatePaths(['/']);
 		},
-		[load, supabase, toast]
+		[load, supabase]
 	);
 
 	const setPublished = useCallback(
@@ -143,30 +138,28 @@ export default function AdminProvider({
 			const { error } = await supabase.from('touren').update({ published }).eq('id', id);
 
 			if (error) {
-				toast({
+				toaster.create({
 					title: 'Fehler beim publizieren.',
 					description: 'Aktuelle Tour konnte nicht Veröffentlicht werden.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 			}
 
-			toast({
+			toaster.create({
 				title: 'Veröffentlichung geändert.',
 				description: 'Der Veröffentlichungsstatus wurde erfolgreich geändert.',
-				status: 'success',
+				type: 'success',
 				duration: 9000,
-				isClosable: true,
-				position: 'top'
+				closable: true
 			});
 
 			load();
 
 			await revalidatePaths([`/tour/${id}`]);
 		},
-		[load, supabase, toast]
+		[load, supabase]
 	);
 
 	return (

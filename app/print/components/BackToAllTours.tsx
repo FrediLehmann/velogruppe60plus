@@ -1,24 +1,23 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Button } from '@chakra-ui/react';
+import { Icon, Link } from '@chakra-ui/react';
+import { FiArrowLeft } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { ArrowLeft } from '@/icons';
 
 export default function BackToAllTours() {
 	return (
 		<TrackClickEvent event={{ name: 'BACK_TO_TOURS_LINK_CLICK' }}>
-			<Button
+			<Link
 				href="/alle-touren"
-				as={Link}
-				variant="link"
 				color="green.700"
-				leftIcon={<ArrowLeft />}
 				py="6"
-				sx={{ '@media print': { display: 'none' } }}>
+				css={{ '@media print': { display: 'none' } }}>
+				<Icon boxSize="5">
+					<FiArrowLeft />
+				</Icon>
 				Zurück zu allen Touren
-			</Button>
+			</Link>
 		</TrackClickEvent>
 	);
 }

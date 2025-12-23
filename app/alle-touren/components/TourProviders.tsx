@@ -1,9 +1,9 @@
 'use client';
 
-import { useToast } from '@chakra-ui/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 
+import { toaster } from '@/components/ui/toaster';
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
 import { createClient } from '@/lib/supabase/client';
 import { Tour } from '@/types/Tours.types';
@@ -20,7 +20,6 @@ export default function TourProviders({
 	const supabase = createClient();
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const toast = useToast();
 
 	// Get current page from URL search params
 	const currentPage = parseInt(searchParams.get('page') || '1', 10);
@@ -59,13 +58,12 @@ export default function TourProviders({
 				.range(offset, offset + pageSize - 1);
 
 			if (error) {
-				toast({
+				toaster.create({
 					title: 'Fehler beim laden der Touren.',
 					description: 'Tour konnte nicht geladen werden. Versuchen Sie es später erneut.',
-					status: 'error',
+					type: 'error',
 					duration: 9000,
-					isClosable: true,
-					position: 'top'
+					closable: true
 				});
 				setIsLoading(false);
 				return;
@@ -74,7 +72,7 @@ export default function TourProviders({
 			if (data) setCurrentTours(data as Tour[]);
 			setIsLoading(false);
 		},
-		[supabase, toast]
+		[supabase]
 	);
 
 	return (

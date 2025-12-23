@@ -4,39 +4,37 @@ import {
 	Button,
 	Center,
 	Container,
+	Field,
 	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
 	Heading,
 	Input,
 	Link,
-	Stack,
-	useToast
+	Stack
 } from '@chakra-ui/react';
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { object, string } from 'yup';
 
 import { TrackClickEvent } from '@/components';
+import { toaster } from '@/components/ui/toaster';
 import { createClient } from '@/lib/supabase/client';
 
 export default function LoginComponent() {
 	const supabase = createClient();
 	const router = useRouter();
 
-	const toast = useToast();
-
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
 	return (
 		<Container maxW="lg" mt={['32', '36']}>
 			<Center>
-				<Heading mb="8">Anmeldung</Heading>
+				<Heading size="4xl" mb="8">
+					Anmeldung
+				</Heading>
 			</Center>
 			<Stack
-				spacing="6"
+				gap="6"
 				py={['0', '8']}
 				px={['4', '10']}
 				bg={['transparent', 'white']}
@@ -59,13 +57,12 @@ export default function LoginComponent() {
 						});
 
 						if (error) {
-							toast({
+							toaster.create({
 								title: 'Anmeldung fehlgeschlagen.',
 								description: 'Wir konnten die Anmeldung nicht durchführen.',
-								status: 'error',
+								type: 'error',
 								duration: 9000,
-								isClosable: true,
-								position: 'top'
+								closable: true
 							});
 							setIsSubmitting(false);
 							return;
@@ -75,40 +72,50 @@ export default function LoginComponent() {
 					}}>
 					{() => (
 						<Form id="login">
-							<Stack spacing="5">
-								<Field name="email">
+							<Stack gap="5">
+								<FormikField name="email">
 									{({ field, form }: FieldProps) => (
-										<FormControl
-											isRequired
-											isInvalid={(form.errors.email && form.touched.email) as boolean}>
-											<FormLabel>Email Addresse</FormLabel>
+										<Field.Root
+											required
+											invalid={(form.errors.email && form.touched.email) as boolean}>
+											<Field.Label>
+												Email Addresse
+												<Field.RequiredIndicator />
+											</Field.Label>
 											<Input autoComplete="email" {...field} />
-											<FormErrorMessage>{form.errors?.email as string}</FormErrorMessage>
-										</FormControl>
+											<Field.ErrorText>{form.errors?.email as string}</Field.ErrorText>
+										</Field.Root>
 									)}
-								</Field>
-								<Field name="password">
+								</FormikField>
+								<FormikField name="password">
 									{({ field, form }: FieldProps) => (
-										<FormControl
-											isRequired
-											isInvalid={(form.errors.password && form.touched.password) as boolean}>
-											<Flex justify="space-between">
-												<FormLabel>Password</FormLabel>
-												<Link href="/reset-password" color="green.700" fontSize="sm">
+										<Field.Root
+											required
+											invalid={(form.errors.password && form.touched.password) as boolean}>
+											<Flex justify="space-between" width="full">
+												<Field.Label>
+													Password
+													<Field.RequiredIndicator />
+												</Field.Label>
+												<Link
+													href="/reset-password"
+													color="green.700"
+													fontSize="sm"
+													marginLeft="auto">
 													Passwort vergessen
 												</Link>
 											</Flex>
 											<Input type="password" autoComplete="current-password" {...field} />
-											<FormErrorMessage>{form.errors?.password as string}</FormErrorMessage>
-										</FormControl>
+											<Field.ErrorText>{form.errors?.password as string}</Field.ErrorText>
+										</Field.Root>
 									)}
-								</Field>
+								</FormikField>
 							</Stack>
 						</Form>
 					)}
 				</Formik>
 				<TrackClickEvent event={{ name: 'ADMIN_LOGIN_BUTTON_CLICK' }}>
-					<Button type="submit" form="login" colorScheme="mapGreen" isLoading={isSubmitting}>
+					<Button type="submit" form="login" colorPalette="green" loading={isSubmitting}>
 						Einloggen
 					</Button>
 				</TrackClickEvent>

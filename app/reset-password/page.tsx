@@ -1,10 +1,11 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
 
 import { ResetPasswordComponents } from './components';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Passwort Reset',
 	description: 'Passwort zurücksetzten.',
 	robots: {

@@ -1,10 +1,11 @@
+import { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 
 import { createClient } from '@/lib/supabase/server';
 
 import { LoginComponent } from './components';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Login',
 	description: 'Login für den Admin bereich.',
 	robots: {

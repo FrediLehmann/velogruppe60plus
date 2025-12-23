@@ -22,7 +22,7 @@ export default function AllTours({ tours }: { tours: Tours }) {
 			{tours.map((tour) => (
 				<Box as="article" key={tour.id} py="3">
 					<Box as="header">
-						<Heading as="h2" size="md" my="4">
+						<Heading as="h2" size="xl" my="4">
 							{tour.name}
 						</Heading>
 					</Box>
@@ -38,7 +38,7 @@ export default function AllTours({ tours }: { tours: Tours }) {
 							</Flex>
 						</Flex>
 						<Box>
-							<Heading as="span" size="sm">
+							<Heading as="span" size="lg">
 								Wegbeschreibung:
 							</Heading>
 							<Text>{tour.route}</Text>

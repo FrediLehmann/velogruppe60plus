@@ -1,9 +1,11 @@
+import { Metadata } from 'next';
+
 import { createClient } from '@/lib/supabase/server';
 import { Tour } from '@/types/Tours.types';
 
 import { AllTours, TourProviders } from './components';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Alle Touren',
 	description:
 		'Tour Übersicht von Velogruppe 60+ Sensetal. Sehen Sie alle Touren die durch unsere Gruppe befahren werden.'

@@ -1,6 +1,7 @@
-import { Heading, ListItem, OrderedList, Text } from '@chakra-ui/react';
+import { Heading, List, Text } from '@chakra-ui/react';
+import { Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Ablauf',
 	description: 'Ablauf einer Fahrradtour der Velogruppe 60+ Sensetal'
 };
@@ -8,11 +9,11 @@ export const metadata = {
 export default function Unfallverhlaten() {
 	return (
 		<>
-			<Heading as="h2" size="lg" mt="8" mb="4">
+			<Heading as="h2" size="3xl" mt="8" mb="4">
 				Ablauf der eBike-Tour mit Tourenleitung, Gruppenleitung, Schlussmann und Patrouillendienst
 			</Heading>
-			<OrderedList fontWeight="semibold" my="4" px="6">
-				<ListItem>
+			<List.Root fontWeight="semibold" my="4" px="6" as="ol">
+				<List.Item>
 					Begrüssung und Einweisung
 					<Text as="span" fontWeight="normal" ml="1">
 						Die eBike-Tour beginnt mit einer freundlichen Begrüssung durch den Tourenleiter, der für
@@ -21,8 +22,8 @@ export default function Unfallverhlaten() {
 						in Kleingruppen eingeteilt. Jede Gruppe steht unter der Leitung eines Gruppenleiters,
 						der für das Wohl und die Sicherheit der Gruppe verantwortlich zeichnet.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Aufwärmphase und Gruppenbildung (ca. 10 Minuten)
 					<Text as="span" fontWeight="normal" ml="1">
 						Eine gemeinsame Aufwärmphase, durchgeführt von einer fachkundigen Person, dient zur
@@ -32,8 +33,8 @@ export default function Unfallverhlaten() {
 						auffällige Warnweste identifizierbar ist und für die Sicherung des hinteren Bereichs der
 						Gruppe verantwortlich ist.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Start der Tour und Hauptstrecke
 					<Text as="span" fontWeight="normal" ml="1">
 						<Text>
@@ -52,8 +53,8 @@ export default function Unfallverhlaten() {
 							Strecke bewältigen.
 						</Text>
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Rast und Verpflegung
 					<Text as="span" fontWeight="normal" ml="1">
 						Nach der intensiven Etappe steht eine Pause in einem gemütlichen Restaurant auf dem
@@ -62,31 +63,31 @@ export default function Unfallverhlaten() {
 						auszutauschen und neue Kontakte zu knüpfen. Der Tourenleiter achtet darauf, dass die
 						Pause ausreichend lang ist, um allen eine optimale Regeneration zu ermöglichen.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Rückfahrt und Ausklang
 					<Text as="span" fontWeight="normal" ml="1">
 						Die Rückfahrt erfolgt in einem gemässigten Tempo, damit alle die Umgebung geniessen
 						können. Gruppenleiter und Schlussmänner gewährleisten weiterhin Sicherheit und ein
 						harmonisches Miteinander in den Gruppen.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Dehnübungen und Abschluss
 					<Text as="span" fontWeight="normal" ml="1">
 						Zur Förderung der Regeneration wird eine kurze Einheit mit Dehnübungen angeboten. Diese
 						wird von einer geschulten Person geleitet und trägt zur Entspannung der Muskulatur bei.
 					</Text>
-				</ListItem>
-				<ListItem>
+				</List.Item>
+				<List.Item>
 					Verabschiedung und Ausblick auf die nächste Tour
 					<Text as="span" fontWeight="normal" ml="1">
 						Zum Abschluss dankt der Tourenleiter den Teilnehmenden für ihr Engagement und gibt einen
 						Ausblick auf die nächste Tour, die auf der Website der Velogruppe angekündigt wird. Ein
 						motivierender Schlusspunkt, der die Vorfreude auf weitere gemeinsame Erlebnisse weckt.
 					</Text>
-				</ListItem>
-			</OrderedList>
+				</List.Item>
+			</List.Root>
 		</>
 	);
 }

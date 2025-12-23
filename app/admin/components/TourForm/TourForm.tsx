@@ -1,15 +1,7 @@
 'use client';
 
-import {
-	FormControl,
-	FormErrorMessage,
-	FormLabel,
-	HStack,
-	Input,
-	Stack,
-	Textarea
-} from '@chakra-ui/react';
-import { Field, FieldProps, Form, Formik } from 'formik';
+import { Field, HStack, Input, Stack, Textarea } from '@chakra-ui/react';
+import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { number, object, string } from 'yup';
 
 import UploadInput from '@/components/UploadInput';
@@ -50,52 +42,60 @@ export default function TourForm({
 			onSubmit={submit}>
 			{() => (
 				<Form id={formName}>
-					<Stack spacing="5">
-						<Field name="name">
+					<Stack gap="5">
+						<FormikField name="name">
 							{({ field, form }: FieldProps) => (
-								<FormControl
-									isRequired
-									isInvalid={(form.errors.name && form.touched.name) as boolean}>
-									<FormLabel>Name</FormLabel>
+								<Field.Root required invalid={(form.errors.name && form.touched.name) as boolean}>
+									<Field.Label>
+										Name
+										<Field.RequiredIndicator />
+									</Field.Label>
 									<Input {...field} />
-									<FormErrorMessage>{form.errors?.name as string}</FormErrorMessage>
-								</FormControl>
+									<Field.ErrorText>{form.errors?.name as string}</Field.ErrorText>
+								</Field.Root>
 							)}
-						</Field>
-						<Field name="description">
+						</FormikField>
+						<FormikField name="description">
 							{({ field, form }: FieldProps) => (
-								<FormControl
-									isRequired
-									isInvalid={(form.errors.description && form.touched.description) as boolean}>
-									<FormLabel>Beschreibung</FormLabel>
+								<Field.Root
+									required
+									invalid={(form.errors.description && form.touched.description) as boolean}>
+									<Field.Label>
+										Beschreibung
+										<Field.RequiredIndicator />
+									</Field.Label>
 									<Textarea {...field} background="white" />
-									<FormErrorMessage>{form.errors?.description as string}</FormErrorMessage>
-								</FormControl>
+									<Field.ErrorText>{form.errors?.description as string}</Field.ErrorText>
+								</Field.Root>
 							)}
-						</Field>
-						<Field name="route">
+						</FormikField>
+						<FormikField name="route">
 							{({ field, form }: FieldProps) => (
-								<FormControl
-									isRequired
-									isInvalid={(form.errors.route && form.touched.route) as boolean}>
-									<FormLabel>Route</FormLabel>
+								<Field.Root required invalid={(form.errors.route && form.touched.route) as boolean}>
+									<Field.Label>
+										Route
+										<Field.RequiredIndicator />
+									</Field.Label>
 									<Textarea {...field} background="white" />
-									<FormErrorMessage>{form.errors?.route as string}</FormErrorMessage>
-								</FormControl>
+									<Field.ErrorText>{form.errors?.route as string}</Field.ErrorText>
+								</Field.Root>
 							)}
-						</Field>
-						<Field name="mapLink">
+						</FormikField>
+						<FormikField name="mapLink">
 							{({ field, form }: FieldProps) => (
-								<FormControl
-									isRequired
-									isInvalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
-									<FormLabel>Url zur Schweiz Mobil Karte</FormLabel>
+								<Field.Root
+									required
+									invalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
+									<Field.Label>
+										Url zur Schweiz Mobil Karte
+										<Field.RequiredIndicator />
+									</Field.Label>
 									<Input {...field} />
-									<FormErrorMessage>{form.errors?.mapLink as string}</FormErrorMessage>
-								</FormControl>
+									<Field.ErrorText>{form.errors?.mapLink as string}</Field.ErrorText>
+								</Field.Root>
 							)}
-						</Field>
-						<Field name="mapImage">
+						</FormikField>
+						<FormikField name="mapImage">
 							{(fieldProps: FieldProps) => (
 								<UploadInput
 									label="Bild der Karte"
@@ -104,89 +104,103 @@ export default function TourForm({
 									fieldProps={fieldProps}
 								/>
 							)}
-						</Field>
-						<HStack spacing="4">
-							<Field name="start">
+						</FormikField>
+						<HStack gap="4">
+							<FormikField name="start">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.start && form.touched.start) as boolean}>
-										<FormLabel>Startpunk</FormLabel>
+									<Field.Root
+										required
+										invalid={(form.errors.start && form.touched.start) as boolean}>
+										<Field.Label>
+											Startpunk
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Textarea {...field} />
-										<FormErrorMessage>{form.errors?.start as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.start as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
-							<Field name="end">
+							</FormikField>
+							<FormikField name="end">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.end && form.touched.end) as boolean}>
-										<FormLabel>Endpunkt</FormLabel>
+									<Field.Root required invalid={(form.errors.end && form.touched.end) as boolean}>
+										<Field.Label>
+											Endpunkt
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Textarea {...field} />
-										<FormErrorMessage>{form.errors?.end as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.end as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
+							</FormikField>
 						</HStack>
-						<Field name="pause">
+						<FormikField name="pause">
 							{({ field, form }: FieldProps) => (
-								<FormControl
-									isRequired
-									isInvalid={(form.errors.pause && form.touched.pause) as boolean}>
-									<FormLabel>Pausenort</FormLabel>
+								<Field.Root required invalid={(form.errors.pause && form.touched.pause) as boolean}>
+									<Field.Label>
+										Pausenort
+										<Field.RequiredIndicator />
+									</Field.Label>
 									<Textarea {...field} background="white" />
-									<FormErrorMessage>{form.errors?.pause as string}</FormErrorMessage>
-								</FormControl>
+									<Field.ErrorText>{form.errors?.pause as string}</Field.ErrorText>
+								</Field.Root>
 							)}
-						</Field>
-						<HStack spacing="4">
-							<Field name="distance">
+						</FormikField>
+						<HStack gap="4">
+							<FormikField name="distance">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.distance && form.touched.distance) as boolean}>
-										<FormLabel>Distanz</FormLabel>
+									<Field.Root
+										required
+										invalid={(form.errors.distance && form.touched.distance) as boolean}>
+										<Field.Label>
+											Distanz
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Input {...field} />
-										<FormErrorMessage>{form.errors?.distance as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.distance as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
-							<Field name="duration">
+							</FormikField>
+							<FormikField name="duration">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.duration && form.touched.duration) as boolean}>
-										<FormLabel>Dauer</FormLabel>
+									<Field.Root
+										required
+										invalid={(form.errors.duration && form.touched.duration) as boolean}>
+										<Field.Label>
+											Dauer
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Input {...field} />
-										<FormErrorMessage>{form.errors?.duration as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.duration as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
+							</FormikField>
 						</HStack>
-						<HStack spacing="4">
-							<Field name="ascent">
+						<HStack gap="4">
+							<FormikField name="ascent">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.ascent && form.touched.ascent) as boolean}>
-										<FormLabel>Aufstieg</FormLabel>
+									<Field.Root
+										required
+										invalid={(form.errors.ascent && form.touched.ascent) as boolean}>
+										<Field.Label>
+											Aufstieg
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Input {...field} />
-										<FormErrorMessage>{form.errors?.ascent as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.ascent as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
-							<Field name="descent">
+							</FormikField>
+							<FormikField name="descent">
 								{({ field, form }: FieldProps) => (
-									<FormControl
-										isRequired
-										isInvalid={(form.errors.descent && form.touched.descent) as boolean}>
-										<FormLabel>Abstieg</FormLabel>
+									<Field.Root
+										required
+										invalid={(form.errors.descent && form.touched.descent) as boolean}>
+										<Field.Label>Abstieg</Field.Label>
 										<Input {...field} />
-										<FormErrorMessage>{form.errors?.descent as string}</FormErrorMessage>
-									</FormControl>
+										<Field.ErrorText>{form.errors?.descent as string}</Field.ErrorText>
+									</Field.Root>
 								)}
-							</Field>
+							</FormikField>
 						</HStack>
 					</Stack>
 				</Form>

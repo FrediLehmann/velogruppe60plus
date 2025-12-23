@@ -1,16 +1,16 @@
 'use client';
 
-import { Stat, StatLabel, StatNumber } from '@chakra-ui/react';
+import { Stat } from '@chakra-ui/react';
 
 export default function Fact({ label, value }: { label: string; value: string }) {
 	return (
-		<Stat minW="20" wordBreak="break-word">
-			<StatLabel fontWeight="light" whiteSpace="nowrap">
+		<Stat.Root minW="20" wordBreak="break-word">
+			<Stat.Label fontWeight="light" whiteSpace="nowrap">
 				{label}
-			</StatLabel>
-			<StatNumber fontSize={['md', 'lg']} whiteSpace="pre-wrap">
+			</Stat.Label>
+			<Stat.ValueText fontSize={['md', 'lg']} whiteSpace="pre-wrap">
 				{value}
-			</StatNumber>
-		</Stat>
+			</Stat.ValueText>
+		</Stat.Root>
 	);
 }

@@ -1,10 +1,9 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Icon, Link, Text } from '@chakra-ui/react';
+import { FiInfo, FiList } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Info, List } from '@/icons';
 
 export default function Header() {
 	return (
@@ -12,31 +11,40 @@ export default function Header() {
 			as="header"
 			borderBottom="1px solid"
 			borderColor="gray.200"
-			sx={{ '@media print': { display: 'none' } }}>
+			css={{ '@media print': { display: 'none' } }}>
 			<Container
-				py="4"
-				maxW="container.md"
+				p="4"
+				maxW="768px"
 				display="flex"
 				flexDirection={['column', null, 'row']}
 				alignItems={['flex-start', null, 'center']}
 				justifyContent="space-between">
 				<Link
 					href="/"
-					as={Text}
 					fontSize={['xl', '2xl']}
 					fontWeight="bold"
 					_hover={{ textDecoration: 'none' }}>
 					Velogruppe 60+ Sensetal
 				</Link>
-				<ButtonGroup size="md" variant="ghost" colorScheme="gray" spacing="2" mt={['4', null, '0']}>
+				<ButtonGroup size="md" variant="ghost" colorScheme="gray" gap="2" mt={['4', null, '0']}>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_ALL_TOURS_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/alle-touren" as="a" leftIcon={<List boxSize={['4', '5']} />}>
-							Touren
+						<Button asChild _hover={{ background: 'bgGray.200' }}>
+							<Link href="/alle-touren" fontWeight="semibold" fontSize="md">
+								<Icon boxSize={['4', '5']}>
+									<FiList />
+								</Icon>
+								Touren
+							</Link>
 						</Button>
 					</TrackClickEvent>
 					<TrackClickEvent event={{ name: 'NAVIGATE_TO_INFO_BUTTON_CLICK' }} showBox={true}>
-						<Button href="/info" as="a" leftIcon={<Info boxSize={['4', '5']} />}>
-							Informationen
+						<Button asChild _hover={{ background: 'bgGray.200' }}>
+							<Link href="/info" fontWeight="semibold" fontSize="md">
+								<Icon boxSize={['4', '5']}>
+									<FiInfo />
+								</Icon>
+								Informationen
+							</Link>
 						</Button>
 					</TrackClickEvent>
 				</ButtonGroup>

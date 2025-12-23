@@ -1,7 +1,6 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Button, ButtonGroup, Container, Text } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Container, Link, Text } from '@chakra-ui/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -45,9 +44,10 @@ export default function Footer() {
 			py="3"
 			borderTop="1px solid"
 			borderColor="gray.200"
-			sx={{ '@media print': { display: 'none' } }}>
+			css={{ '@media print': { display: 'none' } }}>
 			<Container
-				maxW="container.md"
+				maxW="768px"
+				px="4"
 				display="flex"
 				alignItems={['flex-start', 'center']}
 				flexDirection={['column-reverse', 'row']}
@@ -57,19 +57,22 @@ export default function Footer() {
 					<Text>© Copyright {new Date().getFullYear()} by Frederic Lehmann,</Text>
 					<Text>all rights reserved.</Text>
 				</Box>
-				<ButtonGroup spacing="3" variant="link" size="xs" colorScheme="black">
+				<ButtonGroup gap="3" size="xs" colorScheme="black">
 					<TrackClickEvent event={{ name: 'GITHUB_LINK_CLICK' }} showBox={true}>
-						<Button
+						<Link
 							href="https://github.com/FrediLehmann/velogruppe60plus"
-							as={Link}
-							aria-label="Github"
-							isExternal>
+							target="_blank"
+							fontSize="xs"
+							fontWeight="bold">
 							Github
-						</Button>
+						</Link>
 					</TrackClickEvent>
 					{signedIn && (
 						<TrackClickEvent event={{ name: 'SIGNOUT_BUTTON_CLICK' }} showBox={true}>
 							<Button
+								variant="ghost"
+								fontSize="xs"
+								fontWeight="bold"
 								onClick={async () => {
 									await supabase.auth.signOut();
 									router.push('/');
@@ -80,15 +83,15 @@ export default function Footer() {
 					)}
 					{signedIn ? (
 						<TrackClickEvent event={{ name: 'ADMIN_LINK_CLICK' }} showBox={true}>
-							<Button href="/admin" as={Link}>
+							<Link href="/admin" fontSize="xs" fontWeight="bold">
 								Admin
-							</Button>
+							</Link>
 						</TrackClickEvent>
 					) : (
 						<TrackClickEvent event={{ name: 'LOGIN_LINK_CLICK' }} showBox={true}>
-							<Button href="/login" as={Link}>
+							<Link href="/login" fontSize="xs" fontWeight="bold">
 								Login
-							</Button>
+							</Link>
 						</TrackClickEvent>
 					)}
 				</ButtonGroup>

@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, ButtonGroup, Divider, Flex, Text } from '@chakra-ui/react';
+import { Box, ButtonGroup, Flex, Icon, Separator, Text } from '@chakra-ui/react';
 import { useContext, useMemo } from 'react';
+import { FiAlertTriangle } from 'react-icons/fi';
 
-import { AlertTriangle } from '@/icons';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 
 import { EditTourDate, ToggleTourDate } from './components';
@@ -25,7 +25,7 @@ export default function NextTourSection() {
 			<Text fontSize="xl" fontWeight="semibold">
 				Datum für die Nächste Tour
 			</Text>
-			<Divider borderColor="gray.500" my="3" />
+			<Separator borderColor="gray.500" my="3" />
 			{tourDate.is_canceled && (
 				<Flex
 					px="4"
@@ -36,7 +36,9 @@ export default function NextTourSection() {
 					borderColor="red.100"
 					borderRadius="sm"
 					alignItems="center">
-					<AlertTriangle boxSize="6" />
+					<Icon boxSize="6">
+						<FiAlertTriangle />
+					</Icon>
 					<Text fontSize="lg" fontWeight="semibold">
 						Abgesagt
 					</Text>

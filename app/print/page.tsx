@@ -1,9 +1,11 @@
+import { Metadata } from 'next';
+
 import { createClient } from '@/lib/supabase/server';
 import { Tour } from '@/types/Tours.types';
 
 import { AllTours, BackToAllTours, PageContainer, PageHeader } from './components';
 
-export const metadata = {
+export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Drucken',
 	description: 'Seite optimiert für den Drucker.',
 	robots: {

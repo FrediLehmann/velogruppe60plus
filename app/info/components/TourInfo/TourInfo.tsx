@@ -1,17 +1,15 @@
 'use client';
 
-import { Link } from '@chakra-ui/next-js';
-import { Box, Flex, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
-
-import { ArrowRight, Clock, External, MessageCircle } from '@/icons';
+import { Box, Flex, Grid, GridItem, Heading, Icon, Link, Text } from '@chakra-ui/react';
+import { FiArrowRight, FiClock, FiExternalLink, FiMessageCircle } from 'react-icons/fi';
 
 export default function TourInfo() {
 	return (
 		<Box as="section">
-			<Heading as="h2" size="md" color="green.800">
+			<Heading as="h2" size="xl" color="green.800">
 				Touren
 			</Heading>
-			<Heading as="h2" size="lg" mb="3">
+			<Heading as="h2" size="3xl" mb="3">
 				Was muss ich wissen?
 			</Heading>
 			<Text fontSize="lg">
@@ -21,7 +19,7 @@ export default function TourInfo() {
 			<Grid mt="8" templateColumns={['1fr', 'repeat(2, 1fr)']} gap="6">
 				<GridItem>
 					<Flex gap="4">
-						<Flex background="green.600" w="50px" h="50px" borderRadius="lg" color="white">
+						<Flex background="green.fg" w="50px" h="50px" borderRadius="lg" color="white">
 							<Text fontSize="lg" fontWeight="bold" m="auto">
 								Mi
 							</Text>
@@ -38,7 +36,7 @@ export default function TourInfo() {
 				</GridItem>
 				<GridItem>
 					<Flex gap="4">
-						<Flex background="green.600" w="50px" h="50px" borderRadius="lg" color="white">
+						<Flex background="green.fg" w="50px" h="50px" borderRadius="lg" color="white">
 							<Text fontSize="lg" fontWeight="bold" m="auto">
 								50
 								<Text as="sup" fontWeight="bold">
@@ -54,7 +52,10 @@ export default function TourInfo() {
 								Jede Woche wird eine andere von über 80 verfügbaren Touren gefahren.
 							</Text>
 							<Link href="/alle-touren" display="block" mt="2" color="green.700">
-								Touren ansehen <ArrowRight boxSize="4" />
+								Touren ansehen{' '}
+								<Icon boxSize="4">
+									<FiArrowRight />
+								</Icon>
 							</Link>
 						</Box>
 					</Flex>
@@ -62,13 +63,15 @@ export default function TourInfo() {
 				<GridItem>
 					<Flex gap="4">
 						<Flex
-							background="green.600"
+							background="green.fg"
 							w="50px"
 							h="50px"
 							borderRadius="lg"
 							justifyContent="center"
 							color="white">
-							<Clock boxSize="6" strokeWidth="3" my="auto" />
+							<Icon boxSize="6" strokeWidth="3" my="auto">
+								<FiClock />
+							</Icon>
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
@@ -84,13 +87,15 @@ export default function TourInfo() {
 				<GridItem>
 					<Flex gap="4">
 						<Flex
-							background="green.600"
+							background="green.fg"
 							w="50px"
 							h="50px"
 							borderRadius="lg"
 							justifyContent="center"
 							color="white">
-							<MessageCircle boxSize="6" strokeWidth="3" my="auto" />
+							<Icon boxSize="6" strokeWidth="3" my="auto">
+								<FiMessageCircle />
+							</Icon>
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
@@ -104,8 +109,11 @@ export default function TourInfo() {
 								display="block"
 								mt="2"
 								color="green.700"
-								isExternal>
-								Der WhatsApp-Gruppe beitreten <External mx="2px" boxSize="4" />
+								target="_blank">
+								Der WhatsApp-Gruppe beitreten{' '}
+								<Icon mx="2px" boxSize="4">
+									<FiExternalLink />
+								</Icon>
 							</Link>
 						</Box>
 					</Flex>

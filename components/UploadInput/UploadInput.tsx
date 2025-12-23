@@ -1,18 +1,11 @@
 'use client';
 
-import {
-	Button,
-	Image as ChakraImage,
-	Flex,
-	FormControl,
-	FormErrorMessage,
-	FormLabel
-} from '@chakra-ui/react';
+import { Button, Image as ChakraImage, Field, Flex, Icon } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
-import { useMemo, useRef } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { FiUpload } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Upload } from '@/icons';
 import { createClient } from '@/lib/supabase/client';
 
 import { ImageFallback } from './components';
@@ -30,8 +23,10 @@ export default function UploadInput({
 }) {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const supabaseClient = createClient();
+	const [imageError, setImageError] = useState(false);
 
 	const image = useMemo(() => {
+		setImageError(false);
 		return typeof fieldProps.field.value === 'string'
 			? supabaseClient.storage.from('map-images').getPublicUrl(fieldProps.field.value).data
 					.publicUrl
@@ -39,12 +34,12 @@ export default function UploadInput({
 	}, [supabaseClient.storage, fieldProps.field.value]);
 
 	return (
-		<FormControl
-			isInvalid={
+		<Field.Root
+			invalid={
 				(fieldProps.form.errors[fieldProps.field.name] &&
 					fieldProps.form.touched[fieldProps.field.name]) as boolean
 			}>
-			<FormLabel>{label}</FormLabel>
+			<Field.Label>{label}</Field.Label>
 			<input
 				type="file"
 				accept={acceptedFileTypes}
@@ -81,27 +76,35 @@ export default function UploadInput({
 			/>
 			<Flex align="flex-start" gap="6">
 				{fieldProps.field.value && (
-					<ChakraImage
-						borderRadius="md"
-						alt="Bild der Karte"
-						boxSize="125px"
-						fallback={<ImageFallback height="125px" width="125px" />}
-						src={image}
-					/>
+					<>
+						{imageError ? (
+							<ImageFallback height="125px" width="125px" />
+						) : (
+							<ChakraImage
+								borderRadius="md"
+								alt="Bild der Karte"
+								boxSize="125px"
+								src={image}
+								onError={() => setImageError(true)}
+							/>
+						)}
+					</>
 				)}
 				<TrackClickEvent event={{ name: 'UPLOAD_BUTTON_CLICK' }}>
 					<Button
 						variant="outline"
-						leftIcon={<Upload boxSize="5" />}
 						onClick={() => {
 							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
 							inputRef?.current?.click();
 						}}>
+						<Icon boxSize="5">
+							<FiUpload />
+						</Icon>
 						{buttonLabel}
 					</Button>
 				</TrackClickEvent>
 			</Flex>
-			<FormErrorMessage>{fieldProps.form.errors[fieldProps.field.name] as string}</FormErrorMessage>
-		</FormControl>
+			<Field.ErrorText>{fieldProps.form.errors[fieldProps.field.name] as string}</Field.ErrorText>
+		</Field.Root>
 	);
 }

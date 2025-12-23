@@ -1,9 +1,9 @@
 'use client';
 
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Icon, Text } from '@chakra-ui/react';
+import { FiPrinter } from 'react-icons/fi';
 
 import { TrackClickEvent } from '@/components';
-import { Print } from '@/icons';
 
 export default function PageHeader() {
 	function printPage() {
@@ -17,18 +17,23 @@ export default function PageHeader() {
 					fontSize="md"
 					fontWeight="semibold"
 					color="gray.700"
-					sx={{ '@media print': { display: 'none' } }}>
+					css={{ '@media print': { display: 'none' } }}>
 					Alle Touren
 				</Text>
-				<Heading as="h1" size="lg" mb="6">
+				<Heading as="h1" size="3xl" mb="6">
 					Velogruppe 60+ Sensetal
 				</Heading>
 			</Box>
 			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
 				<Button
-					leftIcon={<Print boxSize="5" />}
 					onClick={printPage}
-					sx={{ '@media print': { display: 'none' } }}>
+					variant="subtle"
+					bgColor="bgGray.100"
+					_hover={{ background: 'bgGray.200' }}
+					css={{ '@media print': { display: 'none' } }}>
+					<Icon boxSize="5">
+						<FiPrinter />
+					</Icon>
 					Jetzt Drucken
 				</Button>
 			</TrackClickEvent>
