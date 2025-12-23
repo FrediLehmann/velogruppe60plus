@@ -12,6 +12,7 @@ export type Tour = {
 	descent: string;
 	duration: string;
 	next_tour: boolean;
-	image_data: { path: string; width: number; height: number };
+	image_data?: { path: string; width: number; height: number } | null;
+	map_data?: { gpxPath: string } | null;
 	published?: boolean;
 };

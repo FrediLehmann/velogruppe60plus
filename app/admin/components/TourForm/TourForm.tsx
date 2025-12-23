@@ -4,6 +4,7 @@ import { Field, HStack, Input, Stack, Textarea } from '@chakra-ui/react';
 import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { number, object, string } from 'yup';
 
+import { GpxUploadInput } from '@/components';
 import UploadInput from '@/components/UploadInput';
 import { TourFields } from '@/types/TourFields.types';
 
@@ -26,11 +27,18 @@ export default function TourForm({
 				description: string().required('Beschreibung wird benötigt.'),
 				route: string().required('Route wird benötigt'),
 				mapLink: string().url('Inkorrekt formatierte Url').required('Url wird benötigt'),
-				mapImage: string().nullable().required('Bild wird benötigt'),
+				mapImage: string()
+					.nullable()
+					.when('gpxFile', {
+						is: (val: unknown) => !val,
+						then: (schema) => schema.required('Bild oder GPX wird benötigt'),
+						otherwise: (schema) => schema.nullable()
+					}),
 				mapImageData: object({
 					width: number(),
 					height: number()
 				}),
+				gpxFile: string().nullable(),
 				distance: string().required('Distanz wird benötigt'),
 				ascent: string().required('Aufstieg wird benötigt'),
 				descent: string().required('Abstieg wird benötigt'),
@@ -101,6 +109,15 @@ export default function TourForm({
 									label="Bild der Karte"
 									buttonLabel="Bild hochladen..."
 									acceptedFileTypes="image/png, image/jpeg"
+									fieldProps={fieldProps}
+								/>
+							)}
+						</FormikField>
+						<FormikField name="gpxFile">
+							{(fieldProps: FieldProps) => (
+								<GpxUploadInput
+									label="GPX Datei (optional)"
+									buttonLabel="GPX hochladen..."
 									fieldProps={fieldProps}
 								/>
 							)}
