@@ -4,7 +4,6 @@ import { Button, ButtonGroup, Dialog, Icon, Separator } from '@chakra-ui/react';
 import { useCallback, useContext, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -117,14 +116,12 @@ export default function NewTourSection() {
 
 	return (
 		<>
-			<TrackClickEvent event={{ name: 'START_CREATE_NEW_TOUR_BUTTON_CLICK' }}>
-				<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={() => setOpen(true)}>
-					Neue Tour erfassen
-					<Icon boxSize="5">
-						<FiPlus />
-					</Icon>
-				</Button>
-			</TrackClickEvent>
+			<Button size={['sm', 'md']} colorScheme="mapGreen" onClick={() => setOpen(true)}>
+				Neue Tour erfassen
+				<Icon boxSize="5">
+					<FiPlus />
+				</Icon>
+			</Button>
 			<Separator borderColor="gray.500" my="3" />
 			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
@@ -139,22 +136,16 @@ export default function NewTourSection() {
 						</Dialog.Body>
 						<Dialog.Footer>
 							<ButtonGroup>
-								<TrackClickEvent
-									event={{ name: 'ABORT_CREATING_NEW_TOUR_BUTTON_CLICK' }}
-									showBox={true}>
-									<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
-										Abbrechen
-									</Button>
-								</TrackClickEvent>
-								<TrackClickEvent event={{ name: 'SAVE_NEW_TOUR_BUTTON_CLICK' }} showBox={true}>
-									<Button
-										colorScheme="mapGreen"
-										type="submit"
-										form="createTour"
-										loading={isSubmitting}>
-										Speichern
-									</Button>
-								</TrackClickEvent>
+								<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
+									Abbrechen
+								</Button>
+								<Button
+									colorScheme="mapGreen"
+									type="submit"
+									form="createTour"
+									loading={isSubmitting}>
+									Speichern
+								</Button>
 							</ButtonGroup>
 						</Dialog.Footer>
 					</Dialog.Content>

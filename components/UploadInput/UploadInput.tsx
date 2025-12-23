@@ -5,7 +5,6 @@ import { FieldProps } from 'formik';
 import { useMemo, useRef, useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
 
-import { TrackClickEvent } from '@/components';
 import { createClient } from '@/lib/supabase/client';
 
 import { ImageFallback } from './components';
@@ -90,19 +89,17 @@ export default function UploadInput({
 						)}
 					</>
 				)}
-				<TrackClickEvent event={{ name: 'UPLOAD_BUTTON_CLICK' }}>
-					<Button
-						variant="outline"
-						onClick={() => {
-							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
-							inputRef?.current?.click();
-						}}>
-						<Icon boxSize="5">
-							<FiUpload />
-						</Icon>
-						{buttonLabel}
-					</Button>
-				</TrackClickEvent>
+				<Button
+					variant="outline"
+					onClick={() => {
+						fieldProps.form.setTouched({ [fieldProps.field.name]: true });
+						inputRef?.current?.click();
+					}}>
+					<Icon boxSize="5">
+						<FiUpload />
+					</Icon>
+					{buttonLabel}
+				</Button>
 			</Flex>
 			<Field.ErrorText>{fieldProps.form.errors[fieldProps.field.name] as string}</Field.ErrorText>
 		</Field.Root>

@@ -3,8 +3,6 @@
 import { Box, Button, Flex, Heading, Icon, Text } from '@chakra-ui/react';
 import { FiPrinter } from 'react-icons/fi';
 
-import { TrackClickEvent } from '@/components';
-
 export default function PageHeader() {
 	function printPage() {
 		window.print();
@@ -24,19 +22,17 @@ export default function PageHeader() {
 					Velogruppe 60+ Sensetal
 				</Heading>
 			</Box>
-			<TrackClickEvent event={{ name: 'PRINT_TOURS_BUTTON_CLICK' }}>
-				<Button
-					onClick={printPage}
-					variant="subtle"
-					bgColor="bgGray.100"
-					_hover={{ background: 'bgGray.200' }}
-					css={{ '@media print': { display: 'none' } }}>
-					<Icon boxSize="5">
-						<FiPrinter />
-					</Icon>
-					Jetzt Drucken
-				</Button>
-			</TrackClickEvent>
+			<Button
+				onClick={printPage}
+				variant="subtle"
+				bgColor="bgGray.100"
+				_hover={{ background: 'bgGray.200' }}
+				css={{ '@media print': { display: 'none' } }}>
+				<Icon boxSize="5">
+					<FiPrinter />
+				</Icon>
+				Jetzt Drucken
+			</Button>
 		</Flex>
 	);
 }

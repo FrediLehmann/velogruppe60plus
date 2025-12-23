@@ -3,7 +3,6 @@ import { useContext, useState } from 'react';
 import { FiCalendar, FiSlash } from 'react-icons/fi';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -39,14 +38,10 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 
 	return (
 		<>
-			<TrackClickEvent
-				event={{ name: `${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR` }}
-				showBox={true}>
-				<Button onClick={() => setOpen(true)}>
-					<Icon boxSize="5">{isCanceled ? <FiCalendar /> : <FiSlash />}</Icon>
-					{isCanceled ? 'Aktivieren' : 'Absagen'}
-				</Button>
-			</TrackClickEvent>
+			<Button onClick={() => setOpen(true)}>
+				<Icon boxSize="5">{isCanceled ? <FiCalendar /> : <FiSlash />}</Icon>
+				{isCanceled ? 'Aktivieren' : 'Absagen'}
+			</Button>
 			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
@@ -58,22 +53,12 @@ export default function ToggleTourDate({ id, isCanceled }: { id: number; isCance
 							Wollen Sie die nächste Tour wirklich {isCanceled ? 'wieder aktivieren' : 'absagen'}?
 						</Dialog.Body>
 						<Dialog.Footer>
-							<TrackClickEvent
-								event={{
-									name: `CANCEL_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
-								}}>
-								<Button onClick={() => setOpen(false)} loading={isSubmitting}>
-									Abbrechen
-								</Button>
-							</TrackClickEvent>
-							<TrackClickEvent
-								event={{
-									name: `SAVE_${isCanceled ? 'ACTIVATE' : 'DEACTIVATE'}_TOUR`
-								}}>
-								<Button colorScheme="red" onClick={toggleTour} ml={3} loading={isSubmitting}>
-									{isCanceled ? 'Aktivieren' : 'Absagen'}
-								</Button>
-							</TrackClickEvent>
+							<Button onClick={() => setOpen(false)} loading={isSubmitting}>
+								Abbrechen
+							</Button>
+							<Button colorScheme="red" onClick={toggleTour} ml={3} loading={isSubmitting}>
+								{isCanceled ? 'Aktivieren' : 'Absagen'}
+							</Button>
 						</Dialog.Footer>
 					</Dialog.Content>
 				</Dialog.Positioner>

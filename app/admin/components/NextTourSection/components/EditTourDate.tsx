@@ -5,7 +5,6 @@ import { FiEdit } from 'react-icons/fi';
 import { boolean, object, string } from 'yup';
 
 import revalidatePaths from '@/app/admin/actions/revalidate';
-import { TrackClickEvent } from '@/components';
 import { toaster } from '@/components/ui/toaster';
 import { AdminTourListContext } from '@/lib/contexts/AdminTourListContext';
 import { createClient } from '@/lib/supabase/client';
@@ -59,14 +58,12 @@ export default function EditTourDate() {
 
 	return (
 		<>
-			<TrackClickEvent event={{ name: 'EDIT_TOUR_DATE_BUTTON_CLICK' }} showBox={true}>
-				<Button onClick={() => setOpen(true)}>
-					<Icon boxSize="5">
-						<FiEdit />
-					</Icon>
-					Ändern
-				</Button>
-			</TrackClickEvent>
+			<Button onClick={() => setOpen(true)}>
+				<Icon boxSize="5">
+					<FiEdit />
+				</Icon>
+				Ändern
+			</Button>
 			<Dialog.Root open={open} onOpenChange={(e: { open: boolean }) => setOpen(e.open)}>
 				<Dialog.Backdrop />
 				<Dialog.Positioner>
@@ -123,24 +120,16 @@ export default function EditTourDate() {
 						</Dialog.Body>
 						<Dialog.Footer>
 							<ButtonGroup>
-								<TrackClickEvent
-									event={{ name: 'CANCEL_EDIT_TOUR_DATE_BUTTON_CLICK' }}
-									showBox={true}>
-									<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
-										Abbrechen
-									</Button>
-								</TrackClickEvent>
-								<TrackClickEvent
-									event={{ name: 'SAVE_EDIT_TOUR_DATE_BUTTON_CLICK' }}
-									showBox={true}>
-									<Button
-										colorScheme="mapGreen"
-										type="submit"
-										form={EDIT_FORM}
-										loading={isSubmitting}>
-										Speichern
-									</Button>
-								</TrackClickEvent>
+								<Button disabled={isSubmitting} variant="outline" onClick={() => setOpen(false)}>
+									Abbrechen
+								</Button>
+								<Button
+									colorScheme="mapGreen"
+									type="submit"
+									form={EDIT_FORM}
+									loading={isSubmitting}>
+									Speichern
+								</Button>
 							</ButtonGroup>
 						</Dialog.Footer>
 					</Dialog.Content>

@@ -114,7 +114,6 @@ Note: This project uses `proxy.ts` at the root instead of the standard `middlewa
 **Additional:**
 
 - `/icons/` directory contains custom SVG icon components
-- Tellytics analytics integration with consent UI
 - Vercel Analytics & Speed Insights
 
 ## Development Notes
