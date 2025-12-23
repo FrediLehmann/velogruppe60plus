@@ -54,7 +54,7 @@ export default function OrganiserCard({
 					borderRight="1px solid"
 					borderRightRadius="none"
 					borderColor="gray.200">
-					<Link href="mailto:velogruppe60plus-sensetal@bluewin.ch">
+					<Link href="mailto:velogruppe60plus-sensetal@bluewin.ch" textDecoration="none">
 						<Icon boxSize="5">
 							<FiMail />
 						</Icon>
@@ -62,7 +62,7 @@ export default function OrganiserCard({
 					</Link>
 				</Button>
 				<Button asChild w="50%" variant="ghost">
-					<Link href={`tel:${phone}`}>
+					<Link href={`tel:${phone}`} textDecoration="none">
 						<Icon boxSize="5">
 							<FiPhone />
 						</Icon>

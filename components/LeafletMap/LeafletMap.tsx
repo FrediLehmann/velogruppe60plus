@@ -2,12 +2,29 @@
 
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import parseGpx from 'gpx-parser-builder';
-import { LatLngBoundsExpression } from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { MapContainer, Polyline, TileLayer, useMap } from 'react-leaflet';
 
 import { createClient } from '@/lib/supabase/client';
+
+// Dynamically import Leaflet components with no SSR
+const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
+	ssr: false
+});
+const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
+	ssr: false
+});
+const Polyline = dynamic(() => import('react-leaflet').then((mod) => mod.Polyline), {
+	ssr: false
+});
+const useMap = dynamic(() => import('react-leaflet').then((mod) => mod.useMap as any), {
+	ssr: false
+});
+
+// Import Leaflet CSS only on client side
+if (typeof window !== 'undefined') {
+	import('leaflet/dist/leaflet.css');
+}
 
 interface LeafletMapProps {
 	gpxFilePath: string;
@@ -43,11 +60,11 @@ interface GpxData {
 }
 
 // Component to handle map bounds fitting
-function MapBoundsHandler({ bounds }: { bounds: LatLngBoundsExpression | null }) {
+function MapBoundsHandler({ bounds }: { bounds: [[number, number], [number, number]] | null }) {
 	const map = useMap();
 
 	useEffect(() => {
-		if (bounds) {
+		if (bounds && map) {
 			map.fitBounds(bounds, { padding: [50, 50] });
 		}
 	}, [bounds, map]);
@@ -57,7 +74,7 @@ function MapBoundsHandler({ bounds }: { bounds: LatLngBoundsExpression | null })
 
 export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 	const [trackPoints, setTrackPoints] = useState<TrackPoint[]>([]);
-	const [bounds, setBounds] = useState<LatLngBoundsExpression | null>(null);
+	const [bounds, setBounds] = useState<[[number, number], [number, number]] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 	const supabase = createClient();
