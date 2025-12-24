@@ -158,6 +158,33 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 	}, [trackPoints, loading, error, leafletLoaded]);
 
 	useEffect(() => {
+		if (!mapRef.current || !mapContainerRef.current) return;
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting && mapRef.current) {
+						setTimeout(() => {
+							mapRef.current?.invalidateSize();
+							if (mapRef.current?._polyline) {
+								const bounds = mapRef.current._polyline.getBounds();
+								mapRef.current.fitBounds(bounds);
+							}
+						}, 100);
+					}
+				});
+			},
+			{ threshold: 0.1 }
+		);
+
+		observer.observe(mapContainerRef.current);
+
+		return () => {
+			observer.disconnect();
+		};
+	}, [leafletLoaded, trackPoints]);
+
+	useEffect(() => {
 		return () => {
 			if (mapRef.current) {
 				mapRef.current.remove();
