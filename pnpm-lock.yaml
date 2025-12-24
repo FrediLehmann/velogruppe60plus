@@ -29,9 +29,6 @@ importers:
       formik:
         specifier: ^2.4.9
         version: 2.4.9(@types/react@19.2.7)(react@19.2.3)
-      gpx-parser-builder:
-        specifier: ^1.2.0
-        version: 1.2.0
       leaflet:
         specifier: ^1.9.4
         version: 1.9.4
@@ -50,9 +47,6 @@ importers:
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.2.3)
-      react-leaflet:
-        specifier: ^5.0.0
-        version: 5.0.0(leaflet@1.9.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
@@ -527,13 +521,6 @@ packages:
 
   '@pandacss/is-valid-prop@1.7.1':
     resolution: {integrity: sha512-U95nBIhlj6X26W4U0wEbYcgL0A33zqt7bnfjYQ2+RUGfOK17yKx92OHE/ersiRhMWyuSU0Qhj+5CHlCY2126lQ==}
-
-  '@react-leaflet/core@3.0.0':
-    resolution: {integrity: sha512-3EWmekh4Nz+pGcr+xjf0KNyYfC3U2JjnkWsh0zcqaexYqmmB5ZhH37kz41JXGmKzpaMZCnPofBBm64i+YrEvGQ==}
-    peerDependencies:
-      leaflet: ^1.9.0
-      react: ^19.0.0
-      react-dom: ^19.0.0
 
   '@rtsao/scc@1.1.0':
     resolution: {integrity: sha512-zt6OdqaDoOnJ1ZYsCYGt9YmWzDXl4vQdKTyJev62gFhRGKdx7mcT54V9KIjg+d2wi9EXsPvAPKe7i7WjfVWB8g==}
@@ -1465,10 +1452,6 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fast-xml-parser@5.3.3:
-    resolution: {integrity: sha512-2O3dkPAAC6JavuMm8+4+pgTk+5hoAs+CjZ+sWcQLkX9+/tHRuTkQh/Oaifr8qDmZ8iEHb771Ea6G8CdwkrgvYA==}
-    hasBin: true
-
   fastq@1.20.1:
     resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
 
@@ -1568,9 +1551,6 @@ packages:
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
     engines: {node: '>= 0.4'}
-
-  gpx-parser-builder@1.2.0:
-    resolution: {integrity: sha512-1S2NayY7fBnNcuHldNFo80Sw4bLJp/gDU1X6JNp7cKnkeFHzlwAQoDIO5LbcxlJz2hw/V6d+AQdUNbpAH1wXrQ==}
 
   has-bigints@1.1.0:
     resolution: {integrity: sha512-R3pbpkcIqv2Pm3dUwgjclDRVmWpTJW2DcMzcIhEXEx1oh/CEMObMm3KLmRJOdvhM7o4uQBnwr8pzRK2sJWIqfg==}
@@ -2039,13 +2019,6 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react-leaflet@5.0.0:
-    resolution: {integrity: sha512-CWbTpr5vcHw5bt9i4zSlPEVQdTVcML390TjeDG0cK59z1ylexpqC6M1PJFjV8jD7CF+ACBFsLIDs6DRMoLEofw==}
-    peerDependencies:
-      leaflet: ^1.9.0
-      react: ^19.0.0
-      react-dom: ^19.0.0
-
   react@19.2.3:
     resolution: {integrity: sha512-Ku/hhYbVjOQnXDZFv2+RibmLFGwFdeeKHFcOTlrt7xplBnya5OGn/hIRDsqDiSUcfORsDC7MPxwork8jBwsIWA==}
     engines: {node: '>=0.10.0'}
@@ -2190,9 +2163,6 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  strnum@2.1.2:
-    resolution: {integrity: sha512-l63NF9y/cLROq/yqKXSLtcMeeyOfnSQlfMSlzFt/K73oIaD8DGaQWd7Z34X9GPiKqP5rbSh84Hl4bOlLcjiSrQ==}
 
   styled-jsx@5.1.6:
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
@@ -2878,12 +2848,6 @@ snapshots:
   '@nolyfill/is-core-module@1.0.39': {}
 
   '@pandacss/is-valid-prop@1.7.1': {}
-
-  '@react-leaflet/core@3.0.0(leaflet@1.9.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
-    dependencies:
-      leaflet: 1.9.4
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
 
   '@rtsao/scc@1.1.0': {}
 
@@ -4058,7 +4022,7 @@ snapshots:
       eslint: 9.39.2
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2)
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@9.39.2)
       eslint-plugin-react: 7.37.5(eslint@9.39.2)
       eslint-plugin-react-hooks: 7.0.1(eslint@9.39.2)
@@ -4095,7 +4059,7 @@ snapshots:
       tinyglobby: 0.2.15
       unrs-resolver: 1.11.1
     optionalDependencies:
-      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2)
+      eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2)
     transitivePeerDependencies:
       - supports-color
 
@@ -4110,7 +4074,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1)(eslint@9.39.2):
+  eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint-import-resolver-typescript@3.10.1(eslint-plugin-import@2.32.0(@typescript-eslint/parser@8.50.1(eslint@9.39.2)(typescript@5.9.3))(eslint@9.39.2))(eslint@9.39.2))(eslint@9.39.2):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.9
@@ -4271,10 +4235,6 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fast-xml-parser@5.3.3:
-    dependencies:
-      strnum: 2.1.2
-
   fastq@1.20.1:
     dependencies:
       reusify: 1.1.0
@@ -4386,10 +4346,6 @@ snapshots:
       gopd: 1.2.0
 
   gopd@1.2.0: {}
-
-  gpx-parser-builder@1.2.0:
-    dependencies:
-      fast-xml-parser: 5.3.3
 
   has-bigints@1.1.0: {}
 
@@ -4836,13 +4792,6 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-leaflet@5.0.0(leaflet@1.9.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3):
-    dependencies:
-      '@react-leaflet/core': 3.0.0(leaflet@1.9.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
-      leaflet: 1.9.4
-      react: 19.2.3
-      react-dom: 19.2.3(react@19.2.3)
-
   react@19.2.3: {}
 
   reflect.getprototypeof@1.0.10:
@@ -5063,8 +5012,6 @@ snapshots:
   strip-bom@3.0.0: {}
 
   strip-json-comments@3.1.1: {}
-
-  strnum@2.1.2: {}
 
   styled-jsx@5.1.6(@babel/core@7.28.5)(react@19.2.3):
     dependencies:

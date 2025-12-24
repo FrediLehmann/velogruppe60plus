@@ -21,7 +21,7 @@ export default function GpxDownloadButton({
 			setDownloading(true);
 
 			// Get public URL from Supabase Storage
-			const { data } = supabase.storage.from('gpx-files').getPublicUrl(gpxFilePath);
+			const { data } = supabase.storage.from('map-data').getPublicUrl(gpxFilePath);
 
 			if (!data.publicUrl) {
 				throw new Error('GPX-Datei konnte nicht gefunden werden');
@@ -55,15 +55,16 @@ export default function GpxDownloadButton({
 	return (
 		<Button
 			onClick={handleDownload}
-			colorScheme="green"
-			variant="outline"
+			variant="subtle"
+			bgColor="bgGray.100"
+			_hover={{ bg: 'bgGray.200' }}
 			size="sm"
 			loading={downloading}
 			loadingText="Wird heruntergeladen...">
 			<Icon boxSize="4">
 				<FiDownload />
 			</Icon>
-			GPX herunterladen
+			Karten Daten herunterladen
 		</Button>
 	);
 }

@@ -1,30 +1,10 @@
 'use client';
 
 import { Box, Spinner, Text } from '@chakra-ui/react';
-import parseGpx from 'gpx-parser-builder';
-import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { useEffect, useRef, useState } from 'react';
 
 import { createClient } from '@/lib/supabase/client';
-
-// Dynamically import Leaflet components with no SSR
-const MapContainer = dynamic(() => import('react-leaflet').then((mod) => mod.MapContainer), {
-	ssr: false
-});
-const TileLayer = dynamic(() => import('react-leaflet').then((mod) => mod.TileLayer), {
-	ssr: false
-});
-const Polyline = dynamic(() => import('react-leaflet').then((mod) => mod.Polyline), {
-	ssr: false
-});
-const useMap = dynamic(() => import('react-leaflet').then((mod) => mod.useMap as any), {
-	ssr: false
-});
-
-// Import Leaflet CSS only on client side
-if (typeof window !== 'undefined') {
-	import('leaflet/dist/leaflet.css');
-}
 
 interface LeafletMapProps {
 	gpxFilePath: string;
@@ -35,49 +15,22 @@ interface TrackPoint {
 	lng: number;
 }
 
-interface GpxPoint {
-	$: {
-		lat: string;
-		lon: string;
-	};
-}
-
-interface GpxSegment {
-	trkpt: GpxPoint[];
-}
-
-interface GpxTrack {
-	trkseg: GpxSegment[];
-}
-
-interface GpxRoute {
-	rtept: GpxPoint[];
-}
-
-interface GpxData {
-	trk?: GpxTrack[];
-	rte?: GpxRoute[];
-}
-
-// Component to handle map bounds fitting
-function MapBoundsHandler({ bounds }: { bounds: [[number, number], [number, number]] | null }) {
-	const map = useMap();
-
-	useEffect(() => {
-		if (bounds && map) {
-			map.fitBounds(bounds, { padding: [50, 50] });
-		}
-	}, [bounds, map]);
-
-	return null;
-}
-
 export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
+	const mapRef = useRef<any>(null);
+	const mapContainerRef = useRef<HTMLDivElement>(null);
 	const [trackPoints, setTrackPoints] = useState<TrackPoint[]>([]);
-	const [bounds, setBounds] = useState<[[number, number], [number, number]] | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
+	const [leafletLoaded, setLeafletLoaded] = useState(false);
 	const supabase = createClient();
+
+	useEffect(() => {
+		if (typeof window !== 'undefined') {
+			import('leaflet').then(() => {
+				setLeafletLoaded(true);
+			});
+		}
+	}, []);
 
 	useEffect(() => {
 		const loadGpxData = async () => {
@@ -85,7 +38,6 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 				setLoading(true);
 				setError(null);
 
-				// Fetch GPX file from Supabase Storage
 				const { data, error: fetchError } = await supabase.storage
 					.from('map-data')
 					.download(gpxFilePath);
@@ -94,46 +46,41 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 					throw new Error('GPX-Datei konnte nicht geladen werden');
 				}
 
-				// Convert blob to text
 				const text = await data.text();
 
-				// Parse GPX
-				const gpx = parseGpx(text) as GpxData;
+				const parser = new DOMParser();
+				const xmlDoc = parser.parseFromString(text, 'text/xml');
 
-				// Extract track points
-				const points: TrackPoint[] = [];
-
-				// Handle tracks
-				if (gpx.trk && gpx.trk.length > 0) {
-					gpx.trk.forEach((track: GpxTrack) => {
-						if (track.trkseg && track.trkseg.length > 0) {
-							track.trkseg.forEach((segment: GpxSegment) => {
-								if (segment.trkpt && segment.trkpt.length > 0) {
-									segment.trkpt.forEach((point: GpxPoint) => {
-										if (point.$.lat && point.$.lon) {
-											points.push({
-												lat: parseFloat(point.$.lat),
-												lng: parseFloat(point.$.lon)
-											});
-										}
-									});
-								}
-							});
-						}
-					});
+				const parserError = xmlDoc.querySelector('parsererror');
+				if (parserError) {
+					throw new Error('GPX-Datei konnte nicht geparst werden');
 				}
 
-				// Handle routes if no tracks found
-				if (points.length === 0 && gpx.rte && gpx.rte.length > 0) {
-					gpx.rte.forEach((route: GpxRoute) => {
-						if (route.rtept && route.rtept.length > 0) {
-							route.rtept.forEach((point: GpxPoint) => {
-								if (point.$.lat && point.$.lon) {
-									points.push({
-										lat: parseFloat(point.$.lat),
-										lng: parseFloat(point.$.lon)
-									});
-								}
+				const points: TrackPoint[] = [];
+
+				// Handle tracks (<trk> -> <trkseg> -> <trkpt>)
+				const trackPoints = xmlDoc.querySelectorAll('trk > trkseg > trkpt');
+				trackPoints.forEach((trkpt) => {
+					const lat = trkpt.getAttribute('lat');
+					const lon = trkpt.getAttribute('lon');
+					if (lat && lon) {
+						points.push({
+							lat: parseFloat(lat),
+							lng: parseFloat(lon)
+						});
+					}
+				});
+
+				// Handle routes if no tracks found (<rte> -> <rtept>)
+				if (points.length === 0) {
+					const routePoints = xmlDoc.querySelectorAll('rte > rtept');
+					routePoints.forEach((rtept) => {
+						const lat = rtept.getAttribute('lat');
+						const lon = rtept.getAttribute('lon');
+						if (lat && lon) {
+							points.push({
+								lat: parseFloat(lat),
+								lng: parseFloat(lon)
 							});
 						}
 					});
@@ -144,20 +91,6 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 				}
 
 				setTrackPoints(points);
-
-				// Calculate bounds
-				const lats = points.map((p) => p.lat);
-				const lngs = points.map((p) => p.lng);
-				const minLat = Math.min(...lats);
-				const maxLat = Math.max(...lats);
-				const minLng = Math.min(...lngs);
-				const maxLng = Math.max(...lngs);
-
-				setBounds([
-					[minLat, minLng],
-					[maxLat, maxLng]
-				]);
-
 				setLoading(false);
 			} catch (err) {
 				console.error('Error loading GPX:', err);
@@ -171,7 +104,69 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 		}
 	}, [gpxFilePath, supabase.storage]);
 
-	if (loading) {
+	useEffect(() => {
+		if (
+			!leafletLoaded ||
+			!mapContainerRef.current ||
+			loading ||
+			error ||
+			trackPoints.length === 0
+		) {
+			return;
+		}
+
+		const initMap = async () => {
+			const L = (await import('leaflet')).default;
+
+			if (!mapRef.current) {
+				const map = L.map(mapContainerRef.current!, {
+					center: [trackPoints[0].lat, trackPoints[0].lng],
+					zoom: 13,
+					scrollWheelZoom: true
+				});
+
+				L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+					attribution:
+						'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+				}).addTo(map);
+
+				mapRef.current = map;
+			}
+
+			const map = mapRef.current;
+
+			const positions: [number, number][] = trackPoints.map((p) => [p.lat, p.lng]);
+			const polyline = L.polyline(positions, {
+				color: '#2F855A',
+				weight: 4,
+				opacity: 0.8
+			}).addTo(map);
+
+			const bounds = polyline.getBounds();
+			map.fitBounds(bounds);
+
+			mapRef.current._polyline = polyline;
+		};
+
+		initMap();
+
+		return () => {
+			if (mapRef.current?._polyline) {
+				mapRef.current._polyline.remove();
+			}
+		};
+	}, [trackPoints, loading, error, leafletLoaded]);
+
+	useEffect(() => {
+		return () => {
+			if (mapRef.current) {
+				mapRef.current.remove();
+				mapRef.current = null;
+			}
+		};
+	}, []);
+
+	if (loading || !leafletLoaded) {
 		return (
 			<Box
 				display="flex"
@@ -204,30 +199,9 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 		return null;
 	}
 
-	// Convert track points to Leaflet format
-	const positions: [number, number][] = trackPoints.map((p) => [p.lat, p.lng]);
-
 	return (
 		<Box height="500px" width="100%" borderRadius="md" overflow="hidden">
-			<MapContainer
-				style={{ height: '100%', width: '100%' }}
-				center={positions[0]}
-				zoom={13}
-				scrollWheelZoom={true}>
-				<TileLayer
-					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-				/>
-				<Polyline
-					positions={positions}
-					pathOptions={{
-						color: '#2F855A',
-						weight: 4,
-						opacity: 0.8
-					}}
-				/>
-				<MapBoundsHandler bounds={bounds} />
-			</MapContainer>
+			<div ref={mapContainerRef} style={{ height: '100%', width: '100%' }} />
 		</Box>
 	);
 }

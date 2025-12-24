@@ -10,7 +10,7 @@ import { Tour } from '@/types/Tours.types';
 
 import { Fact } from './components';
 
-export default function TourView({ tour }: { tour: Tour }) {
+export default function TourView({ tour, isAdmin = false }: { tour: Tour; isAdmin?: boolean }) {
 	const supabase = createClient();
 
 	return (
@@ -49,12 +49,14 @@ export default function TourView({ tour }: { tour: Tour }) {
 			{tour.map_data?.gpxPath ? (
 				<>
 					<Flex gap="4" align="center" my="4">
-						<Link href={tour.mapUrl} target="_blank" color="green.700">
-							Auf Schweiz Mobil anschauen{' '}
-							<Icon mx="2px" boxSize="4">
-								<FiExternalLink />
-							</Icon>
-						</Link>
+						{isAdmin && (
+							<Link href={tour.mapUrl} target="_blank" color="green.700">
+								Auf Schweiz Mobil anschauen{' '}
+								<Icon mx="2px" boxSize="4">
+									<FiExternalLink />
+								</Icon>
+							</Link>
+						)}
 						<GpxDownloadButton gpxFilePath={tour.map_data.gpxPath} tourName={tour.name} />
 					</Flex>
 					<LeafletMap gpxFilePath={tour.map_data.gpxPath} />

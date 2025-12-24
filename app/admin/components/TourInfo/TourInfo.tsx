@@ -35,7 +35,7 @@ export default function TourInfo(tour: Tour) {
 			<Accordion.ItemContent>
 				<Accordion.ItemBody>
 					<TourOperations tour={tour} />
-					<TourView tour={tour} />
+					<TourView tour={tour} isAdmin />
 				</Accordion.ItemBody>
 			</Accordion.ItemContent>
 		</Accordion.Item>
