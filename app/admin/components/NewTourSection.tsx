@@ -45,7 +45,7 @@ export default function NewTourSection() {
 						name,
 						description,
 						route,
-						mapUrl: mapLink,
+						mapUrl: mapLink || null,
 						startPoint: start,
 						endPoint: end,
 						pause,

@@ -3,7 +3,7 @@
 import { Box, Button, Field, Flex, Icon, Text } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
 import { useRef, useState } from 'react';
-import { FiFile, FiUpload } from 'react-icons/fi';
+import { FiFile, FiTrash2, FiUpload } from 'react-icons/fi';
 
 export default function GpxUploadInput({
 	label,
@@ -98,17 +98,37 @@ export default function GpxUploadInput({
 						</Text>
 					</Box>
 				)}
-				<Button
-					variant="outline"
-					onClick={() => {
-						fieldProps.form.setTouched({ [fieldProps.field.name]: true });
-						inputRef?.current?.click();
-					}}>
-					<Icon boxSize="5">
-						<FiUpload />
-					</Icon>
-					{buttonLabel}
-				</Button>
+				<Flex gap="2">
+					<Button
+						variant="outline"
+						onClick={() => {
+							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
+							inputRef?.current?.click();
+						}}>
+						<Icon boxSize="5">
+							<FiUpload />
+						</Icon>
+						{buttonLabel}
+					</Button>
+					{fieldProps.field.value && (
+						<Button
+							variant="outline"
+							colorScheme="red"
+							onClick={() => {
+								fieldProps.form.setFieldValue(fieldProps.field.name, null);
+								setFileName('');
+								setFileSize('');
+								if (inputRef.current) {
+									inputRef.current.value = '';
+								}
+							}}>
+							<Icon boxSize="5">
+								<FiTrash2 />
+							</Icon>
+							Löschen
+						</Button>
+					)}
+				</Flex>
 			</Flex>
 			<Field.ErrorText>{fieldProps.form.errors[fieldProps.field.name] as string}</Field.ErrorText>
 		</Field.Root>
