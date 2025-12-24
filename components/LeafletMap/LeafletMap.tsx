@@ -3,6 +3,8 @@
 import { Box, Spinner, Text } from '@chakra-ui/react';
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useRef, useState } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { FiPlay, FiSquare } from 'react-icons/fi';
 
 import { createClient } from '@/lib/supabase/client';
 
@@ -142,10 +144,73 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 				opacity: 0.8
 			}).addTo(map);
 
+			// Create custom icons for start and end markers using react-icons
+			const startIconSvg = renderToStaticMarkup(<FiPlay size={10} fill="white" stroke="white" />);
+			const endIconSvg = renderToStaticMarkup(<FiSquare size={10} fill="white" stroke="white" />);
+
+			const startIcon = L.divIcon({
+				html: `<div style="
+					background-color: #22543D;
+					color: white;
+					width: 20px;
+					height: 20px;
+					border-radius: 50% 50% 50% 0;
+					transform: rotate(-45deg);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border: 1px solid white;
+					box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+				">
+					<div style="transform: rotate(45deg); display: flex; align-items: center; justify-content: center; margin-left: 1px;">${startIconSvg}</div>
+				</div>`,
+				className: '',
+				iconSize: [28, 28],
+				iconAnchor: [14, 28],
+				popupAnchor: [0, -28]
+			});
+
+			const endIcon = L.divIcon({
+				html: `<div style="
+					background-color: #C53030;
+					color: white;
+					width: 20px;
+					height: 20px;
+					border-radius: 50% 50% 50% 0;
+					transform: rotate(-45deg);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border: 1px solid white;
+					box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+				">
+					<div style="transform: rotate(45deg); display: flex; align-items: center; justify-content: center;">${endIconSvg}</div>
+				</div>`,
+				className: '',
+				iconSize: [28, 28],
+				iconAnchor: [14, 28],
+				popupAnchor: [0, -28]
+			});
+
+			// Add start marker
+			const startMarker = L.marker([positions[0][0], positions[0][1]], {
+				icon: startIcon
+			}).addTo(map);
+			startMarker.bindPopup('<strong>Start</strong>');
+
+			// Add end marker
+			const endMarker = L.marker(
+				[positions[positions.length - 1][0], positions[positions.length - 1][1]],
+				{ icon: endIcon }
+			).addTo(map);
+			endMarker.bindPopup('<strong>Ziel</strong>');
+
 			const bounds = polyline.getBounds();
 			map.fitBounds(bounds);
 
 			mapRef.current._polyline = polyline;
+			mapRef.current._startMarker = startMarker;
+			mapRef.current._endMarker = endMarker;
 		};
 
 		initMap();
@@ -153,6 +218,12 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 		return () => {
 			if (mapRef.current?._polyline) {
 				mapRef.current._polyline.remove();
+			}
+			if (mapRef.current?._startMarker) {
+				mapRef.current._startMarker.remove();
+			}
+			if (mapRef.current?._endMarker) {
+				mapRef.current._endMarker.remove();
 			}
 		};
 	}, [trackPoints, loading, error, leafletLoaded]);
