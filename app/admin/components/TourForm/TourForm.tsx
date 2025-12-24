@@ -201,7 +201,10 @@ export default function TourForm({
 									<Field.Root
 										required
 										invalid={(form.errors.descent && form.touched.descent) as boolean}>
-										<Field.Label>Abstieg</Field.Label>
+										<Field.Label>
+											Abstieg
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Input {...field} />
 										<Field.ErrorText>{form.errors?.descent as string}</Field.ErrorText>
 									</Field.Root>
