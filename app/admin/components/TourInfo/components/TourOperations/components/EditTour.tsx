@@ -48,7 +48,6 @@ export default function EditTour({
 			let img = mapImage;
 			let imageDataToSave = tour.image_data;
 
-			// Handle image deletion
 			if (!mapImage && tour.image_data?.path) {
 				const { error: imageRemovalError } = await supabaseClient.storage
 					.from('map-images')
@@ -67,12 +66,9 @@ export default function EditTour({
 					return;
 				}
 
-				img = null;
-				imageDataToSave = null;
-			}
-			// Handle image upload
-			else if (mapImage && typeof mapImage !== 'string') {
-				// Remove old image if it exists
+				img = undefined;
+				imageDataToSave = undefined;
+			} else if (mapImage && typeof mapImage !== 'string') {
 				if (tour.image_data?.path) {
 					const { error: imageRemovalError } = await supabaseClient.storage
 						.from('map-images')
@@ -114,15 +110,12 @@ export default function EditTour({
 				img = data.path;
 				imageDataToSave = {
 					path: data.path,
-					width: mapImageData?.width,
-					height: mapImageData?.height
+					width: mapImageData?.width || 0,
+					height: mapImageData?.height || 0
 				};
 			}
 
-			// Handle GPX file deletion or upload
 			let mapData = tour.map_data;
-
-			// Handle GPX file deletion
 			if (!gpxFile && tour.map_data?.gpxPath) {
 				const { error: gpxRemovalError } = await supabaseClient.storage
 					.from('map-data')
@@ -141,10 +134,7 @@ export default function EditTour({
 				}
 
 				mapData = null;
-			}
-			// Handle GPX file upload
-			else if (gpxFile && gpxFile instanceof File) {
-				// Remove old GPX file if exists
+			} else if (gpxFile && gpxFile instanceof File) {
 				if (tour.map_data?.gpxPath) {
 					await supabaseClient.storage.from('map-data').remove([tour.map_data.gpxPath]);
 				}
