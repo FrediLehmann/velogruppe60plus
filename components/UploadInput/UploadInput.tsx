@@ -75,7 +75,7 @@ export default function UploadInput({
 				style={{ display: 'none' }}
 			/>
 			<Flex align="flex-start" gap="6">
-				{fieldProps.field.value && (
+				{fieldProps.field.value && image && (
 					<>
 						{imageError ? (
 							<ImageFallback height="125px" width="125px" />
