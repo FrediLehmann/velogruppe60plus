@@ -26,6 +26,7 @@ export default function UploadInput({
 
 	const image = useMemo(() => {
 		setImageError(false);
+		if (!fieldProps.field.value) return null;
 		return typeof fieldProps.field.value === 'string'
 			? supabaseClient.storage.from('map-images').getPublicUrl(fieldProps.field.value).data
 					.publicUrl

@@ -27,11 +27,11 @@ export default function TourForm({
 				description: string().required('Beschreibung wird benötigt.'),
 				route: string().required('Route wird benötigt'),
 				mapLink: string().url('Inkorrekt formatierte Url'),
-				mapImage: string(),
+				mapImage: string().nullable(),
 				mapImageData: object({
 					width: number(),
 					height: number()
-				}),
+				}).nullable(),
 				gpxFile: string().nullable(),
 				distance: string().required('Distanz wird benötigt'),
 				ascent: string().required('Aufstieg wird benötigt'),
