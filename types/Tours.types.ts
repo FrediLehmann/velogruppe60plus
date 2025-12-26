@@ -13,6 +13,6 @@ export type Tour = {
 	duration: string;
 	next_tour: boolean;
 	image_data?: { path: string; width: number; height: number } | null;
-	map_data?: { gpxPath: string } | null;
+	map_data?: { gpxPath: string; updated_at?: string } | null;
 	published?: boolean;
 };

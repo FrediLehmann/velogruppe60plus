@@ -127,7 +127,7 @@ export default function NewTourSection() {
 				// Update tour with GPX file path in map_data
 				await supabaseClient
 					.from('touren')
-					.update({ map_data: { gpxPath: gpxData.path } })
+					.update({ map_data: { gpxPath: gpxData.path, updated_at: new Date().toISOString() } })
 					.eq('id', data[0].id);
 			}
 

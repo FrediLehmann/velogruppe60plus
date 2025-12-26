@@ -58,7 +58,7 @@ export default function TourView({ tour, isAdmin = false }: { tour: Tour; isAdmi
 			</Flex>
 			{tour.map_data?.gpxPath ? (
 				<>
-					<Flex gap="4" align="center" my="4">
+					<Flex gap="4" align="center" mt="4" wrap="wrap">
 						{isAdmin && (
 							<Link href={tour.mapUrl} target="_blank" color="green.700">
 								Auf Schweiz Mobil anschauen{' '}
@@ -69,6 +69,18 @@ export default function TourView({ tour, isAdmin = false }: { tour: Tour; isAdmi
 						)}
 						<GpxDownloadButton gpxFilePath={tour.map_data.gpxPath} tourName={tour.name} />
 					</Flex>
+					<Box mb="4" mt="1">
+						{tour.map_data.updated_at && (
+							<Text fontSize="xs" color="gray.500">
+								Karte aktualisiert am:{' '}
+								{new Date(tour.map_data.updated_at).toLocaleDateString('de-CH', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</Text>
+						)}
+					</Box>
 					<LeafletMap gpxFilePath={tour.map_data.gpxPath} />
 				</>
 			) : tour.image_data ? (

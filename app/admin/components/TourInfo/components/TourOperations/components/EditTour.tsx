@@ -155,7 +155,7 @@ export default function EditTour({
 					return;
 				}
 
-				mapData = { gpxPath: gpxData.path };
+				mapData = { gpxPath: gpxData.path, updated_at: new Date().toISOString() };
 			}
 
 			const { error } = await supabaseClient
