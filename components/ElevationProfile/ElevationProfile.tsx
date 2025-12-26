@@ -143,7 +143,7 @@ export default function ElevationProfile({ gpxFilePath }: { gpxFilePath: string 
 										border="1px solid"
 										borderColor="gray.200">
 										<Box fontSize="sm" fontWeight="medium">
-											{payload[0].value} m ü. M.
+											{payload[0].value} m.ü.M.
 										</Box>
 									</Box>
 								);
