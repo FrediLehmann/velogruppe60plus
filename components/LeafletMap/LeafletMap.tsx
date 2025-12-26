@@ -139,7 +139,7 @@ export default function LeafletMap({ gpxFilePath }: LeafletMapProps) {
 
 			const positions: [number, number][] = trackPoints.map((p) => [p.lat, p.lng]);
 			const polyline = L.polyline(positions, {
-				color: '#2F855A',
+				color: '#FF0000',
 				weight: 4,
 				opacity: 0.8
 			}).addTo(map);
