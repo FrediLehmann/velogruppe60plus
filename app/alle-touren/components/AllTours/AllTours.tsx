@@ -51,8 +51,8 @@ export default function AllTours() {
 						{totalTours} Touren
 					</Text>
 				</Box>
-				<Button asChild variant="subtle" bgColor="bgGray.100">
-					<Link href="/print">
+				<Button asChild variant="subtle" bgColor="bgGray.100" _hover={{ bg: 'bgGray.200' }}>
+					<Link href="/print" textDecoration="none">
 						<Icon boxSize="5">
 							<FiPrinter />
 						</Icon>
@@ -76,7 +76,9 @@ export default function AllTours() {
 						</IconButton>
 					) : (
 						<IconButton asChild aria-label="Previous page">
-							<Link href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}>
+							<Link
+								href={page === 2 ? '/alle-touren' : `/alle-touren?page=${page - 1}`}
+								textDecoration="none">
 								<Icon boxSize={['4', '6']}>
 									<FiChevronLeft />
 								</Icon>
@@ -107,7 +109,9 @@ export default function AllTours() {
 							</Button>
 						) : (
 							<Button key={pageIndex} asChild bg="transparent">
-								<Link href={pageIndex === 1 ? '/alle-touren' : `/alle-touren?page=${pageIndex}`}>
+								<Link
+									href={pageIndex === 1 ? '/alle-touren' : `/alle-touren?page=${pageIndex}`}
+									textDecoration="none">
 									{pageIndex}
 								</Link>
 							</Button>
@@ -135,7 +139,7 @@ export default function AllTours() {
 						</IconButton>
 					) : (
 						<IconButton asChild aria-label="Next page">
-							<Link href={`/alle-touren?page=${page + 1}`}>
+							<Link href={`/alle-touren?page=${page + 1}`} textDecoration="none">
 								<Icon boxSize={['4', '6']}>
 									<FiChevronRight />
 								</Icon>

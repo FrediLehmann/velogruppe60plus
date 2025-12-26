@@ -12,12 +12,14 @@ export default function DeleteTour({
 	id,
 	name,
 	image_data,
+	map_data,
 	isOpen,
 	onClose
 }: {
 	id: number;
 	name: string;
-	image_data: { path: string; height: number; width: number };
+	image_data?: { path: string; height: number; width: number } | null;
+	map_data?: { gpxPath: string } | null;
 	isOpen: boolean;
 	onClose: () => void;
 }) {
@@ -26,7 +28,12 @@ export default function DeleteTour({
 	const supabaseClient = createClient();
 
 	const deleteTour = async () => {
-		await supabaseClient.storage.from('map-images').remove([image_data.path]);
+		if (image_data?.path) {
+			await supabaseClient.storage.from('map-images').remove([image_data.path]);
+		}
+		if (map_data?.gpxPath) {
+			await supabaseClient.storage.from('map-data').remove([map_data.gpxPath]);
+		}
 		const { error } = await supabaseClient.from('touren').delete().eq('id', id);
 
 		if (error)

@@ -27,7 +27,7 @@ export default async function AlleTouren({
 	const { error, data, count } = await supabase
 		.from('touren')
 		.select(
-			'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data',
+			'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, map_data',
 			{ count: 'exact' }
 		)
 		.eq('published', true)

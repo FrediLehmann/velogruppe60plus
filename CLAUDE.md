@@ -22,7 +22,7 @@ This is a Next.js 16 application for a German cycling group (Velogruppe 60+ Sens
 - **Framework**: Next.js 16.1 with App Router (not Pages Router)
 - **React**: React 19.2
 - **Database**: Supabase (PostgreSQL) with server-side rendering via @supabase/ssr
-- **UI**: Chakra UI v2 with custom theme (mapGreen palette)
+- **UI**: Chakra UI v3 with custom theme (mapGreen palette) using `createSystem` API
 - **Forms**: Formik + Yup for form handling and validation
 - **Authentication**: Supabase Auth with proxy-based session management
 - **Package Manager**: pnpm 9.12.3 (required - uses packageManager field)
@@ -48,8 +48,12 @@ This is a Next.js 16 application for a German cycling group (Velogruppe 60+ Sens
 
 /lib/                   # Utilities and configurations
 ├── supabase/           # Database client setup
-├── contexts/           # React contexts
-└── theme/              # Chakra UI theme
+└── contexts/           # React contexts
+
+/components/ui/         # Chakra UI setup
+├── provider.tsx        # ChakraProvider wrapper
+├── theme.ts            # Custom theme with createSystem
+└── color-mode.tsx      # Color mode utilities
 
 /types/                 # TypeScript definitions
 ```
@@ -90,8 +94,8 @@ Note: This project uses `proxy.ts` at the root instead of the standard `middlewa
 
 ### Styling Approach
 
-- Chakra UI components with custom theme in `/lib/theme`
-- Custom color palette (mapGreen) for brand consistency
+- Chakra UI v3 components with custom theme in `/components/ui/theme.ts`
+- Custom color palettes: `mapGreen` (brand green) and `bgGray` (background)
 - Responsive design using Chakra's breakpoint arrays
 - German language content (lang="de")
 
@@ -113,7 +117,8 @@ Note: This project uses `proxy.ts` at the root instead of the standard `middlewa
 
 **Additional:**
 
-- `/icons/` directory contains custom SVG icon components
+- Leaflet maps for tour route visualization
+- GPX file upload/download for tour routes
 - Vercel Analytics & Speed Insights
 
 ## Development Notes

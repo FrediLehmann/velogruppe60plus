@@ -4,6 +4,7 @@ import { Field, HStack, Input, Stack, Textarea } from '@chakra-ui/react';
 import { FieldProps, Form, Formik, Field as FormikField } from 'formik';
 import { number, object, string } from 'yup';
 
+import { GpxUploadInput } from '@/components';
 import UploadInput from '@/components/UploadInput';
 import { TourFields } from '@/types/TourFields.types';
 
@@ -25,12 +26,13 @@ export default function TourForm({
 				name: string().required('Name wird benötigt.'),
 				description: string().required('Beschreibung wird benötigt.'),
 				route: string().required('Route wird benötigt'),
-				mapLink: string().url('Inkorrekt formatierte Url').required('Url wird benötigt'),
-				mapImage: string().nullable().required('Bild wird benötigt'),
+				mapLink: string().url('Inkorrekt formatierte Url'),
+				mapImage: string().nullable(),
 				mapImageData: object({
 					width: number(),
 					height: number()
-				}),
+				}).nullable(),
+				gpxFile: string().nullable(),
 				distance: string().required('Distanz wird benötigt'),
 				ascent: string().required('Aufstieg wird benötigt'),
 				descent: string().required('Abstieg wird benötigt'),
@@ -83,13 +85,8 @@ export default function TourForm({
 						</FormikField>
 						<FormikField name="mapLink">
 							{({ field, form }: FieldProps) => (
-								<Field.Root
-									required
-									invalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
-									<Field.Label>
-										Url zur Schweiz Mobil Karte
-										<Field.RequiredIndicator />
-									</Field.Label>
+								<Field.Root invalid={(form.errors.mapLink && form.touched.mapLink) as boolean}>
+									<Field.Label>Url zur Schweiz Mobil Karte</Field.Label>
 									<Input {...field} />
 									<Field.ErrorText>{form.errors?.mapLink as string}</Field.ErrorText>
 								</Field.Root>
@@ -101,6 +98,15 @@ export default function TourForm({
 									label="Bild der Karte"
 									buttonLabel="Bild hochladen..."
 									acceptedFileTypes="image/png, image/jpeg"
+									fieldProps={fieldProps}
+								/>
+							)}
+						</FormikField>
+						<FormikField name="gpxFile">
+							{(fieldProps: FieldProps) => (
+								<GpxUploadInput
+									label="GPX Datei"
+									buttonLabel="GPX hochladen..."
 									fieldProps={fieldProps}
 								/>
 							)}
@@ -195,7 +201,10 @@ export default function TourForm({
 									<Field.Root
 										required
 										invalid={(form.errors.descent && form.touched.descent) as boolean}>
-										<Field.Label>Abstieg</Field.Label>
+										<Field.Label>
+											Abstieg
+											<Field.RequiredIndicator />
+										</Field.Label>
 										<Input {...field} />
 										<Field.ErrorText>{form.errors?.descent as string}</Field.ErrorText>
 									</Field.Root>

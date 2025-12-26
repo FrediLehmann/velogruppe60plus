@@ -26,6 +26,7 @@ export default function NewTourSection() {
 			mapLink,
 			mapImage,
 			mapImageData,
+			gpxFile,
 			start,
 			end,
 			pause,
@@ -44,7 +45,7 @@ export default function NewTourSection() {
 						name,
 						description,
 						route,
-						mapUrl: mapLink,
+						mapUrl: mapLink || null,
 						startPoint: start,
 						endPoint: end,
 						pause,
@@ -68,36 +69,67 @@ export default function NewTourSection() {
 				return;
 			}
 
-			// Upload image
-			const { data: imageData, error: imageUploadError } = await supabaseClient.storage
-				.from('map-images')
-				.upload(`${data[0].id.toString()}.${(mapImage as File).name.split('.').pop()}`, mapImage, {
-					upsert: true
-				});
+			// Upload image if provided
+			if (mapImage && mapImage instanceof File) {
+				const { data: imageData, error: imageUploadError } = await supabaseClient.storage
+					.from('map-images')
+					.upload(
+						`${data[0].id.toString()}.${(mapImage as File).name.split('.').pop()}`,
+						mapImage,
+						{
+							upsert: true
+						}
+					);
 
-			if (imageUploadError) {
-				toaster.create({
-					title: 'Bild upload fehlgeschlagen.',
-					description: 'Bild konnte nicht hochgeladen werden.',
-					type: 'error',
-					duration: 9000,
-					closable: true
-				});
-				setIsSubmitting(false);
-				return;
+				if (imageUploadError) {
+					toaster.create({
+						title: 'Bild upload fehlgeschlagen.',
+						description: 'Bild konnte nicht hochgeladen werden.',
+						type: 'error',
+						duration: 9000,
+						closable: true
+					});
+					setIsSubmitting(false);
+					return;
+				}
+
+				// Set the image info for the new tour
+				await supabaseClient
+					.from('touren')
+					.update({
+						image_data: {
+							path: imageData.path,
+							width: mapImageData?.width,
+							height: mapImageData?.height
+						}
+					})
+					.eq('id', data[0].id);
 			}
 
-			// Set the image info for the new tour
-			await supabaseClient
-				.from('touren')
-				.update({
-					image_data: {
-						path: imageData.path,
-						width: mapImageData?.width,
-						height: mapImageData?.height
-					}
-				})
-				.eq('id', data[0].id);
+			// Upload GPX file if provided
+			if (gpxFile && gpxFile instanceof File) {
+				const { data: gpxData, error: gpxUploadError } = await supabaseClient.storage
+					.from('map-data')
+					.upload(`${data[0].id}.gpx`, gpxFile, { upsert: true });
+
+				if (gpxUploadError) {
+					toaster.create({
+						title: 'GPX upload fehlgeschlagen.',
+						description: 'GPX-Datei konnte nicht hochgeladen werden.',
+						type: 'error',
+						duration: 9000,
+						closable: true
+					});
+					setIsSubmitting(false);
+					return;
+				}
+
+				// Update tour with GPX file path in map_data
+				await supabaseClient
+					.from('touren')
+					.update({ map_data: { gpxPath: gpxData.path, updated_at: new Date().toISOString() } })
+					.eq('id', data[0].id);
+			}
 
 			toaster.create({
 				title: 'Tour gespeichert.',

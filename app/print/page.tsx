@@ -18,7 +18,7 @@ export default async function Print() {
 
 	const { data, error } = await supabase
 		.from('touren')
-		.select('id, name, description, route, mapUrl, startPoint, endPoint')
+		.select('id, name, description, route, mapUrl, startPoint, endPoint, map_data')
 		.eq('published', true)
 		.order('name');
 

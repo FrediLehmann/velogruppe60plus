@@ -3,7 +3,7 @@
 import { Button, Image as ChakraImage, Field, Flex, Icon } from '@chakra-ui/react';
 import { FieldProps } from 'formik';
 import { useMemo, useRef, useState } from 'react';
-import { FiUpload } from 'react-icons/fi';
+import { FiTrash2, FiUpload } from 'react-icons/fi';
 
 import { createClient } from '@/lib/supabase/client';
 
@@ -26,6 +26,7 @@ export default function UploadInput({
 
 	const image = useMemo(() => {
 		setImageError(false);
+		if (!fieldProps.field.value) return null;
 		return typeof fieldProps.field.value === 'string'
 			? supabaseClient.storage.from('map-images').getPublicUrl(fieldProps.field.value).data
 					.publicUrl
@@ -74,7 +75,7 @@ export default function UploadInput({
 				style={{ display: 'none' }}
 			/>
 			<Flex align="flex-start" gap="6">
-				{fieldProps.field.value && (
+				{fieldProps.field.value && image && (
 					<>
 						{imageError ? (
 							<ImageFallback height="125px" width="125px" />
@@ -89,17 +90,36 @@ export default function UploadInput({
 						)}
 					</>
 				)}
-				<Button
-					variant="outline"
-					onClick={() => {
-						fieldProps.form.setTouched({ [fieldProps.field.name]: true });
-						inputRef?.current?.click();
-					}}>
-					<Icon boxSize="5">
-						<FiUpload />
-					</Icon>
-					{buttonLabel}
-				</Button>
+				<Flex gap="2">
+					<Button
+						variant="outline"
+						onClick={() => {
+							fieldProps.form.setTouched({ [fieldProps.field.name]: true });
+							inputRef?.current?.click();
+						}}>
+						<Icon boxSize="5">
+							<FiUpload />
+						</Icon>
+						{buttonLabel}
+					</Button>
+					{fieldProps.field.value && (
+						<Button
+							variant="outline"
+							colorScheme="red"
+							onClick={() => {
+								fieldProps.form.setFieldValue(fieldProps.field.name, null);
+								fieldProps.form.setFieldValue('mapImageData', null);
+								if (inputRef.current) {
+									inputRef.current.value = '';
+								}
+							}}>
+							<Icon boxSize="5">
+								<FiTrash2 />
+							</Icon>
+							Löschen
+						</Button>
+					)}
+				</Flex>
 			</Flex>
 			<Field.ErrorText>{fieldProps.form.errors[fieldProps.field.name] as string}</Field.ErrorText>
 		</Field.Root>

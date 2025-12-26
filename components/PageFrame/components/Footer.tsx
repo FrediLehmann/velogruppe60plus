@@ -66,9 +66,14 @@ export default function Footer() {
 					</Link>
 					{signedIn && (
 						<Button
-							variant="ghost"
+							variant="plain"
 							fontSize="xs"
 							fontWeight="bold"
+							_hover={{
+								textDecoration: 'underline',
+								textDecorationColor: 'gray.300'
+							}}
+							textUnderlineOffset="3px"
 							onClick={async () => {
 								await supabase.auth.signOut();
 								router.push('/');

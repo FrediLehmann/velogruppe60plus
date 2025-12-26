@@ -44,7 +44,7 @@ export default function AdminProvider({
 		const { error: toursError, data: tours } = await supabase
 			.from('touren')
 			.select(
-				'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, published'
+				'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, map_data, published'
 			)
 			.order('name')
 			.range(from, to);

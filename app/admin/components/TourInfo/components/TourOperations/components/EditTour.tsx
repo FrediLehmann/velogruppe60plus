@@ -34,6 +34,7 @@ export default function EditTour({
 			mapLink,
 			mapImage,
 			mapImageData,
+			gpxFile,
 			start,
 			end,
 			pause,
@@ -45,15 +46,17 @@ export default function EditTour({
 			setIsSubmitting(true);
 
 			let img = mapImage;
-			if (typeof mapImage !== 'string') {
+			let imageDataToSave = tour.image_data;
+
+			if (!mapImage && tour.image_data?.path) {
 				const { error: imageRemovalError } = await supabaseClient.storage
 					.from('map-images')
 					.remove([tour.image_data.path]);
 
 				if (imageRemovalError) {
 					toaster.create({
-						title: 'Bild upload fehlgeschlagen.',
-						description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
+						title: 'Bild löschen fehlgeschlagen.',
+						description: 'Bild konnte nicht gelöscht werden.',
 						type: 'error',
 						duration: 9000,
 						closable: true
@@ -61,6 +64,28 @@ export default function EditTour({
 
 					setIsSubmitting(false);
 					return;
+				}
+
+				img = undefined;
+				imageDataToSave = undefined;
+			} else if (mapImage && typeof mapImage !== 'string') {
+				if (tour.image_data?.path) {
+					const { error: imageRemovalError } = await supabaseClient.storage
+						.from('map-images')
+						.remove([tour.image_data.path]);
+
+					if (imageRemovalError) {
+						toaster.create({
+							title: 'Bild upload fehlgeschlagen.',
+							description: 'Bild konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.',
+							type: 'error',
+							duration: 9000,
+							closable: true
+						});
+
+						setIsSubmitting(false);
+						return;
+					}
 				}
 
 				const { data, error: imageUploadError } = await supabaseClient.storage
@@ -83,6 +108,54 @@ export default function EditTour({
 				}
 
 				img = data.path;
+				imageDataToSave = {
+					path: data.path,
+					width: mapImageData?.width || 0,
+					height: mapImageData?.height || 0
+				};
+			}
+
+			let mapData = tour.map_data;
+			if (!gpxFile && tour.map_data?.gpxPath) {
+				const { error: gpxRemovalError } = await supabaseClient.storage
+					.from('map-data')
+					.remove([tour.map_data.gpxPath]);
+
+				if (gpxRemovalError) {
+					toaster.create({
+						title: 'GPX löschen fehlgeschlagen.',
+						description: 'GPX-Datei konnte nicht gelöscht werden.',
+						type: 'error',
+						duration: 9000,
+						closable: true
+					});
+					setIsSubmitting(false);
+					return;
+				}
+
+				mapData = null;
+			} else if (gpxFile && gpxFile instanceof File) {
+				if (tour.map_data?.gpxPath) {
+					await supabaseClient.storage.from('map-data').remove([tour.map_data.gpxPath]);
+				}
+
+				const { data: gpxData, error: gpxUploadError } = await supabaseClient.storage
+					.from('map-data')
+					.upload(`${tour.id}.gpx`, gpxFile, { upsert: true });
+
+				if (gpxUploadError) {
+					toaster.create({
+						title: 'GPX upload fehlgeschlagen.',
+						description: 'GPX-Datei konnte nicht hochgeladen werden.',
+						type: 'error',
+						duration: 9000,
+						closable: true
+					});
+					setIsSubmitting(false);
+					return;
+				}
+
+				mapData = { gpxPath: gpxData.path, updated_at: new Date().toISOString() };
 			}
 
 			const { error } = await supabaseClient
@@ -91,12 +164,9 @@ export default function EditTour({
 					name,
 					description,
 					route,
-					mapUrl: mapLink,
-					image_data: {
-						path: img,
-						width: mapImageData.width,
-						height: mapImageData.height
-					} as Json,
+					mapUrl: mapLink || null,
+					image_data: imageDataToSave as Json,
+					map_data: mapData as Json,
 					startPoint: start,
 					endPoint: end,
 					pause,
@@ -133,7 +203,7 @@ export default function EditTour({
 			onClose();
 			load();
 		},
-		[load, onClose, supabaseClient, tour.id, tour.image_data.path]
+		[load, onClose, supabaseClient, tour.id, tour.image_data, tour.map_data]
 	);
 
 	return (
@@ -156,8 +226,9 @@ export default function EditTour({
 								description: tour.description,
 								route: tour.route,
 								mapLink: tour.mapUrl,
-								mapImage: tour.image_data.path,
-								mapImageData: tour.image_data,
+								mapImage: tour.image_data?.path || '',
+								mapImageData: tour.image_data || { width: 0, height: 0 },
+								gpxFile: tour.map_data?.gpxPath || '',
 								distance: tour.distance,
 								ascent: tour.ascent,
 								descent: tour.descent,

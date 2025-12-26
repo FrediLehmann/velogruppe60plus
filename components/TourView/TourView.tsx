@@ -4,12 +4,13 @@ import { AspectRatio, Box, Flex, Heading, Icon, Link, Text } from '@chakra-ui/re
 import Image from 'next/image';
 import { FiExternalLink } from 'react-icons/fi';
 
+import { ElevationProfile, GpxDownloadButton, LeafletMap } from '@/components';
 import { createClient } from '@/lib/supabase/client';
 import { Tour } from '@/types/Tours.types';
 
 import { Fact } from './components';
 
-export default function TourView({ tour }: { tour: Tour }) {
+export default function TourView({ tour, isAdmin = false }: { tour: Tour; isAdmin?: boolean }) {
 	const supabase = createClient();
 
 	return (
@@ -35,35 +36,77 @@ export default function TourView({ tour }: { tour: Tour }) {
 						</>
 					)}
 				</Box>
-				<Flex gap={['6', '8']} wrap="wrap" minW="40">
-					<Fact label="Distanz" value={tour.distance} />
-					<Fact label="Aufstieg" value={tour.ascent} />
-					<Fact label="Abstieg" value={tour.descent} />
-					<Fact label="Dauer" value={tour.duration} />
-					<Fact label="Start" value={tour.startPoint} />
-					<Fact label="Ziel" value={tour.endPoint} />
-					<Fact label="Kaffeepause" value={tour.pause} />
-				</Flex>
+				<Box minW="40">
+					<Flex gap={['6', '8']} wrap="wrap">
+						<Fact label="Distanz" value={tour.distance} />
+						<Fact label="Aufstieg" value={tour.ascent} />
+						<Fact label="Abstieg" value={tour.descent} />
+						<Fact label="Dauer" value={tour.duration} />
+						<Fact label="Start" value={tour.startPoint} />
+						<Fact label="Ziel" value={tour.endPoint} />
+						<Fact label="Kaffeepause" value={tour.pause} />
+					</Flex>
+					{tour.map_data?.gpxPath && (
+						<Box mt="6">
+							<Text fontSize="sm" fontWeight="medium" mb="2" color="gray.600">
+								Höhenprofil
+							</Text>
+							<ElevationProfile gpxFilePath={tour.map_data.gpxPath} />
+						</Box>
+					)}
+				</Box>
 			</Flex>
-			<Link href={tour.mapUrl} display="block" my="2" target="_blank" color="green.700">
-				Auf Schweiz Mobil anschauen{' '}
-				<Icon mx="2px" boxSize="4">
-					<FiExternalLink />
-				</Icon>
-			</Link>
-			<AspectRatio
-				maxW="736px"
-				ratio={tour.image_data.width / tour.image_data.height}
-				borderRadius="sm">
-				<Image
-					src={
-						supabase.storage.from('map-images').getPublicUrl(tour.image_data.path).data.publicUrl
-					}
-					fill
-					sizes="(min-width: 768px) 736px, 100vw"
-					alt="Bild der Karte"
-				/>
-			</AspectRatio>
+			{tour.map_data?.gpxPath ? (
+				<>
+					<Flex gap="4" align="center" mt="4" wrap="wrap">
+						{isAdmin && (
+							<Link href={tour.mapUrl} target="_blank" color="green.700">
+								Auf Schweiz Mobil anschauen{' '}
+								<Icon mx="2px" boxSize="4">
+									<FiExternalLink />
+								</Icon>
+							</Link>
+						)}
+						<GpxDownloadButton gpxFilePath={tour.map_data.gpxPath} tourName={tour.name} />
+					</Flex>
+					<Box mb="4" mt="1">
+						{tour.map_data.updated_at && (
+							<Text fontSize="xs" color="gray.500">
+								Karte aktualisiert am:{' '}
+								{new Date(tour.map_data.updated_at).toLocaleDateString('de-CH', {
+									year: 'numeric',
+									month: '2-digit',
+									day: '2-digit'
+								})}
+							</Text>
+						)}
+					</Box>
+					<LeafletMap gpxFilePath={tour.map_data.gpxPath} />
+				</>
+			) : tour.image_data ? (
+				<>
+					<Link href={tour.mapUrl} display="block" my="2" target="_blank" color="green.700">
+						Auf Schweiz Mobil anschauen{' '}
+						<Icon mx="2px" boxSize="4">
+							<FiExternalLink />
+						</Icon>
+					</Link>
+					<AspectRatio
+						maxW="736px"
+						ratio={tour.image_data.width / tour.image_data.height}
+						borderRadius="sm">
+						<Image
+							src={
+								supabase.storage.from('map-images').getPublicUrl(tour.image_data.path).data
+									.publicUrl
+							}
+							fill
+							sizes="(min-width: 768px) 736px, 100vw"
+							alt="Bild der Karte"
+						/>
+					</AspectRatio>
+				</>
+			) : null}
 		</>
 	);
 }

@@ -26,7 +26,7 @@ export default function Header() {
 				</Link>
 				<ButtonGroup size="md" variant="ghost" colorScheme="gray" gap="2" mt={['4', null, '0']}>
 					<Button asChild _hover={{ background: 'bgGray.200' }}>
-						<Link href="/alle-touren" fontWeight="semibold" fontSize="md">
+						<Link href="/alle-touren" fontWeight="semibold" fontSize="md" textDecoration="none">
 							<Icon boxSize={['4', '5']}>
 								<FiList />
 							</Icon>
@@ -34,7 +34,7 @@ export default function Header() {
 						</Link>
 					</Button>
 					<Button asChild _hover={{ background: 'bgGray.200' }}>
-						<Link href="/info" fontWeight="semibold" fontSize="md">
+						<Link href="/info" fontWeight="semibold" fontSize="md" textDecoration="none">
 							<Icon boxSize={['4', '5']}>
 								<FiInfo />
 							</Icon>

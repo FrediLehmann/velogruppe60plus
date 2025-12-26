@@ -51,7 +51,7 @@ export default function TourProviders({
 			const { data, error } = await supabase
 				.from('touren')
 				.select(
-					'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data'
+					'id, name, description, route, mapUrl, startPoint, endPoint, pause, distance, ascent, descent, duration, next_tour, image_data, map_data'
 				)
 				.eq('published', true)
 				.order('name')
