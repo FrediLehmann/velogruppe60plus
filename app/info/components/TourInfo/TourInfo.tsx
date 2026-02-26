@@ -13,8 +13,9 @@ export default function TourInfo() {
 				Was muss ich wissen?
 			</Heading>
 			<Text fontSize="lg">
-				Jede Woche fahren wir auf eine von über 80 Touren, die durch das schöne Freiburgerland und
-				den benachbarten Kanton Bern führen. Dabei sind wir einen halben bis ganzen Tag unterwegs.
+				Über 100 Touren im Freiburger Land & Berner Mittelland. Jeden Mittwoch entdecken wir
+				abwechslungsreiche Routen – von einem halben bis ganzen Tag. Bewegung, Natur und
+				Gemeinschaft stehen im Mittelpunkt!
 			</Text>
 			<Grid mt="8" templateColumns={['1fr', 'repeat(2, 1fr)']} gap="6">
 				<GridItem>
@@ -26,10 +27,11 @@ export default function TourInfo() {
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
-								Jeden Mittwoch
+								Jeden Mittwoch unterwegs
 							</Text>
 							<Text maxW={['30ch', '22ch', '30ch']}>
-								Ab dem 30. April 2025 finden die Touren jeden Mittwoch statt.
+								Die Touren starten am 15. April 2026 und finden danach wöchentlich jeden Mittwoch
+								statt
 							</Text>
 						</Box>
 					</Flex>
@@ -38,7 +40,7 @@ export default function TourInfo() {
 					<Flex gap="4">
 						<Flex background="green.fg" w="50px" h="50px" borderRadius="lg" color="white">
 							<Text fontSize="lg" fontWeight="bold" m="auto">
-								50
+								99
 								<Text as="sup" fontWeight="bold">
 									+
 								</Text>
@@ -46,11 +48,9 @@ export default function TourInfo() {
 						</Flex>
 						<Box>
 							<Text fontSize="lg" fontWeight="semibold">
-								Über 80 Touren
+								Über 100 Touren
 							</Text>
-							<Text maxW={['30ch', '22ch', '30ch']}>
-								Jede Woche wird eine andere von über 80 verfügbaren Touren gefahren.
-							</Text>
+							<Text maxW={['30ch', '22ch', '30ch']}>Woche für Woche ein neues Erlebnis.</Text>
 							<Link href="/alle-touren" display="block" mt="2" color="green.700">
 								Touren ansehen{' '}
 								<Icon boxSize="4">
