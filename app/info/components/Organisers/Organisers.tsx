@@ -4,7 +4,6 @@ import { Box, Grid, GridItem, Heading, Text } from '@chakra-ui/react';
 
 import { OrganiserCard } from './components';
 import arthur from './images/arthur.jpeg';
-import hugo from './images/hugo.jpeg';
 import paul from './images/paul.jpeg';
 import peter from './images/peter.jpeg';
 
@@ -47,15 +46,6 @@ export default function Organisers() {
 						description="Zuständig für die Kommunikation und Leitung von Touren"
 						phone="+41 79 648 52 47"
 						objectPosition="1px -9px"
-					/>
-				</GridItem>
-				<GridItem>
-					<OrganiserCard
-						image={hugo}
-						name="Hugo Spicher"
-						description="Zuständig für die Sicherheit und Leitung von Touren"
-						phone="+41 79 311 79 36"
-						objectPosition="0 -30px"
 					/>
 				</GridItem>
 			</Grid>
