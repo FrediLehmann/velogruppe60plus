@@ -1,9 +1,8 @@
 'use client';
 
-import { Chart, useChart } from '@chakra-ui/charts';
 import { Box } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
-import { Area, AreaChart, Tooltip, YAxis } from 'recharts';
+import { Area, AreaChart, ResponsiveContainer, Tooltip, YAxis } from 'recharts';
 
 import { createClient } from '@/lib/supabase/client';
 
@@ -98,11 +97,6 @@ export default function ElevationProfile({ gpxFilePath }: { gpxFilePath: string 
 		}
 	}, [gpxFilePath, supabase.storage]);
 
-	const chart = useChart({
-		data: elevationData,
-		series: [{ name: 'value', color: 'green.solid' }]
-	});
-
 	if (elevationData.length === 0) {
 		return null;
 	}
@@ -118,20 +112,17 @@ export default function ElevationProfile({ gpxFilePath }: { gpxFilePath: string 
 
 	return (
 		<Box width="full" height="12">
-			<Chart.Root width="full" height="12" chart={chart}>
-				<AreaChart data={chart.data}>
+			<ResponsiveContainer width="100%" height="100%">
+				<AreaChart data={elevationData}>
 					<defs>
-						<Chart.Gradient
-							id="elevation-gradient"
-							stops={[
-								{ offset: '0%', color: 'green.solid', opacity: 0.8 },
-								{ offset: '100%', color: 'green.solid', opacity: 0.2 }
-							]}
-						/>
+						<linearGradient id="elevation-gradient" x1="0" y1="0" x2="0" y2="1">
+							<stop offset="0%" stopColor="var(--chakra-colors-green-500)" stopOpacity={0.8} />
+							<stop offset="100%" stopColor="var(--chakra-colors-green-500)" stopOpacity={0.2} />
+						</linearGradient>
 					</defs>
 					<YAxis domain={[yAxisMin, yAxisMax]} hide />
 					<Tooltip
-						cursor={{ stroke: chart.color('green.solid'), strokeWidth: 1 }}
+						cursor={{ stroke: 'var(--chakra-colors-green-500)', strokeWidth: 1 }}
 						content={({ active, payload }) => {
 							if (active && payload && payload.length) {
 								return (
@@ -151,19 +142,16 @@ export default function ElevationProfile({ gpxFilePath }: { gpxFilePath: string 
 							return null;
 						}}
 					/>
-					{chart.series.map((item) => (
-						<Area
-							key={item.name}
-							type="monotone"
-							isAnimationActive={false}
-							dataKey={chart.key(item.name)}
-							fill="url(#elevation-gradient)"
-							stroke={chart.color(item.color)}
-							strokeWidth={2}
-						/>
-					))}
+					<Area
+						type="monotone"
+						isAnimationActive={false}
+						dataKey="value"
+						fill="url(#elevation-gradient)"
+						stroke="var(--chakra-colors-green-500)"
+						strokeWidth={2}
+					/>
 				</AreaChart>
-			</Chart.Root>
+			</ResponsiveContainer>
 		</Box>
 	);
 }
