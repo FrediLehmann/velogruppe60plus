@@ -25,7 +25,6 @@ export default function UploadInput({
 	const [imageError, setImageError] = useState(false);
 
 	const image = useMemo(() => {
-		setImageError(false);
 		if (!fieldProps.field.value) return null;
 		return typeof fieldProps.field.value === 'string'
 			? supabaseClient.storage.from('map-images').getPublicUrl(fieldProps.field.value).data
@@ -54,6 +53,7 @@ export default function UploadInput({
 						fieldProps.form.setFieldValue(fieldProps.field.name, null);
 						return;
 					}
+					setImageError(false);
 
 					const fr = new FileReader();
 					fr.onload = function () {
@@ -86,6 +86,7 @@ export default function UploadInput({
 								boxSize="125px"
 								src={image}
 								onError={() => setImageError(true)}
+								onLoad={() => setImageError(false)}
 							/>
 						)}
 					</>

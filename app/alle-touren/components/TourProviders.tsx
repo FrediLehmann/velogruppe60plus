@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { toaster } from '@/components/ui/toaster';
 import { AllTourListContext } from '@/lib/contexts/AllTourListContext';
@@ -27,10 +27,12 @@ export default function TourProviders({
 	const [isLoading, setIsLoading] = useState(false);
 	const [currentTours, setCurrentTours] = useState<Tour[]>(tours);
 
-	// Update tours when server-provided tours change (when navigating between pages)
-	useEffect(() => {
+	// Adjust state when server-provided tours change (when navigating between pages)
+	const [prevTours, setPrevTours] = useState(tours);
+	if (prevTours !== tours) {
+		setPrevTours(tours);
 		setCurrentTours(tours);
-	}, [tours]);
+	}
 
 	const setPage = useCallback(
 		(page: number) => {
