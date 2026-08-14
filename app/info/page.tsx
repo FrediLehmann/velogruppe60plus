@@ -1,13 +1,6 @@
 import { Metadata } from 'next';
 
-import {
-	AdditionalInfos,
-	EBikeSecurity,
-	Organisers,
-	RulesOfConduct,
-	Stack,
-	TourInfo
-} from './components';
+import { AdditionalInfos, Organisers, RulesOfConduct, Stack, TourInfo } from './components';
 
 export const metadata: Metadata = {
 	title: 'Velogruppe 60+ Sensetal | Informationen',
@@ -21,7 +14,6 @@ export default function Information() {
 			<TourInfo />
 			<Organisers />
 			<RulesOfConduct />
-			<EBikeSecurity />
 			<AdditionalInfos />
 		</Stack>
 	);
