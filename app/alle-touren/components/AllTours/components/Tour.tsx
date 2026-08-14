@@ -1,5 +1,6 @@
 import { Badge, Box, Flex, Heading, LinkBox, LinkOverlay, Text } from '@chakra-ui/react';
-import type { Tour } from 'types/Tours.types';
+
+import type { Tour } from '@/types/Tours.types';
 
 export default function CurrentTour({
 	id,
