@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides project guidance for AI coding agents (pi, Claude Code, and other AGENTS.md-compatible tools) when working with code in this repository.
 
 ## Project Overview
 
@@ -8,7 +8,7 @@ This is a Next.js 16 application for a German cycling group (Velogruppe 60+ Sens
 
 ## Essential Commands
 
-- `pnpm dev` - Start development server (http://localhost:3000)
+- `pnpm dev` - Start development server (<http://localhost:3000>)
 - `pnpm build` - Build for production
 - `pnpm start` - Start production server
 - `pnpm lint` - Run ESLint (uses flat config with ESLint 9)
@@ -152,6 +152,12 @@ Note: This project uses `proxy.ts` at the root instead of the standard `middlewa
 
 - All user-facing content is in German
 - HTML lang attribute is "de"
+
+## Agent Configuration
+
+- Project guidance lives in `AGENTS.md` (loaded as a context file by pi and Claude Code).
+- pi project settings live in `.pi/`: `.pi/settings.json` for settings, `.pi/skills/` for skills, `.pi/prompts/` for prompt templates, `.pi/extensions/` for extensions.
+- After changing `AGENTS.md` or `.pi` resources, restart pi or run `/reload` to pick up the changes.
 
 ## Environment Variables
 
