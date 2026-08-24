@@ -224,7 +224,7 @@ export default function RulesOfConduct() {
 			<Text fontSize="lg" fontWeight="semibold" mt="4">
 				Beat Gruber
 			</Text>
-			<Text fontSize="lg">Tourenverantwortlicher</Text>
+			<Text fontSize="lg">Sicherheitsverantwortlicher</Text>
 		</Box>
 	);
 }
